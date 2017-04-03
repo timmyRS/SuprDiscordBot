@@ -1,4 +1,4 @@
-var nickname = "Tims Schrott"; // Nickname to be used on all servers.
+var nickname = "SuprDiscordBot"; // Nickname to be used on all servers.
 
 script.on("load", function() // Called upon (re)load of this script.
 {
