@@ -1,0 +1,46 @@
+package de.timmyrs.suprdiscordbot.websocket;
+
+import de.timmyrs.suprdiscordbot.Main;
+import de.timmyrs.suprdiscordbot.apis.DiscordAPI;
+
+public class WebSocketHeart extends Thread
+{
+	static boolean gotACK = true;
+	static int interval;
+	private static long lastHeartbeat = 0;
+
+	public WebSocketHeart()
+	{
+		new Thread(this, "WebSocketHeart").start();
+	}
+
+	public void run()
+	{
+		while(true)
+		{
+			if(interval != 0)
+			{
+				if(lastHeartbeat < System.currentTimeMillis() - interval)
+				{
+					if(gotACK)
+					{
+						gotACK = false;
+						Main.discordAPI.send(1, WebSocket.lastSeq);
+						lastHeartbeat = System.currentTimeMillis();
+					} else
+					{
+						interval = 0;
+						DiscordAPI.closeWebSocket("Discord did not answer heartbeat.");
+					}
+				}
+			}
+			try
+			{
+				Thread.sleep(200);
+			} catch(InterruptedException e)
+			{
+				e.printStackTrace();
+			}
+		}
+	}
+}
