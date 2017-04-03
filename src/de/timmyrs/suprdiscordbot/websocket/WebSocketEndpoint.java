@@ -13,12 +13,16 @@ public class WebSocketEndpoint
 	Session userSession = null;
 	private MessageHandler messageHandler;
 
-	public WebSocketEndpoint(URI endpointURI)
+	WebSocketEndpoint(URI endpointURI)
 	{
 		try
 		{
 			WebSocketContainer container = ContainerProvider.getWebSocketContainer();
 			container.connectToServer(this, endpointURI);
+		} catch(DeploymentException e)
+		{
+			DiscordAPI.closeWebSocket("Connection failed.");
+			DiscordAPI.getWebSocket();
 		} catch(Exception e)
 		{
 			e.printStackTrace();

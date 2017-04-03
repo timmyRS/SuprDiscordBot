@@ -140,7 +140,10 @@ public class Channel extends Structure
 		JsonArray snowflakes = new JsonArray();
 		for(String id : ids)
 		{
-			snowflakes.add(new JsonPrimitive(id));
+			if(id != null)
+			{
+				snowflakes.add(new JsonPrimitive(id));
+			}
 		}
 		JsonObject json = new JsonObject();
 		json.add("messages", snowflakes);

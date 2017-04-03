@@ -26,12 +26,12 @@ public class WebSocketHeart extends Thread
 					{
 						gotACK = false;
 						Main.discordAPI.send(1, WebSocket.lastSeq);
-						lastHeartbeat = System.currentTimeMillis();
 					} else
 					{
 						interval = 0;
 						DiscordAPI.closeWebSocket("Discord did not answer heartbeat.");
 					}
+					lastHeartbeat = System.currentTimeMillis();
 				}
 			}
 			try

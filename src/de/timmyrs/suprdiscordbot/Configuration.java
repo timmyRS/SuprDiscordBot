@@ -28,7 +28,10 @@ public class Configuration
 		String cont = null;
 		try
 		{
-			cont = IOUtils.toString(new BufferedInputStream(new FileInputStream(this.file)), "UTF-8");
+			if(file.exists())
+			{
+				cont = IOUtils.toString(new BufferedInputStream(new FileInputStream(this.file)), "UTF-8");
+			}
 		} catch(Exception e)
 		{
 			e.printStackTrace();

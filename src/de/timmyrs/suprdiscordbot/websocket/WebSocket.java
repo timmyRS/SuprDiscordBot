@@ -203,7 +203,10 @@ public class WebSocket
 		try
 		{
 			System.out.println("[WebSocket]     Manually closing: " + reason);
-			this.endpoint.userSession.close();
+			if(this.endpoint.userSession != null)
+			{
+				this.endpoint.userSession.close();
+			}
 		} catch(IOException e)
 		{
 			e.printStackTrace();
