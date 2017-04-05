@@ -194,6 +194,35 @@ public class Guild extends Structure
 		return getMember(p.user);
 	}
 
+	public void addMember(Member member)
+	{
+		ArrayList<Member> memberArrayList = new ArrayList<>();
+		for(Member m : members)
+		{
+			if(!m.user.id.equals(member.user.id))
+			{
+				memberArrayList.add(m);
+			}
+		}
+		memberArrayList.add(member);
+		Member[] tmp = member.getArray(memberArrayList.size());
+		members = memberArrayList.toArray(tmp);
+	}
+
+	public void removeMember(String id)
+	{
+		ArrayList<Member> memberArrayList = new ArrayList<>();
+		for(Member m : members)
+		{
+			if(!m.user.id.equals(id))
+			{
+				memberArrayList.add(m);
+			}
+		}
+		Member[] tmp = new Member[memberArrayList.size()];
+		members = memberArrayList.toArray(tmp);
+	}
+
 	/**
 	 * @param id User ID
 	 * @return {@link Presence} object with given ID
@@ -225,12 +254,12 @@ public class Guild extends Structure
 		presences = presencesArrayList.toArray(tmp);
 	}
 
-	public void removePresence(Presence presence)
+	public void removePresence(String id)
 	{
 		ArrayList<Presence> presencesArrayList = new ArrayList<>();
 		for(Presence p : presences)
 		{
-			if(!p.user.id.equals(presence.user.id))
+			if(!p.user.id.equals(id))
 			{
 				presencesArrayList.add(p);
 			}

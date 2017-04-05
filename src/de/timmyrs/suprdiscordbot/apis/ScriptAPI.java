@@ -2,6 +2,7 @@ package de.timmyrs.suprdiscordbot.apis;
 
 import de.timmyrs.suprdiscordbot.scripts.Script;
 
+import java.util.Arrays;
 import java.util.function.Consumer;
 
 /**
@@ -24,9 +25,16 @@ public class ScriptAPI
 	 * @param function Consumer of object to run when event occurs
 	 * @return this
 	 */
-	public ScriptAPI on(final String event, final Consumer<Object> function)
+	public ScriptAPI on(String event, final Consumer<Object> function)
 	{
-		this.script.events.put(event.toUpperCase(), function);
+		event = event.toUpperCase();
+		if(new ScriptAPI(null).inArray(new String[]{"PRESENCE_UPDATE", "USER_LEAVE"}, event))
+		{
+			System.out.println("[ScriptAPI]     Event '" + event + "' is no longer being supported and thereby will not be registered.");
+		} else
+		{
+			this.script.events.put(event, function);
+		}
 		return this;
 	}
 
@@ -42,6 +50,17 @@ public class ScriptAPI
 			function.accept(o);
 		}
 		return this;
+	}
+
+	/**
+	 * @param arr    Array of objects to seek in
+	 * @param object Object to seek for
+	 * @return Is the given object included in the given array?
+	 * @since 1.1
+	 */
+	public boolean inArray(final Object[] arr, final Object object)
+	{
+		return Arrays.asList(arr).contains(object);
 	}
 
 	/**

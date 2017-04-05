@@ -9,6 +9,7 @@ import de.timmyrs.suprdiscordbot.structures.*;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.Arrays;
 
 public class WebSocket
 {
@@ -83,53 +84,92 @@ public class WebSocket
 								DiscordAPI.guilds.remove(g);
 								Main.scriptManager.fireEvent("GUILD_DELETE", g);
 								break;
+							case "GUILD_MEMBER_ADD":
+								m = new Gson().fromJson(data, Member.class);
+								m.getGuild().addMember(m);
+								Main.scriptManager.fireEvent("USER_JOIN", m);
+								break;
 							case "GUILD_MEMBER_REMOVE":
 								p = new Gson().fromJson(data, Presence.class);
-								p.getGuild().removePresence(p);
-								Main.scriptManager.fireEvent("USER_LEAVE", p);
+								p.getGuild().removeMember(p.user.id);
+								p.getGuild().removePresence(p.user.id);
+								Main.scriptManager.fireEvent("USER_REMOVE", p);
 								break;
 							case "PRESENCE_UPDATE":
 								g = Main.discordAPI.getGuild(data.get("guild_id").getAsString());
 								p = new Gson().fromJson(data, Presence.class);
-								m = g.getMember(p);
-								if(m == null)
+								Presence cp = g.getPresence(p.user.id);
+								m = g.getMember(p.user.id);
+								if(cp == null)
 								{
 									if(!p.status.equals("offline"))
 									{
-										Main.scriptManager.fireEvent("USER_JOIN", p);
 										g.addPresence(p);
+										Main.scriptManager.fireEvent("PRESENCE_GO_ONLINE", p);
+									}
+									break;
+								}
+								if(p.status.equals("offline"))
+								{
+									Main.scriptManager.fireEvent("PRESENCE_GO_OFFLINE", cp);
+									g.removePresence(cp.user.id);
+									break;
+								}
+								cp.user = p.user;
+								if(!p.status.equals(cp.status))
+								{
+									Main.scriptManager.fireEvent("PRESENCE_UPDATE_STATUS", new Object[]{p, cp.status});
+									cp.status = p.status;
+								}
+								if(cp.game == null)
+								{
+									if(p.game != null)
+									{
+										Main.scriptManager.fireEvent("PRESENCE_UPDATE_GAME", new Object[]{p, cp.game});
+										cp.game = p.game;
 									}
 								} else
 								{
-									if(p.user.username != null)
+									if(p.game == null)
 									{
-										m.user.username = p.user.username;
-										p.user.username = null;
+										Main.scriptManager.fireEvent("PRESENCE_UPDATE_GAME", new Object[]{p, cp.game});
+										p.game = null;
+									} else if(!cp.game.equals(p.game))
+									{
+										Main.scriptManager.fireEvent("PRESENCE_UPDATE_GAME", new Object[]{p, cp.game});
+										cp.game = p.game;
 									}
-									if(p.user.discriminator != null)
-									{
-										m.user.discriminator = p.user.discriminator;
-										p.user.discriminator = null;
-									}
-									if(p.user.avatar != null)
-									{
-										m.user.avatar = p.user.avatar;
-										p.user.avatar = null;
-									}
-									if(p.roles != null)
-									{
-										m.roles = p.roles;
-										p.roles = null;
-									}
-									if(p.status.equals("offline"))
-									{
-										g.removePresence(p);
-									} else
-									{
-										g.addPresence(p);
-									}
-									Main.scriptManager.fireEvent("PRESENCE_UPDATE", p);
 								}
+								g.addPresence(cp);
+								break;
+							case "GUILD_MEMBER_UPDATE":
+								g = Main.discordAPI.getGuild(data.get("guild_id").getAsString());
+								m = new Gson().fromJson(data, Member.class);
+								Member cm = g.getMember(m.user.id);
+								if(cm.nick == null)
+								{
+									if(m.nick != null)
+									{
+										Main.scriptManager.fireEvent("MEMBER_UPDATE_NICK", new Object[]{m, cm.nick});
+										cm.nick = m.nick;
+									}
+								} else
+								{
+									if(m.nick == null)
+									{
+										Main.scriptManager.fireEvent("MEMBER_UPDATE_NICK", new Object[]{m, cm.nick});
+										cm.nick = null;
+									} else if(!cm.nick.equals(m.nick))
+									{
+										Main.scriptManager.fireEvent("MEMBER_UPDATE_NICK", new Object[]{m, cm.nick});
+										cm.nick = m.nick;
+									}
+								}
+								if(!Arrays.equals(cm.roles, m.roles))
+								{
+									Main.scriptManager.fireEvent("MEMBER_UPDATE_ROLES", new Object[]{m, cm.roles});
+								}
+								g.addMember(cm);
 								break;
 							case "TYPING_START":
 								Channel c = Main.discordAPI.getChannel(data.get("channel_id").getAsString());

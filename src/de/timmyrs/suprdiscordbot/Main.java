@@ -11,7 +11,7 @@ import java.io.File;
  * SuprDiscordBot
  *
  * @author timmyRS
- * @version 1.0
+ * @version 1.1
  * @see DiscordAPI
  * @see de.timmyrs.suprdiscordbot.apis.ScriptAPI
  * @see de.timmyrs.suprdiscordbot.apis.ConsoleAPI

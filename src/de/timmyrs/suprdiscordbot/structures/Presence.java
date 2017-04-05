@@ -14,10 +14,6 @@ public class Presence extends Structure
 	 */
 	public User user;
 	/**
-	 * Array of Role IDs. Update-only.
-	 */
-	public String[] roles;
-	/**
 	 * The {@link Game} object played or null if none.
 	 */
 	public Game game;
@@ -37,6 +33,15 @@ public class Presence extends Structure
 	public Guild getGuild()
 	{
 		return Main.discordAPI.getGuild(guild_id);
+	}
+
+	/**
+	 * @return {@link Member} object correlating with this presence
+	 * @since 1.1
+	 */
+	public Member getMember()
+	{
+		return getGuild().getMember(this);
 	}
 
 	public Presence[] getArray(int size)

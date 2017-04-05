@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -116,6 +116,8 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html" title="class in de.timmyrs.suprdiscordbot.structures">Structure</a></pre>
 <div class="block">Presence Structure</div>
 <dl>
+<dt><span class="simpleTagLabel">Version:</span></dt>
+<dd>1.1</dd>
 <dt><span class="simpleTagLabel">Author:</span></dt>
 <dd>timmyRS</dd>
 </dl>
@@ -150,18 +152,12 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>java.lang.String[]</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Presence.html#roles">roles</a></span></code>
-<div class="block">Array of Role IDs.</div>
-</td>
-</tr>
-<tr class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Presence.html#status">status</a></span></code>
 <div class="block">The status - Either "online", "idle", "dnd" or "offline"</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/User.html" title="class in de.timmyrs.suprdiscordbot.structures">User</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Presence.html#user">user</a></span></code>
 <div class="block">The <a href="../../../../de/timmyrs/suprdiscordbot/structures/User.html" title="class in de.timmyrs.suprdiscordbot.structures"><code>User</code></a> object</div>
@@ -208,6 +204,10 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Presence.html#getGuild--">getGuild</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
+<td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html" title="class in de.timmyrs.suprdiscordbot.structures">Member</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Presence.html#getMember--">getMember</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Presence.html#toString--">toString</a></span>()</code>&nbsp;</td>
 </tr>
@@ -241,16 +241,6 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <h4>user</h4>
 <pre>public&nbsp;<a href="../../../../de/timmyrs/suprdiscordbot/structures/User.html" title="class in de.timmyrs.suprdiscordbot.structures">User</a> user</pre>
 <div class="block">The <a href="../../../../de/timmyrs/suprdiscordbot/structures/User.html" title="class in de.timmyrs.suprdiscordbot.structures"><code>User</code></a> object</div>
-</li>
-</ul>
-<a name="roles">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>roles</h4>
-<pre>public&nbsp;java.lang.String[] roles</pre>
-<div class="block">Array of Role IDs. Update-only.</div>
 </li>
 </ul>
 <a name="game">
@@ -319,6 +309,21 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>Guild this presence is part of</dd>
+</dl>
+</li>
+</ul>
+<a name="getMember--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getMember</h4>
+<pre>public&nbsp;<a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html" title="class in de.timmyrs.suprdiscordbot.structures">Member</a>&nbsp;getMember()</pre>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html" title="class in de.timmyrs.suprdiscordbot.structures"><code>Member</code></a> object correlating with this presence</dd>
+<dt><span class="simpleTagLabel">Since:</span></dt>
+<dd>1.1</dd>
 </dl>
 </li>
 </ul>

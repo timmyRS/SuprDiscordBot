@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -111,6 +111,8 @@ var activeTableTab = "activeTableTab";
 extends java.lang.Object</pre>
 <div class="block">Script API ('script')</div>
 <dl>
+<dt><span class="simpleTagLabel">Version:</span></dt>
+<dd>1.1</dd>
 <dt><span class="simpleTagLabel">Author:</span></dt>
 <dd>timmyRS</dd>
 </dl>
@@ -164,19 +166,24 @@ extends java.lang.Object</pre>
          java.lang.Object&nbsp;data)</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/ScriptAPI.html#inArray-java.lang.Object:A-java.lang.Object-">inArray</a></span>(java.lang.Object[]&nbsp;arr,
+       java.lang.Object&nbsp;object)</code>&nbsp;</td>
+</tr>
+<tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/apis/ScriptAPI.html" title="class in de.timmyrs.suprdiscordbot.apis">ScriptAPI</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/ScriptAPI.html#on-java.lang.String-java.util.function.Consumer-">on</a></span>(java.lang.String&nbsp;event,
   java.util.function.Consumer&lt;java.lang.Object&gt;&nbsp;function)</code>&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>long</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/ScriptAPI.html#time--">time</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>long</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/ScriptAPI.html#timeMillis--">timeMillis</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/apis/ScriptAPI.html" title="class in de.timmyrs.suprdiscordbot.apis">ScriptAPI</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/ScriptAPI.html#timeout-java.lang.Runnable-int-">timeout</a></span>(java.lang.Runnable&nbsp;function,
        int&nbsp;millis)</code>
@@ -253,6 +260,25 @@ extends java.lang.Object</pre>
 <dd><code>function</code> - Consumer of object to be run for each object in array</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>this</dd>
+</dl>
+</li>
+</ul>
+<a name="inArray-java.lang.Object:A-java.lang.Object-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>inArray</h4>
+<pre>public&nbsp;boolean&nbsp;inArray(java.lang.Object[]&nbsp;arr,
+                       java.lang.Object&nbsp;object)</pre>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>arr</code> - Array of objects to seek in</dd>
+<dd><code>object</code> - Object to seek for</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Is the given object included in the given array?</dd>
+<dt><span class="simpleTagLabel">Since:</span></dt>
+<dd>1.1</dd>
 </dl>
 </li>
 </ul>

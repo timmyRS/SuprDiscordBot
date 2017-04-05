@@ -1,6 +1,5 @@
 package de.timmyrs.suprdiscordbot.structures;
 
-import de.timmyrs.suprdiscordbot.Configuration;
 import de.timmyrs.suprdiscordbot.Main;
 
 import java.util.ArrayList;
@@ -40,7 +39,11 @@ public class Member extends Structure
 	 * Use {@link #getRoles()} to get a list of {@link Role} objects.
 	 */
 	public String[] roles;
-	private String nick;
+	/**
+	 * Nickname of this member.
+	 * Use {@link #getName()} to safely the user's name.
+	 */
+	public String nick;
 
 	/**
 	 * @return Name of the member - Either nickname or username
