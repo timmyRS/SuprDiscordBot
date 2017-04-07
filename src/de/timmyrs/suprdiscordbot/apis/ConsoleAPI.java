@@ -29,9 +29,9 @@ public class ConsoleAPI
 		String msg = "[";
 		for(Object o : objects)
 		{
-			msg += o.toString() + ",";
+			msg += o.toString() + ", ";
 		}
-		return this.log(msg.substring(0, msg.length() - 1));
+		return this.log(msg.substring(0, msg.length() - 2) + "]");
 	}
 
 	/**
@@ -42,7 +42,7 @@ public class ConsoleAPI
 	 */
 	public ConsoleAPI info(Object o)
 	{
-		System.out.println("[Console]       (i) " + o.toString());
+		System.out.println("[Console]       (i) " + o.toString() + "]");
 		return this;
 	}
 
@@ -55,9 +55,9 @@ public class ConsoleAPI
 		String msg = "[";
 		for(Object o : objects)
 		{
-			msg += o.toString() + ",";
+			msg += o.toString() + ", ";
 		}
-		return this.log(msg.substring(0, msg.length() - 1));
+		return this.log(msg.substring(0, msg.length() - 2) + "]");
 	}
 
 	/**
@@ -81,9 +81,9 @@ public class ConsoleAPI
 		String msg = "[";
 		for(Object o : objects)
 		{
-			msg += o.toString() + ",";
+			msg += o.toString() + ", ";
 		}
-		return this.log(msg.substring(0, msg.length() - 1));
+		return this.log(msg.substring(0, msg.length() - 2) + "]");
 	}
 
 	/**
@@ -107,8 +107,8 @@ public class ConsoleAPI
 		String msg = "[";
 		for(Object o : objects)
 		{
-			msg += o.toString() + ",";
+			msg += o.toString() + ", ";
 		}
-		return this.log(msg.substring(0, msg.length() - 1));
+		return this.log(msg.substring(0, msg.length() - 2) + "]");
 	}
 }

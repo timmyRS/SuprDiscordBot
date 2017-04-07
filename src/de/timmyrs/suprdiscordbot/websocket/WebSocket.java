@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import de.timmyrs.suprdiscordbot.Main;
 import de.timmyrs.suprdiscordbot.apis.DiscordAPI;
+import de.timmyrs.suprdiscordbot.scripts.ScriptWatcher;
 import de.timmyrs.suprdiscordbot.structures.*;
 
 import java.io.IOException;
@@ -48,8 +49,12 @@ public class WebSocket
 							case "READY":
 								JsonObject d = json.get("d").getAsJsonObject();
 								session_id = d.get("session_id").getAsString();
-								Main.ready = true;
 								Main.discordAPI.user = new Gson().fromJson(d.get("user"), User.class);
+								if(!Main.ready)
+								{
+									new ScriptWatcher();
+									Main.ready = true;
+								}
 							case "RESUMED":
 								if(afterConnectSend != null)
 								{
@@ -64,13 +69,14 @@ public class WebSocket
 								{
 									c.guild_id = g.id;
 								}
-								for(Presence presence : g.presences)
-								{
-									presence.guild_id = g.id;
-								}
 								for(Member member : g.members)
 								{
 									member.guild_id = g.id;
+								}
+								for(Presence presence : g.presences)
+								{
+									presence.guild_id = g.id;
+									presence.user = g.getMember(presence.user.id).user;
 								}
 								for(VoiceState vs : g.voice_states)
 								{
@@ -104,6 +110,7 @@ public class WebSocket
 								{
 									if(!p.status.equals("offline"))
 									{
+										p.user = m.user;
 										g.addPresence(p);
 										Main.scriptManager.fireEvent("PRESENCE_GO_ONLINE", p);
 									}
@@ -111,11 +118,17 @@ public class WebSocket
 								}
 								if(p.status.equals("offline"))
 								{
-									Main.scriptManager.fireEvent("PRESENCE_GO_OFFLINE", cp);
+									Main.scriptManager.fireEvent("PRESENCE_GO_OFFLINE", g.getPresence(p.user.id));
 									g.removePresence(cp.user.id);
 									break;
 								}
-								cp.user = p.user;
+								if(p.user.username == null || p.user.discriminator == null || p.user.avatar == null)
+								{
+									p.user = cp.user;
+								} else
+								{
+									cp.user = p.user;
+								}
 								if(!p.status.equals(cp.status))
 								{
 									Main.scriptManager.fireEvent("PRESENCE_UPDATE_STATUS", new Object[]{p, cp.status});

@@ -8,8 +8,7 @@ import java.net.URLEncoder;
 
 /**
  * Message Structure.
- * You can retrieve an array of message structures using {@link Channel#getMessages(int)}
- * and a single message structure using {@link Channel#sendMessage(String)}.
+ * You can retrieve an array of message structures using {@link Channel#getMessages(int)}.
  *
  * @author timmyRS
  */

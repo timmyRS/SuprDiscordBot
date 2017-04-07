@@ -22,11 +22,6 @@ public class ScriptWatcher extends Thread
 	{
 		try
 		{
-			while(!Main.ready)
-			{
-				Thread.sleep(100);
-			}
-			Thread.sleep(1000);
 			if(!scriptsDir.exists())
 			{
 				scriptsDir.mkdir();

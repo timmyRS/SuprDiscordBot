@@ -1,9 +1,13 @@
 package de.timmyrs.suprdiscordbot.structures;
 
+import de.timmyrs.suprdiscordbot.apis.DiscordAPI;
+
 import java.util.ArrayList;
 
 /**
- * Embed Structure
+ * Embed Structure.
+ * You can get an empty embed structure using {@link DiscordAPI#createEmbed()}.
+ * You can send an embed using {@link Channel#sendMessage(Embed)} and {@link Channel#sendMessage(String, Embed)}.
  *
  * @author timmyRS
  */

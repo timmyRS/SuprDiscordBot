@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -114,10 +114,14 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">Overwrite</span>
 extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html" title="class in de.timmyrs.suprdiscordbot.structures">Structure</a></pre>
-<div class="block">Overwrite Structure</div>
+<div class="block">Overwrite Structure.
+ You can retrieve an array of overwrite strucutures using <a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html#permission_overwrites"><code>Channel.permission_overwrites</code></a>
+ and can get an empty embed structure using <a href="../../../../de/timmyrs/suprdiscordbot/apis/DiscordAPI.html#createOverwrite--"><code>DiscordAPI.createOverwrite()</code></a>.</div>
 <dl>
 <dt><span class="simpleTagLabel">Author:</span></dt>
 <dd>timmyRS</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html#overwritePermissions-de.timmyrs.suprdiscordbot.structures.Overwrite-"><code>Channel.overwritePermissions(Overwrite)</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -194,10 +198,26 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Overwrite.html" title="class in de.timmyrs.suprdiscordbot.structures">Overwrite</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Overwrite.html#allow-int-">allow</a></span>(int&nbsp;allow)</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Overwrite.html" title="class in de.timmyrs.suprdiscordbot.structures">Overwrite</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Overwrite.html#deny-int-">deny</a></span>(int&nbsp;deny)</code>&nbsp;</td>
+</tr>
+<tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Overwrite.html" title="class in de.timmyrs.suprdiscordbot.structures">Overwrite</a>[]</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Overwrite.html#getArray-int-">getArray</a></span>(int&nbsp;size)</code>&nbsp;</td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Overwrite.html" title="class in de.timmyrs.suprdiscordbot.structures">Overwrite</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Overwrite.html#setRole-de.timmyrs.suprdiscordbot.structures.Role-">setRole</a></span>(<a href="../../../../de/timmyrs/suprdiscordbot/structures/Role.html" title="class in de.timmyrs.suprdiscordbot.structures">Role</a>&nbsp;r)</code>&nbsp;</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Overwrite.html" title="class in de.timmyrs.suprdiscordbot.structures">Overwrite</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Overwrite.html#setUser-de.timmyrs.suprdiscordbot.structures.User-">setUser</a></span>(<a href="../../../../de/timmyrs/suprdiscordbot/structures/User.html" title="class in de.timmyrs.suprdiscordbot.structures">User</a>&nbsp;u)</code>&nbsp;</td>
+</tr>
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Overwrite.html#toString--">toString</a></span>()</code>&nbsp;</td>
 </tr>
@@ -288,6 +308,74 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <!--   -->
 </a>
 <h3>Method Detail</h3>
+<a name="setUser-de.timmyrs.suprdiscordbot.structures.User-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setUser</h4>
+<pre>public&nbsp;<a href="../../../../de/timmyrs/suprdiscordbot/structures/Overwrite.html" title="class in de.timmyrs.suprdiscordbot.structures">Overwrite</a>&nbsp;setUser(<a href="../../../../de/timmyrs/suprdiscordbot/structures/User.html" title="class in de.timmyrs.suprdiscordbot.structures">User</a>&nbsp;u)</pre>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>u</code> - User to overwrite permissions of</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>this</dd>
+<dt><span class="simpleTagLabel">Since:</span></dt>
+<dd>1.1</dd>
+</dl>
+</li>
+</ul>
+<a name="setRole-de.timmyrs.suprdiscordbot.structures.Role-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>setRole</h4>
+<pre>public&nbsp;<a href="../../../../de/timmyrs/suprdiscordbot/structures/Overwrite.html" title="class in de.timmyrs.suprdiscordbot.structures">Overwrite</a>&nbsp;setRole(<a href="../../../../de/timmyrs/suprdiscordbot/structures/Role.html" title="class in de.timmyrs.suprdiscordbot.structures">Role</a>&nbsp;r)</pre>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>r</code> - Role to overwrite permissions of</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>this</dd>
+<dt><span class="simpleTagLabel">Since:</span></dt>
+<dd>1.1</dd>
+</dl>
+</li>
+</ul>
+<a name="allow-int-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>allow</h4>
+<pre>public&nbsp;<a href="../../../../de/timmyrs/suprdiscordbot/structures/Overwrite.html" title="class in de.timmyrs.suprdiscordbot.structures">Overwrite</a>&nbsp;allow(int&nbsp;allow)</pre>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>allow</code> - Bitwise value of permission to allow</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>this</dd>
+<dt><span class="simpleTagLabel">Since:</span></dt>
+<dd>1.1</dd>
+</dl>
+</li>
+</ul>
+<a name="deny-int-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>deny</h4>
+<pre>public&nbsp;<a href="../../../../de/timmyrs/suprdiscordbot/structures/Overwrite.html" title="class in de.timmyrs.suprdiscordbot.structures">Overwrite</a>&nbsp;deny(int&nbsp;deny)</pre>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>deny</code> - Bitwise value of permission to disallow</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>this</dd>
+<dt><span class="simpleTagLabel">Since:</span></dt>
+<dd>1.1</dd>
+</dl>
+</li>
+</ul>
 <a name="getArray-int-">
 <!--   -->
 </a>

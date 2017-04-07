@@ -152,6 +152,56 @@ public class Channel extends Structure
 	}
 
 	/**
+	 * @param overwrite {@link Overwrite} object
+	 * @return this
+	 * @see DiscordAPI#createOverwrite()
+	 * @since 1.1
+	 */
+	public Channel overwritePermissions(Overwrite overwrite)
+	{
+		JsonObject json = new JsonObject();
+		json.addProperty("type", overwrite.type);
+		json.addProperty("allow", overwrite.allow);
+		json.addProperty("deny", overwrite.deny);
+		DiscordAPI.request("PUT", "/channels/" + id + "/permissions/" + overwrite.id, json.toString());
+		return this;
+	}
+
+	/**
+	 * @param u {@link User} object
+	 * @return {@link Overwrite} object for that user; null if not found
+	 * @since 1.1
+	 */
+	public Overwrite getOverwrite(User u)
+	{
+		for(Overwrite o : permission_overwrites)
+		{
+			if(o.type.equals("member") && o.id.equals(u.id))
+			{
+				return o;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * @param r {@link Role} object
+	 * @return {@link Overwrite} object for that role; null if not found
+	 * @since 1.1
+	 */
+	public Overwrite getOverwrite(Role r)
+	{
+		for(Overwrite o : permission_overwrites)
+		{
+			if(o.type.equals("member") && o.id.equals(r.id))
+			{
+				return o;
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * Show everyone in this channel that we are typing/working.
 	 *
 	 * @return this
@@ -176,6 +226,7 @@ public class Channel extends Structure
 	/**
 	 * @param embed {@link Embed} object to be sent
 	 * @return The newly sent message
+	 * @see DiscordAPI#createEmbed()
 	 */
 	public Message sendMessage(Embed embed)
 	{
@@ -186,6 +237,7 @@ public class Channel extends Structure
 	 * @param content Content of the message to be sent
 	 * @param embed   {@link Embed} object to be sent
 	 * @return The newly sent message
+	 * @see DiscordAPI#createEmbed()
 	 */
 	public Message sendMessage(String content, Embed embed)
 	{

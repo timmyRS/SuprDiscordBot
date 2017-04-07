@@ -29,6 +29,8 @@ SuprDiscordBot is a Java Application allowing you to easily script a Discord Bot
 
 - As you do not have jQuery in SuprDiscordBot, the functions [`script.each`](https://timmyrs.github.io/SuprDiscordBot/de/timmyrs/suprdiscordbot/apis/ScriptAPI.html#each-java.lang.Object:A-java.util.function.Consumer-) and [`script.inArray`](https://timmyrs.github.io/SuprDiscordBot/de/timmyrs/suprdiscordbot/apis/ScriptAPI.html#inArray-java.lang.Object:A-java.lang.Object-) are there to still make your coding experience easier.
 
+- There's no `while`, as it is rather abused than used, however, `for` can be used as normal, but you should use [`script.each`](https://timmyrs.github.io/SuprDiscordBot/de/timmyrs/suprdiscordbot/apis/ScriptAPI.html#each-java.lang.Object:A-java.util.function.Consumer-) to iterate through arrays.
+
 ## Join the Discord Guild
 
 [![](https://discordapp.com/api/guilds/208658782966906880/embed.png?style=banner3)](https://discord.gg/MhvFkSJ)

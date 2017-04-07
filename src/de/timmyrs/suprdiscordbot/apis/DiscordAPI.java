@@ -385,13 +385,6 @@ public class DiscordAPI
 		return dms.toArray(ret);
 	}
 
-	/**
-	 * @return New {@link Message} object
-	 */
-	public Message createMessage()
-	{
-		return new Message();
-	}
 
 	/**
 	 * @return New {@link Embed} object
@@ -399,5 +392,14 @@ public class DiscordAPI
 	public Embed createEmbed()
 	{
 		return new Embed();
+	}
+
+	/**
+	 * @return New {@link Overwrite} object
+	 * @since 1.1
+	 */
+	public Overwrite createOverwrite()
+	{
+		return new Overwrite();
 	}
 }

@@ -1,8 +1,10 @@
 package de.timmyrs.suprdiscordbot.apis;
 
+import de.timmyrs.suprdiscordbot.Main;
 import de.timmyrs.suprdiscordbot.scripts.Script;
 
 import java.util.Arrays;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Consumer;
 
 /**
@@ -39,8 +41,10 @@ public class ScriptAPI
 	}
 
 	/**
-	 * @param arr      Array of objects to foreach through
-	 * @param function Consumer of object to be run for each object in array
+	 * Iterates through given array synchronously.
+	 *
+	 * @param arr      Array to iterate through
+	 * @param function Anonymous function to accept each object as argument
 	 * @return this
 	 */
 	public ScriptAPI each(final Object[] arr, final Consumer<Object> function)
@@ -80,6 +84,17 @@ public class ScriptAPI
 	}
 
 	/**
+	 * @param min Smallest possible number
+	 * @param max Biggest possible number
+	 * @return Random number
+	 * @since 1.1
+	 */
+	public int rand(int min, int max)
+	{
+		return ThreadLocalRandom.current().nextInt(min, max + 1);
+	}
+
+	/**
 	 * Replacement for window.setTimeout
 	 *
 	 * @param function Runnable to be run after timeout
@@ -100,6 +115,21 @@ public class ScriptAPI
 			function.run();
 		}).start();
 		return this;
+	}
+
+	/**
+	 * @param version Minimum version
+	 * @return Whether the version of this instance is equal to or above the given minimum version
+	 * @since 1.1
+	 */
+	public boolean isVersionOrAbove(String version)
+	{
+		version = version.replaceAll("\\.", "");
+		while(version.length() < 4)
+		{
+			version += "0";
+		}
+		return Main.versionInt >= Integer.valueOf(version);
 	}
 
 	/**

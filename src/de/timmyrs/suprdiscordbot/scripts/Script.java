@@ -2,6 +2,7 @@ package de.timmyrs.suprdiscordbot.scripts;
 
 import de.timmyrs.suprdiscordbot.Main;
 import de.timmyrs.suprdiscordbot.apis.ConsoleAPI;
+import de.timmyrs.suprdiscordbot.apis.PermissionAPI;
 import de.timmyrs.suprdiscordbot.apis.ScriptAPI;
 
 import javax.script.Bindings;
@@ -30,8 +31,8 @@ public class Script
 		engine.put("script", new ScriptAPI(this));
 		engine.put("discord", Main.discordAPI);
 		engine.put("console", new ConsoleAPI());
+		engine.put("permission", new PermissionAPI());
 		Bindings bindings = engine.getBindings(100);
-		bindings.remove("while");
 		bindings.remove("for");
 		engine.eval(script);
 		return this;
