@@ -99,7 +99,7 @@ public class ScriptAPI
 	 *
 	 * @param function Runnable to be run after timeout
 	 * @param millis   Number of millis to wait before execution of function
-	 * @return Created [@link Thread} object
+	 * @return Created {@link Thread} object
 	 */
 	public Thread timeout(final Runnable function, final int millis)
 	{
