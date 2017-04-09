@@ -99,22 +99,25 @@ public class ScriptAPI
 	 *
 	 * @param function Runnable to be run after timeout
 	 * @param millis   Number of millis to wait before execution of function
-	 * @return this
+	 * @return Created [@link Thread} object
 	 */
-	public ScriptAPI timeout(final Runnable function, final int millis)
+	public Thread timeout(final Runnable function, final int millis)
 	{
-		new Thread(()->
+		Thread t = new Thread(()->
 		{
 			try
 			{
 				Thread.sleep(millis);
+				function.run();
 			} catch(InterruptedException e)
+			{
+			} catch(Exception e)
 			{
 				e.printStackTrace();
 			}
-			function.run();
-		}).start();
-		return this;
+		});
+		t.start();
+		return t;
 	}
 
 	/**

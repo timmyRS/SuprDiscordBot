@@ -137,17 +137,23 @@ public class Channel extends Structure
 	 */
 	public Channel deleteMessages(String[] ids)
 	{
-		JsonArray snowflakes = new JsonArray();
-		for(String id : ids)
+		if(ids.length == 1)
 		{
-			if(id != null)
+			DiscordAPI.request("DELETE", "/channels/" + id + "/messages/" + ids[0]);
+		} else
+		{
+			JsonArray snowflakes = new JsonArray();
+			for(String id : ids)
 			{
-				snowflakes.add(new JsonPrimitive(id));
+				if(id != null)
+				{
+					snowflakes.add(new JsonPrimitive(id));
+				}
 			}
+			JsonObject json = new JsonObject();
+			json.add("messages", snowflakes);
+			DiscordAPI.request("POST", "/channels/" + id + "/messages/bulk-delete", json.toString());
 		}
-		JsonObject json = new JsonObject();
-		json.add("messages", snowflakes);
-		DiscordAPI.request("POST", "/channels/" + id + "/messages/bulk-delete", json.toString());
 		return this;
 	}
 
