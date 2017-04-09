@@ -4,15 +4,15 @@ var roles = ["Mod"];
 // Handle message creation
 script.on("MESSAGE_CREATE", function(msg)
 {
-	// Set variables
-	var cont = msg.content.toLowerCase().trim(),
-	channel = msg.getChannel();
-
 	// Don't handle own messages.
 	if(msg.author.id == discord.user.id)
 	{
 		return;
 	}
+
+	// Set variables
+	var cont = msg.content.toLowerCase().trim(),
+	channel = msg.getChannel();
 
 	// Write message to log
 	console.log(msg.author.username + " wrote " + cont + " in " + channel.getName());
@@ -23,14 +23,18 @@ script.on("MESSAGE_CREATE", function(msg)
 		var slowmode = channel.getValues().getInt("slowmode");
 		if(slowmode > 0)
 		{
-			var lastmsg = msg.author.getValues().getInt("lastmsg");
-			if((lastmsg + slowmode) > script.time())
+			var overwrite = channel.getOverwrite(msg.author);
+			if(overwrite == null)
 			{
-				msg.delete();
-				msg.author.getDMChannel().sendMessage("Please wait **" + slowmode + "** seconds in between " + channel.getName() + "-messages. Your message:\n```\n" + msg.content + "\n```");
-				return;
+				overwrite = discord.createOverwrite().setUser(msg.author);
 			}
-			msg.author.getValues().set("lastmsg", script.time());
+			overwrite.deny(permission.SEND_MESSAGES);
+			channel.overwritePermissions(overwrite);
+			script.timeout(function()
+			{
+				overwrite.deny(-permission.SEND_MESSAGES);
+				channel.overwritePermissions(overwrite);
+			}, (slowmode * 1000));
 		}
 	}
 
@@ -95,7 +99,35 @@ script.on("MESSAGE_CREATE", function(msg)
 			});
 		});
 
-		if(cont == "+explode" || cont.substr(0, 9) == "+explode ")
+		if(cont.substr(0, 6) == "+mute ")
+		{
+			msg.delete();
+			if(hasperm)
+			{
+				var secs = parseInt(cont.substr(6).split(" ")[0]), msgs = [];
+				script.each(msg.mentions, function(mention)
+				{
+					msgs.push(channel.sendMessage(mention.getHandle() + " is now muted for **" + secs + "** seconds in " + channel.getHandle() + ".").id);
+					var overwrite = channel.getOverwrite(mention);
+					if(overwrite == null)
+					{
+						overwrite = discord.createOverwrite().setUser(mention);
+					}
+					overwrite.deny(permission.SEND_MESSAGES);
+					channel.overwritePermissions(overwrite);
+					script.timeout(function()
+					{
+						overwrite.deny(-permission.SEND_MESSAGES);
+						channel.overwritePermissions(overwrite);
+					}, (secs * 1000));
+				});
+				script.timeout(function()
+				{
+					channel.deleteMessages(msgs);
+				}, 5000);
+			}
+		}
+		else if(cont == "+explode" || cont.substr(0, 9) == "+explode ")
 		{
 			channel.sendTyping();
 			if(!hasperm && cont.substr(0, 9) == "+explode ")

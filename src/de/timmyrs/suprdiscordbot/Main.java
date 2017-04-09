@@ -42,7 +42,7 @@ public class Main
 		{
 			Main.configuration.set("botToken", "BOT TOKEN");
 			System.out.println("[Setup]          Please create a Discord Application at https://discordapp.com/developers/applications/me");
-			System.out.println("[Setup]          and add your bot token to config.json");
+			System.out.println("[Setup]          with an associated bot and add your bot token to the config.json");
 			System.out.println("[Setup]          Make your bot join your server by navigating to https://discordapp.com/oauth2/authorize?client_id=CLIENT_ID&scope=bot&permissions=2146958463");
 			System.out.println("[Setup]          wherein you replace 'CLIENT_ID' with your App's Client ID.");
 		}
