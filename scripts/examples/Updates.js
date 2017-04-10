@@ -24,7 +24,6 @@ script.on("USER_JOIN", function(m) // Called when a user joins a guild
 	console.log(p.user.getTag() + " changed their game from '" + (arr[1] == null ? "" : arr[1].name) + "' to '" + (p.game == null ? "" : p.game.name) + "'"); // Log new and old game to console
 }).on("MEMBER_UPDATE_ROLES", function(arr) // Called upon update of a members's guilds
 {
-	console.log("Role update");
 	var m = arr[0], g = m.getGuild();
 	script.each(m.roles, function(role)
 	{

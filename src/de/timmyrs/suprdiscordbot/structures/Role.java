@@ -52,6 +52,6 @@ public class Role extends Structure
 
 	public String toString()
 	{
-		return "{Role " + this.name + " #" + this.id + "}";
+		return "{Role \"" + this.name + "\" #" + this.id + "}";
 	}
 }

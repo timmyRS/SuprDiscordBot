@@ -1,12 +1,15 @@
-// Log guild creation
-// Note: The guild create event is fired when we are added to a guild or the websocket connection started
-script.on("GUILD_CREATE", function(guild)
+script.on("LOAD", function() // On loading of this script...
+{
+	script.each(discord.guilds, function(guild) // ...for each guild we are in...
+	{
+		script.fireEvent("GUILD_CREATE", guild); // ...fire the GUILD_CREATE event.
+	})
+})
+.on("GUILD_CREATE", function(guild) // Fired when we are added to a guild
 {
 	console.log("GUILD_CREATE " + guild.toString());
 })
-// Log guild deletion
-// Note: The guild delete event is fired when we are kicked, the guild goes offline or is actually being deleted
-.on("GUILD_DELETE", function(guild)
+.on("GUILD_DELETE", function(guild) // Fired when we are kicked, the guild goes offline or actually being deleted
 {
 	console.log("GUILD_DELETE " + guild.toString());
 });

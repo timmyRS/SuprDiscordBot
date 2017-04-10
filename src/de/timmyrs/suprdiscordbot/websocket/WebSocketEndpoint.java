@@ -52,7 +52,10 @@ public class WebSocketEndpoint
 	@OnMessage
 	public void onMessage(String msg)
 	{
-		System.out.println("[WebSocket]     > " + msg);
+		if(Main.debug)
+		{
+			System.out.println("[WebSocket]     > " + msg);
+		}
 		this.messageHandler.handleMessage(msg);
 	}
 
@@ -63,7 +66,10 @@ public class WebSocketEndpoint
 
 	void send(String msg)
 	{
-		System.out.println("[WebSocket]     < " + msg);
+		if(Main.debug)
+		{
+			System.out.println("[WebSocket]     < " + msg);
+		}
 		this.userSession.getAsyncRemote().sendText(msg);
 	}
 

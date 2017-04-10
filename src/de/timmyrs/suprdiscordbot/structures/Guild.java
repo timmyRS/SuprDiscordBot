@@ -345,6 +345,6 @@ public class Guild extends Structure
 
 	public String toString()
 	{
-		return "{Guild " + this.name + " #" + this.id + "}";
+		return "{Guild \"" + this.name + "\" #" + this.id + "}";
 	}
 }

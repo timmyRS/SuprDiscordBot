@@ -268,6 +268,6 @@ public class Channel extends Structure
 
 	public String toString()
 	{
-		return "{Channel " + getName() + " #" + id + "}";
+		return "{" + (type.equals("text") ? "Text" : "Voice") + " Channel \"" + getName() + "\" #" + id + "}";
 	}
 }

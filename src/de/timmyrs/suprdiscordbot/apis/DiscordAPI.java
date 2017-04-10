@@ -177,7 +177,7 @@ public class DiscordAPI
 				if(res.startsWith("{"))
 				{
 					JsonObject json = new JsonParser().parse(res).getAsJsonObject();
-					System.out.println(con.getResponseCode() + " - " + json.toString());
+					System.out.println("[DiscordAPI]    " + con.getResponseCode() + " - " + json.toString());
 					if(json.has("message"))
 					{
 						if(json.get("message").getAsString().equals("You are being rate limited."))
@@ -188,7 +188,7 @@ public class DiscordAPI
 					}
 					return null;
 				}
-				System.out.println(con.getResponseCode() + " - " + res);
+				System.out.println("[DiscordAPI]    " + con.getResponseCode() + " - " + res);
 			} catch(Exception ex)
 			{
 				ex.printStackTrace();
@@ -384,7 +384,6 @@ public class DiscordAPI
 		Channel[] ret = new Channel[dms.size()];
 		return dms.toArray(ret);
 	}
-
 
 	/**
 	 * @return New {@link Embed} object

@@ -90,6 +90,6 @@ public class User extends Structure
 
 	public String toString()
 	{
-		return "{User " + username + " #" + id + "}";
+		return "{User \"" + getTag() + "\" #" + id + "}";
 	}
 }

@@ -22,6 +22,14 @@ public class ScriptWatcher extends Thread
 	{
 		try
 		{
+			// Delay inital script loading, to collect data from Discord without any problems.
+			Thread.sleep(1000);
+		} catch(InterruptedException e)
+		{
+			e.printStackTrace();
+		}
+		try
+		{
 			if(!scriptsDir.exists())
 			{
 				scriptsDir.mkdir();

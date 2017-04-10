@@ -31,7 +31,10 @@ public class WebSocket
 				switch(payload.op)
 				{
 					default:
-						System.out.println("[WebSocket]     Unhandled Operation Code: " + payload.op + " - " + json);
+						if(Main.debug)
+						{
+							System.out.println("[WebSocket]     Unhandled Operation Code: " + payload.op + " - " + json);
+						}
 						break;
 					case 0:
 						lastSeq = payload.s;
@@ -44,7 +47,10 @@ public class WebSocket
 						switch(payload.t)
 						{
 							default:
-								System.out.println("[WebSocket]     Unhandled Dispatch Event: " + payload.t + " - " + json);
+								if(Main.debug)
+								{
+									System.out.println("[WebSocket]     Unhandled Dispatch Event: " + payload.t + " - " + json);
+								}
 								break;
 							case "READY":
 								JsonObject d = json.get("d").getAsJsonObject();
