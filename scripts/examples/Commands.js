@@ -39,10 +39,7 @@ script.on("MESSAGE_CREATE", function(msg)
 	}
 
 	// Handle commands
-	if(cont == "+hello")
-	{
-		channel.sendTyping().sendMessage("Hello, world!");
-	} else if(cont.substr(0, 7) == "+react ")
+	if(cont.substr(0, 7) == "+react ")
 	{
 		if(!channel.is_private)
 		{
@@ -67,7 +64,7 @@ script.on("MESSAGE_CREATE", function(msg)
 			.setColor(0xF57C00)
 			.setTitle("SuprDiscordBot Help")
 			.setURL("https://github.com/timmyrs/SuprDiscordBot")
-			.addField("Everywhere-Commands", "`+react`, `+react <id>` and `+hello` work everywhere.", false)
+			.addField("Everywhere-Commands", "`+react` and `+react <id>` work everywhere.", false)
 			.addField("Guild-only", "`+explode` and `xd`-fixture are Guild-only.", false)
 			.addField("Guild-Mod-only", "`+explode <id>`, `+clear <count>` and `+slowmode <secs>` are only available on Guilds for Mods.", false)
 			.setFooter("SuprDiscordBot, Commands.js, by timmyRS")

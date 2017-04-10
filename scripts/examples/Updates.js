@@ -4,6 +4,12 @@ script.on("USER_JOIN", function(m) // Called when a user joins a guild
 }).on("USER_REMOVE", function(p) // Called when a user leaves or gets kicked out of a guild
 {
 	console.log(p.user.getTag() + " left " + p.getGuild().name);
+}).on("PRESENCE_GO_ONLINE", function(p) // Called when a presence goes online
+{
+	console.log(p.user.getTag() + " is now online as " + p.status);
+}).on("PRESENCE_GO_OFFLINE", function(p) // Called when a presence goes offline
+{
+	console.log(p.user.getTag() + " is now offline (was " + p.status + ")");
 }).on("PRESENCE_UPDATE_STATUS", function(arr) // Called upon update of of a presence's status
 {
 	var p = arr[0];

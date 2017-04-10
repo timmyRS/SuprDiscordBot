@@ -4,6 +4,7 @@ import de.timmyrs.suprdiscordbot.Main;
 import de.timmyrs.suprdiscordbot.apis.DiscordAPI;
 
 import javax.websocket.*;
+import java.net.ConnectException;
 import java.net.URI;
 
 @SuppressWarnings("unused")
@@ -19,7 +20,7 @@ public class WebSocketEndpoint
 		{
 			WebSocketContainer container = ContainerProvider.getWebSocketContainer();
 			container.connectToServer(this, endpointURI);
-		} catch(DeploymentException e)
+		} catch(DeploymentException | ConnectException e)
 		{
 			DiscordAPI.closeWebSocket("Connection failed.");
 			DiscordAPI.getWebSocket();
