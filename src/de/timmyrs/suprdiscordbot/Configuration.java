@@ -58,7 +58,7 @@ public class Configuration
 		{
 			this.json.addProperty(key, val);
 		}
-		return this;
+		return this.save();
 	}
 
 	/**
