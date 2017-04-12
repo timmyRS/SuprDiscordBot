@@ -29,7 +29,7 @@ public class WebSocketEndpoint
 	@OnOpen
 	public void onOpen(Session userSession)
 	{
-		System.out.println("[WebSocket]     WebSocket opened.");
+		Main.log("Socket", "WebSocket opened.");
 		this.userSession = userSession;
 	}
 
@@ -42,7 +42,7 @@ public class WebSocketEndpoint
 	@OnClose
 	public void onClose(Session userSession, CloseReason reason)
 	{
-		System.out.println("[WebSocket]     WebSocket closed: " + reason.getReasonPhrase() + " (" + reason.getCloseCode().getCode() + ")");
+		Main.log("Socket", "WebSocket closed: " + reason.getReasonPhrase() + " (" + reason.getCloseCode().getCode() + ")");
 		this.userSession = null;
 		Main.scriptManager.fireEvent("DISCONNECTED");
 		DiscordAPI.closeWebSocket(null);
@@ -54,7 +54,7 @@ public class WebSocketEndpoint
 	{
 		if(Main.debug)
 		{
-			System.out.println("[WebSocket]     > " + msg);
+			Main.log("Socket", "> " + msg);
 		}
 		this.messageHandler.handleMessage(msg);
 	}
@@ -68,7 +68,7 @@ public class WebSocketEndpoint
 	{
 		if(Main.debug)
 		{
-			System.out.println("[WebSocket]     < " + msg);
+			Main.log("Socket", "< " + msg);
 		}
 		this.userSession.getAsyncRemote().sendText(msg);
 	}

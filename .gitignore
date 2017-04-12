@@ -1,7 +1,9 @@
 out/
 .idea/
-values/
-scripts/*.js
-config.json
 *.iml
 hs_err_pid*
+
+values/
+scripts/*.js
+start.bat
+config.json

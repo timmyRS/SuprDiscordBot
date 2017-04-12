@@ -1,5 +1,7 @@
 package de.timmyrs.suprdiscordbot.apis;
 
+import de.timmyrs.suprdiscordbot.Main;
+
 /**
  * Console API ('console')
  *
@@ -16,7 +18,7 @@ public class ConsoleAPI
 	 */
 	public ConsoleAPI log(Object o)
 	{
-		System.out.println("[Console]       " + o.toString());
+		Main.log("Console", o.toString());
 		return this;
 	}
 
@@ -42,7 +44,7 @@ public class ConsoleAPI
 	 */
 	public ConsoleAPI info(Object o)
 	{
-		System.out.println("[Console]       (i) " + o.toString() + "]");
+		Main.log("Console", "(i) " + o.toString());
 		return this;
 	}
 
@@ -68,7 +70,7 @@ public class ConsoleAPI
 	 */
 	public ConsoleAPI warn(Object o)
 	{
-		System.out.println("[Console]       (!) " + o.toString());
+		Main.log("Console", "(!) " + o.toString());
 		return this;
 	}
 
@@ -94,7 +96,7 @@ public class ConsoleAPI
 	 */
 	public ConsoleAPI error(Object o)
 	{
-		System.out.println("[Console]       /!\\ " + o.toString());
+		Main.log("Console", "/!\\ " + o.toString());
 		return this;
 	}
 

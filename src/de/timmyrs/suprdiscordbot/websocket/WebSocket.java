@@ -33,7 +33,7 @@ public class WebSocket
 					default:
 						if(Main.debug)
 						{
-							System.out.println("[WebSocket]     Unhandled Operation Code: " + payload.op + " - " + json);
+							Main.log("Socket", "Unhandled Operation: " + json);
 						}
 						break;
 					case 0:
@@ -49,7 +49,7 @@ public class WebSocket
 							default:
 								if(Main.debug)
 								{
-									System.out.println("[WebSocket]     Unhandled Dispatch Event: " + payload.t + " - " + json);
+									Main.log("Socket", "Unhandled Event " + payload.t + ": " + json.get("d").toString());
 								}
 								break;
 							case "READY":
@@ -261,7 +261,7 @@ public class WebSocket
 	{
 		try
 		{
-			System.out.println("[WebSocket]     Manually closing: " + reason);
+			Main.log("Socket", "Manually closing - " + reason);
 			if(this.endpoint.userSession != null)
 			{
 				this.endpoint.userSession.close();

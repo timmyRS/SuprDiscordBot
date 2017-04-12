@@ -32,7 +32,7 @@ public class ScriptAPI
 		event = event.toUpperCase();
 		if(new ScriptAPI(null).inArray(new String[]{"PRESENCE_UPDATE", "USER_LEAVE"}, event))
 		{
-			System.out.println("[ScriptAPI]     Event '" + event + "' is no longer being supported and thereby will not be registered.");
+			Main.log("Script", "Event '" + event + "' is no longer being supported and thereby will not be registered.");
 		} else
 		{
 			this.script.events.put(event, function);

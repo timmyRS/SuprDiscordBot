@@ -34,7 +34,7 @@ public class ScriptWatcher extends Thread
 			{
 				scriptsDir.mkdir();
 			}
-			System.out.println("[ScriptWatcher] Scripts are being loaded from " + scriptsDir.getAbsolutePath());
+			Main.log("Watcher", "Scripts are being loaded from " + scriptsDir.getAbsolutePath());
 		} catch(Exception e)
 		{
 			e.printStackTrace();
@@ -59,7 +59,7 @@ public class ScriptWatcher extends Thread
 					{
 						if(s == null && fs == null)
 						{
-							System.out.println("[ScriptWatcher] Loading " + f.getName());
+							Main.log("Watcher", "Loading " + f.getName());
 							s = Main.scriptManager.registerScript(f);
 						} else
 						{
@@ -78,7 +78,7 @@ public class ScriptWatcher extends Thread
 								{
 									continue;
 								}
-								System.out.println("[ScriptWatcher] Reloading " + s.name);
+								Main.log("Watcher", "Reloading " + s.name);
 								s.hash = hash;
 								s.setScript(cont);
 							} else
@@ -87,7 +87,7 @@ public class ScriptWatcher extends Thread
 								{
 									continue;
 								}
-								System.out.println("[ScriptWatcher] Reloading " + fs.name);
+								Main.log("Watcher", "Reloading " + s.name);
 								Main.scriptManager.removeFailedScript(fs);
 								s = Main.scriptManager.registerScript(f);
 							}
@@ -98,7 +98,7 @@ public class ScriptWatcher extends Thread
 						{
 							Main.scriptManager.removeScript(s);
 						}
-						System.out.println("[ScriptWatcher] " + e.getMessage() + " in " + f.getName());
+						Main.log("Watcher", e.getMessage() + " in " + f.getName());
 						if(fs == null)
 						{
 							Main.scriptManager.registerFailedScript(f);

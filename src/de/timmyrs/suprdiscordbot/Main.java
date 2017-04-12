@@ -18,8 +18,8 @@ import java.io.File;
  */
 public class Main
 {
-	public static final int versionInt = 1100;
-	public static final String version = "1.1";
+	public static final int versionInt = 1200;
+	public static final String version = "1.2";
 	private static final File valuesDir = new File("values");
 	private final static File confFile = new File("config.json");
 	public static boolean debug = false;
@@ -30,8 +30,8 @@ public class Main
 
 	public static void main(String[] args)
 	{
-		System.out.println("                SuprDiscordBot Version " + version);
-		System.out.println("                https://github.com/timmyrs/SuprDiscordBot");
+		Main.log("Main", "SuprDiscordBot Version " + version);
+		Main.log("Main", "https://github.com/timmyrs/SuprDiscordBot");
 		for(String arg : args)
 		{
 			if(arg.equals("--debug"))
@@ -50,9 +50,21 @@ public class Main
 		} else
 		{
 			Main.configuration.set("botToken", "BOT_TOKEN");
-			System.out.println("[Setup]          Welcome to SuprDiscordBot. :) Please setup a Discord Application.");
-			System.out.println("[Setup]          https://github.com/timmyrs/SuprDiscordBot/blob/master/SETUP.md");
+			Main.log("Setup", "Welcome to SuprDiscordBot. :) Please setup a");
+			Main.log("Setup", "Discord Application using the following guide.");
+			Main.log("Setup", "https://github.com/timmyrs/SuprDiscordBot/blob/master/SETUP.md");
 		}
+	}
+
+	public static void log(String from, String msg)
+	{
+		from = "[" + from + "] ";
+		final int length = (12 - from.length());
+		for(int i = 0; i < length; i++)
+		{
+			from += " ";
+		}
+		System.out.println(from + msg);
 	}
 
 	public static Configuration getValuesConfig(String name)
