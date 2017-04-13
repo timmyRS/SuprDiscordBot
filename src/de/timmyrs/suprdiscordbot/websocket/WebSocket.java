@@ -14,9 +14,9 @@ import java.util.Arrays;
 
 public class WebSocket
 {
-	public static String session_id = "";
 	public static JsonObject afterConnectSend;
 	static int lastSeq;
+	private static String session_id = "";
 	private WebSocketEndpoint endpoint;
 
 	public WebSocket(String url)
@@ -42,7 +42,6 @@ public class WebSocket
 						Guild g;
 						Member m;
 						Presence p;
-						Message msg;
 						JsonObject data = json.get("d").getAsJsonObject();
 						switch(payload.t)
 						{
@@ -144,7 +143,7 @@ public class WebSocket
 								{
 									if(p.game != null)
 									{
-										Main.scriptManager.fireEvent("PRESENCE_UPDATE_GAME", new Object[]{p, cp.game});
+										Main.scriptManager.fireEvent("PRESENCE_UPDATE_GAME", new Object[]{p, null});
 										cp.game = p.game;
 									}
 								} else
@@ -169,7 +168,7 @@ public class WebSocket
 								{
 									if(m.nick != null)
 									{
-										Main.scriptManager.fireEvent("MEMBER_UPDATE_NICK", new Object[]{m, cm.nick});
+										Main.scriptManager.fireEvent("MEMBER_UPDATE_NICK", new Object[]{m, null});
 										cm.nick = m.nick;
 									}
 								} else

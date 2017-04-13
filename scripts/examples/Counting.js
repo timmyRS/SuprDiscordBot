@@ -1,6 +1,5 @@
-// If your guild has a #counting channel by any chance, this will help it keep in the right order and even count with you.
+// If your guild has a #counting channel, this will help you keep in the right order.
 
-var thread = undefined;
 script.on("MESSAGE_CREATE", function(msg)
 {
 	var cont = msg.content.toLowerCase().trim(),
@@ -8,28 +7,37 @@ script.on("MESSAGE_CREATE", function(msg)
 
 	if(channel.getName() == "#counting")
 	{
-		num = getNum(cont);
-		lastNum = getNum(channel.getMessages(2)[1].content);
-		if(num == (lastNum + 1))
+		var bool = false, last = null;
+		script.each(channel.getMessages(50), function(m)
 		{
-			if(msg.author.id != discord.user.id)
+			if(bool)
 			{
-				if(thread !== undefined && !thread.isInterrupted())
+				last = m, bool = false;
+			} else if(last == null)
+			{
+				if(m.id == msg.id)
 				{
-					thread.interrupt();
+					bool = true;
 				}
-				channel.sendTyping();
-				thread = script.timeout(function()
-				{
-					channel.sendMessage(num + 1);
-				}, 4000);
 			}
-		} else
+		});
+		if(last != null)
 		{
-			msg.delete();
+			num = getNum(msg.content),
+			lastNum = getNum(last.content);
+			if(num != (lastNum + 1))
+			{
+				msg.delete();
+			}
 		}
 	}
-});
+}).on("MESSAGE_UPDATE", function(msg)
+{
+	if(msg.content != null)
+	{
+		script.fireEvent("MESSAGE_CREATE", msg);
+	}
+})
 
 function getNum(cont)
 {

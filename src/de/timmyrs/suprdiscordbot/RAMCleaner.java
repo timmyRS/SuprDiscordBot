@@ -26,7 +26,7 @@ public class RAMCleaner extends Thread
 						DiscordAPI.rate_limits.remove(entry.getKey());
 					}
 				}
-				Thread.sleep(10000);
+				Thread.sleep(60000);
 			} catch(Exception e)
 			{
 				try

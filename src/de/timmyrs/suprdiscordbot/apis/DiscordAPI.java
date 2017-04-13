@@ -27,7 +27,7 @@ import java.util.HashMap;
 public class DiscordAPI
 {
 	public static ArrayList<Guild> guilds = new ArrayList<>();
-	public static HashMap<String, Long> rate_limits = new HashMap<>();
+	public static volatile HashMap<String, Long> rate_limits = new HashMap<>();
 	private static ArrayList<Channel> dms;
 	private static WebSocket ws;
 	/**
