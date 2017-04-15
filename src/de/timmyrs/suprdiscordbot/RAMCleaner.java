@@ -19,12 +19,18 @@ public class RAMCleaner extends Thread
 			try
 			{
 				long milis = System.currentTimeMillis();
+				int removed = 0;
 				for(Entry<String, Long> entry : DiscordAPI.rate_limits.entrySet())
 				{
 					if(milis > entry.getValue())
 					{
 						DiscordAPI.rate_limits.remove(entry.getKey());
+						removed++;
 					}
+				}
+				if(removed > 0 && Main.debug)
+				{
+					Main.log("Cleaner", "Removed " + removed + " useless values from RAM.");
 				}
 				Thread.sleep(60000);
 			} catch(Exception e)

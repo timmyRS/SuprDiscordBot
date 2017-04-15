@@ -46,7 +46,6 @@ public class Main
 			Main.discordAPI = new DiscordAPI();
 			new WebSocketHeart();
 			DiscordAPI.getWebSocket();
-			new RAMCleaner();
 		} else
 		{
 			Main.configuration.set("botToken", "BOT_TOKEN");

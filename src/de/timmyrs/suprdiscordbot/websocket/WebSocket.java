@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import de.timmyrs.suprdiscordbot.Main;
+import de.timmyrs.suprdiscordbot.RAMCleaner;
 import de.timmyrs.suprdiscordbot.apis.DiscordAPI;
 import de.timmyrs.suprdiscordbot.scripts.ScriptWatcher;
 import de.timmyrs.suprdiscordbot.structures.*;
@@ -58,6 +59,7 @@ public class WebSocket
 								if(!Main.ready)
 								{
 									new ScriptWatcher();
+									new RAMCleaner();
 									Main.ready = true;
 								}
 							case "RESUMED":
@@ -265,6 +267,7 @@ public class WebSocket
 			{
 				this.endpoint.userSession.close();
 			}
+			this.endpoint = null;
 		} catch(IOException e)
 		{
 			e.printStackTrace();
