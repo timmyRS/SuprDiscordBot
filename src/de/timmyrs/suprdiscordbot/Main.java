@@ -2,13 +2,18 @@ package de.timmyrs.suprdiscordbot;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonParser;
+import com.sun.istack.internal.NotNull;
 import de.timmyrs.suprdiscordbot.apis.ConsoleAPI;
 import de.timmyrs.suprdiscordbot.apis.DiscordAPI;
 import de.timmyrs.suprdiscordbot.apis.PermissionAPI;
 import de.timmyrs.suprdiscordbot.scripts.ScriptManager;
 import de.timmyrs.suprdiscordbot.websocket.WebSocketHeart;
+import org.apache.commons.io.IOUtils;
 
 import java.io.File;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 /**
  * SuprDiscordBot
@@ -58,6 +63,13 @@ public class Main
 			Main.permisisonAPI = new PermissionAPI();
 			new WebSocketHeart();
 			DiscordAPI.getWebSocket();
+			if(Integer.valueOf(getURLContent("https://raw.githubusercontent.com/timmyrs/SuprDiscordBot/master/version.txt").trim()) > Main.versionInt)
+			{
+				Main.log("Main", "There is a new verion/release available at https://github.com/timmyrs/SuprDiscordBot/releases");
+			} else if(Main.debug)
+			{
+				Main.log("Main", "This seems to be the newest version.");
+			}
 		} else
 		{
 			Main.configuration.set("botToken", "BOT_TOKEN");
@@ -67,7 +79,23 @@ public class Main
 		}
 	}
 
-	public static void log(String from, String msg)
+	private static String getURLContent(@NotNull String urlStr)
+	{
+		String body = "";
+		try
+		{
+			java.net.URL url = new URL(urlStr);
+			HttpURLConnection uc = (HttpURLConnection) url.openConnection();
+			InputStream in = uc.getInputStream();
+			body = IOUtils.toString(in, "UTF-8");
+		} catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return body;
+	}
+
+	public static void log(@NotNull String from, String msg)
 	{
 		from = "[" + from + "] ";
 		final int length = (12 - from.length());

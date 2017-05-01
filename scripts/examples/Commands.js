@@ -53,6 +53,23 @@ script.on("MESSAGE_CREATE", function(msg)
 	} else if(cont == "+react")
 	{
 		msg.addReactions(["🇴", "🇰"]);
+	} else if(cont == "+info")
+	{
+		channel.sendTyping();
+		var presence = discord.getPresence(msg.author.id), embed = discord.createEmbed().setColor(0xF57C00).setTitle("Info");
+		if(!channel.is_private)
+		{
+			msg.delete();
+			channel = msg.author.getDMChannel();
+		}
+		if(presence.game != null)
+		{
+			embed.addField("Game", presence.game, false);
+		} else
+		{
+			embed.addField("Game", "None", false);
+		}
+		channel.sendMessage(embed);
 	} else if(cont == "+help")
 	{
 		if(!channel.is_private)
@@ -64,15 +81,11 @@ script.on("MESSAGE_CREATE", function(msg)
 			.setColor(0xF57C00)
 			.setTitle("SuprDiscordBot Help")
 			.setURL("https://github.com/timmyrs/SuprDiscordBot")
-			.addField("Everywhere-Commands", "`+react` and `+react <id>` work everywhere.", false)
+			.addField("Everywhere-Commands", "`+react`, `+react <id>` and `+info` work everywhere.", false)
 			.addField("Guild-only", "`+explode` and `xd`-fixture are Guild-only.", false)
-			.addField("Guild-Mod-only", "`+explode <id>`, `+clear <count>` and `+slowmode <secs>` are only available on Guilds for Mods.", false)
+			.addField("Guild-Mod-only", "`+explode <id>`, `+clear <count>`, `+erase <count>` and `+slowmode <secs>` are only available on Guilds for Mods.", false)
 			.setFooter("SuprDiscordBot, Commands.js, by timmyRS")
 			);
-	} else if(channel.is_private)
-	{
-		// Write "unknown command" if command is not handled and this is a private chat.
-		channel.sendTyping().sendMessage("Unknown command. Try `+help`.");
 	} else if(!channel.is_private)
 	{
 		// Handle severe cases of incompetence
@@ -196,19 +209,66 @@ script.on("MESSAGE_CREATE", function(msg)
 			{
 				msg.delete();
 				mymsg = channel.sendMessage(":thumbsdown: Now you are just being lazy, " + msg.author.getHandle() + ".");
-			} else if(count > 99)
-			{
-				msg.delete();
-				mymsg = channel.sendMessage(":warning: Won't delete more than 99 messages.");
 			} else
 			{
-				var deletemsgs = [];
-				script.each(channel.getMessages(count + 1), function(msg)
+				var deleted = 0;
+				count++;
+				while(count > 0)
 				{
-					deletemsgs.push(msg.id);
-				});
-				channel.deleteMessages(deletemsgs);
-				mymsg = channel.sendMessage(":thumbsup: Deleted a whopping **" + count + "** messages.");
+					var reading = 100;
+					if(count < 100)
+					{
+						reading = count;
+					}
+					var deletemsgs = [];
+					script.each(channel.getMessages(reading), function(msg)
+					{
+						deletemsgs.push(msg.id);
+					});
+					channel.deleteMessages(deletemsgs);
+					count -= reading;
+					deleted += reading;
+				}
+				mymsg = channel.sendMessage(":thumbsup: Deleted a whopping **" + deleted + "** messages.");
+			}
+			script.timeout(function()
+			{
+				mymsg.delete();
+			}, 5000);
+		} else if(cont.substr(0, 7) == "+erase ")
+		{
+			channel.sendTyping();
+			var count = parseInt(cont.substr(7)), mymsg;
+			msg.delete();
+			if(!hasperm)
+			{
+				mymsg = channel.sendMessage(":warning: Only privileged members may use `+erase <count>`.");
+			} else if(count < 1)
+			{
+				mymsg = channel.sendMessage(":warning: Can't delete 0 or less messages.");
+			} else
+			{
+				i = count;
+				mymsg = channel.sendMessage(":warning: Deleting **" + count + "** messages...");
+				while(i > 0)
+				{
+					var reading = 99;
+					if(i < 99)
+					{
+						reading = i;
+					}
+					var deletemsgs = [];
+					script.each(channel.getMessages(reading + 1), function(msg)
+					{
+						if(msg.id != mymsg.id)
+						{
+							msg.delete();
+							i--;
+						}
+					});
+					mymsg.edit(":warning: Deleting **" + i + "** messages...");
+				}
+				mymsg.edit(":thumbsup: Manually deleted a whopping **" + count + "** messages.");
 			}
 			script.timeout(function()
 			{

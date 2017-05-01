@@ -76,7 +76,10 @@ public class WebSocketEndpoint
 		{
 			Main.log("Socket", "< " + msg);
 		}
-		this.userSession.getAsyncRemote().sendText(msg);
+		if(this.userSession != null && this.userSession.isOpen())
+		{
+			this.userSession.getAsyncRemote().sendText(msg);
+		}
 	}
 
 	public interface MessageHandler
