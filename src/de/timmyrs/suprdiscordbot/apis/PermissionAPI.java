@@ -138,7 +138,7 @@ public class PermissionAPI
 	 *
 	 * @param i Permission Bit Set
 	 * @return String array of permissions
-	 * @since 1.3
+	 * @since 1.2
 	 */
 	public String[] bitsToStrings(int i)
 	{
@@ -194,7 +194,7 @@ public class PermissionAPI
 	 * @param permissions Permission bit set
 	 * @param permission  Permission name
 	 * @return Weather the permission is included in the permission bit set
-	 * @since 1.3
+	 * @since 1.2
 	 */
 	public boolean allowsFor(int permissions, String permission)
 	{
@@ -205,7 +205,7 @@ public class PermissionAPI
 	 * @param permissions Array of permission strings
 	 * @param permission  Permission name
 	 * @return Weather the permission is in the permission array
-	 * @since 1.3
+	 * @since 1.2
 	 */
 	public boolean allowsFor(String[] permissions, String permission)
 	{

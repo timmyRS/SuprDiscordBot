@@ -50,7 +50,7 @@ public class Role extends Structure
 	 * Returns Guild this role is part of
 	 *
 	 * @return {@link Guild} object this Role is part of
-	 * @since 1.3
+	 * @since 1.2
 	 */
 	public Guild getGuild()
 	{
@@ -71,7 +71,7 @@ public class Role extends Structure
 	 * Returns list of online users with this role
 	 *
 	 * @return List of {@link Member} objects of online users with this role
-	 * @since 1.3
+	 * @since 1.2
 	 */
 	public Member[] getMembers()
 	{

@@ -429,7 +429,7 @@ public class DiscordAPI
 	 * Tells you weather this instance is running in debug mode.
 	 *
 	 * @return Weather this instance is running in debug mode.
-	 * @since 1.3
+	 * @since 1.2
 	 */
 	public boolean isInDebugMode()
 	{

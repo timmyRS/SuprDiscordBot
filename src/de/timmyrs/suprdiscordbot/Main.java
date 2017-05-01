@@ -22,8 +22,8 @@ import java.io.File;
  */
 public class Main
 {
-	public static final int versionInt = 1300;
-	private static final String version = "1.3";
+	public static final int versionInt = 1200;
+	private static final String version = "1.2";
 	private static final File valuesDir = new File("values");
 	private final static File confFile = new File("config.json");
 	public static boolean debug = false;
