@@ -25,7 +25,7 @@ public abstract class Structure
 /*
 	 * @param o Other Structure
 	 * @return Weather the other structure is equal to this structure
-	 * @since 1.3
+	 * @since 1.2
 	 */
 	//public abstract boolean equals(Structure o);
 }
