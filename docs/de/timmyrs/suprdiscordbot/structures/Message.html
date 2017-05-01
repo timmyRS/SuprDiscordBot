@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -279,22 +279,50 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Message.html#edit-java.lang.String-">edit</a></span>(java.lang.String&nbsp;content)</code>&nbsp;</td>
 </tr>
 <tr id="i4" class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Message.html#equals-de.timmyrs.suprdiscordbot.structures.Message-">equals</a></span>(<a href="../../../../de/timmyrs/suprdiscordbot/structures/Message.html" title="class in de.timmyrs.suprdiscordbot.structures">Message</a>&nbsp;o)</code>&nbsp;</td>
+</tr>
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Message.html" title="class in de.timmyrs.suprdiscordbot.structures">Message</a>[]</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Message.html#getArray-int-">getArray</a></span>(int&nbsp;size)</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html" title="class in de.timmyrs.suprdiscordbot.structures">Channel</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Message.html#getChannel--">getChannel</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code>long</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Message.html#getEditMillis--">getEditMillis</a></span>()</code>
+<div class="block">Get Edit Time Millis</div>
+</td>
+</tr>
+<tr id="i8" class="altColor">
+<td class="colFirst"><code>long</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Message.html#getEditTime--">getEditTime</a></span>()</code>
+<div class="block">Get Edit Time</div>
+</td>
+</tr>
+<tr id="i9" class="rowColor">
+<td class="colFirst"><code>long</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Message.html#getMillis--">getMillis</a></span>()</code>
+<div class="block">Get Time Millis</div>
+</td>
+</tr>
+<tr id="i10" class="altColor">
+<td class="colFirst"><code>long</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Message.html#getTime--">getTime</a></span>()</code>
+<div class="block">Get Time</div>
+</td>
+</tr>
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Message.html" title="class in de.timmyrs.suprdiscordbot.structures">Message</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Message.html#setContent-java.lang.String-">setContent</a></span>(java.lang.String&nbsp;content)</code>&nbsp;</td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Message.html" title="class in de.timmyrs.suprdiscordbot.structures">Message</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Message.html#setEmbed-de.timmyrs.suprdiscordbot.structures.Embed-">setEmbed</a></span>(<a href="../../../../de/timmyrs/suprdiscordbot/structures/Embed.html" title="class in de.timmyrs.suprdiscordbot.structures">Embed</a>&nbsp;embed)</code>&nbsp;</td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Message.html#toString--">toString</a></span>()</code>&nbsp;</td>
 </tr>
@@ -598,6 +626,62 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 </dl>
 </li>
 </ul>
+<a name="getTime--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getTime</h4>
+<pre>public&nbsp;long&nbsp;getTime()</pre>
+<div class="block">Get Time</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>The UNIX timestamp of the message's creation.</dd>
+</dl>
+</li>
+</ul>
+<a name="getMillis--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getMillis</h4>
+<pre>public&nbsp;long&nbsp;getMillis()</pre>
+<div class="block">Get Time Millis</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>The time millis of the message's creation.</dd>
+</dl>
+</li>
+</ul>
+<a name="getEditTime--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getEditTime</h4>
+<pre>public&nbsp;long&nbsp;getEditTime()</pre>
+<div class="block">Get Edit Time</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>The UNIX timestamp of the message's last edit.</dd>
+</dl>
+</li>
+</ul>
+<a name="getEditMillis--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getEditMillis</h4>
+<pre>public&nbsp;long&nbsp;getEditMillis()</pre>
+<div class="block">Get Edit Time Millis</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>The time millis of the message's last edit.</dd>
+</dl>
+</li>
+</ul>
 <a name="getArray-int-">
 <!--   -->
 </a>
@@ -618,7 +702,7 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <a name="toString--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>toString</h4>
 <pre>public&nbsp;java.lang.String&nbsp;toString()</pre>
@@ -628,6 +712,15 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>String representation of Structure</dd>
 </dl>
+</li>
+</ul>
+<a name="equals-de.timmyrs.suprdiscordbot.structures.Message-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>equals</h4>
+<pre>public&nbsp;boolean&nbsp;equals(<a href="../../../../de/timmyrs/suprdiscordbot/structures/Message.html" title="class in de.timmyrs.suprdiscordbot.structures">Message</a>&nbsp;o)</pre>
 </li>
 </ul>
 </li>

@@ -52,11 +52,17 @@ public class WebSocketEndpoint
 	@OnMessage
 	public void onMessage(String msg)
 	{
-		if(Main.debug)
+		if(this.messageHandler != null)
 		{
-			Main.log("Socket", "> " + msg);
+			if(Main.debug)
+			{
+				Main.log("Socket", "> " + msg);
+			}
+			this.messageHandler.handleMessage(msg);
+		} else if(msg != null)
+		{
+			Main.log("Socket", "Unhandled > " + msg);
 		}
-		this.messageHandler.handleMessage(msg);
 	}
 
 	void addMessageHandler(MessageHandler msgHandler)

@@ -121,7 +121,26 @@ public class PermissionAPI
 	 */
 	public final int MANAGE_EMOJIS = 0x40000000;
 
+	/**
+	 * Converts permission bit set to string array.
+	 *
+	 * @param i Permission Bit Set
+	 * @return String array of permissions
+	 * @deprecated Use {@link PermissionAPI#bitsToStrings(int)} instead
+	 */
 	public String[] intToStringArray(int i)
+	{
+		return bitsToStrings(i);
+	}
+
+	/**
+	 * Converts permission bit set to string array.
+	 *
+	 * @param i Permission Bit Set
+	 * @return String array of permissions
+	 * @since 1.3
+	 */
+	public String[] bitsToStrings(int i)
 	{
 		try
 		{
@@ -169,5 +188,34 @@ public class PermissionAPI
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	/**
+	 * @param permissions Permission bit set
+	 * @param permission  Permission name
+	 * @return Weather the permission is included in the permission bit set
+	 * @since 1.3
+	 */
+	public boolean allowsFor(int permissions, String permission)
+	{
+		return allowsFor(bitsToStrings(permissions), permission);
+	}
+
+	/**
+	 * @param permissions Array of permission strings
+	 * @param permission  Permission name
+	 * @return Weather the permission is in the permission array
+	 * @since 1.3
+	 */
+	public boolean allowsFor(String[] permissions, String permission)
+	{
+		for(String perm : permissions)
+		{
+			if(perm.equals(permission))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 }

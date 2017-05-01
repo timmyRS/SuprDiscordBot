@@ -5,6 +5,8 @@ import de.timmyrs.suprdiscordbot.Main;
 import de.timmyrs.suprdiscordbot.apis.DiscordAPI;
 
 import java.net.URLEncoder;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 /**
  * Message Structure.
@@ -173,6 +175,74 @@ public class Message extends Structure
 		return this;
 	}
 
+	/**
+	 * Get Time
+	 *
+	 * @return The UNIX timestamp of the message's creation.
+	 */
+	public long getTime()
+	{
+		try
+		{
+			return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssSSSXXX").parse(this.timestamp).getTime() / 1000L;
+		} catch(ParseException e)
+		{
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	/**
+	 * Get Time Millis
+	 *
+	 * @return The time millis of the message's creation.
+	 */
+	public long getMillis()
+	{
+		try
+		{
+			return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssSSSXXX").parse(this.timestamp).getTime() / 1000L;
+		} catch(ParseException e)
+		{
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	/**
+	 * Get Edit Time
+	 *
+	 * @return The UNIX timestamp of the message's last edit.
+	 */
+	public long getEditTime()
+	{
+		try
+		{
+			return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssSSSXXX").parse(this.edited_timestamp).getTime();
+		} catch(ParseException e)
+		{
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	/**
+	 * Get Edit Time Millis
+	 *
+	 * @return The time millis of the message's last edit.
+	 */
+	public long getEditMillis()
+	{
+		try
+		{
+			return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssSSSXXX").parse(this.edited_timestamp).getTime() / 1000L;
+		} catch(ParseException e)
+		{
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
 	public Message[] getArray(int size)
 	{
 		return new Message[size];
@@ -189,5 +259,10 @@ public class Message extends Structure
 					" by " + author.toString() +
 					" in " + getChannel().toString() + "}";
 		}
+	}
+
+	public boolean equals(Message o)
+	{
+		return o.id.equals(this.id);
 	}
 }

@@ -21,4 +21,11 @@ public abstract class Structure
 	 */
 	@NotNull
 	public abstract String toString();
+
+/*
+	 * @param o Other Structure
+	 * @return Weather the other structure is equal to this structure
+	 * @since 1.3
+	 */
+	//public abstract boolean equals(Structure o);
 }

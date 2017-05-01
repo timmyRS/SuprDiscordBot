@@ -88,6 +88,22 @@ public class Member extends Structure
 	}
 
 	/**
+	 * @param role {@link Role} object to be tested for
+	 * @return Weather this member is part of the given role
+	 */
+	public boolean hasRole(Role role)
+	{
+		for(Role r : getRoles())
+		{
+			if(role.equals(r))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
 	 * @return {@link Presence} object this member correlates to
 	 */
 	public Presence getPresence()

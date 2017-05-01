@@ -4,7 +4,6 @@ import de.timmyrs.suprdiscordbot.Main;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.IOUtils;
 
-import javax.script.ScriptException;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,7 +21,7 @@ public class ScriptWatcher extends Thread
 	{
 		try
 		{
-			// Delay inital script loading, to collect data from Discord without any problems.
+			// Delay initial script loading, to collect data from Discord without any problems.
 			Thread.sleep(1000);
 		} catch(InterruptedException e)
 		{
@@ -92,7 +91,7 @@ public class ScriptWatcher extends Thread
 								s = Main.scriptManager.registerScript(f);
 							}
 						}
-					} catch(ScriptException e)
+					} catch(Exception e)
 					{
 						if(s != null)
 						{

@@ -1,5 +1,9 @@
 package de.timmyrs.suprdiscordbot.structures;
 
+import de.timmyrs.suprdiscordbot.Main;
+
+import java.util.ArrayList;
+
 /**
  * Role Structure
  *
@@ -28,7 +32,9 @@ public class Role extends Structure
 	 */
 	public int position;
 	/**
-	 * Permission bit set
+	 * Permission bit set.
+	 *
+	 * @see de.timmyrs.suprdiscordbot.apis.PermissionAPI#bitsToStrings(int)
 	 */
 	public int permissions;
 	/**
@@ -40,6 +46,50 @@ public class Role extends Structure
 	 */
 	public boolean mentionable;
 
+	/**
+	 * Returns Guild this role is part of
+	 *
+	 * @return {@link Guild} object this Role is part of
+	 * @since 1.3
+	 */
+	public Guild getGuild()
+	{
+		for(Guild g : Main.discordAPI.getGuilds())
+		{
+			for(Role r : g.roles)
+			{
+				if(r.equals(this))
+				{
+					return g;
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Returns list of online users with this role
+	 *
+	 * @return List of {@link Member} objects of online users with this role
+	 * @since 1.3
+	 */
+	public Member[] getMembers()
+	{
+		ArrayList<Member> arrayList = new ArrayList<>();
+		for(Member m : getGuild().members)
+		{
+			if(m.hasRole(this))
+			{
+				arrayList.add(m);
+			}
+		}
+		Member[] tmp = new Member[arrayList.size()];
+		return arrayList.toArray(tmp);
+	}
+
+	/**
+	 * @return Handle of this role to be used in a message
+	 */
 	public String getHandle()
 	{
 		return "<&" + id + ">";
@@ -53,5 +103,10 @@ public class Role extends Structure
 	public String toString()
 	{
 		return "{Role \"" + this.name + "\" #" + this.id + "}";
+	}
+
+	public boolean equals(Role o)
+	{
+		return o.id.equals(this.id);
 	}
 }

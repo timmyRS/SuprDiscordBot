@@ -1,6 +1,10 @@
 package de.timmyrs.suprdiscordbot;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonParser;
+import de.timmyrs.suprdiscordbot.apis.ConsoleAPI;
 import de.timmyrs.suprdiscordbot.apis.DiscordAPI;
+import de.timmyrs.suprdiscordbot.apis.PermissionAPI;
 import de.timmyrs.suprdiscordbot.scripts.ScriptManager;
 import de.timmyrs.suprdiscordbot.websocket.WebSocketHeart;
 
@@ -18,15 +22,19 @@ import java.io.File;
  */
 public class Main
 {
-	public static final int versionInt = 1200;
-	public static final String version = "1.2";
+	public static final int versionInt = 1300;
+	private static final String version = "1.3";
 	private static final File valuesDir = new File("values");
 	private final static File confFile = new File("config.json");
 	public static boolean debug = false;
 	public static Configuration configuration;
 	public static ScriptManager scriptManager;
 	public static DiscordAPI discordAPI;
+	public static ConsoleAPI consoleAPI;
+	public static PermissionAPI permisisonAPI;
 	public static boolean ready = false;
+	public static Gson gson;
+	public static JsonParser jsonParser;
 
 	public static void main(String[] args)
 	{
@@ -39,11 +47,15 @@ public class Main
 				Main.debug = true;
 			}
 		}
-		Main.scriptManager = new ScriptManager();
+		Main.jsonParser = new JsonParser();
 		Main.configuration = new Configuration(confFile);
 		if(Main.configuration.has("botToken"))
 		{
+			Main.gson = new Gson();
+			Main.scriptManager = new ScriptManager();
 			Main.discordAPI = new DiscordAPI();
+			Main.consoleAPI = new ConsoleAPI();
+			Main.permisisonAPI = new PermissionAPI();
 			new WebSocketHeart();
 			DiscordAPI.getWebSocket();
 		} else

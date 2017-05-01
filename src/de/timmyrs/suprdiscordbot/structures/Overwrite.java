@@ -84,4 +84,9 @@ public class Overwrite extends Structure
 	{
 		return "{Overwrite for " + this.type + " #" + this.id + "}";
 	}
+
+	public boolean equals(Overwrite o)
+	{
+		return o.id.equals(this.id);
+	}
 }

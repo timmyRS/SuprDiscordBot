@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9,"i1":9};
+var methods = {"i0":9,"i1":9,"i2":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -144,12 +144,28 @@ extends java.lang.Object</pre>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../de/timmyrs/suprdiscordbot/Main.html#configuration">configuration</a></span></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><code>static <a href="../../../de/timmyrs/suprdiscordbot/apis/ConsoleAPI.html" title="class in de.timmyrs.suprdiscordbot.apis">ConsoleAPI</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../de/timmyrs/suprdiscordbot/Main.html#consoleAPI">consoleAPI</a></span></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><code>static boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../de/timmyrs/suprdiscordbot/Main.html#debug">debug</a></span></code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static <a href="../../../de/timmyrs/suprdiscordbot/apis/DiscordAPI.html" title="class in de.timmyrs.suprdiscordbot.apis">DiscordAPI</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../de/timmyrs/suprdiscordbot/Main.html#discordAPI">discordAPI</a></span></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static com.google.gson.Gson</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../de/timmyrs/suprdiscordbot/Main.html#gson">gson</a></span></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static com.google.gson.JsonParser</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../de/timmyrs/suprdiscordbot/Main.html#jsonParser">jsonParser</a></span></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="../../../de/timmyrs/suprdiscordbot/apis/PermissionAPI.html" title="class in de.timmyrs.suprdiscordbot.apis">PermissionAPI</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../de/timmyrs/suprdiscordbot/Main.html#permisisonAPI">permisisonAPI</a></span></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>static boolean</code></td>
@@ -160,10 +176,6 @@ extends java.lang.Object</pre>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../de/timmyrs/suprdiscordbot/Main.html#scriptManager">scriptManager</a></span></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>static java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../de/timmyrs/suprdiscordbot/Main.html#version">version</a></span></code>&nbsp;</td>
-</tr>
-<tr class="altColor">
 <td class="colFirst"><code>static int</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../de/timmyrs/suprdiscordbot/Main.html#versionInt">versionInt</a></span></code>&nbsp;</td>
 </tr>
@@ -205,6 +217,11 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>static void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../de/timmyrs/suprdiscordbot/Main.html#log-java.lang.String-java.lang.String-">log</a></span>(java.lang.String&nbsp;from,
+   java.lang.String&nbsp;msg)</code>&nbsp;</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code>static void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../de/timmyrs/suprdiscordbot/Main.html#main-java.lang.String:A-">main</a></span>(java.lang.String[]&nbsp;args)</code>&nbsp;</td>
 </tr>
 </table>
@@ -239,19 +256,6 @@ extends java.lang.Object</pre>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../constant-values.html#de.timmyrs.suprdiscordbot.Main.versionInt">Constant Field Values</a></dd>
-</dl>
-</li>
-</ul>
-<a name="version">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>version</h4>
-<pre>public static final&nbsp;java.lang.String version</pre>
-<dl>
-<dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="../../../constant-values.html#de.timmyrs.suprdiscordbot.Main.version">Constant Field Values</a></dd>
 </dl>
 </li>
 </ul>
@@ -291,13 +295,49 @@ extends java.lang.Object</pre>
 <pre>public static&nbsp;<a href="../../../de/timmyrs/suprdiscordbot/apis/DiscordAPI.html" title="class in de.timmyrs.suprdiscordbot.apis">DiscordAPI</a> discordAPI</pre>
 </li>
 </ul>
+<a name="consoleAPI">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>consoleAPI</h4>
+<pre>public static&nbsp;<a href="../../../de/timmyrs/suprdiscordbot/apis/ConsoleAPI.html" title="class in de.timmyrs.suprdiscordbot.apis">ConsoleAPI</a> consoleAPI</pre>
+</li>
+</ul>
+<a name="permisisonAPI">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>permisisonAPI</h4>
+<pre>public static&nbsp;<a href="../../../de/timmyrs/suprdiscordbot/apis/PermissionAPI.html" title="class in de.timmyrs.suprdiscordbot.apis">PermissionAPI</a> permisisonAPI</pre>
+</li>
+</ul>
 <a name="ready">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>ready</h4>
+<pre>public static&nbsp;boolean ready</pre>
+</li>
+</ul>
+<a name="gson">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>gson</h4>
+<pre>public static&nbsp;com.google.gson.Gson gson</pre>
+</li>
+</ul>
+<a name="jsonParser">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>ready</h4>
-<pre>public static&nbsp;boolean ready</pre>
+<h4>jsonParser</h4>
+<pre>public static&nbsp;com.google.gson.JsonParser jsonParser</pre>
 </li>
 </ul>
 </li>
@@ -332,6 +372,16 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>main</h4>
 <pre>public static&nbsp;void&nbsp;main(java.lang.String[]&nbsp;args)</pre>
+</li>
+</ul>
+<a name="log-java.lang.String-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>log</h4>
+<pre>public static&nbsp;void&nbsp;log(java.lang.String&nbsp;from,
+                       java.lang.String&nbsp;msg)</pre>
 </li>
 </ul>
 <a name="getValuesConfig-java.lang.String-">

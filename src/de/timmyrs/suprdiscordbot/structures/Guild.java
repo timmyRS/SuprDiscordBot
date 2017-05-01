@@ -1,7 +1,6 @@
 package de.timmyrs.suprdiscordbot.structures;
 
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import de.timmyrs.suprdiscordbot.Configuration;
 import de.timmyrs.suprdiscordbot.Main;
 import de.timmyrs.suprdiscordbot.apis.DiscordAPI;
@@ -138,7 +137,7 @@ public class Guild extends Structure
 	 */
 	public Guild setNickname(final String newnick)
 	{
-		JsonObject json = new JsonParser().parse("{}").getAsJsonObject();
+		JsonObject json = Main.jsonParser.parse("{}").getAsJsonObject();
 		json.addProperty("nick", newnick);
 		DiscordAPI.request("PATCH", "/guilds/" + this.id + "/members/@me/nick", json.toString());
 		return this;
@@ -271,6 +270,7 @@ public class Guild extends Structure
 	/**
 	 * @param u {@link User} object
 	 * @return {@link Presence} object correlating to the given {@link User} object
+	 * @deprecated Use {@link Guild#getPresence(String)} using {@link User#id} instead
 	 */
 	public Presence getPresence(User u)
 	{
@@ -283,7 +283,7 @@ public class Guild extends Structure
 	 */
 	public Presence getPresence(Member m)
 	{
-		return getPresence(m.user);
+		return getPresence(m.user.id);
 	}
 
 	/**
@@ -346,5 +346,10 @@ public class Guild extends Structure
 	public String toString()
 	{
 		return "{Guild \"" + this.name + "\" #" + this.id + "}";
+	}
+
+	public boolean equals(Guild o)
+	{
+		return o.id.equals(this.id);
 	}
 }

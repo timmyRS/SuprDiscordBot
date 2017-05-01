@@ -1,8 +1,6 @@
 package de.timmyrs.suprdiscordbot.scripts;
 
 import de.timmyrs.suprdiscordbot.Main;
-import de.timmyrs.suprdiscordbot.apis.ConsoleAPI;
-import de.timmyrs.suprdiscordbot.apis.PermissionAPI;
 import de.timmyrs.suprdiscordbot.apis.ScriptAPI;
 
 import javax.script.Bindings;
@@ -30,8 +28,8 @@ public class Script
 		final ScriptEngine engine = Main.scriptManager.factory.getEngineByExtension("js");
 		engine.put("script", new ScriptAPI(this));
 		engine.put("discord", Main.discordAPI);
-		engine.put("console", new ConsoleAPI());
-		engine.put("permission", new PermissionAPI());
+		engine.put("console", Main.consoleAPI);
+		engine.put("permission", Main.permisisonAPI);
 		Bindings bindings = engine.getBindings(100);
 		bindings.remove("for");
 		engine.eval(script);
@@ -46,9 +44,9 @@ public class Script
 	public Script fireEvent(String event, final Object data)
 	{
 		event = event.toUpperCase();
-		if(events.containsKey(event))
+		if(this.events.containsKey(event))
 		{
-			final Consumer<Object> function = events.get(event);
+			final Consumer<Object> function = this.events.get(event);
 			new Thread(()->
 			{
 				function.accept(data);

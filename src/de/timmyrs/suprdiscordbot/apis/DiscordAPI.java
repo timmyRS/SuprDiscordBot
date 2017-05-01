@@ -1,9 +1,8 @@
 package de.timmyrs.suprdiscordbot.apis;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.sun.istack.internal.Nullable;
 import de.timmyrs.suprdiscordbot.Main;
 import de.timmyrs.suprdiscordbot.structures.*;
 import de.timmyrs.suprdiscordbot.websocket.WebSocket;
@@ -176,7 +175,7 @@ public class DiscordAPI
 				String res = IOUtils.toString(is, "UTF-8");
 				if(res.startsWith("{"))
 				{
-					JsonObject json = new JsonParser().parse(res).getAsJsonObject();
+					JsonObject json = Main.jsonParser.parse(res).getAsJsonObject();
 					Main.log("Discord", con.getResponseCode() + " - " + json.toString());
 					if(json.has("message"))
 					{
@@ -203,13 +202,13 @@ public class DiscordAPI
 				return res;
 			} else if(res.startsWith("{"))
 			{
-				return new Gson().fromJson(res, structure.getClass());
+				return Main.gson.fromJson(res, structure.getClass());
 			} else if(res.startsWith("["))
 			{
 				ArrayList<Structure> arrayList = new ArrayList<>();
-				for(JsonElement e : new JsonParser().parse(res).getAsJsonArray())
+				for(JsonElement e : Main.jsonParser.parse(res).getAsJsonArray())
 				{
-					arrayList.add(new Gson().fromJson(e, structure.getClass()));
+					arrayList.add(Main.gson.fromJson(e, structure.getClass()));
 				}
 				Structure[] arr = structure.getArray(arrayList.size());
 				return arrayList.toArray(arr);
@@ -232,7 +231,7 @@ public class DiscordAPI
 		{
 			if(!Main.configuration.has("gateway"))
 			{
-				JsonObject json = new JsonParser().parse(DiscordAPI.request("/gateway").toString()).getAsJsonObject();
+				JsonObject json = Main.jsonParser.parse(DiscordAPI.request("/gateway").toString()).getAsJsonObject();
 				Main.configuration.set("gateway", json.get("url").getAsString());
 			}
 			ws = new WebSocket(Main.configuration.getString("gateway") + "/?v=5&encoding=json");
@@ -245,14 +244,11 @@ public class DiscordAPI
 	 *
 	 * @param reason Close reason
 	 */
-	public static void closeWebSocket(String reason)
+	public static void closeWebSocket(@Nullable String reason)
 	{
 		if(ws != null)
 		{
-			if(reason != null)
-			{
-				ws.close(reason);
-			}
+			ws.close(reason);
 			ws = null;
 		}
 	}
@@ -273,7 +269,7 @@ public class DiscordAPI
 			json.add("d", (JsonElement) d);
 		} else if(d instanceof String && d.toString().startsWith("{"))
 		{
-			json.add("d", new JsonParser().parse(d.toString()).getAsJsonObject());
+			json.add("d", Main.jsonParser.parse(d.toString()).getAsJsonObject());
 		} else
 		{
 			json.addProperty("d", d.toString());
@@ -304,7 +300,12 @@ public class DiscordAPI
 				return g;
 			}
 		}
-		return (Guild) request("/guilds/" + id, new Guild());
+		Guild g = (Guild) request("/guilds/" + id, new Guild());
+		if(g != null)
+		{
+			guilds.add(g);
+		}
+		return g;
 	}
 
 	/**
@@ -324,6 +325,28 @@ public class DiscordAPI
 			}
 		}
 		return (User) request("/users/" + id, new User());
+	}
+
+	/**
+	 * Gets Presence by ID
+	 *
+	 * @param id ID of the user
+	 * @return {@link Presence} object with the given ID
+	 */
+	public Presence getPresence(String id)
+	{
+		for(Guild g : guilds)
+		{
+			for(Presence p : g.presences)
+			{
+				if(p.user.id.equals(id))
+				{
+					p.guild_id = null;
+					return p;
+				}
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -400,5 +423,16 @@ public class DiscordAPI
 	public Overwrite createOverwrite()
 	{
 		return new Overwrite();
+	}
+
+	/**
+	 * Tells you weather this instance is running in debug mode.
+	 *
+	 * @return Weather this instance is running in debug mode.
+	 * @since 1.3
+	 */
+	public boolean isInDebugMode()
+	{
+		return Main.debug;
 	}
 }

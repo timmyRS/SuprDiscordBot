@@ -1,15 +1,13 @@
 package de.timmyrs.suprdiscordbot.websocket;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.sun.istack.internal.Nullable;
 import de.timmyrs.suprdiscordbot.Main;
 import de.timmyrs.suprdiscordbot.RAMCleaner;
 import de.timmyrs.suprdiscordbot.apis.DiscordAPI;
 import de.timmyrs.suprdiscordbot.scripts.ScriptWatcher;
 import de.timmyrs.suprdiscordbot.structures.*;
 
-import java.io.IOException;
 import java.net.URI;
 import java.util.Arrays;
 
@@ -27,8 +25,8 @@ public class WebSocket
 			endpoint = new WebSocketEndpoint(new URI(url));
 			endpoint.addMessageHandler(message->
 			{
-				JsonObject json = new JsonParser().parse(message).getAsJsonObject();
-				GatewayPayload payload = new Gson().fromJson(json, GatewayPayload.class);
+				JsonObject json = Main.jsonParser.parse(message).getAsJsonObject();
+				GatewayPayload payload = Main.gson.fromJson(json, GatewayPayload.class);
 				switch(payload.op)
 				{
 					default:
@@ -55,7 +53,8 @@ public class WebSocket
 							case "READY":
 								JsonObject d = json.get("d").getAsJsonObject();
 								session_id = d.get("session_id").getAsString();
-								Main.discordAPI.user = new Gson().fromJson(d.get("user"), User.class);
+								DiscordAPI.guilds.clear();
+								Main.discordAPI.user = Main.gson.fromJson(d.get("user"), User.class);
 								if(!Main.ready)
 								{
 									new ScriptWatcher();
@@ -71,7 +70,7 @@ public class WebSocket
 								Main.scriptManager.fireEvent("CONNECTED");
 								break;
 							case "GUILD_CREATE":
-								g = new Gson().fromJson(data, Guild.class);
+								g = Main.gson.fromJson(data, Guild.class);
 								for(Channel c : g.getChannels())
 								{
 									c.guild_id = g.id;
@@ -98,19 +97,19 @@ public class WebSocket
 								Main.scriptManager.fireEvent("GUILD_DELETE", g);
 								break;
 							case "GUILD_MEMBER_ADD":
-								m = new Gson().fromJson(data, Member.class);
+								m = Main.gson.fromJson(data, Member.class);
 								m.getGuild().addMember(m);
 								Main.scriptManager.fireEvent("USER_JOIN", m);
 								break;
 							case "GUILD_MEMBER_REMOVE":
-								p = new Gson().fromJson(data, Presence.class);
+								p = Main.gson.fromJson(data, Presence.class);
 								p.getGuild().removeMember(p.user.id);
 								p.getGuild().removePresence(p.user.id);
 								Main.scriptManager.fireEvent("USER_REMOVE", p);
 								break;
 							case "PRESENCE_UPDATE":
 								g = Main.discordAPI.getGuild(data.get("guild_id").getAsString());
-								p = new Gson().fromJson(data, Presence.class);
+								p = Main.gson.fromJson(data, Presence.class);
 								Presence cp = g.getPresence(p.user.id);
 								m = g.getMember(p.user.id);
 								if(cp == null)
@@ -164,7 +163,7 @@ public class WebSocket
 								break;
 							case "GUILD_MEMBER_UPDATE":
 								g = Main.discordAPI.getGuild(data.get("guild_id").getAsString());
-								m = new Gson().fromJson(data, Member.class);
+								m = Main.gson.fromJson(data, Member.class);
 								Member cm = g.getMember(m.user.id);
 								if(cm.nick == null)
 								{
@@ -205,7 +204,7 @@ public class WebSocket
 							case "MESSAGE_CREATE":
 							case "MESSAGE_UPDATE":
 							case "MESSAGE_DELETE":
-								Main.scriptManager.fireEvent(payload.t, new Gson().fromJson(data, Message.class));
+								Main.scriptManager.fireEvent(payload.t, Main.gson.fromJson(data, Message.class));
 								break;
 						}
 						break;
@@ -231,7 +230,7 @@ public class WebSocket
 							d.add("properties", properties);
 							d.addProperty("compress", false);
 							d.addProperty("large_threshold", 50);
-							d.add("shard", new JsonParser().parse("[0,1]").getAsJsonArray());
+							d.add("shard", Main.jsonParser.parse("[0,1]").getAsJsonArray());
 							Main.discordAPI.send(2, d);
 						} else
 						{
@@ -240,7 +239,7 @@ public class WebSocket
 							d.addProperty("seq", lastSeq);
 							Main.discordAPI.send(6, d);
 						}
-						WebSocketHeart.interval = new JsonParser().parse(payload.d.toString()).getAsJsonObject().get("heartbeat_interval").getAsInt();
+						WebSocketHeart.interval = Main.jsonParser.parse(payload.d.toString()).getAsJsonObject().get("heartbeat_interval").getAsInt();
 						break;
 					case 11:
 						WebSocketHeart.gotACK = true;
@@ -258,17 +257,23 @@ public class WebSocket
 		this.endpoint.send(json.toString());
 	}
 
-	public void close(String reason)
+	public void close(@Nullable String reason)
 	{
 		try
 		{
-			Main.log("Socket", "Manually closing - " + reason);
-			if(this.endpoint.userSession != null)
+			if(reason != null)
+			{
+				Main.log("Socket", "Manually closing - " + reason);
+			}
+			if(this.endpoint.userSession != null && this.endpoint.userSession.isOpen())
 			{
 				this.endpoint.userSession.close();
 			}
-			this.endpoint = null;
-		} catch(IOException e)
+			if(reason == null)
+			{
+				this.endpoint = null;
+			}
+		} catch(Exception e)
 		{
 			e.printStackTrace();
 		}

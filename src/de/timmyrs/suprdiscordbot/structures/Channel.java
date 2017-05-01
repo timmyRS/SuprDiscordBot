@@ -1,6 +1,5 @@
 package de.timmyrs.suprdiscordbot.structures;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
@@ -249,7 +248,7 @@ public class Channel extends Structure
 	{
 		JsonObject json = new JsonObject();
 		json.addProperty("content", content);
-		json.add("embed", new Gson().toJsonTree(embed));
+		json.add("embed", Main.gson.toJsonTree(embed));
 		return (Message) DiscordAPI.request("POST", "/channels/" + id + "/messages", json.toString(), new Message());
 	}
 
@@ -269,5 +268,10 @@ public class Channel extends Structure
 	public String toString()
 	{
 		return "{" + (type.equals("text") ? "Text" : "Voice") + " Channel \"" + getName() + "\" #" + id + "}";
+	}
+
+	public boolean equals(Channel o)
+	{
+		return o.id.equals(this.id);
 	}
 }

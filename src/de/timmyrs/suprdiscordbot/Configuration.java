@@ -1,7 +1,6 @@
 package de.timmyrs.suprdiscordbot;
 
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import org.apache.commons.io.IOUtils;
 
 import java.io.BufferedInputStream;
@@ -40,7 +39,7 @@ public class Configuration
 		{
 			cont = "{}";
 		}
-		this.json = new JsonParser().parse(cont).getAsJsonObject();
+		this.json = Main.jsonParser.parse(cont).getAsJsonObject();
 	}
 
 	/**

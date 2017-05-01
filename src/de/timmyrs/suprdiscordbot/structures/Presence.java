@@ -3,7 +3,8 @@ package de.timmyrs.suprdiscordbot.structures;
 import de.timmyrs.suprdiscordbot.Main;
 
 /**
- * Presence Structure
+ * Presence Structure.
+ * You can retrieve a Presence Structure using {@link Guild#getPresence(Member)}.
  *
  * @author timmyRS
  */
@@ -32,6 +33,10 @@ public class Presence extends Structure
 	 */
 	public Guild getGuild()
 	{
+		if(guild_id == null)
+		{
+			return null;
+		}
 		return Main.discordAPI.getGuild(guild_id);
 	}
 

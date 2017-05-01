@@ -30,6 +30,6 @@ public class Game extends Structure
 
 	public String toString()
 	{
-		return "{Game \"" + this.name + "\"}";
+		return "{Game \"" + this.name + "\" (Type " + this.type + ")}";
 	}
 }

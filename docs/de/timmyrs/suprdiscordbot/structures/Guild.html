@@ -17,8 +17,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":42,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -279,7 +279,7 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t6" class="tableTab"><span><a href="javascript:show(32);">Deprecated Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
@@ -293,80 +293,88 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html#addPresence-de.timmyrs.suprdiscordbot.structures.Presence-">addPresence</a></span>(<a href="../../../../de/timmyrs/suprdiscordbot/structures/Presence.html" title="class in de.timmyrs.suprdiscordbot.structures">Presence</a>&nbsp;presence)</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html#equals-de.timmyrs.suprdiscordbot.structures.Guild-">equals</a></span>(<a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html" title="class in de.timmyrs.suprdiscordbot.structures">Guild</a>&nbsp;o)</code>&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html" title="class in de.timmyrs.suprdiscordbot.structures">Channel</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html#getAFKChannel--">getAFKChannel</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html" title="class in de.timmyrs.suprdiscordbot.structures">Guild</a>[]</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html#getArray-int-">getArray</a></span>(int&nbsp;size)</code>&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html" title="class in de.timmyrs.suprdiscordbot.structures">Channel</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html#getChannel-java.lang.String-">getChannel</a></span>(java.lang.String&nbsp;id)</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html" title="class in de.timmyrs.suprdiscordbot.structures">Channel</a>[]</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html#getChannels--">getChannels</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html" title="class in de.timmyrs.suprdiscordbot.structures">Channel</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html#getEmbedChannel--">getEmbedChannel</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html#getIcon--">getIcon</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html" title="class in de.timmyrs.suprdiscordbot.structures">Member</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html#getMember-de.timmyrs.suprdiscordbot.structures.Presence-">getMember</a></span>(<a href="../../../../de/timmyrs/suprdiscordbot/structures/Presence.html" title="class in de.timmyrs.suprdiscordbot.structures">Presence</a>&nbsp;p)</code>&nbsp;</td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html" title="class in de.timmyrs.suprdiscordbot.structures">Member</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html#getMember-java.lang.String-">getMember</a></span>(java.lang.String&nbsp;id)</code>&nbsp;</td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html" title="class in de.timmyrs.suprdiscordbot.structures">Member</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html#getMember-de.timmyrs.suprdiscordbot.structures.User-">getMember</a></span>(<a href="../../../../de/timmyrs/suprdiscordbot/structures/User.html" title="class in de.timmyrs.suprdiscordbot.structures">User</a>&nbsp;u)</code>&nbsp;</td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Presence.html" title="class in de.timmyrs.suprdiscordbot.structures">Presence</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html#getPresence-de.timmyrs.suprdiscordbot.structures.Member-">getPresence</a></span>(<a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html" title="class in de.timmyrs.suprdiscordbot.structures">Member</a>&nbsp;m)</code>&nbsp;</td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Presence.html" title="class in de.timmyrs.suprdiscordbot.structures">Presence</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html#getPresence-java.lang.String-">getPresence</a></span>(java.lang.String&nbsp;id)</code>&nbsp;</td>
 </tr>
-<tr id="i13" class="rowColor">
-<td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Presence.html" title="class in de.timmyrs.suprdiscordbot.structures">Presence</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html#getPresence-de.timmyrs.suprdiscordbot.structures.User-">getPresence</a></span>(<a href="../../../../de/timmyrs/suprdiscordbot/structures/User.html" title="class in de.timmyrs.suprdiscordbot.structures">User</a>&nbsp;u)</code>&nbsp;</td>
-</tr>
 <tr id="i14" class="altColor">
+<td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Presence.html" title="class in de.timmyrs.suprdiscordbot.structures">Presence</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html#getPresence-de.timmyrs.suprdiscordbot.structures.User-">getPresence</a></span>(<a href="../../../../de/timmyrs/suprdiscordbot/structures/User.html" title="class in de.timmyrs.suprdiscordbot.structures">User</a>&nbsp;u)</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
+<div class="block"><span class="deprecationComment">Use <a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html#getPresence-java.lang.String-"><code>getPresence(String)</code></a> using <a href="../../../../de/timmyrs/suprdiscordbot/structures/User.html#id"><code>User.id</code></a> instead</span></div>
+</div>
+</td>
+</tr>
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Role.html" title="class in de.timmyrs.suprdiscordbot.structures">Role</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html#getRole-java.lang.String-">getRole</a></span>(java.lang.String&nbsp;id)</code>&nbsp;</td>
 </tr>
-<tr id="i15" class="rowColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html#getSplash--">getSplash</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i16" class="altColor">
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/Configuration.html" title="class in de.timmyrs.suprdiscordbot">Configuration</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html#getValues--">getValues</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i17" class="rowColor">
+<tr id="i18" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html#removeMember-java.lang.String-">removeMember</a></span>(java.lang.String&nbsp;id)</code>&nbsp;</td>
 </tr>
-<tr id="i18" class="altColor">
+<tr id="i19" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html#removePresence-java.lang.String-">removePresence</a></span>(java.lang.String&nbsp;id)</code>&nbsp;</td>
 </tr>
-<tr id="i19" class="rowColor">
+<tr id="i20" class="altColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html" title="class in de.timmyrs.suprdiscordbot.structures">Guild</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html#setNickname-java.lang.String-">setNickname</a></span>(java.lang.String&nbsp;newnick)</code>
 <div class="block">Changes this bot's nickname on this guild</div>
 </td>
 </tr>
-<tr id="i20" class="altColor">
+<tr id="i21" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html#toString--">toString</a></span>()</code>&nbsp;</td>
 </tr>
@@ -780,6 +788,7 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <li class="blockList">
 <h4>getPresence</h4>
 <pre>public&nbsp;<a href="../../../../de/timmyrs/suprdiscordbot/structures/Presence.html" title="class in de.timmyrs.suprdiscordbot.structures">Presence</a>&nbsp;getPresence(<a href="../../../../de/timmyrs/suprdiscordbot/structures/User.html" title="class in de.timmyrs.suprdiscordbot.structures">User</a>&nbsp;u)</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">Use <a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html#getPresence-java.lang.String-"><code>getPresence(String)</code></a> using <a href="../../../../de/timmyrs/suprdiscordbot/structures/User.html#id"><code>User.id</code></a> instead</span></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>u</code> - <a href="../../../../de/timmyrs/suprdiscordbot/structures/User.html" title="class in de.timmyrs.suprdiscordbot.structures"><code>User</code></a> object</dd>
@@ -877,7 +886,7 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <a name="toString--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>toString</h4>
 <pre>public&nbsp;java.lang.String&nbsp;toString()</pre>
@@ -887,6 +896,15 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>String representation of Structure</dd>
 </dl>
+</li>
+</ul>
+<a name="equals-de.timmyrs.suprdiscordbot.structures.Guild-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>equals</h4>
+<pre>public&nbsp;boolean&nbsp;equals(<a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html" title="class in de.timmyrs.suprdiscordbot.structures">Guild</a>&nbsp;o)</pre>
 </li>
 </ul>
 </li>
