@@ -40,4 +40,4 @@ If you want to Java**Script** your bot yourself these resources might be helpful
 
 ## Join the Discord Guild
 
-[![](https://discordapp.com/api/guilds/208658782966906880/embed.png?style=banner3)](https://discord.gg/MhvFkSJ)
+[![](https://discordapp.com/api/guilds/208658782966906880/embed.png?style=banner3)](https://discord.timmyrs.de)
