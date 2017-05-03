@@ -29,22 +29,4 @@ Now your bot should have joined your guild.
 
 You can change the profile picture of your bot by changing your **App Icon**.
 
-If you want to Java**Script** your bot yourself, check out [(Java)scripting your own bot](https://github.com/timmyrs/SuprDiscordBot/blob/master/SCRIPTING.md).
-
-- [What Makes SuprDiscordBot's JavaScript Different](https://github.com/timmyrs/SuprDiscordBot/blob/master/SETUP.md#what-makes-suprdiscordbots-javascript-different).
-- [Examples](https://github.com/timmyrs/SuprDiscordBot/tree/master/scripts/examples)
-- [Documentation](https://timmyrs.github.io/SuprDiscordBot)
-
-**Note:** A "Discord Server" is called a "Guild".
-
-## What Makes SuprDiscordBot's Javascript Different
-
-- The `console` object's [functions in SuprDiscordBot](https://timmyrs.github.io/SuprDiscordBot/?de/timmyrs/suprdiscordbot/apis/ConsoleAPI.html) only accept one argument, which can be an object or an array of objects.
-
-- `window` is not a thing. However, `window.setTimeout` can be replaced with [`script.timeout`](https://timmyrs.github.io/SuprDiscordBot/de/timmyrs/suprdiscordbot/apis/ScriptAPI.html#timeout-java.lang.Runnable-int-).
-
-- SuprDiscordBot built with event- and return-based-programming, which means you write all your code in anonymous functions, registered as event handlers using `script.on("eventname", function(){ ... })`. Furthermore, the [`.on`-function](https://timmyrs.github.io/SuprDiscordBot/de/timmyrs/suprdiscordbot/apis/ScriptAPI.html#on-java.lang.String-java.util.function.Consumer-), including many others, returns `this`, which allows you to do `script.on(...).on(...).on(...)`, etc.
-
-- As you do not have jQuery in SuprDiscordBot, the functions [`script.each`](https://timmyrs.github.io/SuprDiscordBot/de/timmyrs/suprdiscordbot/apis/ScriptAPI.html#each-java.lang.Object:A-java.util.function.Consumer-) and [`script.inArray`](https://timmyrs.github.io/SuprDiscordBot/de/timmyrs/suprdiscordbot/apis/ScriptAPI.html#inArray-java.lang.Object:A-java.lang.Object-) are there to still make your coding experience easier.
-
-- There's no `while`, as it is rather abused than used, however, `for` can be used as normal, but you should use [`script.each`](https://timmyrs.github.io/SuprDiscordBot/de/timmyrs/suprdiscordbot/apis/ScriptAPI.html#each-java.lang.Object:A-java.util.function.Consumer-) to iterate through arrays.
+If you want to Java**script** your bot yourself, check out [(Java)scripting your own bot](https://github.com/timmyrs/SuprDiscordBot/blob/master/SCRIPTING.md).

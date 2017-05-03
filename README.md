@@ -12,3 +12,7 @@ SuprDiscordBot is a Java Application allowing you to easily script a Discord Bot
 ## Setup
 
 For information on how to setup SuprDiscordBot, [check out SuprDiscordBot Setup](https://github.com/timmyrs/SuprDiscordBot/blob/master/SETUP.md).
+
+## Scripting
+
+If you want to Java**script** your bot yourself, check out [(Java)scripting your own bot](https://github.com/timmyrs/SuprDiscordBot/blob/master/SCRIPTING.md).
