@@ -29,4 +29,4 @@ Now your bot should have joined your guild.
 
 You can change the profile picture of your bot by changing your **App Icon**.
 
-If you want to Java**script** your bot yourself, check out [(Java)scripting your own bot](https://github.com/timmyrs/SuprDiscordBot/blob/master/SCRIPTING.md).
+If you want to Java**script** your bot yourself, check out [SCRIPTING.md](https://github.com/timmyrs/SuprDiscordBot/blob/master/SCRIPTING.md).

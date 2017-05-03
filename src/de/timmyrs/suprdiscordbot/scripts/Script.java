@@ -36,7 +36,6 @@ public class Script
 		engine.put("console", Main.consoleAPI);
 		engine.put("permission", Main.permisisonAPI);
 		Bindings bindings = engine.getBindings(100);
-		bindings.remove("for");
 		engine.eval(script);
 		this.started = true;
 		return this;
