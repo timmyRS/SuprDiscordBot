@@ -48,6 +48,10 @@ public class ScriptWatcher extends Thread
 					{
 						continue;
 					}
+					if(!f.getName().substring(f.getName().length() - 3).equals(".js"))
+					{
+						continue;
+					}
 					Script s = Main.scriptManager.getScript(f.getName());
 					FailedScript fs = null;
 					if(s == null)
@@ -86,7 +90,7 @@ public class ScriptWatcher extends Thread
 								{
 									continue;
 								}
-								Main.log("Watcher", "Reloading " + s.name);
+								Main.log("Watcher", "Reloading " + fs.name);
 								Main.scriptManager.removeFailedScript(fs);
 								s = Main.scriptManager.registerScript(f);
 							}
@@ -97,12 +101,18 @@ public class ScriptWatcher extends Thread
 						{
 							Main.scriptManager.removeScript(s);
 						}
-						Main.log("Watcher", e.getMessage() + " in " + f.getName());
+						if(e.getMessage() == null)
+						{
+							e.printStackTrace();
+						} else
+						{
+							Main.log("Watcher", e.getMessage() + " in " + f.getName());
+						}
 						if(fs == null)
 						{
 							Main.scriptManager.registerFailedScript(f);
 						}
-						break;
+						continue;
 					}
 					if(s != null)
 					{

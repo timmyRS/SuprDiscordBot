@@ -153,11 +153,16 @@ public class WebSocket
 									{
 										Main.scriptManager.fireEvent("PRESENCE_UPDATE_GAME", new Object[]{p, cp.game});
 										p.game = null;
-									} else if(!cp.game.equals(p.game))
+									} else if(!cp.game.name.equals(p.game.name))
 									{
 										Main.scriptManager.fireEvent("PRESENCE_UPDATE_GAME", new Object[]{p, cp.game});
 										cp.game = p.game;
 									}
+								}
+								if(!cp.user.username.equals(p.user.username) || !cp.user.username.equals(p.user.discriminator))
+								{
+									Main.scriptManager.fireEvent("PRESENCE_UPDATE_USER", new Object[]{p, cp.user});
+									p.user = cp.user;
 								}
 								g.addPresence(cp);
 								break;
@@ -199,7 +204,33 @@ public class WebSocket
 								{
 									u = c.getGuild().getMember(data.get("user_id").getAsString()).user;
 								}
-								Main.scriptManager.fireEvent("TYPING_START", new Structure[]{c, u});
+								Main.scriptManager.fireEvent("TYPING_START", new Object[]{c, u});
+								break;
+							case "CHANNEL_UPDATE":
+								g = Main.discordAPI.getGuild(data.get("guild_id").getAsString());
+								c = Main.gson.fromJson(data, Channel.class);
+								Channel cc = g.getChannel(c.id);
+								if(!cc.getName().equals(c.getName()))
+								{
+									cc.name = c.name;
+									Main.scriptManager.fireEvent("CHANNEL_UPDATE_NAME", new Object[]{c, cc.getName()});
+								}
+								if(!cc.topic.equals(c.topic))
+								{
+									cc.topic = c.topic;
+									Main.scriptManager.fireEvent("CHANNEL_UPDATE_TOPIC", new Object[]{c, cc.topic});
+								}
+								if(cc.position != c.position)
+								{
+									cc.position = c.position;
+									Main.scriptManager.fireEvent("CHANNEL_UPDATE_POSITION", new Object[]{c, cc.position});
+								}
+								if(!cc.permission_overwrites.equals(c.permission_overwrites))
+								{
+									cc.permission_overwrites = c.permission_overwrites;
+									Main.scriptManager.fireEvent("CHANNEL_UPDATE_OVERWRITES", new Object[]{c, cc.permission_overwrites});
+								}
+								g.addChannel(cc);
 								break;
 							case "MESSAGE_CREATE":
 							case "MESSAGE_UPDATE":

@@ -28,6 +28,10 @@ public class ConsoleAPI
 	 */
 	public ConsoleAPI log(Object[] objects)
 	{
+		if(objects.length == 0)
+		{
+			return this.log("[]");
+		}
 		String msg = "[";
 		for(Object o : objects)
 		{
@@ -54,6 +58,10 @@ public class ConsoleAPI
 	 */
 	public ConsoleAPI info(Object[] objects)
 	{
+		if(objects.length == 0)
+		{
+			return this.info("[]");
+		}
 		String msg = "[";
 		for(Object o : objects)
 		{
@@ -80,6 +88,10 @@ public class ConsoleAPI
 	 */
 	public ConsoleAPI warn(Object[] objects)
 	{
+		if(objects.length == 0)
+		{
+			return this.warn("[]");
+		}
 		String msg = "[";
 		for(Object o : objects)
 		{
@@ -106,6 +118,10 @@ public class ConsoleAPI
 	 */
 	public ConsoleAPI error(Object[] objects)
 	{
+		if(objects.length == 0)
+		{
+			return this.error("[]");
+		}
 		String msg = "[";
 		for(Object o : objects)
 		{

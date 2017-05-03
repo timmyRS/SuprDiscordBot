@@ -14,6 +14,7 @@ public class Script
 	public HashMap<String, Consumer<Object>> events = new HashMap<>();
 	public String name;
 	String hash;
+	private boolean started = false;
 
 	Script(String name, String hash, String script) throws ScriptException
 	{
@@ -24,6 +25,10 @@ public class Script
 
 	Script setScript(final String script) throws ScriptException
 	{
+		if(this.started)
+		{
+			this.fireEvent("UNLOAD");
+		}
 		events.clear();
 		final ScriptEngine engine = Main.scriptManager.factory.getEngineByExtension("js");
 		engine.put("script", new ScriptAPI(this));
@@ -33,6 +38,7 @@ public class Script
 		Bindings bindings = engine.getBindings(100);
 		bindings.remove("for");
 		engine.eval(script);
+		this.started = true;
 		return this;
 	}
 

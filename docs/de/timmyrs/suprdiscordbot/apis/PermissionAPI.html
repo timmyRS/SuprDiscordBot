@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":42};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":42};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -331,21 +331,37 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/PermissionAPI.html#allowsFor-int-int-">allowsFor</a></span>(int&nbsp;permissions,
+         int&nbsp;permission)</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/PermissionAPI.html#allowsFor-int-java.lang.String-">allowsFor</a></span>(int&nbsp;permissions,
          java.lang.String&nbsp;permission)</code>&nbsp;</td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/PermissionAPI.html#allowsFor-java.lang.String:A-int-">allowsFor</a></span>(java.lang.String[]&nbsp;permissions,
+         int&nbsp;permission)</code>&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/PermissionAPI.html#allowsFor-java.lang.String:A-java.lang.String-">allowsFor</a></span>(java.lang.String[]&nbsp;permissions,
          java.lang.String&nbsp;permission)</code>&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>java.lang.String[]</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/PermissionAPI.html#bitsToStrings-int-">bitsToStrings</a></span>(int&nbsp;i)</code>
 <div class="block">Converts permission bit set to string array.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code>java.lang.String[][]</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/PermissionAPI.html#getPermArray--">getPermArray</a></span>()</code>
+<div class="block">Returns a multidimensional array of all permissions</div>
+</td>
+</tr>
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>java.lang.String[]</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/PermissionAPI.html#intToStringArray-int-">intToStringArray</a></span>(int&nbsp;i)</code>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
@@ -778,6 +794,20 @@ extends java.lang.Object</pre>
 <!--   -->
 </a>
 <h3>Method Detail</h3>
+<a name="getPermArray--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getPermArray</h4>
+<pre>public&nbsp;java.lang.String[][]&nbsp;getPermArray()</pre>
+<div class="block">Returns a multidimensional array of all permissions</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Array of string arrays of permission name and hex values ordered by highest hex value first</dd>
+</dl>
+</li>
+</ul>
 <a name="intToStringArray-int-">
 <!--   -->
 </a>
@@ -832,10 +862,29 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
+<a name="allowsFor-int-int-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>allowsFor</h4>
+<pre>public&nbsp;boolean&nbsp;allowsFor(int&nbsp;permissions,
+                         int&nbsp;permission)</pre>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>permissions</code> - Permission bit set</dd>
+<dd><code>permission</code> - Permission bit value</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Weather the permission is included in the permission bit set</dd>
+<dt><span class="simpleTagLabel">Since:</span></dt>
+<dd>1.2</dd>
+</dl>
+</li>
+</ul>
 <a name="allowsFor-java.lang.String:A-java.lang.String-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>allowsFor</h4>
 <pre>public&nbsp;boolean&nbsp;allowsFor(java.lang.String[]&nbsp;permissions,
@@ -844,6 +893,25 @@ extends java.lang.Object</pre>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>permissions</code> - Array of permission strings</dd>
 <dd><code>permission</code> - Permission name</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Weather the permission is in the permission array</dd>
+<dt><span class="simpleTagLabel">Since:</span></dt>
+<dd>1.2</dd>
+</dl>
+</li>
+</ul>
+<a name="allowsFor-java.lang.String:A-int-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>allowsFor</h4>
+<pre>public&nbsp;boolean&nbsp;allowsFor(java.lang.String[]&nbsp;permissions,
+                         int&nbsp;permission)</pre>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>permissions</code> - Array of permission strings</dd>
+<dd><code>permission</code> - Permission bit value</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>Weather the permission is in the permission array</dd>
 <dt><span class="simpleTagLabel">Since:</span></dt>

@@ -243,7 +243,7 @@ public class Guild extends Structure
 		ArrayList<Presence> presencesArrayList = new ArrayList<>();
 		for(Presence p : presences)
 		{
-			if(!p.user.id.equals(presence.user.id))
+			if(!p.equals(presence))
 			{
 				presencesArrayList.add(p);
 			}
@@ -265,6 +265,21 @@ public class Guild extends Structure
 		}
 		Presence[] tmp = new Presence[presencesArrayList.size()];
 		presences = presencesArrayList.toArray(tmp);
+	}
+
+	public void addChannel(Channel channel)
+	{
+		ArrayList<Channel> channelsArrayList = new ArrayList<>();
+		for(Channel c : channels)
+		{
+			if(!c.equals(channel))
+			{
+				channelsArrayList.add(c);
+			}
+		}
+		channelsArrayList.add(channel);
+		Channel[] tmp = new Channel[channelsArrayList.size()];
+		channels = channelsArrayList.toArray(tmp);
 	}
 
 	/**
@@ -346,10 +361,5 @@ public class Guild extends Structure
 	public String toString()
 	{
 		return "{Guild \"" + this.name + "\" #" + this.id + "}";
-	}
-
-	public boolean equals(Guild o)
-	{
-		return o.id.equals(this.id);
 	}
 }

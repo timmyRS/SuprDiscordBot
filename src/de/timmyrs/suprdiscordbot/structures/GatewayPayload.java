@@ -34,8 +34,4 @@ public class GatewayPayload extends Structure
 		return "{GatewayPayload " + op + " " + d + "}";
 	}
 
-	public boolean equals(GatewayPayload o)
-	{
-		return o.op == this.op && o.s == this.s;
-	}
 }

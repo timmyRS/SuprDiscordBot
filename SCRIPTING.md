@@ -7,34 +7,6 @@
 [![Floobits Status](https://floobits.com/timmyRS/SuprDiscordBot.svg)](https://floobits.com/timmyRS/SuprDiscordBot/redirect)
 [![Discord Guild](https://discordapp.com/api/guilds/208658782966906880/embed.png)](https://discord.timmyrs.de)
 
-## SuprDiscordBot Setup
-
-This step-by-step guide will tell you how to setup your SuprDiscordBot and it is recommended you do **exactly** as it says, to avoid any problems.
-
-1. Open a console and verify with `java -version` that you have at least Java 8 installed - [install it](https://java.com/en/download/) if missing.
-2. [Download the newest release](https://github.com/timmyrs/SuprDiscordBot/releases).
-3. Unzip it.
-4. Move some example scripts from `scripts/examples/` into `scripts/` so the Bot has *something* to do.
-5. Double click the `start.bat` or open a terminal, `cd` into the directory and then `sh start.sh`.
-6. [Register an application at Discord](https://discordapp.com/developers/applications/me/create). The only field you have to fill out is the app name.
-7. Add a bot user - do not check any of the boxes - reveal and copy the **Bot Token** and **[Save changes]**.
-8. Open the `config.json` in the SuprDiscordBot directory and replace `BOT_TOKEN` with your **Bot Token**.
-9. Start the SuprDiscordBot again *(see step 5)*.
-10. Copy the **Client ID** from your Discord Application.
-11. Replace `CLIENT_ID` in the following URL with your **Client ID** and then open the URL in your browser. `https://discordapp.com/oauth2/authorize?client_id=CLIENT_ID&scope=bot&permissions=2146958463`
-
-## That's it (Additional Information)
-
-Now your bot should have joined your guild.
-
-You can change the profile picture of your bot by changing your **App Icon**.
-
-If you want to Java**Script** your bot yourself, check out [(Java)scripting your own bot](https://github.com/timmyrs/SuprDiscordBot/blob/master/SCRIPTING.md).
-
-- [What Makes SuprDiscordBot's JavaScript Different](https://github.com/timmyrs/SuprDiscordBot/blob/master/SETUP.md#what-makes-suprdiscordbots-javascript-different).
-- [Examples](https://github.com/timmyrs/SuprDiscordBot/tree/master/scripts/examples)
-- [Documentation](https://timmyrs.github.io/SuprDiscordBot)
-
 **Note:** A "Discord Server" is called a "Guild".
 
 ## What Makes SuprDiscordBot's Javascript Different
@@ -48,3 +20,12 @@ If you want to Java**Script** your bot yourself, check out [(Java)scripting your
 - As you do not have jQuery in SuprDiscordBot, the functions [`script.each`](https://timmyrs.github.io/SuprDiscordBot/de/timmyrs/suprdiscordbot/apis/ScriptAPI.html#each-java.lang.Object:A-java.util.function.Consumer-) and [`script.inArray`](https://timmyrs.github.io/SuprDiscordBot/de/timmyrs/suprdiscordbot/apis/ScriptAPI.html#inArray-java.lang.Object:A-java.lang.Object-) are there to still make your coding experience easier.
 
 - There's no `while`, as it is rather abused than used, however, `for` can be used as normal, but you should use [`script.each`](https://timmyrs.github.io/SuprDiscordBot/de/timmyrs/suprdiscordbot/apis/ScriptAPI.html#each-java.lang.Object:A-java.util.function.Consumer-) to iterate through arrays.
+
+## Other Resources
+
+- [Examples](https://github.com/timmyrs/SuprDiscordBot/tree/master/scripts/examples)
+- [Documentation](https://timmyrs.github.io/SuprDiscordBot)
+
+## Upgrading
+
+If you plan on upgrading your version, check out the [Deprecated List](https://timmyrs.github.io/SuprDiscordBot/index.html?deprecated-list.html) for information on what functions will no longer be available and what you should replace 'em with.

@@ -93,8 +93,4 @@ public class User extends Structure
 		return "{User \"" + getTag() + "\" #" + id + "}";
 	}
 
-	public boolean equals(User o)
-	{
-		return o.id.equals(this.id);
-	}
 }

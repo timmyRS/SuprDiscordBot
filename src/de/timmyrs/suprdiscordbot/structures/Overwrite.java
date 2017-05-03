@@ -1,5 +1,6 @@
 package de.timmyrs.suprdiscordbot.structures;
 
+import de.timmyrs.suprdiscordbot.Main;
 import de.timmyrs.suprdiscordbot.apis.DiscordAPI;
 
 /**
@@ -10,6 +11,7 @@ import de.timmyrs.suprdiscordbot.apis.DiscordAPI;
  * @author timmyRS
  * @see Channel#overwritePermissions(Overwrite)
  */
+@SuppressWarnings("unused")
 public class Overwrite extends Structure
 {
 	/**
@@ -60,7 +62,16 @@ public class Overwrite extends Structure
 	 */
 	public Overwrite allow(int allow)
 	{
-		this.allow += allow;
+		if(allow < 0)
+		{
+			if(Main.permisisonAPI.allowsFor(this.allow, allow * -1))
+			{
+				this.allow += allow;
+			}
+		} else if(!Main.permisisonAPI.allowsFor(this.allow, allow))
+		{
+			this.allow += allow;
+		}
 		return this;
 	}
 
@@ -71,7 +82,16 @@ public class Overwrite extends Structure
 	 */
 	public Overwrite deny(int deny)
 	{
-		this.deny += deny;
+		if(deny < 0)
+		{
+			if(Main.permisisonAPI.allowsFor(this.deny, deny * -1))
+			{
+				this.deny += deny;
+			}
+		} else if(!Main.permisisonAPI.allowsFor(this.deny, deny))
+		{
+			this.deny += deny;
+		}
 		return this;
 	}
 
@@ -83,10 +103,5 @@ public class Overwrite extends Structure
 	public String toString()
 	{
 		return "{Overwrite for " + this.type + " #" + this.id + "}";
-	}
-
-	public boolean equals(Overwrite o)
-	{
-		return o.id.equals(this.id);
 	}
 }

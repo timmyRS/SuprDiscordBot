@@ -21,6 +21,11 @@ public class Channel extends Structure
 	 */
 	public String id;
 	/**
+	 * Name of the channel.
+	 * Use {@link Channel#getName()} to avoid errors.
+	 */
+	public String name;
+	/**
 	 * The type of this channel - "text" or "voice"
 	 */
 	public String type;
@@ -61,7 +66,6 @@ public class Channel extends Structure
 	 * Use {@link #getGuild()} to get this channel's guild tho.
 	 */
 	public String guild_id;
-	private String name;
 
 	/**
 	 * @return {@link Configuration}
@@ -268,10 +272,5 @@ public class Channel extends Structure
 	public String toString()
 	{
 		return "{" + (type.equals("text") ? "Text" : "Voice") + " Channel \"" + getName() + "\" #" + id + "}";
-	}
-
-	public boolean equals(Channel o)
-	{
-		return o.id.equals(this.id);
 	}
 }

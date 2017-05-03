@@ -32,6 +32,7 @@ public class RAMCleaner extends Thread
 				{
 					Main.log("Cleaner", "Removed " + removed + " useless value(s) from RAM.");
 				}
+				System.gc();
 				Thread.sleep(60000);
 			} catch(Exception e)
 			{

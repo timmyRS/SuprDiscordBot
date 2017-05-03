@@ -10,6 +10,8 @@ import com.sun.istack.internal.NotNull;
 public abstract class Structure
 {
 	/**
+	 * Get Array
+	 *
 	 * @param size Size of the array to be created
 	 * @return New array of Structure with specified size
 	 */
@@ -17,15 +19,22 @@ public abstract class Structure
 	public abstract Structure[] getArray(final int size);
 
 	/**
+	 * To String
+	 *
 	 * @return String representation of Structure
 	 */
 	@NotNull
 	public abstract String toString();
 
-/*
+	/**
+	 * Equals
+	 *
 	 * @param o Other Structure
 	 * @return Weather the other structure is equal to this structure
 	 * @since 1.2
 	 */
-	//public abstract boolean equals(Structure o);
+	public boolean equals(Structure o)
+	{
+		return o.toString().equals(this.toString());
+	}
 }

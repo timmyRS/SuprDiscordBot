@@ -39,6 +39,14 @@ script.on("USER_JOIN", function(m) // Called when a user joins a guild
 			console.log(m.getName() + " is no longer part of " + g.getRole(role).name + " in " + g.name); // Log removed roles to console
 		}
 	});
+}).on("CHANNEL_UPDATE_NAME", function(arr) // Called upon update of a channel's name
+{
+    var c = arr[0], old_name = arr[1];
+    console.log(c.getName() + " in " + c.getGuild().name + " was called '" + old_name + "' just a second ago.");
+}).on("CHANNEL_UPDATE_TOPIC", function(arr) // Called upon update of a channel's name
+{
+    var c = arr[0], old_topic = arr[1];
+    console.log(c.getName() + " in " + c.getGuild().name + " now has a new topic.");
 }).on("TYPING_START", function(arr) // Called upon typing start. Note: There is NO typing stop event.
 {
 	var channel = arr[0], user = arr[1];

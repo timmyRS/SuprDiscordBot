@@ -105,8 +105,4 @@ public class Role extends Structure
 		return "{Role \"" + this.name + "\" #" + this.id + "}";
 	}
 
-	public boolean equals(Role o)
-	{
-		return o.id.equals(this.id);
-	}
 }

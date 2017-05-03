@@ -260,9 +260,4 @@ public class Message extends Structure
 					" in " + getChannel().toString() + "}";
 		}
 	}
-
-	public boolean equals(Message o)
-	{
-		return o.id.equals(this.id);
-	}
 }

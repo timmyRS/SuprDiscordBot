@@ -55,13 +55,15 @@ script.on("MESSAGE_CREATE", function(msg)
 		msg.addReactions(["🇴", "🇰"]);
 	} else if(cont == "+info")
 	{
-		channel.sendTyping();
-		var presence = discord.getPresence(msg.author.id), embed = discord.createEmbed().setColor(0xF57C00).setTitle("Info");
+		var presence = discord.getPresence(msg.author.id);
 		if(!channel.is_private)
 		{
 			msg.delete();
 			channel = msg.author.getDMChannel();
 		}
+		channel.sendTyping();
+		var embed = discord.createEmbed().setColor(0xF57C00).setTitle("Info").setFooter("SuprDiscordBot, Commands.js, by timmyRS");
+		embed.setDescription(presence.user);
 		if(presence.game != null)
 		{
 			embed.addField("Game", presence.game, false);
@@ -81,9 +83,9 @@ script.on("MESSAGE_CREATE", function(msg)
 			.setColor(0xF57C00)
 			.setTitle("SuprDiscordBot Help")
 			.setURL("https://github.com/timmyrs/SuprDiscordBot")
-			.addField("Everywhere-Commands", "`+react`, `+react <id>` and `+info` work everywhere.", false)
+			.addField("Everywhere-Commands", "`+react`, `+react <id>`, `+info` and `+help` work everywhere.", false)
 			.addField("Guild-only", "`+explode` and `xd`-fixture are Guild-only.", false)
-			.addField("Guild-Mod-only", "`+explode <id>`, `+clear <count>`, `+erase <count>` and `+slowmode <secs>` are only available on Guilds for Mods.", false)
+			.addField("Guild-Mod-only", "`+explode <id>`, `+clear <count>`, `+erase <count>`, `+mute <secs> <mentions ...>`, `+mute <mentions ...>`, `+unmute <mentions ...>` and `+slowmode <secs>` are only available on Guilds for Mods.", false)
 			.setFooter("SuprDiscordBot, Commands.js, by timmyRS")
 			);
 	} else if(!channel.is_private)
@@ -111,25 +113,69 @@ script.on("MESSAGE_CREATE", function(msg)
 
 		if(cont.substr(0, 6) == "+mute ")
 		{
+			channel.sendTyping();
 			msg.delete();
 			if(hasperm)
 			{
 				var secs = parseInt(cont.substr(6).split(" ")[0]), msgs = [];
+				if(isNaN(secs))
+				{
+					secs = 0;
+				}
+				if(secs > 600)
+				{
+					msgs.push(channel.sendMessage(":warning: Won't temp-mute for more than 10 minutes. Use `+mute <mentions ...>` (without `<secs>`) instead.").id);
+				} else
+				{
+					script.each(msg.mentions, function(mention)
+					{
+						if(secs == 0)
+						{
+							msgs.push(channel.sendMessage(":thumbsup: " + mention.getHandle() + " is now muted in " + channel.getHandle() + ".").id);
+						} else
+						{
+							msgs.push(channel.sendMessage(":thumbsup: " + mention.getHandle() + " is now muted for **" + secs + "** second" + (secs == 1 ? "" : "s") +" in " + channel.getHandle() + ".").id);
+						}
+						var overwrite = channel.getOverwrite(mention);
+						if(overwrite == null)
+						{
+							overwrite = discord.createOverwrite().setUser(mention);
+						}
+						overwrite.deny(permission.SEND_MESSAGES);
+						channel.overwritePermissions(overwrite);
+						if(secs != 0)
+						{
+							script.timeout(function()
+							{
+								overwrite.deny(-permission.SEND_MESSAGES);
+								channel.overwritePermissions(overwrite);
+							}, (secs * 1000));
+						}
+					});
+				}
+				script.timeout(function()
+				{
+					channel.deleteMessages(msgs);
+				}, 5000);
+			}
+		}
+		else if(cont.substr(0, 8) == "+unmute ")
+		{
+			channel.sendTyping();
+			msg.delete();
+			if(hasperm)
+			{
+				var msgs = [];
 				script.each(msg.mentions, function(mention)
 				{
-					msgs.push(channel.sendMessage(mention.getHandle() + " is now muted for **" + secs + "** seconds in " + channel.getHandle() + ".").id);
+					msgs.push(channel.sendMessage(":thumbsup: " + mention.getHandle() + " is no longer muted in " + channel.getHandle() + ".").id);
 					var overwrite = channel.getOverwrite(mention);
 					if(overwrite == null)
 					{
 						overwrite = discord.createOverwrite().setUser(mention);
 					}
-					overwrite.deny(permission.SEND_MESSAGES);
+					overwrite.deny(-permission.SEND_MESSAGES);
 					channel.overwritePermissions(overwrite);
-					script.timeout(function()
-					{
-						overwrite.deny(-permission.SEND_MESSAGES);
-						channel.overwritePermissions(overwrite);
-					}, (secs * 1000));
 				});
 				script.timeout(function()
 				{

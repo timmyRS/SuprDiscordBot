@@ -4,11 +4,12 @@ script.on("LOAD", function()
 	{
 		script.on("MESSAGE_CREATE", function(msg)
 		{
+		var cont = msg.content.toLowerCase().trim();
+        if(cont.substr(0, 5) == "+dump")
+        {
 			if(msg.getChannel().is_private)
 			{
-				var cont = msg.content.toLowerCase().trim();
-				if(cont.substr(0, 5) == "+dump")
-				{
+
 					console.log("┌ DMs");
 					script.each(discord.getDMs(), function(c)
 					{
@@ -50,11 +51,11 @@ script.on("LOAD", function()
 							}
 						});
 					});
-				}
-			} else
-			{
-				msg.delete();
-			}
+                } else
+                {
+                    msg.delete();
+                }
+            }
 		});
 	} else
 	{

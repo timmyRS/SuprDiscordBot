@@ -122,6 +122,44 @@ public class PermissionAPI
 	public final int MANAGE_EMOJIS = 0x40000000;
 
 	/**
+	 * Returns a multidimensional array of all permissions
+	 *
+	 * @return Array of string arrays of permission name and hex values ordered by highest hex value first
+	 */
+	public String[][] getPermArray()
+	{
+		return new String[][]{
+				new String[]{"MANAGE_EMOJIS", "0x40000000"},
+				new String[]{"MANAGE_WEBHOOKS", "0x20000000"},
+				new String[]{"MANAGE_ROLES", "0x10000000"},
+				new String[]{"MANAGE_NICKNAMES", "0x08000000"},
+				new String[]{"CHANGE_NICKNAME", "0x04000000"},
+				new String[]{"USE_VAD", "0x02000000"},
+				new String[]{"MOVE_MEMBERS", "0x01000000"},
+				new String[]{"DEAFEN_MEMBERS", "0x00800000"},
+				new String[]{"MUTE_MEMBERS", "0x00400000"},
+				new String[]{"SPEAK", "0x00200000"},
+				new String[]{"CONNECT", "0x00100000"},
+				new String[]{"USE_EXTERNAL_EMOJIS", "0x00040000"},
+				new String[]{"MENTION_EVERYONE", "0x00020000"},
+				new String[]{"READ_MESSAGE_HISTORY", "0x00010000"},
+				new String[]{"ATTACH_FILES", "0x00008000"},
+				new String[]{"EMBED_LINKS", "0x00004000"},
+				new String[]{"MANAGE_MESSAGES", "0x00002000"},
+				new String[]{"SEND_TTS_MESSAGES", "0x00001000"},
+				new String[]{"SEND_MESSAGES", "0x00000800"},
+				new String[]{"READ_MESSAGES", "0x00000400"},
+				new String[]{"ADD_REACTIONS", "0x00000040"},
+				new String[]{"MANAGE_GUILD", "0x00000020"},
+				new String[]{"MANAGE_CHANNELS", "0x00000010"},
+				new String[]{"ADMINISTRATOR", "0x00000008"},
+				new String[]{"BAN_MEMBERS", "0x00000004"},
+				new String[]{"KICK_MEMBERS", "0x00000002"},
+				new String[]{"CREATE_INSTANT_INVITE", "0x00000001"}
+		};
+	}
+
+	/**
 	 * Converts permission bit set to string array.
 	 *
 	 * @param i Permission Bit Set
@@ -145,35 +183,7 @@ public class PermissionAPI
 		try
 		{
 			ArrayList<String> perms = new ArrayList<>();
-			for(String[] perm : new String[][]{
-					new String[]{"MANAGE_EMOJIS", "0x40000000"},
-					new String[]{"MANAGE_WEBHOOKS", "0x20000000"},
-					new String[]{"MANAGE_ROLES", "0x10000000"},
-					new String[]{"MANAGE_NICKNAMES", "0x08000000"},
-					new String[]{"CHANGE_NICKNAME", "0x04000000"},
-					new String[]{"USE_VAD", "0x02000000"},
-					new String[]{"MOVE_MEMBERS", "0x01000000"},
-					new String[]{"DEAFEN_MEMBERS", "0x00800000"},
-					new String[]{"MUTE_MEMBERS", "0x00400000"},
-					new String[]{"SPEAK", "0x00200000"},
-					new String[]{"CONNECT", "0x00100000"},
-					new String[]{"USE_EXTERNAL_EMOJIS", "0x00040000"},
-					new String[]{"MENTION_EVERYONE", "0x00020000"},
-					new String[]{"READ_MESSAGE_HISTORY", "0x00010000"},
-					new String[]{"ATTACH_FILES", "0x00008000"},
-					new String[]{"EMBED_LINKS", "0x00004000"},
-					new String[]{"MANAGE_MESSAGES", "0x00002000"},
-					new String[]{"SEND_TTS_MESSAGES", "0x00001000"},
-					new String[]{"SEND_MESSAGES", "0x00000800"},
-					new String[]{"READ_MESSAGES", "0x00000400"},
-					new String[]{"ADD_REACTIONS", "0x00000040"},
-					new String[]{"MANAGE_GUILD", "0x00000020"},
-					new String[]{"MANAGE_CHANNELS", "0x00000010"},
-					new String[]{"ADMINISTRATOR", "0x00000008"},
-					new String[]{"BAN_MEMBERS", "0x00000004"},
-					new String[]{"KICK_MEMBERS", "0x00000002"},
-					new String[]{"CREATE_INSTANT_INVITE", "0x00000001"}
-			})
+			for(String[] perm : getPermArray())
 			{
 				int val = Long.decode(perm[1]).intValue();
 				if((i - val) >= 0)
@@ -187,7 +197,7 @@ public class PermissionAPI
 		{
 			e.printStackTrace();
 		}
-		return null;
+		return new String[]{};
 	}
 
 	/**
@@ -197,6 +207,17 @@ public class PermissionAPI
 	 * @since 1.2
 	 */
 	public boolean allowsFor(int permissions, String permission)
+	{
+		return allowsFor(bitsToStrings(permissions), permission);
+	}
+
+	/**
+	 * @param permissions Permission bit set
+	 * @param permission  Permission bit value
+	 * @return Weather the permission is included in the permission bit set
+	 * @since 1.2
+	 */
+	public boolean allowsFor(int permissions, int permission)
 	{
 		return allowsFor(bitsToStrings(permissions), permission);
 	}
@@ -214,6 +235,24 @@ public class PermissionAPI
 			if(perm.equals(permission))
 			{
 				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * @param permissions Array of permission strings
+	 * @param permission  Permission bit value
+	 * @return Weather the permission is in the permission array
+	 * @since 1.2
+	 */
+	public boolean allowsFor(String[] permissions, int permission)
+	{
+		for(String[] perm : getPermArray())
+		{
+			if(Long.decode(perm[1]).intValue() == permission)
+			{
+				return allowsFor(permissions, perm[0]);
 			}
 		}
 		return false;
