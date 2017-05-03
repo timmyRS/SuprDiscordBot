@@ -1,5 +1,6 @@
 out/
 .idea/
+.floo*
 *.iml
 hs_err_pid*
 

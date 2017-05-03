@@ -1,4 +1,12 @@
-# SuprDiscordBot Setup
+# SuprDiscordBot
+
+[![GitHub release](https://img.shields.io/github/release/qubyte/rubidium.svg)](https://github.com/timmyrs/SuprDiscordBot/releases)
+[![Github Releases](https://img.shields.io/github/downloads/atom/atom/latest/total.svg)](https://github.com/timmyrs/SuprDiscordBot/releases)
+[![Floobits Status](https://floobits.com/timmyRS/SuprDiscordBot.svg)](https://floobits.com/timmyRS/SuprDiscordBot/redirect)
+[![Discord Guild](https://discordapp.com/api/guilds/208658782966906880/embed.png)](https://discord.timmyrs.de)
+[![GitHub stars](https://img.shields.io/github/stars/badges/shields.svg?style=social&label=Star)](https://github.com/timmyrs/SuprDiscordBot/stargazers)
+
+## SuprDiscordBot Setup
 
 This step-by-step guide will tell you how to setup your SuprDiscordBot and it is recommended you do **exactly** as it says, to avoid any problems.
 
@@ -14,7 +22,7 @@ This step-by-step guide will tell you how to setup your SuprDiscordBot and it is
 10. Copy the **Client ID** from your Discord Application.
 11. Replace `CLIENT_ID` in the following URL with your **Client ID** and then open the URL in your browser. `https://discordapp.com/oauth2/authorize?client_id=CLIENT_ID&scope=bot&permissions=2146958463`
 
-# That's it (Additional Information)
+## That's it (Additional Information)
 
 Now your bot should have joined your guild. You can change the profile picture of your bot by changing your **App Icon**.
 
@@ -37,7 +45,3 @@ If you want to Java**Script** your bot yourself these resources might be helpful
 - As you do not have jQuery in SuprDiscordBot, the functions [`script.each`](https://timmyrs.github.io/SuprDiscordBot/de/timmyrs/suprdiscordbot/apis/ScriptAPI.html#each-java.lang.Object:A-java.util.function.Consumer-) and [`script.inArray`](https://timmyrs.github.io/SuprDiscordBot/de/timmyrs/suprdiscordbot/apis/ScriptAPI.html#inArray-java.lang.Object:A-java.lang.Object-) are there to still make your coding experience easier.
 
 - There's no `while`, as it is rather abused than used, however, `for` can be used as normal, but you should use [`script.each`](https://timmyrs.github.io/SuprDiscordBot/de/timmyrs/suprdiscordbot/apis/ScriptAPI.html#each-java.lang.Object:A-java.util.function.Consumer-) to iterate through arrays.
-
-## Join the Discord Guild
-
-[![](https://discordapp.com/api/guilds/208658782966906880/embed.png?style=banner3)](https://discord.timmyrs.de)
