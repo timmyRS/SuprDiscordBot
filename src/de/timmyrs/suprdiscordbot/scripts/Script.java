@@ -1,5 +1,6 @@
 package de.timmyrs.suprdiscordbot.scripts;
 
+import com.sun.istack.internal.Nullable;
 import de.timmyrs.suprdiscordbot.Main;
 import de.timmyrs.suprdiscordbot.apis.ScriptAPI;
 
@@ -27,14 +28,18 @@ public class Script
 	{
 		if(this.started)
 		{
-			this.fireEvent("UNLOAD");
+			if(this.events.containsKey("UNLOAD"))
+			{
+				this.events.get("UNLOAD").accept(null);
+			}
 		}
 		events.clear();
 		final ScriptEngine engine = Main.scriptManager.factory.getEngineByExtension("js");
-		engine.put("script", new ScriptAPI(this));
-		engine.put("discord", Main.discordAPI);
 		engine.put("console", Main.consoleAPI);
+		engine.put("discord", Main.discordAPI);
+		engine.put("internet", Main.internetAPI);
 		engine.put("permission", Main.permisisonAPI);
+		engine.put("script", new ScriptAPI(this));
 		Bindings bindings = engine.getBindings(100);
 		engine.eval(script);
 		this.started = true;
@@ -46,7 +51,7 @@ public class Script
 		return fireEvent(event, null);
 	}
 
-	public Script fireEvent(String event, final Object data)
+	public Script fireEvent(String event, @Nullable final Object data)
 	{
 		event = event.toUpperCase();
 		if(this.events.containsKey(event))

@@ -23,10 +23,10 @@ This step-by-step guide will tell you how to setup your SuprDiscordBot and it is
 10. Copy the **Client ID** from your Discord Application.
 11. Replace `CLIENT_ID` in the following URL with your **Client ID** and then open the URL in your browser. `https://discordapp.com/oauth2/authorize?client_id=CLIENT_ID&scope=bot&permissions=2146958463`
 
-## That's it (Additional Information)
+## That's it!
 
 Now your bot should have joined your guild.
 
 You can change the profile picture of your bot by changing your **App Icon**.
 
-If you want to Java**script** your bot yourself, check out [SCRIPTING.md](https://github.com/timmyrs/SuprDiscordBot/blob/master/SCRIPTING.md).
+If you want to *Java*script your bot yourself, check out [SCRIPTING.md](https://github.com/timmyrs/SuprDiscordBot/blob/master/SCRIPTING.md).

@@ -5,15 +5,13 @@ import com.google.gson.JsonParser;
 import com.sun.istack.internal.NotNull;
 import de.timmyrs.suprdiscordbot.apis.ConsoleAPI;
 import de.timmyrs.suprdiscordbot.apis.DiscordAPI;
+import de.timmyrs.suprdiscordbot.apis.InternetAPI;
 import de.timmyrs.suprdiscordbot.apis.PermissionAPI;
 import de.timmyrs.suprdiscordbot.scripts.ScriptManager;
 import de.timmyrs.suprdiscordbot.websocket.WebSocketHeart;
-import org.apache.commons.io.IOUtils;
 
 import java.io.File;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.io.IOException;
 
 /**
  * SuprDiscordBot
@@ -34,8 +32,9 @@ public class Main
 	public static boolean debug = false;
 	public static Configuration configuration;
 	public static ScriptManager scriptManager;
-	public static DiscordAPI discordAPI;
 	public static ConsoleAPI consoleAPI;
+	public static DiscordAPI discordAPI;
+	public static InternetAPI internetAPI;
 	public static PermissionAPI permisisonAPI;
 	public static boolean ready = false;
 	public static Gson gson;
@@ -58,17 +57,24 @@ public class Main
 		{
 			Main.gson = new Gson();
 			Main.scriptManager = new ScriptManager();
-			Main.discordAPI = new DiscordAPI();
 			Main.consoleAPI = new ConsoleAPI();
+			Main.discordAPI = new DiscordAPI();
+			Main.internetAPI = new InternetAPI();
 			Main.permisisonAPI = new PermissionAPI();
 			new WebSocketHeart();
 			DiscordAPI.getWebSocket();
-			if(Integer.valueOf(getURLContent("https://raw.githubusercontent.com/timmyrs/SuprDiscordBot/master/version.txt").trim()) > Main.versionInt)
+			try
 			{
-				Main.log("Main", "There is a new verion/release available at https://github.com/timmyrs/SuprDiscordBot/releases");
-			} else if(Main.debug)
+				if(Integer.valueOf(internetAPI.httpString("https://raw.githubusercontent.com/timmyrs/SuprDiscordBot/master/version.txt").trim()) > Main.versionInt)
+				{
+					Main.log("Main", "There is a new verion/release available at https://github.com/timmyrs/SuprDiscordBot/releases");
+				} else if(Main.debug)
+				{
+					Main.log("Main", "This seems to be the newest version.");
+				}
+			} catch(IOException e)
 			{
-				Main.log("Main", "This seems to be the newest version.");
+				e.printStackTrace();
 			}
 		} else
 		{
@@ -77,22 +83,6 @@ public class Main
 			Main.log("Setup", "Discord Application using the following guide.");
 			Main.log("Setup", "https://github.com/timmyrs/SuprDiscordBot/blob/master/SETUP.md");
 		}
-	}
-
-	private static String getURLContent(@NotNull String urlStr)
-	{
-		String body = "";
-		try
-		{
-			java.net.URL url = new URL(urlStr);
-			HttpURLConnection uc = (HttpURLConnection) url.openConnection();
-			InputStream in = uc.getInputStream();
-			body = IOUtils.toString(in, "UTF-8");
-		} catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		return body;
 	}
 
 	public static void log(@NotNull String from, String msg)
