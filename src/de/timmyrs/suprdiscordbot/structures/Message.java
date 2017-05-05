@@ -179,12 +179,13 @@ public class Message extends Structure
 	 * Get Time
 	 *
 	 * @return The UNIX timestamp of the message's creation.
+	 * @since 1.2
 	 */
 	public long getTime()
 	{
 		try
 		{
-			return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssSSSXXX").parse(this.timestamp).getTime() / 1000L;
+			return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(this.timestamp.substring(0, this.timestamp.length() - 9)).getTime() / 1000L;
 		} catch(ParseException e)
 		{
 			e.printStackTrace();
@@ -196,12 +197,13 @@ public class Message extends Structure
 	 * Get Time Millis
 	 *
 	 * @return The time millis of the message's creation.
+	 * @since 1.2
 	 */
 	public long getMillis()
 	{
 		try
 		{
-			return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssSSSXXX").parse(this.timestamp).getTime() / 1000L;
+			return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(this.timestamp.substring(0, this.timestamp.length() - 9)).getTime() / 1000L;
 		} catch(ParseException e)
 		{
 			e.printStackTrace();
@@ -213,12 +215,13 @@ public class Message extends Structure
 	 * Get Edit Time
 	 *
 	 * @return The UNIX timestamp of the message's last edit.
+	 * @since 1.2
 	 */
 	public long getEditTime()
 	{
 		try
 		{
-			return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssSSSXXX").parse(this.edited_timestamp).getTime();
+			return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(this.edited_timestamp.substring(0, this.edited_timestamp.length() - 9)).getTime();
 		} catch(ParseException e)
 		{
 			e.printStackTrace();
@@ -230,12 +233,13 @@ public class Message extends Structure
 	 * Get Edit Time Millis
 	 *
 	 * @return The time millis of the message's last edit.
+	 * @since 1.2
 	 */
 	public long getEditMillis()
 	{
 		try
 		{
-			return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssSSSXXX").parse(this.edited_timestamp).getTime() / 1000L;
+			return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(this.edited_timestamp.substring(0, this.edited_timestamp.length() - 9)).getTime() / 1000L;
 		} catch(ParseException e)
 		{
 			e.printStackTrace();

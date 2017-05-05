@@ -233,6 +233,20 @@ public class Channel extends Structure
 	}
 
 	/**
+	 * @param content Content of the message to be sent
+	 * @param tts     Whether this is a TTS message or not
+	 * @return The newly sent message
+	 * @since 1.2
+	 */
+	public Message sendMessage(String content, boolean tts)
+	{
+		JsonObject json = new JsonObject();
+		json.addProperty("content", content);
+		json.addProperty("tts", tts);
+		return (Message) DiscordAPI.request("POST", "/channels/" + id + "/messages", json.toString(), new Message());
+	}
+
+	/**
 	 * @param embed {@link Embed} object to be sent
 	 * @return The newly sent message
 	 * @see DiscordAPI#createEmbed()

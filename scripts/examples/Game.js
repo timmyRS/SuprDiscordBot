@@ -1,5 +1,5 @@
 // The name of the game that is to be displayed on Discord:
-var game = "Being A Bot™";
+var game = "https://github.com/timmyrs/SuprDiscordBot";
 
 script.on("connected", function() // Called everytime the WebSocket to Discord has been (re)opened.
 {
