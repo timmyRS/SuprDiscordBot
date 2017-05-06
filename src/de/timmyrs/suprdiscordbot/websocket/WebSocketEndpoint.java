@@ -1,5 +1,7 @@
 package de.timmyrs.suprdiscordbot.websocket;
 
+import com.sun.istack.internal.NotNull;
+import com.sun.istack.internal.Nullable;
 import de.timmyrs.suprdiscordbot.Main;
 import de.timmyrs.suprdiscordbot.apis.DiscordAPI;
 
@@ -10,10 +12,12 @@ import java.net.URI;
 @ClientEndpoint
 public class WebSocketEndpoint
 {
-	Session userSession = null;
+	@Nullable
+	Session userSession;
+	@NotNull
 	private MessageHandler messageHandler;
 
-	WebSocketEndpoint(URI endpointURI)
+	WebSocketEndpoint(@NotNull URI endpointURI)
 	{
 		try
 		{
@@ -27,6 +31,7 @@ public class WebSocketEndpoint
 	}
 
 	@OnOpen
+	@Nullable
 	public void onOpen(Session userSession)
 	{
 		Main.log("Socket", "WebSocket opened.");
@@ -34,12 +39,14 @@ public class WebSocketEndpoint
 	}
 
 	@OnError
+	@Nullable
 	public void onError(Session userSession, Throwable e)
 	{
 		e.printStackTrace();
 	}
 
 	@OnClose
+	@Nullable
 	public void onClose(Session userSession, CloseReason reason)
 	{
 		Main.log("Socket", "WebSocket closed: " + reason.getReasonPhrase() + " (" + reason.getCloseCode().getCode() + ")");
@@ -50,7 +57,8 @@ public class WebSocketEndpoint
 	}
 
 	@OnMessage
-	public void onMessage(String msg)
+	@Nullable
+	public void onMessage(@Nullable String msg)
 	{
 		if(this.messageHandler != null)
 		{
@@ -70,6 +78,7 @@ public class WebSocketEndpoint
 		this.messageHandler = msgHandler;
 	}
 
+	@Nullable
 	void send(String msg)
 	{
 		if(Main.debug)
@@ -84,6 +93,6 @@ public class WebSocketEndpoint
 
 	public interface MessageHandler
 	{
-		void handleMessage(String message);
+		void handleMessage(@Nullable String message);
 	}
 }

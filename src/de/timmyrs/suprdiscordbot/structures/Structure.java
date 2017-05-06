@@ -33,8 +33,9 @@ public abstract class Structure
 	 * @return Weather the other structure is equal to this structure
 	 * @since 1.2
 	 */
+	@NotNull
 	public boolean equals(Structure o)
 	{
-		return o.toString().equals(this.toString());
+		return o != null && o.toString().equals(this.toString());
 	}
 }

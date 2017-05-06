@@ -1,5 +1,7 @@
 package de.timmyrs.suprdiscordbot.scripts;
 
+import com.sun.istack.internal.NotNull;
+import com.sun.istack.internal.Nullable;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.IOUtils;
 
@@ -22,7 +24,8 @@ public class ScriptManager
 		this.factory = new ScriptEngineManager();
 	}
 
-	Script getScript(final String name)
+	@Nullable
+	Script getScript(@NotNull final String name)
 	{
 		for(Script script : scripts)
 		{
@@ -34,7 +37,8 @@ public class ScriptManager
 		return null;
 	}
 
-	FailedScript getFailedScript(final String name)
+	@Nullable
+	FailedScript getFailedScript(@NotNull final String name)
 	{
 		for(FailedScript script : failedscripts)
 		{
@@ -46,7 +50,8 @@ public class ScriptManager
 		return null;
 	}
 
-	void removeScript(final Script script)
+	@Nullable
+	void removeScript(@NotNull final Script script)
 	{
 		if(scripts.contains(script))
 		{
@@ -54,7 +59,8 @@ public class ScriptManager
 		}
 	}
 
-	void removeFailedScript(final FailedScript script)
+	@Nullable
+	void removeFailedScript(@NotNull final FailedScript script)
 	{
 		if(failedscripts.contains(script))
 		{
@@ -62,7 +68,8 @@ public class ScriptManager
 		}
 	}
 
-	Script registerScript(final File f) throws ScriptException
+	@NotNull
+	Script registerScript(@NotNull final File f) throws ScriptException
 	{
 		String cont = "";
 		try
@@ -77,7 +84,8 @@ public class ScriptManager
 		return s;
 	}
 
-	FailedScript registerFailedScript(final File f)
+	@NotNull
+	FailedScript registerFailedScript(@NotNull final File f)
 	{
 		String cont = "";
 		try
@@ -92,12 +100,14 @@ public class ScriptManager
 		return s;
 	}
 
-	public ScriptManager fireEvent(final String event)
+	@NotNull
+	public ScriptManager fireEvent(@NotNull final String event)
 	{
 		return fireEvent(event, null);
 	}
 
-	public ScriptManager fireEvent(final String event, final Object data)
+	@NotNull
+	public ScriptManager fireEvent(@NotNull final String event, @Nullable final Object data)
 	{
 		for(Script script : scripts)
 		{
