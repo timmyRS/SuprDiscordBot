@@ -108,21 +108,7 @@ public class Channel extends Structure
 		return (Message) DiscordAPI.request("GET", "/channels/" + this.id + "/messages/" + id, new Message());
 	}
 
-	/**
-	 * @param count Number of messages to be gathered. 1-100.
-	 * @return An array of {@link Message} objects
-	 */
-	public Message[] getMessages(int count)
-	{
-		return getMessages(count, null);
-	}
-
-	/**
-	 * @param count Number of messages to be gathered. 1-100.
-	 * @param after Messages have to be after this message ID.
-	 * @return An array of {@link Message} objects
-	 */
-	public Message[] getMessages(int count, String after)
+	private Message[] getMessages(int count, String arg)
 	{
 		if(count < 1)
 		{
@@ -131,7 +117,57 @@ public class Channel extends Structure
 		{
 			count = 100;
 		}
-		return (Message[]) DiscordAPI.request("GET", "/channels/" + id + "/messages", "limit=" + count + (after == null ? "" : "&after=" + after), new Message());
+		return (Message[]) DiscordAPI.request("GET", "/channels/" + id + "/messages", "limit=" + count + arg, new Message());
+	}
+
+	/**
+	 * Get X Messages
+	 *
+	 * @param count Number of messages to be gathered (X). 1-100.
+	 * @return An array of {@link Message} objects
+	 */
+	public Message[] getMessages(int count)
+	{
+		return getMessages(count, "");
+	}
+
+	/**
+	 * Get X Messages Before Y
+	 *
+	 * @param count  Number of messages to be gathered (X). 1-100.
+	 * @param before Message ID (Y)
+	 * @return An array of {@link Message} objects
+	 * @since 1.2
+	 */
+	public Message[] getMessagesBefore(int count, String before)
+	{
+		return getMessages(count, "&before=" + before);
+	}
+
+	/**
+	 * Get X Messages Around Y
+	 *
+	 * @param count  Number of messages to be gathered (X). 1-100.
+	 * @param around Message ID (Y)
+	 * @return An array of {@link Message} objects
+	 * @since 1.2
+	 */
+	public Message[] getMessagesAround(int count, String around)
+	{
+		return getMessages(count, "&around=" + around);
+	}
+
+	/**
+	 * Get X Messages After Y
+	 *
+	 * @param count Number of messages to be gathered. 1-100.
+	 * @param after Message ID (Y)
+	 * @return An array of {@link Message} objects
+	 * @since 1.2
+	 */
+	public Message[] getMessagesAfter(int count, String after)
+	{
+		return getMessages(count, "&after=" + after);
 	}
 
 	/**
@@ -143,7 +179,7 @@ public class Channel extends Structure
 		if(ids.length == 1)
 		{
 			DiscordAPI.request("DELETE", "/channels/" + id + "/messages/" + ids[0]);
-		} else
+		} else if(ids.length > 0)
 		{
 			JsonArray snowflakes = new JsonArray();
 			for(String id : ids)

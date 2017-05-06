@@ -5,7 +5,7 @@ var roles = ["Mod"];
 script.on("MESSAGE_CREATE", function(msg)
 {
 	// Don't handle own messages.
-	if(msg.author.id == discord.user.id)
+	if(msg.author == discord.user)
 	{
 		return;
 	}
@@ -303,16 +303,23 @@ script.on("MESSAGE_CREATE", function(msg)
 					{
 						reading = i;
 					}
-					var deletemsgs = [];
+					var deleted = 0;
 					script.each(channel.getMessages(reading + 1), function(msg)
 					{
 						if(msg.id != mymsg.id)
 						{
 							msg.delete();
 							i--;
+							deleted++;
 						}
 					});
-					mymsg.edit(":warning: Deleting **" + i + "** messages...");
+					if(deleted == 0)
+					{
+						i = 0;
+					} else
+					{
+						mymsg.edit(":warning: Deleting **" + i + "** messages...");
+					}
 				}
 				mymsg.edit(":thumbsup: Manually deleted a whopping **" + count + "** messages.");
 			}
@@ -342,6 +349,51 @@ script.on("MESSAGE_CREATE", function(msg)
 			{
 				channel.getValues().set("slowmode", secs);
 				mymsg = channel.sendMessage(":thumbsup: An interval of **" + secs + "** seconds between messages is now being enforced.");
+			}
+			script.timeout(function()
+			{
+				mymsg.delete();
+			}, 5000);
+		} else if(cont.substr(0, 11) == "+timeclear ")
+		{
+			channel.sendTyping();
+			msg.delete();
+			var hours = parseInt(cont.substr(11)), mymsg;
+			if(!hasperm)
+			{
+				mymsg = channel.sendMessage(":warning: Only privileged members may use `+timeclear <hours>`.");
+			} else if(hours < 0)
+			{
+				mymsg = channel.sendMessage(":warning: Hours have to be a positive integer.");
+			} else
+			{
+				var msgs, before = channel.last_message_id, done = false, count = 0;
+				while(!done && (msgs = channel.getMessagesBefore(100, before)).length != 0)
+				{
+					var deleteids = [];
+					script.each(msgs, function(msg)
+					{
+						if(done)
+						{
+							return;
+						}
+						before = msg.id;
+						if(msg.getTime() < (script.time() - (hours * 3600)))
+						{
+							if(msg.getTime() < (script.time() - 1209600))
+							{
+								console.info("Can't delete messages older than 2 weeks. Use +erase <count> instead.");
+								done = true;
+							} else
+							{
+								deleteids.push(msg.id);
+								count++;
+							}
+						}
+					});
+					channel.deleteMessages(deleteids);
+				}
+				mymsg = channel.sendMessage(":thumbsup: Deleted a whopping **" + count + "** messages.");
 			}
 			script.timeout(function()
 			{
