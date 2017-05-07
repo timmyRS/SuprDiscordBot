@@ -139,7 +139,7 @@ public class Guild extends Structure
 	{
 		JsonObject json = Main.jsonParser.parse("{}").getAsJsonObject();
 		json.addProperty("nick", newnick);
-		DiscordAPI.request("PATCH", "/guilds/" + this.id + "/members/@me/nick", json.toString());
+		Main.discordAPI.request("PATCH", "/guilds/" + this.id + "/members/@me/nick", json.toString());
 		return this;
 	}
 
@@ -311,6 +311,42 @@ public class Guild extends Structure
 			channels = (Channel[]) DiscordAPI.request("/guilds/" + this.id + "/channels", new Channel());
 		}
 		return channels;
+	}
+
+	/**
+	 * @return List of text channels which are part of this guild
+	 * @since 1.2
+	 */
+	public Channel[] getTextChannels()
+	{
+		ArrayList<Channel> channelArrayList = new ArrayList<>();
+		for(Channel c : getChannels())
+		{
+			if(c.type.equals("text"))
+			{
+				channelArrayList.add(c);
+			}
+		}
+		Channel[] tmp = new Channel[channelArrayList.size()];
+		return channelArrayList.toArray(tmp);
+	}
+
+	/**
+	 * @return List of voice channels which are part of this guild
+	 * @since 1.2
+	 */
+	public Channel[] getVoiceChannels()
+	{
+		ArrayList<Channel> channelArrayList = new ArrayList<>();
+		for(Channel c : getChannels())
+		{
+			if(c.type.equals("voice"))
+			{
+				channelArrayList.add(c);
+			}
+		}
+		Channel[] tmp = new Channel[channelArrayList.size()];
+		return channelArrayList.toArray(tmp);
 	}
 
 	/**

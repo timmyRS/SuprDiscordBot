@@ -37,17 +37,6 @@ public class DiscordAPI
 	/**
 	 * Not accessible within script.
 	 *
-	 * @param endpoint Endpoint
-	 * @return Object
-	 */
-	public static Object request(String endpoint)
-	{
-		return request("GET", endpoint, "", null);
-	}
-
-	/**
-	 * Not accessible within script.
-	 *
 	 * @param endpoint  Endpoint
 	 * @param structure Structure
 	 * @return Object
@@ -55,18 +44,6 @@ public class DiscordAPI
 	public static Object request(String endpoint, Structure structure)
 	{
 		return request("GET", endpoint, "", structure);
-	}
-
-	/**
-	 * Not accessible within script.
-	 *
-	 * @param method   Method
-	 * @param endpoint Endpoint
-	 * @return Object
-	 */
-	public static Object request(String method, String endpoint)
-	{
-		return request(method, endpoint, "", null);
 	}
 
 	/**
@@ -80,19 +57,6 @@ public class DiscordAPI
 	public static Object request(String method, String endpoint, Structure structure)
 	{
 		return request(method, endpoint, "", structure);
-	}
-
-	/**
-	 * Not accessible within script.
-	 *
-	 * @param method   Method
-	 * @param endpoint Endpoint
-	 * @param args     Args
-	 * @return Object
-	 */
-	public static Object request(String method, String endpoint, String args)
-	{
-		return request(method, endpoint, args, null);
 	}
 
 	/**
@@ -231,7 +195,7 @@ public class DiscordAPI
 		{
 			if(!Main.configuration.has("gateway"))
 			{
-				JsonObject json = Main.jsonParser.parse(DiscordAPI.request("/gateway").toString()).getAsJsonObject();
+				JsonObject json = Main.jsonParser.parse(Main.discordAPI.request("/gateway").toString()).getAsJsonObject();
 				Main.configuration.set("gateway", json.get("url").getAsString());
 			}
 			ws = new WebSocket(Main.configuration.getString("gateway") + "/?v=5&encoding=json");
@@ -251,6 +215,42 @@ public class DiscordAPI
 			ws.close(reason);
 			ws = null;
 		}
+	}
+
+	/**
+	 * Send a manual request to the Discord API.
+	 *
+	 * @param endpoint HTTP Method (GET, POST, PATCH, etc.)
+	 * @return Object
+	 */
+	public Object request(String endpoint)
+	{
+		return request("GET", endpoint, "", null);
+	}
+
+	/**
+	 * Send a manual request to the Discord API.
+	 *
+	 * @param method   HTTP Method (GET, POST, PATCH, etc.)
+	 * @param endpoint The API endpoint (e.g. /users/_ID_)
+	 * @return Object
+	 */
+	public Object request(String method, String endpoint)
+	{
+		return request(method, endpoint, "", null);
+	}
+
+	/**
+	 * Send a manual request to the Discord API.
+	 *
+	 * @param method   HTTP Method (GET, POST, PATCH, etc.)
+	 * @param endpoint The API endpoint (e.g. /users/_ID_)
+	 * @param args     HTTP Arguments
+	 * @return Object
+	 */
+	public Object request(String method, String endpoint, String args)
+	{
+		return request(method, endpoint, args, null);
 	}
 
 	/**

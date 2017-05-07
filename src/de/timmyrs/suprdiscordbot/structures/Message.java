@@ -115,7 +115,7 @@ public class Message extends Structure
 	{
 		try
 		{
-			DiscordAPI.request("PUT", "/channels/" + channel_id + "/messages/" + id + "/reactions/" + URLEncoder.encode(emoji, "UTF-8") + "/@me");
+			Main.discordAPI.request("PUT", "/channels/" + channel_id + "/messages/" + id + "/reactions/" + URLEncoder.encode(emoji, "UTF-8") + "/@me");
 		} catch(Exception e)
 		{
 			e.printStackTrace();
@@ -170,7 +170,7 @@ public class Message extends Structure
 	 */
 	public Message delete()
 	{
-		DiscordAPI.request("DELETE", "/channels/" + channel_id + "/messages/" + id);
+		Main.discordAPI.request("DELETE", "/channels/" + channel_id + "/messages/" + id);
 		this.id = null;
 		return this;
 	}

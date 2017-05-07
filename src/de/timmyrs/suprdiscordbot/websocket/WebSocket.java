@@ -215,7 +215,7 @@ public class WebSocket
 									cc.name = c.name;
 									Main.scriptManager.fireEvent("CHANNEL_UPDATE_NAME", new Object[]{c, cc.getName()});
 								}
-								if(!cc.topic.equals(c.topic))
+								if(c.topic != null && !cc.topic.equals(c.topic))
 								{
 									cc.topic = c.topic;
 									Main.scriptManager.fireEvent("CHANNEL_UPDATE_TOPIC", new Object[]{c, cc.topic});
@@ -225,7 +225,7 @@ public class WebSocket
 									cc.position = c.position;
 									Main.scriptManager.fireEvent("CHANNEL_UPDATE_POSITION", new Object[]{c, cc.position});
 								}
-								if(!cc.permission_overwrites.equals(c.permission_overwrites))
+								if(c.permission_overwrites != null && !Arrays.equals(cc.permission_overwrites, c.permission_overwrites))
 								{
 									cc.permission_overwrites = c.permission_overwrites;
 									Main.scriptManager.fireEvent("CHANNEL_UPDATE_OVERWRITES", new Object[]{c, cc.permission_overwrites});

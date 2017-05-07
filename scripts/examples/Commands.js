@@ -85,7 +85,7 @@ script.on("MESSAGE_CREATE", function(msg)
 			.setURL("https://github.com/timmyrs/SuprDiscordBot")
 			.addField("Everywhere-Commands", "`+react`, `+react <id>`, `+info` and `+help` work everywhere.", false)
 			.addField("Guild-only", "`+explode` and `xd`-fixture are Guild-only.", false)
-			.addField("Guild-Mod-only", "`+explode <id>`, `+clear <count>`, `+erase <count>`, `+mute <secs> <mentions ...>`, `+mute <mentions ...>`, `+unmute <mentions ...>` and `+slowmode <secs>` are only available on Guilds for Mods.", false)
+			.addField("Guild-Mod-only", "`+explode <id>`, `+clear <count> [<mentions ...>]`, `+erase <count>`, `+mute <secs> <mentions ...>`, `+mute <mentions ...>`, `+unmute <mentions ...>`, `+gute <mentions ...>`, `+ungute <mentions ...>` and `+slowmode <secs>` are only available on Guilds for Mods.", false)
 			.setFooter("SuprDiscordBot, Commands.js, by timmyRS")
 			);
 	} else if(!channel.is_private)
@@ -111,76 +111,105 @@ script.on("MESSAGE_CREATE", function(msg)
 			});
 		});
 
-		if(cont.substr(0, 6) == "+mute ")
+		// Guild-only commands
+		if(cont.substr(0, 6) == "+mute " || cont.substr(0, 6) == "+gute ")
 		{
-			channel.sendTyping();
-			msg.delete();
 			if(hasperm)
 			{
-				var secs = parseInt(cont.substr(6).split(" ")[0]), msgs = [];
+				channel.sendTyping();
+				msg.delete();
+				var gmute = cont.substr(0, 6) == "+gute ", secs = parseInt(cont.substr(6).split(" ")[0]);
 				if(isNaN(secs))
 				{
 					secs = 0;
 				}
 				if(secs > 600)
 				{
-					msgs.push(channel.sendMessage(":warning: Won't temp-mute for more than 10 minutes. Use `+mute <mentions ...>` (without `<secs>`) instead.").id);
+					var msg = channel.sendMessage(":warning: " + msg.author.getHandle() + " Won't temp-mute for more than 10 minutes. Use `+mute <mentions ...>` or `+gute <mentions ...>` (without `<secs>`) instead.");
+					script.timeout(function()
+					{
+						msg.delete();
+					}, 5000);
 				} else
 				{
 					script.each(msg.mentions, function(mention)
 					{
-						if(secs == 0)
+						var msg;
+						script.each((gmute ? channel.getGuild().getTextChannels() : [channel]), function(c)
 						{
-							msgs.push(channel.sendMessage(":thumbsup: " + mention.getHandle() + " is now muted in " + channel.getHandle() + ".").id);
-						} else
-						{
-							msgs.push(channel.sendMessage(":thumbsup: " + mention.getHandle() + " is now muted for **" + secs + "** second" + (secs == 1 ? "" : "s") +" in " + channel.getHandle() + ".").id);
-						}
-						var overwrite = channel.getOverwrite(mention);
-						if(overwrite == null)
-						{
-							overwrite = discord.createOverwrite().setUser(mention);
-						}
-						overwrite.deny(permission.SEND_MESSAGES);
-						channel.overwritePermissions(overwrite);
+							var overwrite = c.getOverwrite(mention);
+							if(overwrite == null)
+							{
+								overwrite = discord.createOverwrite().setUser(mention);
+							}
+							overwrite.deny(permission.SEND_MESSAGES);
+							c.overwritePermissions(overwrite);
+							if(secs != 0)
+							{
+								script.timeout(function()
+								{
+									overwrite.deny(-permission.SEND_MESSAGES);
+									c.overwritePermissions(overwrite);
+								}, (secs * 1000));
+							}
+						});
 						if(secs != 0)
 						{
 							script.timeout(function()
 							{
-								overwrite.deny(-permission.SEND_MESSAGES);
-								channel.overwritePermissions(overwrite);
+								msg.edit("~~" + msg.content + "~~ **[Expired]**");
 							}, (secs * 1000));
+						}
+						if(secs == 0)
+						{
+							if(gmute)
+							{
+								channel.sendMessage(":thumbsup: " + mention.getHandle() + " is now muted in " + channel.getGuild().name + ".");
+							} else
+							{
+								channel.sendMessage(":thumbsup: " + mention.getHandle() + " is now muted in " + channel.getHandle() + ".");
+							}
+						} else
+						{
+							if(gmute)
+							{
+								msg = channel.sendMessage(":thumbsup: " + mention.getHandle() + " is now muted for **" + secs + "** second" + (secs == 1 ? "" : "s") +" in " + channel.getGuild().name + ".");
+							} else
+							{
+								msg = channel.sendMessage(":thumbsup: " + mention.getHandle() + " is now muted for **" + secs + "** second" + (secs == 1 ? "" : "s") +" in " + channel.getHandle() + ".");
+							}
 						}
 					});
 				}
-				script.timeout(function()
-				{
-					channel.deleteMessages(msgs);
-				}, 5000);
 			}
 		}
-		else if(cont.substr(0, 8) == "+unmute ")
+		else if(cont.substr(0, 8) == "+unmute " || cont.substr(0, 8) == "+ungute ")
 		{
-			channel.sendTyping();
-			msg.delete();
 			if(hasperm)
 			{
-				var msgs = [];
+				channel.sendTyping();
+				msg.delete();
+				var gmute = cont.substr(0, 8) == "+ungute ", msgs = [];
 				script.each(msg.mentions, function(mention)
 				{
-					msgs.push(channel.sendMessage(":thumbsup: " + mention.getHandle() + " is no longer muted in " + channel.getHandle() + ".").id);
-					var overwrite = channel.getOverwrite(mention);
-					if(overwrite == null)
+					script.each((gmute ? channel.getGuild().getTextChannels() : [channel]), function(c)
 					{
-						overwrite = discord.createOverwrite().setUser(mention);
+						var overwrite = c.getOverwrite(mention);
+						if(overwrite == null)
+						{
+							overwrite = discord.createOverwrite().setUser(mention);
+						}
+						overwrite.deny(-permission.SEND_MESSAGES);
+						c.overwritePermissions(overwrite);
+					});
+					if(gmute)
+					{
+						channel.sendMessage(":thumbsup: " + mention.getHandle() + " is no longer muted in " + channel.getGuild().name + ".");
+					} else
+					{
+						channel.sendMessage(":thumbsup: " + mention.getHandle() + " is no longer muted in " + channel.getHandle() + ".");
 					}
-					overwrite.deny(-permission.SEND_MESSAGES);
-					channel.overwritePermissions(overwrite);
 				});
-				script.timeout(function()
-				{
-					channel.deleteMessages(msgs);
-				}, 5000);
 			}
 		}
 		else if(cont == "+explode" || cont.substr(0, 9) == "+explode ")
@@ -242,23 +271,27 @@ script.on("MESSAGE_CREATE", function(msg)
 		} else if(cont.substr(0, 7) == "+clear ")
 		{
 			channel.sendTyping();
+			msg.delete();
 			var count = parseInt(cont.substr(7)), mymsg;
 			if(!hasperm)
 			{
 				msg.delete();
-				mymsg = channel.sendMessage(":warning: Only privileged members may use `+clear <count>`.");
+				mymsg = channel.sendMessage(":warning: " + msg.author.getHandle() + " Only privileged members may use `+clear <count> [<mentions ...>]`.");
 			} else if(count < 1)
 			{
 				msg.delete();
-				mymsg = channel.sendMessage(":warning: Can't delete 0 or less messages.");
+				mymsg = channel.sendMessage(":warning: " + msg.author.getHandle() + " Can't delete 0 (or less) messages.");
 			} else if(count == 1)
 			{
 				msg.delete();
 				mymsg = channel.sendMessage(":thumbsdown: Now you are just being lazy, " + msg.author.getHandle() + ".");
 			} else
 			{
-				var deleted = 0;
-				count++;
+				var deleted = 0, mentions = [];
+				script.each(msg.mentions, function(user)
+				{
+					mentions.push(user.id);
+				});
 				while(count > 0)
 				{
 					var reading = 100;
@@ -269,11 +302,20 @@ script.on("MESSAGE_CREATE", function(msg)
 					var deletemsgs = [];
 					script.each(channel.getMessages(reading), function(msg)
 					{
-						deletemsgs.push(msg.id);
+						if(mentions.length > 0)
+						{
+							if(script.inArray(mentions, msg.author.id))
+							{
+								deletemsgs.push(msg.id);
+							}
+						} else
+						{
+							deletemsgs.push(msg.id);
+						}
 					});
 					channel.deleteMessages(deletemsgs);
 					count -= reading;
-					deleted += reading;
+					deleted += deletemsgs.length;
 				}
 				mymsg = channel.sendMessage(":thumbsup: Deleted a whopping **" + deleted + "** messages.");
 			}
@@ -288,13 +330,13 @@ script.on("MESSAGE_CREATE", function(msg)
 			msg.delete();
 			if(!hasperm)
 			{
-				mymsg = channel.sendMessage(":warning: Only privileged members may use `+erase <count>`.");
+				mymsg = channel.sendMessage(":warning: " + msg.author.getHandle() + " Only privileged members may use `+erase <count>`.");
 			} else if(count < 1)
 			{
-				mymsg = channel.sendMessage(":warning: Can't delete 0 or less messages.");
+				mymsg = channel.sendMessage(":warning: " + msg.author.getHandle() + " Can't delete 0 or less messages.");
 			} else
 			{
-				i = count;
+				var i = count, totaldel = 0;
 				mymsg = channel.sendMessage(":warning: Deleting **" + count + "** messages...");
 				while(i > 0)
 				{
@@ -304,13 +346,14 @@ script.on("MESSAGE_CREATE", function(msg)
 						reading = i;
 					}
 					var deleted = 0;
-					script.each(channel.getMessages(reading + 1), function(msg)
+					script.each(channel.getMessagesBefore(reading, mymsg.id), function(msg)
 					{
 						if(msg.id != mymsg.id)
 						{
 							msg.delete();
 							i--;
 							deleted++;
+							totaldel++;
 						}
 					});
 					if(deleted == 0)
@@ -321,7 +364,23 @@ script.on("MESSAGE_CREATE", function(msg)
 						mymsg.edit(":warning: Deleting **" + i + "** messages...");
 					}
 				}
-				mymsg.edit(":thumbsup: Manually deleted a whopping **" + count + "** messages.");
+				mymsg.edit(":thumbsup: Manually deleted a whopping **" + totaldel + "** messages.");
+			}
+			script.timeout(function()
+			{
+				mymsg.delete();
+			}, 5000);
+		} else if(cont == "+slowmode")
+		{
+			channel.sendTyping();
+			msg.delete();
+			var mymsg;
+			if(channel.getValues().has("slowmode"))
+			{
+				mymsg = channel.sendMessage(":thumbsup: An interval of **" + channel.getValues().getString("slowmode") + "** second(s) is being inforced in " + channel.getHandle() + ".");
+			} else
+			{
+				mymsg = channel.sendMessage(":thumbsdown: There is no interval being enforced in " + channel.getHandle() + ".");
 			}
 			script.timeout(function()
 			{
@@ -334,21 +393,21 @@ script.on("MESSAGE_CREATE", function(msg)
 			var secs = parseInt(cont.substr(10)), mymsg;
 			if(!hasperm)
 			{
-				mymsg = channel.sendMessage(":warning: Only privileged members may use `+clear <count>`.");
+				mymsg = channel.sendMessage(":warning: " + msg.author.getHandle() + " Only privileged members may use `+clear <count>`.");
 			} else if(secs == 0)
 			{
 				channel.getValues().unset("slowmode");
 				mymsg = channel.sendMessage(":thumbsup: Disabled slowmode in " + channel.getHandle() + ".");
 			} else if(secs < 0)
 			{
-				mymsg = channel.sendMessage(":warning: Interval has to be a positive integer.");
+				mymsg = channel.sendMessage(":warning: " + msg.author.getHandle() + " Interval has to be a positive integer.");
 			} else if(secs > 60)
 			{
-				mymsg = channel.sendMessage(":warning: Won't set interval above 60 seconds.");
+				mymsg = channel.sendMessage(":warning: " + msg.author.getHandle() + " Won't set interval above 60 seconds.");
 			} else
 			{
 				channel.getValues().set("slowmode", secs);
-				mymsg = channel.sendMessage(":thumbsup: An interval of **" + secs + "** seconds between messages is now being enforced.");
+				mymsg = channel.sendMessage(":thumbsup: An interval of **" + secs + "** second(s) between messages is now being enforced.");
 			}
 			script.timeout(function()
 			{
@@ -361,10 +420,10 @@ script.on("MESSAGE_CREATE", function(msg)
 			var hours = parseInt(cont.substr(11)), mymsg;
 			if(!hasperm)
 			{
-				mymsg = channel.sendMessage(":warning: Only privileged members may use `+timeclear <hours>`.");
+				mymsg = channel.sendMessage(":warning: " + msg.author.getHandle() + " Only privileged members may use `+timeclear <hours>`.");
 			} else if(hours < 0)
 			{
-				mymsg = channel.sendMessage(":warning: Hours have to be a positive integer.");
+				mymsg = channel.sendMessage(":warning: " + msg.author.getHandle() + " Hours have to be a positive integer.");
 			} else
 			{
 				var msgs, before = channel.last_message_id, done = false, count = 0;

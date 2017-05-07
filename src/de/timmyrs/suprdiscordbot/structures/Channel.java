@@ -178,7 +178,7 @@ public class Channel extends Structure
 	{
 		if(ids.length == 1)
 		{
-			DiscordAPI.request("DELETE", "/channels/" + id + "/messages/" + ids[0]);
+			Main.discordAPI.request("DELETE", "/channels/" + id + "/messages/" + ids[0]);
 		} else if(ids.length > 0)
 		{
 			JsonArray snowflakes = new JsonArray();
@@ -191,7 +191,7 @@ public class Channel extends Structure
 			}
 			JsonObject json = new JsonObject();
 			json.add("messages", snowflakes);
-			DiscordAPI.request("POST", "/channels/" + id + "/messages/bulk-delete", json.toString());
+			Main.discordAPI.request("POST", "/channels/" + id + "/messages/bulk-delete", json.toString());
 		}
 		return this;
 	}
@@ -208,7 +208,7 @@ public class Channel extends Structure
 		json.addProperty("type", overwrite.type);
 		json.addProperty("allow", overwrite.allow);
 		json.addProperty("deny", overwrite.deny);
-		DiscordAPI.request("PUT", "/channels/" + id + "/permissions/" + overwrite.id, json.toString());
+		Main.discordAPI.request("PUT", "/channels/" + id + "/permissions/" + overwrite.id, json.toString());
 		return this;
 	}
 
@@ -253,7 +253,7 @@ public class Channel extends Structure
 	 */
 	public Channel sendTyping()
 	{
-		DiscordAPI.request("POST", "/channels/" + id + "/typing");
+		Main.discordAPI.request("POST", "/channels/" + id + "/typing");
 		return this;
 	}
 
