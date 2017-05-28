@@ -220,22 +220,11 @@ public class DiscordAPI
 	/**
 	 * Send a manual request to the Discord API.
 	 *
-	 * @param endpoint HTTP Method (GET, POST, PATCH, etc.)
-	 * @return Object
-	 */
-	public Object request(String endpoint)
-	{
-		return request("GET", endpoint, "", null);
-	}
-
-	/**
-	 * Send a manual request to the Discord API.
-	 *
 	 * @param method   HTTP Method (GET, POST, PATCH, etc.)
 	 * @param endpoint The API endpoint (e.g. /users/_ID_)
 	 * @return Object
 	 */
-	public Object request(String method, String endpoint)
+	public static Object request(String method, String endpoint)
 	{
 		return request(method, endpoint, "", null);
 	}
@@ -248,9 +237,20 @@ public class DiscordAPI
 	 * @param args     HTTP Arguments
 	 * @return Object
 	 */
-	public Object request(String method, String endpoint, String args)
+	public static Object request(String method, String endpoint, String args)
 	{
 		return request(method, endpoint, args, null);
+	}
+
+	/**
+	 * Send a manual request to the Discord API.
+	 *
+	 * @param endpoint HTTP Method (GET, POST, PATCH, etc.)
+	 * @return Object
+	 */
+	public Object request(String endpoint)
+	{
+		return request("GET", endpoint, "", null);
 	}
 
 	/**
@@ -285,11 +285,10 @@ public class DiscordAPI
 	}
 
 	/**
-	 * Gets Guild by ID
+	 * Gets {@link Guild} object by ID
 	 *
 	 * @param id ID of the Guild
-	 * @return Guild object with given ID
-	 * @see Guild
+	 * @return {@link Guild} object with given ID
 	 */
 	public Guild getGuild(String id)
 	{
@@ -306,6 +305,25 @@ public class DiscordAPI
 			guilds.add(g);
 		}
 		return g;
+	}
+
+	/**
+	 * Gets {@link Guild} object by Name
+	 *
+	 * @param name Name of the Guild
+	 * @return {@link Guild} object with given name or null if not found
+	 * @since 1.2
+	 */
+	public Guild getGuildByName(String name)
+	{
+		for(Guild g : guilds)
+		{
+			if(g.name.equalsIgnoreCase(name))
+			{
+				return g;
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -328,10 +346,10 @@ public class DiscordAPI
 	}
 
 	/**
-	 * Gets Presence by ID
+	 * Gets {@link Presence} object by ID
 	 *
 	 * @param id ID of the user
-	 * @return {@link Presence} object with the given ID
+	 * @return {@link Presence} object with the given ID or null if not found
 	 */
 	public Presence getPresence(String id)
 	{
@@ -350,7 +368,7 @@ public class DiscordAPI
 	}
 
 	/**
-	 * Gets Channel by ID
+	 * Gets {@link Channel} object by ID
 	 *
 	 * @param id ID of the Channel
 	 * @return {@link Channel} object with the given ID

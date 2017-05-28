@@ -8,16 +8,31 @@ import de.timmyrs.suprdiscordbot.apis.DiscordAPI;
 import de.timmyrs.suprdiscordbot.apis.InternetAPI;
 import de.timmyrs.suprdiscordbot.apis.PermissionAPI;
 import de.timmyrs.suprdiscordbot.scripts.ScriptManager;
+import de.timmyrs.suprdiscordbot.websocket.WebSocketEndpoint;
 import de.timmyrs.suprdiscordbot.websocket.WebSocketHeart;
 
 import java.io.File;
 import java.io.IOException;
+// Note: Not closing the p-tag is what JavaDoc wants. It is not a mistake.
 
 /**
- * SuprDiscordBot
+ * SuprDiscordBot Main Class.
+ * <p>
+ * Arguments:
+ * <ul>
+ * <li>
+ * <strong>--debug</strong>
+ * makes output more verbose and makes {@link DiscordAPI#isInDebugMode()} return true
+ * </li>
+ * <li>
+ * <strong>--dont-update-scripts</strong>
+ * stops the Script Watcher from checking for new or updated scripts.
+ * This is recommended for a <i>production environment</i>, as the watcher reads on your hard drive quite often.
+ * </li>
+ * </ul>
  *
  * @author timmyRS
- * @version 1.1
+ * @version 1.2
  * @see DiscordAPI
  * @see de.timmyrs.suprdiscordbot.apis.ScriptAPI
  * @see de.timmyrs.suprdiscordbot.apis.ConsoleAPI
@@ -26,10 +41,12 @@ import java.io.IOException;
 public class Main
 {
 	public static final int versionInt = 1200;
+	public static final Object WS_LOCK = "";
 	private static final String version = "1.2";
 	private static final File valuesDir = new File("values");
 	private final static File confFile = new File("config.json");
 	public static boolean debug = false;
+	public static boolean dontUpdateScripts = false;
 	public static Configuration configuration;
 	public static ScriptManager scriptManager;
 	public static ConsoleAPI consoleAPI;
@@ -39,6 +56,7 @@ public class Main
 	public static boolean ready = false;
 	public static Gson gson;
 	public static JsonParser jsonParser;
+	public static WebSocketEndpoint webSocketEndpoint;
 
 	public static void main(String[] args)
 	{
@@ -49,6 +67,12 @@ public class Main
 			if(arg.equals("--debug"))
 			{
 				Main.debug = true;
+			} else if(arg.equals("--dont-update-scripts"))
+			{
+				Main.dontUpdateScripts = true;
+			} else
+			{
+				Main.log("Main", "Unknown Argument: " + arg);
 			}
 		}
 		Main.jsonParser = new JsonParser();

@@ -53,7 +53,7 @@ public class Guild extends Structure
 	 */
 	public int default_message_notifications;
 	/**
-	 * Array of {@link Role} objects
+	 * Use {@link Guild#getRoles()} to get Roles this Guild has.
 	 */
 	public Role[] roles;
 	/**
@@ -139,19 +139,49 @@ public class Guild extends Structure
 	{
 		JsonObject json = Main.jsonParser.parse("{}").getAsJsonObject();
 		json.addProperty("nick", newnick);
-		Main.discordAPI.request("PATCH", "/guilds/" + this.id + "/members/@me/nick", json.toString());
+		DiscordAPI.request("PATCH", "/guilds/" + this.id + "/members/@me/nick", json.toString());
 		return this;
 	}
 
 	/**
+	 * @return An array of {@link Role} objects this guild has
+	 * @since 1.2
+	 */
+	public Role[] getRoles()
+	{
+		if(this.roles == null)
+		{
+			this.roles = (Role[]) DiscordAPI.request("GET", "/guilds/" + this.id + "/roles", new Role());
+		}
+		return this.roles;
+	}
+
+	/**
 	 * @param id Role ID
-	 * @return {@link Role} object with given ID
+	 * @return {@link Role} object with given ID or null if not found
 	 */
 	public Role getRole(String id)
 	{
 		for(Role r : roles)
 		{
 			if(r.id.equals(id))
+			{
+				return r;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * @param name Role Name
+	 * @return {@link Role} object with given name or null if not found
+	 * @since 1.2
+	 */
+	public Role getRoleByName(String name)
+	{
+		for(Role r : roles)
+		{
+			if(r.name.equalsIgnoreCase(name))
 			{
 				return r;
 			}

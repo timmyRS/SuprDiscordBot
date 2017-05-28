@@ -5,7 +5,9 @@ import de.timmyrs.suprdiscordbot.Main;
 import java.util.ArrayList;
 
 /**
- * Role Structure
+ * Role Structure.
+ * To get a Role object use {@link Guild#getRole(String)} or {@link Guild#getRoleByName(String)},
+ * or to get an array of Roles, use {@link Guild#getRoles()} or {@link Member#getRoles()}.
  *
  * @author timmyRS
  */
@@ -68,7 +70,33 @@ public class Role extends Structure
 	}
 
 	/**
-	 * Returns list of online users with this role
+	 * Assigns given {@link Member} this Role.
+	 *
+	 * @param m {@link Member} object
+	 * @return this
+	 * @since 1.2
+	 */
+	public Role addMember(Member m)
+	{
+		m.addRole(this);
+		return this;
+	}
+
+	/**
+	 * Removes given {@link Member} from this Role.
+	 *
+	 * @param m {@link Member} object
+	 * @return this
+	 * @since 1.2
+	 */
+	public Role removeMember(Member m)
+	{
+		m.removeRole(this);
+		return this;
+	}
+
+	/**
+	 * Returns list of Members who are part of this Role
 	 *
 	 * @return List of {@link Member} objects of online users with this role
 	 * @since 1.2
@@ -104,5 +132,4 @@ public class Role extends Structure
 	{
 		return "{Role \"" + this.name + "\" #" + this.id + "}";
 	}
-
 }

@@ -13,13 +13,14 @@ var socket = null, running = false; // These are global variables
 script.on("LOAD", function() // On load of the script...
 {
     try { // We try to...
-	    socket = new ServerSocket(80); // Open a socket on port 80
+	    socket = new ServerSocket(345); // Open a socket on port 345
 	    running = true;
 	} catch(e) // if that fails, we just stop.
 	{
-        console.error("Couldn't bind to port 80. Webserver.js is now doing *nothing*!");
+        console.error("Couldn't bind to port 345. Webserver.js is now doing *nothing*!");
         return;
 	}
+	console.info("A very cheap webserver is now running on http://localhost:435");
 	while(running) // We can while() as long as we want in LOAD, as every event has its own thread.
 	{
 		var client = socket.accept(); // Here we wait for an ingoing connection

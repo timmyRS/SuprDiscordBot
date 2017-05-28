@@ -192,7 +192,8 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>onOpen</h4>
-<pre>public&nbsp;void&nbsp;onOpen(javax.websocket.Session&nbsp;userSession)</pre>
+<pre>@Nullable
+public&nbsp;void&nbsp;onOpen(javax.websocket.Session&nbsp;userSession)</pre>
 </li>
 </ul>
 <a name="onError-javax.websocket.Session-java.lang.Throwable-">
@@ -201,8 +202,9 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>onError</h4>
-<pre>public&nbsp;void&nbsp;onError(javax.websocket.Session&nbsp;userSession,
-                    java.lang.Throwable&nbsp;e)</pre>
+<pre>@Nullable
+public&nbsp;void&nbsp;onError(javax.websocket.Session&nbsp;userSession,
+                               java.lang.Throwable&nbsp;e)</pre>
 </li>
 </ul>
 <a name="onClose-javax.websocket.Session-javax.websocket.CloseReason-">
@@ -211,8 +213,9 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>onClose</h4>
-<pre>public&nbsp;void&nbsp;onClose(javax.websocket.Session&nbsp;userSession,
-                    javax.websocket.CloseReason&nbsp;reason)</pre>
+<pre>@Nullable
+public&nbsp;void&nbsp;onClose(javax.websocket.Session&nbsp;userSession,
+                               javax.websocket.CloseReason&nbsp;reason)</pre>
 </li>
 </ul>
 <a name="onMessage-java.lang.String-">
@@ -221,7 +224,9 @@ extends java.lang.Object</pre>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>onMessage</h4>
-<pre>public&nbsp;void&nbsp;onMessage(java.lang.String&nbsp;msg)</pre>
+<pre>@Nullable
+public&nbsp;void&nbsp;onMessage(@Nullable
+                                 java.lang.String&nbsp;msg)</pre>
 </li>
 </ul>
 </li>

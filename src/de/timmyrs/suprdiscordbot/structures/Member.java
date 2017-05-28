@@ -1,6 +1,7 @@
 package de.timmyrs.suprdiscordbot.structures;
 
 import de.timmyrs.suprdiscordbot.Main;
+import de.timmyrs.suprdiscordbot.apis.DiscordAPI;
 
 import java.util.ArrayList;
 
@@ -63,6 +64,32 @@ public class Member extends Structure
 	public Guild getGuild()
 	{
 		return Main.discordAPI.getGuild(guild_id);
+	}
+
+	/**
+	 * Assigns the given {@link Role}
+	 *
+	 * @param r {@link Role} object
+	 * @return this
+	 * @since 1.2
+	 */
+	public Member addRole(Role r)
+	{
+		DiscordAPI.request("PUT", "/guilds/" + this.guild_id + "/members/" + this.user.id + "/roles/" + r.id);
+		return this;
+	}
+
+	/**
+	 * Removes Member from the given {@link Role}
+	 *
+	 * @param r {@link Role} object
+	 * @return this
+	 * @since 1.2
+	 */
+	public Member removeRole(Role r)
+	{
+		DiscordAPI.request("DELETE", "/guilds/" + this.guild_id + "/members/" + this.user.id + "/roles/" + r.id);
+		return this;
 	}
 
 	/**

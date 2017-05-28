@@ -38,7 +38,7 @@ public class ScriptWatcher extends Thread
 		{
 			e.printStackTrace();
 		}
-		while(true)
+		do
 		{
 			try
 			{
@@ -125,5 +125,6 @@ public class ScriptWatcher extends Thread
 				e.printStackTrace();
 			}
 		}
+		while(!Main.dontUpdateScripts);
 	}
 }

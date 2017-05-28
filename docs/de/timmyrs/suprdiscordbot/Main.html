@@ -109,10 +109,23 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">Main</span>
 extends java.lang.Object</pre>
-<div class="block">SuprDiscordBot</div>
+<div class="block">SuprDiscordBot Main Class.
+ <p>
+ Arguments:
+ <ul>
+ <li>
+ <strong>--debug</strong>
+ makes output more verbose and makes <a href="../../../de/timmyrs/suprdiscordbot/apis/DiscordAPI.html#isInDebugMode--"><code>DiscordAPI.isInDebugMode()</code></a> return true
+ </li>
+ <li>
+ <strong>--dont-update-scripts</strong>
+ stops the Script Watcher from checking for new or updated scripts.
+ This is recommended for a <i>production environment</i>, as the watcher reads on your hard drive quite often.
+ </li>
+ </ul></div>
 <dl>
 <dt><span class="simpleTagLabel">Version:</span></dt>
-<dd>1.1</dd>
+<dd>1.2</dd>
 <dt><span class="simpleTagLabel">Author:</span></dt>
 <dd>timmyRS</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
@@ -156,32 +169,44 @@ extends java.lang.Object</pre>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../de/timmyrs/suprdiscordbot/Main.html#discordAPI">discordAPI</a></span></code>&nbsp;</td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><code>static boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../de/timmyrs/suprdiscordbot/Main.html#dontUpdateScripts">dontUpdateScripts</a></span></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code>static com.google.gson.Gson</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../de/timmyrs/suprdiscordbot/Main.html#gson">gson</a></span></code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static <a href="../../../de/timmyrs/suprdiscordbot/apis/InternetAPI.html" title="class in de.timmyrs.suprdiscordbot.apis">InternetAPI</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../de/timmyrs/suprdiscordbot/Main.html#internetAPI">internetAPI</a></span></code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static com.google.gson.JsonParser</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../de/timmyrs/suprdiscordbot/Main.html#jsonParser">jsonParser</a></span></code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static <a href="../../../de/timmyrs/suprdiscordbot/apis/PermissionAPI.html" title="class in de.timmyrs.suprdiscordbot.apis">PermissionAPI</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../de/timmyrs/suprdiscordbot/Main.html#permisisonAPI">permisisonAPI</a></span></code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../de/timmyrs/suprdiscordbot/Main.html#ready">ready</a></span></code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>static <a href="../../../de/timmyrs/suprdiscordbot/scripts/ScriptManager.html" title="class in de.timmyrs.suprdiscordbot.scripts">ScriptManager</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../de/timmyrs/suprdiscordbot/Main.html#scriptManager">scriptManager</a></span></code>&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code>static int</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../de/timmyrs/suprdiscordbot/Main.html#versionInt">versionInt</a></span></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static <a href="../../../de/timmyrs/suprdiscordbot/websocket/WebSocketEndpoint.html" title="class in de.timmyrs.suprdiscordbot.websocket">WebSocketEndpoint</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../de/timmyrs/suprdiscordbot/Main.html#webSocketEndpoint">webSocketEndpoint</a></span></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static java.lang.Object</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../de/timmyrs/suprdiscordbot/Main.html#WS_LOCK">WS_LOCK</a></span></code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -263,6 +288,15 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
+<a name="WS_LOCK">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>WS_LOCK</h4>
+<pre>public static final&nbsp;java.lang.Object WS_LOCK</pre>
+</li>
+</ul>
 <a name="debug">
 <!--   -->
 </a>
@@ -270,6 +304,15 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>debug</h4>
 <pre>public static&nbsp;boolean debug</pre>
+</li>
+</ul>
+<a name="dontUpdateScripts">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>dontUpdateScripts</h4>
+<pre>public static&nbsp;boolean dontUpdateScripts</pre>
 </li>
 </ul>
 <a name="configuration">
@@ -347,10 +390,19 @@ extends java.lang.Object</pre>
 <a name="jsonParser">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>jsonParser</h4>
 <pre>public static&nbsp;com.google.gson.JsonParser jsonParser</pre>
+</li>
+</ul>
+<a name="webSocketEndpoint">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>webSocketEndpoint</h4>
+<pre>public static&nbsp;<a href="../../../de/timmyrs/suprdiscordbot/websocket/WebSocketEndpoint.html" title="class in de.timmyrs.suprdiscordbot.websocket">WebSocketEndpoint</a> webSocketEndpoint</pre>
 </li>
 </ul>
 </li>

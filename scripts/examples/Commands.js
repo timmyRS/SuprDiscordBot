@@ -100,7 +100,7 @@ script.on("MESSAGE_CREATE", function(msg)
 
 		// Find out if member is privileged
 		var hasperm = false;
-		script.each(channel.getGuild().getMember(msg.author).roles, function(role)
+		script.each(channel.getGuild().getMember(msg.author).getRoles(), function(role)
 		{
 			script.each(roles, function(name)
 			{
