@@ -191,7 +191,7 @@ public class Guild extends Structure
 
 	/**
 	 * @param id Member ID
-	 * @return {@link Member} object with given ID
+	 * @return {@link Member} object with given ID or null if not found
 	 */
 	public Member getMember(String id)
 	{
@@ -282,7 +282,6 @@ public class Guild extends Structure
 		Presence[] tmp = presence.getArray(presencesArrayList.size());
 		presences = presencesArrayList.toArray(tmp);
 	}
-
 	public void removePresence(String id)
 	{
 		ArrayList<Presence> presencesArrayList = new ArrayList<>();
@@ -315,7 +314,6 @@ public class Guild extends Structure
 	/**
 	 * @param u {@link User} object
 	 * @return {@link Presence} object correlating to the given {@link User} object
-	 * @deprecated Use {@link Guild#getPresence(String)} using {@link User#id} instead
 	 */
 	public Presence getPresence(User u)
 	{

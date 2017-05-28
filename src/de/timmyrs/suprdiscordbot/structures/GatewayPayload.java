@@ -1,26 +1,26 @@
 package de.timmyrs.suprdiscordbot.structures;
 
 /**
- * GatewayPayload Structure
- *
  * @author timmyRS
  */
 public class GatewayPayload extends Structure
 {
 	/**
-	 * Operation Code
+	 * Operation Code.
 	 */
 	public int op;
 	/**
-	 * Data
+	 * Data.
 	 */
 	public Object d;
 	/**
-	 * Sequence number. Dispatch-only.
+	 * Sequence number.
+	 * Dispatch-only.
 	 */
 	public int s;
 	/**
-	 * Event name. Dispatch-only.
+	 * Event name.
+	 * Dispatch-only.
 	 */
 	public String t;
 
@@ -33,5 +33,4 @@ public class GatewayPayload extends Structure
 	{
 		return "{GatewayPayload " + op + " " + d + "}";
 	}
-
 }

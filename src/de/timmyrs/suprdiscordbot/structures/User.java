@@ -14,15 +14,16 @@ import de.timmyrs.suprdiscordbot.apis.DiscordAPI;
 public class User extends Structure
 {
 	/**
-	 * The user's ID
+	 * The user's ID.
 	 */
 	public String id;
 	/**
-	 * The user's username
+	 * The user's username.
 	 */
 	public String username;
 	/**
-	 * The user avatar's hash
+	 * The user avatar's hash.
+	 * Use {@link User#getPic()} to get a full URL.
 	 */
 	public String avatar;
 	/**
@@ -30,7 +31,7 @@ public class User extends Structure
 	 */
 	public boolean bot;
 	/**
-	 * The user's 4-digit Discord-tag
+	 * The user's 4-digit Discord-tag.
 	 */
 	public String discriminator;
 
@@ -43,7 +44,7 @@ public class User extends Structure
 	}
 
 	/**
-	 * @return Profile Picture URL
+	 * @return Profile Picture URL.
 	 */
 	public String getPic()
 	{
@@ -51,7 +52,7 @@ public class User extends Structure
 	}
 
 	/**
-	 * @return User's Discord-tag.
+	 * @return User's DiscordTag.
 	 */
 	public String getTag()
 	{
@@ -59,7 +60,7 @@ public class User extends Structure
 	}
 
 	/**
-	 * @return Handle of this user to be used in a message
+	 * @return Handle of this user to be used in a message.
 	 */
 	public String getHandle()
 	{
@@ -67,7 +68,25 @@ public class User extends Structure
 	}
 
 	/**
-	 * @return DM {@link Channel} with this user
+	 * Gets the {@link Member} object of this User in the given Guild
+	 *
+	 * @param g {@link Guild} object
+	 * @return {@link Member} object
+	 * @since 1.2
+	 */
+	public Member getMember(Guild g)
+	{
+		return g.getMember(this);
+	}
+
+	/**
+	 * Gets DM Channel with this User.
+	 * <p>
+	 * <code>
+	 * msg.getAuthor().getDMChannel().sendMessage("Hello, world!");
+	 * </code>
+	 *
+	 * @return {@link Channel} object of DM Channel.
 	 */
 	public Channel getDMChannel()
 	{
@@ -83,6 +102,21 @@ public class User extends Structure
 		return (Channel) DiscordAPI.request("POST", "/users/@me/channels", json.toString(), new Channel());
 	}
 
+	/**
+	 * Sends a DM to the user.
+	 * <p>
+	 * <code>
+	 * msg.getAuthor().sendDM("Hello, world!");
+	 * </code>
+	 *
+	 * @param content Content of the message
+	 * @return {@link Message} object of the newly sent message.
+	 */
+	public Message sendDM(String content)
+	{
+		return this.getDMChannel().sendMessage(content);
+	}
+
 	public User[] getArray(int size)
 	{
 		return new User[size];
@@ -92,5 +126,4 @@ public class User extends Structure
 	{
 		return "{User \"" + getTag() + "\" #" + id + "}";
 	}
-
 }

@@ -114,6 +114,8 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">Emoji</span>
 extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html" title="class in de.timmyrs.suprdiscordbot.structures">Structure</a></pre>
+<div class="block">Emoji Structure.
+ https://discordapp.com/developers/docs/resources/guild#emoji-object</div>
 </li>
 </ul>
 </div>
@@ -134,23 +136,33 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Emoji.html#id">id</a></span></code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Emoji.html#id">id</a></span></code>
+<div class="block">Emoji ID.</div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Emoji.html#managed">managed</a></span></code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Emoji.html#managed">managed</a></span></code>
+<div class="block">Is this emoji managed?</div>
+</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Emoji.html#name">name</a></span></code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Emoji.html#name">name</a></span></code>
+<div class="block">Emoji Name.</div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Emoji.html#require_colons">require_colons</a></span></code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Emoji.html#require_colons">require_colons</a></span></code>
+<div class="block">Must this emoji be wrapped in colons?</div>
+</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>int[]</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Emoji.html#roles">roles</a></span></code>&nbsp;</td>
+<td class="colFirst"><code>java.lang.String[]</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Emoji.html#roles">roles</a></span></code>
+<div class="block">Roles this Emoji is active for.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -186,15 +198,11 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Emoji.html" title="class in de.timmyrs.suprdiscordbot.structures">Emoji</a>[]</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Emoji.html#getArray-int-">getArray</a></span>(int&nbsp;size)</code>
-<div class="block">Get Array</div>
-</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Emoji.html#getArray-int-">getArray</a></span>(int&nbsp;size)</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Emoji.html#toString--">toString</a></span>()</code>
-<div class="block">To String</div>
-</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Emoji.html#toString--">toString</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -232,6 +240,7 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <li class="blockList">
 <h4>id</h4>
 <pre>public&nbsp;java.lang.String id</pre>
+<div class="block">Emoji ID.</div>
 </li>
 </ul>
 <a name="name">
@@ -241,6 +250,7 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <li class="blockList">
 <h4>name</h4>
 <pre>public&nbsp;java.lang.String name</pre>
+<div class="block">Emoji Name.</div>
 </li>
 </ul>
 <a name="roles">
@@ -249,7 +259,8 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <ul class="blockList">
 <li class="blockList">
 <h4>roles</h4>
-<pre>public&nbsp;int[] roles</pre>
+<pre>public&nbsp;java.lang.String[] roles</pre>
+<div class="block">Roles this Emoji is active for.</div>
 </li>
 </ul>
 <a name="require_colons">
@@ -259,6 +270,7 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <li class="blockList">
 <h4>require_colons</h4>
 <pre>public&nbsp;boolean require_colons</pre>
+<div class="block">Must this emoji be wrapped in colons?</div>
 </li>
 </ul>
 <a name="managed">
@@ -268,6 +280,7 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <li class="blockList">
 <h4>managed</h4>
 <pre>public&nbsp;boolean managed</pre>
+<div class="block">Is this emoji managed?</div>
 </li>
 </ul>
 </li>
@@ -302,15 +315,13 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <li class="blockList">
 <h4>getArray</h4>
 <pre>public&nbsp;<a href="../../../../de/timmyrs/suprdiscordbot/structures/Emoji.html" title="class in de.timmyrs.suprdiscordbot.structures">Emoji</a>[]&nbsp;getArray(int&nbsp;size)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html#getArray-int-">Structure</a></code></span></div>
-<div class="block">Get Array</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html#getArray-int-">getArray</a></code>&nbsp;in class&nbsp;<code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html" title="class in de.timmyrs.suprdiscordbot.structures">Structure</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>size</code> - Size of the array to be created</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>New array of Structure with specified size</dd>
+<dd>New array of Structure with given size.</dd>
 </dl>
 </li>
 </ul>
@@ -321,13 +332,11 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <li class="blockList">
 <h4>toString</h4>
 <pre>public&nbsp;java.lang.String&nbsp;toString()</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html#toString--">Structure</a></code></span></div>
-<div class="block">To String</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html#toString--">toString</a></code>&nbsp;in class&nbsp;<code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html" title="class in de.timmyrs.suprdiscordbot.structures">Structure</a></code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>String representation of Structure</dd>
+<dd>String representation of Structure.</dd>
 </dl>
 </li>
 </ul>

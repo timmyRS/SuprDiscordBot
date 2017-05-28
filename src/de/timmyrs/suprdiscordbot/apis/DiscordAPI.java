@@ -25,8 +25,8 @@ import java.util.HashMap;
 @SuppressWarnings("unused")
 public class DiscordAPI
 {
+	public static final HashMap<String, Long> rate_limits = new HashMap<>();
 	public static ArrayList<Guild> guilds = new ArrayList<>();
-	public static volatile HashMap<String, Long> rate_limits = new HashMap<>();
 	private static ArrayList<Channel> dms;
 	private static WebSocket ws;
 	/**
@@ -70,17 +70,31 @@ public class DiscordAPI
 	 */
 	public static Object request(String method, String endpoint, String args, Structure structure)
 	{
-		while(rate_limits.containsKey(endpoint) && System.currentTimeMillis() < rate_limits.get(endpoint))
+		long rate_limit = 0;
+		synchronized(rate_limits)
 		{
-			try
+			if(rate_limits.containsKey(endpoint))
 			{
-				Thread.sleep(50);
-			} catch(InterruptedException e)
-			{
-				e.printStackTrace();
+				rate_limit = rate_limits.get(endpoint);
 			}
 		}
-		rate_limits.put(endpoint, System.currentTimeMillis() + 3000L);
+		if(rate_limit != 0)
+		{
+			while(System.currentTimeMillis() < rate_limit)
+			{
+				try
+				{
+					Thread.sleep(50);
+				} catch(InterruptedException e)
+				{
+					e.printStackTrace();
+				}
+			}
+			synchronized(rate_limits)
+			{
+				rate_limits.put(endpoint, System.currentTimeMillis() + 3000L);
+			}
+		}
 		HttpURLConnection con = null;
 		if(method.equals("GET") && !args.equals(""))
 		{
@@ -126,7 +140,10 @@ public class DiscordAPI
 				e.printStackTrace();
 			}
 		}
-		rate_limits.put(endpoint, System.currentTimeMillis() + 500L);
+		synchronized(rate_limits)
+		{
+			rate_limits.put(endpoint, System.currentTimeMillis() + 500L);
+		}
 		InputStream is;
 		try
 		{
@@ -145,7 +162,10 @@ public class DiscordAPI
 					{
 						if(json.get("message").getAsString().equals("You are being rate limited."))
 						{
-							rate_limits.put(endpoint, System.currentTimeMillis() + (json.get("retry_after").getAsLong()));
+							synchronized(rate_limits)
+							{
+								rate_limits.put(endpoint, System.currentTimeMillis() + (json.get("retry_after").getAsLong()));
+							}
 							DiscordAPI.request(method, endpoint, args, structure);
 						}
 					}

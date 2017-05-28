@@ -1,6 +1,7 @@
 package de.timmyrs.suprdiscordbot.structures;
 
 import de.timmyrs.suprdiscordbot.Main;
+import de.timmyrs.suprdiscordbot.apis.DiscordAPI;
 
 import java.util.ArrayList;
 
@@ -14,23 +15,23 @@ import java.util.ArrayList;
 public class Role extends Structure
 {
 	/**
-	 * Role ID
+	 * Role ID.
 	 */
 	public String id;
 	/**
-	 * Role name
+	 * Role name.
 	 */
 	public String name;
 	/**
-	 * Integer representation of hexadecimal color code
+	 * Integer representation of hexadecimal color code.
 	 */
 	public int color;
 	/**
-	 * If this role is pinned in the user listing
+	 * If this role is pinned in the user listing.
 	 */
 	public boolean hoist;
 	/**
-	 * Position of this role
+	 * Position of this role.
 	 */
 	public int position;
 	/**
@@ -40,18 +41,18 @@ public class Role extends Structure
 	 */
 	public int permissions;
 	/**
-	 * Whether this role is managed by an integration
+	 * Is this Role managed by an Integration?
 	 */
 	public boolean managed;
 	/**
-	 * Whether this role is mentionable
+	 * Is this Role mentionable?
 	 */
 	public boolean mentionable;
 
 	/**
 	 * Returns Guild this role is part of
 	 *
-	 * @return {@link Guild} object this Role is part of
+	 * @return {@link Guild} object this Role is part of.
 	 * @since 1.2
 	 */
 	public Guild getGuild()
@@ -70,35 +71,75 @@ public class Role extends Structure
 	}
 
 	/**
-	 * Assigns given {@link Member} this Role.
+	 * Assigns Role to given {@link Member}.
+	 * <p>
+	 * <code>
+	 * var role = member.getGuild().getRoleByName("Member");<br>
+	 * if(role != null)<br>
+	 * {<br>
+	 * &nbsp;&nbsp;&nbsp;&nbsp;role.assign(member);<br>
+	 * }<br>
+	 * </code>
 	 *
 	 * @param m {@link Member} object
 	 * @return this
 	 * @since 1.2
 	 */
-	public Role addMember(Member m)
+	public Role assign(Member m)
 	{
-		m.addRole(this);
+		DiscordAPI.request("PUT", "/guilds/" + m.guild_id + "/members/" + m.user.id + "/roles/" + this.id);
 		return this;
 	}
 
 	/**
-	 * Removes given {@link Member} from this Role.
+	 * Assigns Role to given {@link Presence}.
+	 * <p>
+	 * <code>
+	 * var role = presence.getGuild().getRoleByName("Member");<br>
+	 * if(role != null)<br>
+	 * {<br>
+	 * &nbsp;&nbsp;&nbsp;&nbsp;role.assign(presence);<br>
+	 * }<br>
+	 * </code>
+	 *
+	 * @param p {@link Presence} object
+	 * @return this
+	 * @since 1.2
+	 */
+	public Role assign(Presence p)
+	{
+		return this.assign(p.getMember());
+	}
+
+	/**
+	 * Removes Role from given {@link Member}.
 	 *
 	 * @param m {@link Member} object
 	 * @return this
 	 * @since 1.2
 	 */
-	public Role removeMember(Member m)
+	public Role remove(Member m)
 	{
-		m.removeRole(this);
+		DiscordAPI.request("DELETE", "/guilds/" + m.guild_id + "/members/" + m.user.id + "/roles/" + this.id);
 		return this;
+	}
+
+	/**
+	 * Removes Role from given {@link Presence}.
+	 *
+	 * @param p {@link Presence} object
+	 * @return this
+	 * @since 1.2
+	 */
+	public Role remove(Presence p)
+	{
+		return this.remove(p.getMember());
 	}
 
 	/**
 	 * Returns list of Members who are part of this Role
 	 *
-	 * @return List of {@link Member} objects of online users with this role
+	 * @return List of {@link Member} objects of online users with this role.
 	 * @since 1.2
 	 */
 	public Member[] getMembers()
@@ -116,7 +157,7 @@ public class Role extends Structure
 	}
 
 	/**
-	 * @return Handle of this role to be used in a message
+	 * @return Handle of this role to be used in a message.
 	 */
 	public String getHandle()
 	{

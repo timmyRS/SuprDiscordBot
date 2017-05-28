@@ -13,7 +13,6 @@ import de.timmyrs.suprdiscordbot.websocket.WebSocketHeart;
 
 import java.io.File;
 import java.io.IOException;
-// Note: Not closing the p-tag is what JavaDoc wants. It is not a mistake.
 
 /**
  * SuprDiscordBot Main Class.
@@ -41,7 +40,6 @@ import java.io.IOException;
 public class Main
 {
 	public static final int versionInt = 1200;
-	public static final Object WS_LOCK = "";
 	private static final String version = "1.2";
 	private static final File valuesDir = new File("values");
 	private final static File confFile = new File("config.json");
@@ -56,7 +54,7 @@ public class Main
 	public static boolean ready = false;
 	public static Gson gson;
 	public static JsonParser jsonParser;
-	public static WebSocketEndpoint webSocketEndpoint;
+	public static volatile WebSocketEndpoint webSocketEndpoint;
 
 	public static void main(String[] args)
 	{

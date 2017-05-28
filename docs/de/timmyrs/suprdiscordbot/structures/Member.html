@@ -17,8 +17,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
+var methods = {"i0":42,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":42,"i11":10,"i12":10};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -147,13 +147,13 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <tr class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html#guild_id">guild_id</a></span></code>
-<div class="block">ID of the guild this member is part of.</div>
+<div class="block">ID of the Guild this Member is part of.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html#joined_at">joined_at</a></span></code>
-<div class="block">Date the user joined the guild</div>
+<div class="block">Date the user joined the guild.</div>
 </td>
 </tr>
 <tr class="rowColor">
@@ -165,19 +165,19 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <tr class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html#nick">nick</a></span></code>
-<div class="block">Nickname of this member.</div>
+<div class="block">Nickname of this Member.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>java.lang.String[]</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html#roles">roles</a></span></code>
-<div class="block">Use <a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html#getRoles--"><code>getRoles()</code></a> to get a list of Roles this Member is a part of.</div>
+<div class="block">Use <a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html#getRoles--"><code>getRoles()</code></a> to get an array of <a href="../../../../de/timmyrs/suprdiscordbot/structures/Role.html" title="class in de.timmyrs.suprdiscordbot.structures"><code>Role</code></a> objects this member is a part of.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/User.html" title="class in de.timmyrs.suprdiscordbot.structures">User</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html#user">user</a></span></code>
-<div class="block">Correlating user object</div>
+<div class="block">Correlating user object.</div>
 </td>
 </tr>
 </table>
@@ -207,7 +207,7 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t6" class="tableTab"><span><a href="javascript:show(32);">Deprecated Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
@@ -215,46 +215,66 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <tr id="i0" class="altColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html" title="class in de.timmyrs.suprdiscordbot.structures">Member</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html#addRole-de.timmyrs.suprdiscordbot.structures.Role-">addRole</a></span>(<a href="../../../../de/timmyrs/suprdiscordbot/structures/Role.html" title="class in de.timmyrs.suprdiscordbot.structures">Role</a>&nbsp;r)</code>
-<div class="block">Assigns the given <a href="../../../../de/timmyrs/suprdiscordbot/structures/Role.html" title="class in de.timmyrs.suprdiscordbot.structures"><code>Role</code></a></div>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
+<div class="block"><span class="deprecationComment">Use <a href="../../../../de/timmyrs/suprdiscordbot/structures/Role.html#assign-de.timmyrs.suprdiscordbot.structures.Member-"><code>Role.assign(Member)</code></a> instead.</span></div>
+</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html" title="class in de.timmyrs.suprdiscordbot.structures">Member</a>[]</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html#getArray-int-">getArray</a></span>(int&nbsp;size)</code>
-<div class="block">Get Array</div>
-</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html#getArray-int-">getArray</a></span>(int&nbsp;size)</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
+<td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html" title="class in de.timmyrs.suprdiscordbot.structures">Channel</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html#getDMChannel--">getDMChannel</a></span>()</code>
+<div class="block">Gets the DM channel with this Member.</div>
+</td>
+</tr>
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html" title="class in de.timmyrs.suprdiscordbot.structures">Guild</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html#getGuild--">getGuild</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html#getName--">getName</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Presence.html" title="class in de.timmyrs.suprdiscordbot.structures">Presence</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html#getPresence--">getPresence</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
+<td class="colFirst"><code>java.lang.String[]</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html#getRoleIDs--">getRoleIDs</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Role.html" title="class in de.timmyrs.suprdiscordbot.structures">Role</a>[]</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html#getRoles--">getRoles</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html#hasRole-de.timmyrs.suprdiscordbot.structures.Role-">hasRole</a></span>(<a href="../../../../de/timmyrs/suprdiscordbot/structures/Role.html" title="class in de.timmyrs.suprdiscordbot.structures">Role</a>&nbsp;role)</code>&nbsp;</td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i9" class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html#hasRole-java.lang.String-">hasRole</a></span>(java.lang.String&nbsp;name)</code>&nbsp;</td>
+</tr>
+<tr id="i10" class="altColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html" title="class in de.timmyrs.suprdiscordbot.structures">Member</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html#removeRole-de.timmyrs.suprdiscordbot.structures.Role-">removeRole</a></span>(<a href="../../../../de/timmyrs/suprdiscordbot/structures/Role.html" title="class in de.timmyrs.suprdiscordbot.structures">Role</a>&nbsp;r)</code>
-<div class="block">Removes Member from the given <a href="../../../../de/timmyrs/suprdiscordbot/structures/Role.html" title="class in de.timmyrs.suprdiscordbot.structures"><code>Role</code></a></div>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
+<div class="block"><span class="deprecationComment">Use <a href="../../../../de/timmyrs/suprdiscordbot/structures/Role.html#remove-de.timmyrs.suprdiscordbot.structures.Member-"><code>Role.remove(Member)</code></a> instead.</span></div>
+</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
-<td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html#toString--">toString</a></span>()</code>
-<div class="block">To String</div>
+<tr id="i11" class="rowColor">
+<td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Message.html" title="class in de.timmyrs.suprdiscordbot.structures">Message</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html#sendDM-java.lang.String-">sendDM</a></span>(java.lang.String&nbsp;content)</code>
+<div class="block">Sends a DM to the user.</div>
 </td>
+</tr>
+<tr id="i12" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html#toString--">toString</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -292,7 +312,7 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <li class="blockList">
 <h4>user</h4>
 <pre>public&nbsp;<a href="../../../../de/timmyrs/suprdiscordbot/structures/User.html" title="class in de.timmyrs.suprdiscordbot.structures">User</a> user</pre>
-<div class="block">Correlating user object</div>
+<div class="block">Correlating user object.</div>
 </li>
 </ul>
 <a name="joined_at">
@@ -302,7 +322,7 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <li class="blockList">
 <h4>joined_at</h4>
 <pre>public&nbsp;java.lang.String joined_at</pre>
-<div class="block">Date the user joined the guild</div>
+<div class="block">Date the user joined the guild.</div>
 </li>
 </ul>
 <a name="deaf">
@@ -332,8 +352,8 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <li class="blockList">
 <h4>guild_id</h4>
 <pre>public&nbsp;java.lang.String guild_id</pre>
-<div class="block">ID of the guild this member is part of.
- Use <a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html#getGuild--"><code>getGuild()</code></a> to get <a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html" title="class in de.timmyrs.suprdiscordbot.structures"><code>Guild</code></a> object tho.</div>
+<div class="block">ID of the Guild this Member is part of.
+ Use <a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html#getGuild--"><code>getGuild()</code></a> to get the <a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html" title="class in de.timmyrs.suprdiscordbot.structures"><code>Guild</code></a> object.</div>
 </li>
 </ul>
 <a name="roles">
@@ -343,7 +363,7 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <li class="blockList">
 <h4>roles</h4>
 <pre>public&nbsp;java.lang.String[] roles</pre>
-<div class="block">Use <a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html#getRoles--"><code>getRoles()</code></a> to get a list of Roles this Member is a part of.</div>
+<div class="block">Use <a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html#getRoles--"><code>getRoles()</code></a> to get an array of <a href="../../../../de/timmyrs/suprdiscordbot/structures/Role.html" title="class in de.timmyrs.suprdiscordbot.structures"><code>Role</code></a> objects this member is a part of.</div>
 </li>
 </ul>
 <a name="nick">
@@ -353,8 +373,8 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <li class="blockList">
 <h4>nick</h4>
 <pre>public&nbsp;java.lang.String nick</pre>
-<div class="block">Nickname of this member.
- Use <a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html#getName--"><code>getName()</code></a> to safely the user's name.</div>
+<div class="block">Nickname of this Member.
+ Use <a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html#getName--"><code>getName()</code></a> to get the user's name.</div>
 </li>
 </ul>
 </li>
@@ -391,7 +411,7 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <pre>public&nbsp;java.lang.String&nbsp;getName()</pre>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>Name of the member - Either nickname or username</dd>
+<dd>The Nickname or - if not set - the Username of this Member.</dd>
 </dl>
 </li>
 </ul>
@@ -404,7 +424,7 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <pre>public&nbsp;<a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html" title="class in de.timmyrs.suprdiscordbot.structures">Guild</a>&nbsp;getGuild()</pre>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd><a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html" title="class in de.timmyrs.suprdiscordbot.structures"><code>Guild</code></a> this member is part of</dd>
+<dd><a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html" title="class in de.timmyrs.suprdiscordbot.structures"><code>Guild</code></a> this member is part of.</dd>
 </dl>
 </li>
 </ul>
@@ -415,7 +435,7 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <li class="blockList">
 <h4>addRole</h4>
 <pre>public&nbsp;<a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html" title="class in de.timmyrs.suprdiscordbot.structures">Member</a>&nbsp;addRole(<a href="../../../../de/timmyrs/suprdiscordbot/structures/Role.html" title="class in de.timmyrs.suprdiscordbot.structures">Role</a>&nbsp;r)</pre>
-<div class="block">Assigns the given <a href="../../../../de/timmyrs/suprdiscordbot/structures/Role.html" title="class in de.timmyrs.suprdiscordbot.structures"><code>Role</code></a></div>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">Use <a href="../../../../de/timmyrs/suprdiscordbot/structures/Role.html#assign-de.timmyrs.suprdiscordbot.structures.Member-"><code>Role.assign(Member)</code></a> instead.</span></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>r</code> - <a href="../../../../de/timmyrs/suprdiscordbot/structures/Role.html" title="class in de.timmyrs.suprdiscordbot.structures"><code>Role</code></a> object</dd>
@@ -433,7 +453,7 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <li class="blockList">
 <h4>removeRole</h4>
 <pre>public&nbsp;<a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html" title="class in de.timmyrs.suprdiscordbot.structures">Member</a>&nbsp;removeRole(<a href="../../../../de/timmyrs/suprdiscordbot/structures/Role.html" title="class in de.timmyrs.suprdiscordbot.structures">Role</a>&nbsp;r)</pre>
-<div class="block">Removes Member from the given <a href="../../../../de/timmyrs/suprdiscordbot/structures/Role.html" title="class in de.timmyrs.suprdiscordbot.structures"><code>Role</code></a></div>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">Use <a href="../../../../de/timmyrs/suprdiscordbot/structures/Role.html#remove-de.timmyrs.suprdiscordbot.structures.Member-"><code>Role.remove(Member)</code></a> instead.</span></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>r</code> - <a href="../../../../de/timmyrs/suprdiscordbot/structures/Role.html" title="class in de.timmyrs.suprdiscordbot.structures"><code>Role</code></a> object</dd>
@@ -441,6 +461,21 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <dd>this</dd>
 <dt><span class="simpleTagLabel">Since:</span></dt>
 <dd>1.2</dd>
+</dl>
+</li>
+</ul>
+<a name="getRoleIDs--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getRoleIDs</h4>
+<pre>public&nbsp;java.lang.String[]&nbsp;getRoleIDs()</pre>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>List of IDs of Roles the Member is part of.</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html#getRoles--"><code>getRoles()</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -453,7 +488,7 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <pre>public&nbsp;<a href="../../../../de/timmyrs/suprdiscordbot/structures/Role.html" title="class in de.timmyrs.suprdiscordbot.structures">Role</a>[]&nbsp;getRoles()</pre>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>List of <a href="../../../../de/timmyrs/suprdiscordbot/structures/Role.html" title="class in de.timmyrs.suprdiscordbot.structures"><code>Role</code></a> objects this member is part of</dd>
+<dd>List of <a href="../../../../de/timmyrs/suprdiscordbot/structures/Role.html" title="class in de.timmyrs.suprdiscordbot.structures"><code>Role</code></a> objects the Member is part of.</dd>
 </dl>
 </li>
 </ul>
@@ -468,7 +503,66 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>role</code> - <a href="../../../../de/timmyrs/suprdiscordbot/structures/Role.html" title="class in de.timmyrs.suprdiscordbot.structures"><code>Role</code></a> object to be tested for</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>Weather this member is part of the given role</dd>
+<dd>Weather this member is part of the given role.</dd>
+</dl>
+</li>
+</ul>
+<a name="hasRole-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>hasRole</h4>
+<pre>public&nbsp;boolean&nbsp;hasRole(java.lang.String&nbsp;name)</pre>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>name</code> - Name of the Role to be tested for</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>Weather this member is part of the given role.</dd>
+<dt><span class="simpleTagLabel">Since:</span></dt>
+<dd>1.2</dd>
+</dl>
+</li>
+</ul>
+<a name="getDMChannel--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getDMChannel</h4>
+<pre>public&nbsp;<a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html" title="class in de.timmyrs.suprdiscordbot.structures">Channel</a>&nbsp;getDMChannel()</pre>
+<div class="block">Gets the DM channel with this Member.
+ <p>
+ <code>
+ msg.getAuthor().getMember(msg.getGuild()).getDMChannel().sendMessage("Hello, world!");
+ </code></div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html" title="class in de.timmyrs.suprdiscordbot.structures"><code>Channel</code></a> object of DM Channel.</dd>
+<dt><span class="simpleTagLabel">Since:</span></dt>
+<dd>1.2</dd>
+</dl>
+</li>
+</ul>
+<a name="sendDM-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>sendDM</h4>
+<pre>public&nbsp;<a href="../../../../de/timmyrs/suprdiscordbot/structures/Message.html" title="class in de.timmyrs.suprdiscordbot.structures">Message</a>&nbsp;sendDM(java.lang.String&nbsp;content)</pre>
+<div class="block">Sends a DM to the user.
+ <p>
+ <code>
+ msg.getAuthor().getMember(msg.getGuild()).sendDM("Hello, world!");
+ </code></div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>content</code> - Content of the message</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><a href="../../../../de/timmyrs/suprdiscordbot/structures/Message.html" title="class in de.timmyrs.suprdiscordbot.structures"><code>Message</code></a> object of the newly sent message.</dd>
+<dt><span class="simpleTagLabel">Since:</span></dt>
+<dd>1.2</dd>
 </dl>
 </li>
 </ul>
@@ -481,7 +575,7 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <pre>public&nbsp;<a href="../../../../de/timmyrs/suprdiscordbot/structures/Presence.html" title="class in de.timmyrs.suprdiscordbot.structures">Presence</a>&nbsp;getPresence()</pre>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd><a href="../../../../de/timmyrs/suprdiscordbot/structures/Presence.html" title="class in de.timmyrs.suprdiscordbot.structures"><code>Presence</code></a> object this member correlates to</dd>
+<dd><a href="../../../../de/timmyrs/suprdiscordbot/structures/Presence.html" title="class in de.timmyrs.suprdiscordbot.structures"><code>Presence</code></a> object this member correlates to.</dd>
 </dl>
 </li>
 </ul>
@@ -492,15 +586,13 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <li class="blockList">
 <h4>getArray</h4>
 <pre>public&nbsp;<a href="../../../../de/timmyrs/suprdiscordbot/structures/Member.html" title="class in de.timmyrs.suprdiscordbot.structures">Member</a>[]&nbsp;getArray(int&nbsp;size)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html#getArray-int-">Structure</a></code></span></div>
-<div class="block">Get Array</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html#getArray-int-">getArray</a></code>&nbsp;in class&nbsp;<code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html" title="class in de.timmyrs.suprdiscordbot.structures">Structure</a></code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>size</code> - Size of the array to be created</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>New array of Structure with specified size</dd>
+<dd>New array of Structure with given size.</dd>
 </dl>
 </li>
 </ul>
@@ -511,13 +603,11 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <li class="blockList">
 <h4>toString</h4>
 <pre>public&nbsp;java.lang.String&nbsp;toString()</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html#toString--">Structure</a></code></span></div>
-<div class="block">To String</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html#toString--">toString</a></code>&nbsp;in class&nbsp;<code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html" title="class in de.timmyrs.suprdiscordbot.structures">Structure</a></code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>String representation of Structure</dd>
+<dd>String representation of Structure.</dd>
 </dl>
 </li>
 </ul>

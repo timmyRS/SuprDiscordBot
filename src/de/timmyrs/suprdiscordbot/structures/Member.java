@@ -1,9 +1,6 @@
 package de.timmyrs.suprdiscordbot.structures;
 
 import de.timmyrs.suprdiscordbot.Main;
-import de.timmyrs.suprdiscordbot.apis.DiscordAPI;
-
-import java.util.ArrayList;
 
 /**
  * Member Structure.
@@ -15,11 +12,11 @@ import java.util.ArrayList;
 public class Member extends Structure
 {
 	/**
-	 * Correlating user object
+	 * Correlating user object.
 	 */
 	public User user;
 	/**
-	 * Date the user joined the guild
+	 * Date the user joined the guild.
 	 */
 	public String joined_at;
 	/**
@@ -31,34 +28,30 @@ public class Member extends Structure
 	 */
 	public boolean mute;
 	/**
-	 * ID of the guild this member is part of.
-	 * Use {@link #getGuild()} to get {@link Guild} object tho.
+	 * ID of the Guild this Member is part of.
+	 * Use {@link Member#getGuild()} to get the {@link Guild} object.
 	 */
 	public String guild_id;
 	/**
-	 * Use {@link #getRoles()} to get a list of Roles this Member is a part of.
+	 * Use {@link Member#getRoles()} to get an array of {@link Role} objects this member is a part of.
 	 */
 	public String[] roles;
 	/**
-	 * Nickname of this member.
-	 * Use {@link #getName()} to safely the user's name.
+	 * Nickname of this Member.
+	 * Use {@link Member#getName()} to get the user's name.
 	 */
 	public String nick;
 
 	/**
-	 * @return Name of the member - Either nickname or username
+	 * @return The Nickname or - if not set - the Username of this Member.
 	 */
 	public String getName()
 	{
-		if(nick == null)
-		{
-			return user.username;
-		}
-		return nick;
+		return (nick == null ? user.username : nick);
 	}
 
 	/**
-	 * @return {@link Guild} this member is part of
+	 * @return {@link Guild} this member is part of.
 	 */
 	public Guild getGuild()
 	{
@@ -66,56 +59,57 @@ public class Member extends Structure
 	}
 
 	/**
-	 * Assigns the given {@link Role}
-	 *
 	 * @param r {@link Role} object
 	 * @return this
 	 * @since 1.2
+	 * @deprecated Use {@link Role#assign(Member)} instead.
 	 */
 	public Member addRole(Role r)
 	{
-		DiscordAPI.request("PUT", "/guilds/" + this.guild_id + "/members/" + this.user.id + "/roles/" + r.id);
+		r.assign(this);
 		return this;
 	}
 
 	/**
-	 * Removes Member from the given {@link Role}
-	 *
 	 * @param r {@link Role} object
 	 * @return this
 	 * @since 1.2
+	 * @deprecated Use {@link Role#remove(Member)} instead.
 	 */
 	public Member removeRole(Role r)
 	{
-		DiscordAPI.request("DELETE", "/guilds/" + this.guild_id + "/members/" + this.user.id + "/roles/" + r.id);
+		r.remove(this);
 		return this;
 	}
 
 	/**
-	 * @return List of {@link Role} objects this member is part of
+	 * @return List of IDs of Roles the Member is part of.
+	 * @see Member#getRoles()
+	 */
+	public String[] getRoleIDs()
+	{
+		return this.roles;
+	}
+
+	/**
+	 * @return List of {@link Role} objects the Member is part of.
 	 */
 	public Role[] getRoles()
 	{
 		Guild g = getGuild();
-		if(g == null)
-		{
-			return null;
-		}
-		ArrayList<Role> roles = new ArrayList<>();
+		Role[] roleArr = new Role[this.roles.length];
+		int i = 0;
 		for(String rid : this.roles)
 		{
 			Role r = g.getRole(rid);
-			if(r != null)
-			{
-				roles.add(r);
-			}
+			roleArr[i++] = r;
 		}
-		return roles.toArray(new Role[roles.size()]);
+		return roleArr;
 	}
 
 	/**
 	 * @param role {@link Role} object to be tested for
-	 * @return Weather this member is part of the given role
+	 * @return Weather this member is part of the given role.
 	 */
 	public boolean hasRole(Role role)
 	{
@@ -130,7 +124,55 @@ public class Member extends Structure
 	}
 
 	/**
-	 * @return {@link Presence} object this member correlates to
+	 * @param name Name of the Role to be tested for
+	 * @return Weather this member is part of the given role.
+	 * @since 1.2
+	 */
+	public boolean hasRole(String name)
+	{
+		for(Role r : getRoles())
+		{
+			if(r.name.equalsIgnoreCase(name))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Gets the DM channel with this Member.
+	 * <p>
+	 * <code>
+	 * msg.getAuthor().getMember(msg.getGuild()).getDMChannel().sendMessage("Hello, world!");
+	 * </code>
+	 *
+	 * @return {@link Channel} object of DM Channel.
+	 * @since 1.2
+	 */
+	public Channel getDMChannel()
+	{
+		return this.user.getDMChannel();
+	}
+
+	/**
+	 * Sends a DM to the user.
+	 * <p>
+	 * <code>
+	 * msg.getAuthor().getMember(msg.getGuild()).sendDM("Hello, world!");
+	 * </code>
+	 *
+	 * @param content Content of the message
+	 * @return {@link Message} object of the newly sent message.
+	 * @since 1.2
+	 */
+	public Message sendDM(String content)
+	{
+		return this.user.sendDM(content);
+	}
+
+	/**
+	 * @return {@link Presence} object this member correlates to.
 	 */
 	public Presence getPresence()
 	{
@@ -144,6 +186,6 @@ public class Member extends Structure
 
 	public String toString()
 	{
-		return "{Member " + this.user.toString() + " (" + this.nick + ")}";
+		return "{Member " + this.user.toString() + " \"" + this.getName() + "\"}";
 	}
 }

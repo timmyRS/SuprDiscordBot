@@ -302,15 +302,18 @@ script.on("MESSAGE_CREATE", function(msg)
 					var deletemsgs = [];
 					script.each(channel.getMessages(reading), function(msg)
 					{
-						if(mentions.length > 0)
-						{
-							if(script.inArray(mentions, msg.author.id))
-							{
-								deletemsgs.push(msg.id);
-							}
-						} else
-						{
-							deletemsgs.push(msg.id);
+					    if(!msg.pinned)
+					    {
+                            if(mentions.length > 0)
+                            {
+                                if(script.inArray(mentions, msg.author.id))
+                                {
+                                    deletemsgs.push(msg.id);
+                                }
+                            } else
+                            {
+                                deletemsgs.push(msg.id);
+                            }
 						}
 					});
 					channel.deleteMessages(deletemsgs);

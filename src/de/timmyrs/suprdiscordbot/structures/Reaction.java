@@ -1,22 +1,22 @@
 package de.timmyrs.suprdiscordbot.structures;
 
 /**
- * Reaction Structure
+ * Reaction Structure.
  *
  * @author timmyRS
  */
 public class Reaction extends Structure
 {
 	/**
-	 * Times this emoji has been used to react
+	 * The amount of times this Emoji has been used to react.
 	 */
 	public int count;
 	/**
-	 * Whether this user reacted using this emoji
+	 * Has this user/bot reacted with this Emoji?
 	 */
 	public boolean me;
 	/**
-	 * Emoji
+	 * The Emoji.
 	 */
 	public Emoji emoji;
 

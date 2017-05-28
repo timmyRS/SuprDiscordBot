@@ -8,6 +8,13 @@ import java.util.ArrayList;
  * Embed Structure.
  * You can get an empty embed structure using {@link DiscordAPI#createEmbed()}.
  * You can send an embed using {@link Channel#sendMessage(Embed)} and {@link Channel#sendMessage(String, Embed)}.
+ * <p>
+ * <code>
+ * channel.sendMessage(discord.createEmbed()<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;.setTitle("Example Embed")<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;.setColor(0xF57C00)<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;.setDescription("Hello, world!"));
+ * </code>
  *
  * @author timmyRS
  */

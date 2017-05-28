@@ -17,24 +17,28 @@ import de.timmyrs.suprdiscordbot.apis.DiscordAPI;
 public class Channel extends Structure
 {
 	/**
-	 * The ID of this channel
+	 * The ID of this channel.
 	 */
 	public String id;
 	/**
 	 * Name of the channel.
-	 * Use {@link Channel#getName()} to avoid errors.
+	 *
+	 * @see Channel#getName()
 	 */
 	public String name;
 	/**
-	 * The type of this channel - "text" or "voice"
+	 * The type of this channel - "text" or "voice".
 	 */
 	public String type;
 	/**
-	 * The sorting position of this channel
+	 * The sorting position of this channel.
 	 */
 	public int position;
 	/**
-	 * Is this a private DM channel?
+	 * Is this a DM channel?
+	 *
+	 * @see Channel#isPrivate()
+	 * @since 1.2
 	 */
 	public boolean is_private;
 	/**
@@ -62,13 +66,13 @@ public class Channel extends Structure
 	 */
 	public int user_limit;
 	/**
-	 * ID of the guild this channel is part of.
-	 * Use {@link #getGuild()} to get this channel's guild tho.
+	 * The ID of the guild this channel is part of.
+	 * Use {@link Member#getGuild()} to get a {@link Guild} object.
 	 */
 	public String guild_id;
 
 	/**
-	 * @return {@link Configuration}
+	 * @return {@link Configuration} object.
 	 */
 	public Configuration getValues()
 	{
@@ -76,7 +80,7 @@ public class Channel extends Structure
 	}
 
 	/**
-	 * @return Name of the channel
+	 * @return Name of the channel.
 	 */
 	public String getName()
 	{
@@ -88,7 +92,16 @@ public class Channel extends Structure
 	}
 
 	/**
-	 * @return {@link Guild} Guild this channel is part of
+	 * @return Whether this is a DM Channel or not.
+	 * @since 1.2
+	 */
+	public boolean isPrivate()
+	{
+		return this.is_private;
+	}
+
+	/**
+	 * @return {@link Guild} Guild this channel is part of.
 	 */
 	public Guild getGuild()
 	{
@@ -101,7 +114,8 @@ public class Channel extends Structure
 
 	/**
 	 * @param id Message ID
-	 * @return {@link Message} object with the given ID
+	 * @return {@link Message} object with the given ID.
+	 * @deprecated I don't see any pratical use in this function, but feel free to open an issue if you need it.
 	 */
 	public Message getMessage(String id)
 	{
@@ -121,10 +135,19 @@ public class Channel extends Structure
 	}
 
 	/**
-	 * Get X Messages
+	 * Gets X Messages.
+	 * <p>
+	 * <code>
+	 * // Deletes the last 3 messages<br>
+	 * script.each(channel.getMessages(3), function(msg)<br>
+	 * {<br>
+	 * &nbsp;&nbsp;&nbsp;&nbsp;msg.delete();<br>
+	 * });
+	 * </code>
 	 *
-	 * @param count Number of messages to be gathered (X). 1-100.
-	 * @return An array of {@link Message} objects
+	 * @param count Number of messages to be gathered; must be between 1 and 100 (X)
+	 * @return An array of {@link Message} objects.
+	 * @see Message#delete()
 	 */
 	public Message[] getMessages(int count)
 	{
@@ -132,11 +155,12 @@ public class Channel extends Structure
 	}
 
 	/**
-	 * Get X Messages Before Y
+	 * Gets X Messages Before Y.
 	 *
-	 * @param count  Number of messages to be gathered (X). 1-100.
+	 * @param count  Number of messages to be gathered; must be between 1 and 100 (X)
 	 * @param before Message ID (Y)
-	 * @return An array of {@link Message} objects
+	 * @return An array of {@link Message} objects.
+	 * @see Channel#getMessages(int)
 	 * @since 1.2
 	 */
 	public Message[] getMessagesBefore(int count, String before)
@@ -145,11 +169,12 @@ public class Channel extends Structure
 	}
 
 	/**
-	 * Get X Messages Around Y
+	 * Gets X Messages Around Y.
 	 *
-	 * @param count  Number of messages to be gathered (X). 1-100.
+	 * @param count  Number of messages to be gathered; must be between 1 and 100 (X)
 	 * @param around Message ID (Y)
-	 * @return An array of {@link Message} objects
+	 * @return An array of {@link Message} objects.
+	 * @see Channel#getMessages(int)
 	 * @since 1.2
 	 */
 	public Message[] getMessagesAround(int count, String around)
@@ -158,11 +183,12 @@ public class Channel extends Structure
 	}
 
 	/**
-	 * Get X Messages After Y
+	 * Gets X Messages After Y.
 	 *
-	 * @param count Number of messages to be gathered. 1-100.
+	 * @param count Number of messages to be gathered; must be between 1 and 100 (X)
 	 * @param after Message ID (Y)
-	 * @return An array of {@link Message} objects
+	 * @return An array of {@link Message} objects.
+	 * @see Channel#getMessages(int)
 	 * @since 1.2
 	 */
 	public Message[] getMessagesAfter(int count, String after)
@@ -178,7 +204,7 @@ public class Channel extends Structure
 	{
 		if(ids.length == 1)
 		{
-			Main.discordAPI.request("DELETE", "/channels/" + id + "/messages/" + ids[0]);
+			DiscordAPI.request("DELETE", "/channels/" + id + "/messages/" + ids[0]);
 		} else if(ids.length > 0)
 		{
 			JsonArray snowflakes = new JsonArray();
@@ -191,7 +217,7 @@ public class Channel extends Structure
 			}
 			JsonObject json = new JsonObject();
 			json.add("messages", snowflakes);
-			Main.discordAPI.request("POST", "/channels/" + id + "/messages/bulk-delete", json.toString());
+			DiscordAPI.request("POST", "/channels/" + id + "/messages/bulk-delete", json.toString());
 		}
 		return this;
 	}
@@ -208,13 +234,13 @@ public class Channel extends Structure
 		json.addProperty("type", overwrite.type);
 		json.addProperty("allow", overwrite.allow);
 		json.addProperty("deny", overwrite.deny);
-		Main.discordAPI.request("PUT", "/channels/" + id + "/permissions/" + overwrite.id, json.toString());
+		DiscordAPI.request("PUT", "/channels/" + id + "/permissions/" + overwrite.id, json.toString());
 		return this;
 	}
 
 	/**
 	 * @param u {@link User} object
-	 * @return {@link Overwrite} object for that user; null if not found
+	 * @return {@link Overwrite} object for that user or null if not found.
 	 * @since 1.1
 	 */
 	public Overwrite getOverwrite(User u)
@@ -231,7 +257,7 @@ public class Channel extends Structure
 
 	/**
 	 * @param r {@link Role} object
-	 * @return {@link Overwrite} object for that role; null if not found
+	 * @return {@link Overwrite} object for that role or null if not found.
 	 * @since 1.1
 	 */
 	public Overwrite getOverwrite(Role r)
@@ -253,13 +279,13 @@ public class Channel extends Structure
 	 */
 	public Channel sendTyping()
 	{
-		Main.discordAPI.request("POST", "/channels/" + id + "/typing");
+		DiscordAPI.request("POST", "/channels/" + id + "/typing");
 		return this;
 	}
 
 	/**
 	 * @param content Content of the message to be sent
-	 * @return The newly sent message
+	 * @return The newly sent message.
 	 */
 	public Message sendMessage(String content)
 	{
@@ -271,7 +297,7 @@ public class Channel extends Structure
 	/**
 	 * @param content Content of the message to be sent
 	 * @param tts     Whether this is a TTS message or not
-	 * @return The newly sent message
+	 * @return The newly sent message.
 	 * @since 1.2
 	 */
 	public Message sendMessage(String content, boolean tts)
@@ -284,7 +310,7 @@ public class Channel extends Structure
 
 	/**
 	 * @param embed {@link Embed} object to be sent
-	 * @return The newly sent message
+	 * @return The newly sent message.
 	 * @see DiscordAPI#createEmbed()
 	 */
 	public Message sendMessage(Embed embed)
@@ -295,7 +321,7 @@ public class Channel extends Structure
 	/**
 	 * @param content Content of the message to be sent
 	 * @param embed   {@link Embed} object to be sent
-	 * @return The newly sent message
+	 * @return The newly sent message.
 	 * @see DiscordAPI#createEmbed()
 	 */
 	public Message sendMessage(String content, Embed embed)

@@ -1,38 +1,40 @@
 package de.timmyrs.suprdiscordbot.structures;
 
 /**
- * Attachment Structure
+ * Attachment Structure.
  *
  * @author timmyRS
  */
 public class Attachment extends Structure
 {
 	/**
-	 * Attachment ID
+	 * Attachment ID.
 	 */
 	public String id;
 	/**
-	 * Name of file attached
+	 * Name of file attached.
 	 */
 	public String filename;
 	/**
-	 * Size of file in bytes
+	 * Size of file in bytes.
 	 */
 	public int size;
 	/**
-	 * Source URL of the file
+	 * Source URL of the file.
 	 */
 	public String url;
 	/**
-	 * A proxied URl of the file
+	 * A proxied URl of the file.
 	 */
 	public String proxy_url;
 	/**
-	 * Height of file. Image-only.
+	 * Height of file.
+	 * Image-only.
 	 */
 	public int height;
 	/**
-	 * Width of file. Image-only.
+	 * Width of file.
+	 * Image-only.
 	 */
 	public int width;
 

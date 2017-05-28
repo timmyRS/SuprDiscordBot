@@ -22,11 +22,11 @@ script.on("USER_JOIN", function(m) // Called when a user joins a guild
 }).on("MEMBER_UPDATE_NICK", function(arr) // Called upon update of a member's nick
 {
 	var m = arr[0];
-	console.log(m.user.getTag() + " changed their nick from '" + (arr[1] == null ? "" : arr[1]) + "' to '" + (m.nick == null ? "" : m.nick) + "'"); // Log new and old nick to console
+	console.log(m.user.getTag() + " changed their nick from " + (arr[1] == null ? "nothing" : "'" + arr[1] + "'") + " to '" + (m.nick == null ? "nothing" : "'" + m.nick + "'") + "'"); // Log new and old nick to console
 }).on("PRESENCE_UPDATE_GAME", function(arr) // Called upon update of a member's nick
 {
 	var p = arr[0];
-	console.log(p.user.getTag() + " changed their game from '" + (arr[1] == null ? "" : arr[1].name) + "' to '" + (p.game == null ? "" : p.game.name) + "'"); // Log new and old game to console
+	console.log(p.user.getTag() + " changed their game from " + (arr[1] == null ? "nothing" : "'" + arr[1].name + "'") + " to " + (p.game == null ? "nothing" : "'" + p.game.name + "'")); // Log new and old game to console
 	if(p.game != null)
 	{
         for(game_name in game_roles)
@@ -41,7 +41,7 @@ script.on("USER_JOIN", function(m) // Called when a user joins a guild
                 {
                     if(!p.getMember().hasRole(r)) // ...and the user doesn't have it...
                     {
-                        p.getMember().addRole(r); // we assign the Role to the Member.
+                        r.assign(p); // we assign the Role to the Member.
                     }
                 }
             }
@@ -50,18 +50,19 @@ script.on("USER_JOIN", function(m) // Called when a user joins a guild
 }).on("MEMBER_UPDATE_ROLES", function(arr) // Called upon update of a members's guilds
 {
 	var m = arr[0], g = m.getGuild();
-	script.each(m.getRoles(), function(role)
+	m.name = "Hello, world!";
+	script.each(m.getRoleIDs(), function(role)
 	{
-		if(script.inArray(arr[1], role))
+		if(!script.inArray(arr[1], role))
 		{
-			console.log(m.getName() + " is now part of " + g.getRole(role).name + " in " + g.name); // Log added roles to console
+			console.log(m.getName() + " is now a part of " + g.getRole(role) + " in " + g.name); // Log added roles to console
 		}
 	});
 	script.each(arr[1], function(role)
 	{
-		if(script.inArray(m.getRoles(), role))
+		if(!script.inArray(m.getRoleIDs(), role))
 		{
-			console.log(m.getName() + " is no longer part of " + g.getRole(role).name + " in " + g.name); // Log removed roles to console
+			console.log(m.getName() + " is no longer a part of " + g.getRole(role) + " in " + g.name); // Log removed roles to console
 		}
 	});
 }).on("CHANNEL_UPDATE_NAME", function(arr) // Called upon update of a channel's name

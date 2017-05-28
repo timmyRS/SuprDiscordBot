@@ -3,7 +3,7 @@ package de.timmyrs.suprdiscordbot.structures;
 import de.timmyrs.suprdiscordbot.Main;
 
 /**
- * VoiceState Structure
+ * VoiceState Structure.
  *
  * @author timmyRS
  */
@@ -11,34 +11,34 @@ public class VoiceState extends Structure
 {
 	/**
 	 * ID of the guild this VoiceState belongs to.
-	 * Use {@link #getGuild()} to get the {@link Guild} tho.
+	 * Use {@link #getGuild()} to get the {@link Guild} object.
 	 */
 	public String guild_id;
 	/**
-	 * The session ID this VoiceState is for
+	 * The session ID this VoiceState is for.
 	 */
 	public String session_id;
 	/**
-	 * Whether this user is deafened by the server
+	 * Whether this user is deafened by the server.
 	 */
 	public boolean deaf;
 	/**
-	 * Whether this user is muted by the server
+	 * Whether this user is muted by the server.
 	 */
 	public boolean mute;
 	/**
-	 * Whether this user locally deafened
+	 * Whether this user locally deafened.
 	 */
 	public boolean self_deaf;
 	/**
-	 * Whether this user locally muted
+	 * Whether this user locally muted.
 	 */
 	public boolean self_mute;
 	private String channel_id;
 	private String user_id;
 
 	/**
-	 * @return The {@link Channel} is VoiceState is part of
+	 * @return The {@link Channel} is VoiceState is part of.
 	 */
 	public Channel getChannel()
 	{
@@ -46,7 +46,7 @@ public class VoiceState extends Structure
 	}
 
 	/**
-	 * @return The {@link Guild} this VoiceState is part of
+	 * @return The {@link Guild} this VoiceState is part of.
 	 */
 	public Guild getGuild()
 	{
@@ -54,7 +54,7 @@ public class VoiceState extends Structure
 	}
 
 	/**
-	 * @return The {@link User} this VoiceState belongs to
+	 * @return The {@link User} this VoiceState belongs to.
 	 */
 	public User getUser()
 	{
