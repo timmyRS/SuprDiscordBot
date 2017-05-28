@@ -1,426 +1,85 @@
-package de.timmyrs.suprdiscordbot.structures;
-
-import com.google.gson.JsonObject;
-import de.timmyrs.suprdiscordbot.Configuration;
-import de.timmyrs.suprdiscordbot.Main;
-import de.timmyrs.suprdiscordbot.apis.DiscordAPI;
-
-import java.util.ArrayList;
-
-/**
- * Guild Structure.
- * You can retrieve an array of guild structures using {@link DiscordAPI#getGuilds()}.
- *
- * @author timmyRS
- */
-@SuppressWarnings("unused")
-public class Guild extends Structure
-{
-	/**
-	 * Guild ID
-	 */
-	public String id;
-	/**
-	 * Guild Name (2-100 chars)
-	 */
-	public String name;
-	/**
-	 * Icon Hash
-	 */
-	public String icon;
-	/**
-	 * Splash Hash
-	 */
-	public String splash;
-	/**
-	 * Voice Region
-	 */
-	public String region;
-	/**
-	 * AFK timeout in seconds
-	 */
-	public int afk_timeout;
-	/**
-	 * Is this guild embeddable?
-	 */
-	public boolean embed_enabled;
-	/**
-	 * Level of verification
-	 */
-	public int verification_level;
-	/**
-	 * Default message notifications level
-	 */
-	public int default_message_notifications;
-	/**
-	 * Use {@link Guild#getRoles()} to get Roles this Guild has.
-	 */
-	public Role[] roles;
-	/**
-	 * Array of {@link Emoji} objects
-	 */
-	public Emoji[] emojis;
-	/**
-	 * Array of guild features
-	 */
-	public String[] features;
-	/**
-	 * Required Multi Factor Authentication (MFA) level for the guild
-	 */
-	public int mfa_level;
-	/**
-	 * Date this guild was joined at (Create-only)
-	 */
-	public String joined_at;
-	/**
-	 * Is this guild unavailable? (Create-only)
-	 */
-	public boolean unavailable;
-	/**
-	 * Total number of members in this guild (Create-only)
-	 */
-	public int member_count;
-	/**
-	 * Array of {@link VoiceState} objects
-	 */
-	public VoiceState[] voice_states;
-	/**
-	 * Array of {@link Member} objects
-	 */
-	public Member[] members;
-	/**
-	 * Array of {@link Presence} objects
-	 */
-	public Presence[] presences;
-	private String owner_id;
-	private String afk_channel_id;
-	private String embed_channel_id;
-	private Channel[] channels;
-
-	/**
-	 * @return {@link Configuration}
-	 */
-	public Configuration getValues()
-	{
-		return Main.getValuesConfig("g" + this.id);
-	}
-
-	/**
-	 * @return Guild Icon URL. Empty when it has none.
-	 */
-	public String getIcon()
-	{
-		if(this.icon == null)
-		{
-			return "";
-		}
-		return "https://cdn.discordapp.com/icons/" + this.id + "/" + this.icon;
-	}
-
-	/**
-	 * @return Guild Splash URL. Empty when it has none.
-	 */
-	public String getSplash()
-	{
-		if(this.splash == null)
-		{
-			return "";
-		}
-		return "https://cdn.discordapp.com/icons/" + this.id + "/" + this.splash;
-	}
-
-	/**
-	 * Changes this bot's nickname on this guild
-	 *
-	 * @param newnick New nickname
-	 * @return this
-	 */
-	public Guild setNickname(final String newnick)
-	{
-		JsonObject json = Main.jsonParser.parse("{}").getAsJsonObject();
-		json.addProperty("nick", newnick);
-		DiscordAPI.request("PATCH", "/guilds/" + this.id + "/members/@me/nick", json.toString());
-		return this;
-	}
-
-	public Role[] getRoles()
-	{
-		if(this.roles == null)
-		{
-			this.roles = (Role[]) DiscordAPI.request("GET", "/guilds/" + this.id + "/roles", new Role());
-		}
-		return this.roles;
-	}
-
-	/**
-	 * @param id Role ID
-	 * @return {@link Role} object with given ID or null if not found
-	 */
-	public Role getRole(String id)
-	{
-		for(Role r : roles)
-		{
-			if(r.id.equals(id))
-			{
-				return r;
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * @param name Role Name
-	 * @return {@link Role} object with given name or null if not found
-	 */
-	public Role getRoleByName(String name)
-	{
-		for(Role r : roles)
-		{
-			if(r.name.equalsIgnoreCase(name))
-			{
-				return r;
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * @param id Member ID
-	 * @return {@link Member} object with given ID
-	 */
-	public Member getMember(String id)
-	{
-		for(Member m : members)
-		{
-			if(m.user.id.equals(id))
-			{
-				return m;
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * @param u {@link User} object
-	 * @return {@link Member} Member correlating with the {@link User} object
-	 */
-	public Member getMember(User u)
-	{
-		return getMember(u.id);
-	}
-
-	/**
-	 * @param p {@link Presence} object
-	 * @return {@link Member} Member correlating with the {@link Presence} object
-	 */
-	public Member getMember(Presence p)
-	{
-		return getMember(p.user);
-	}
-
-	public void addMember(Member member)
-	{
-		ArrayList<Member> memberArrayList = new ArrayList<>();
-		for(Member m : members)
-		{
-			if(!m.user.id.equals(member.user.id))
-			{
-				memberArrayList.add(m);
-			}
-		}
-		memberArrayList.add(member);
-		Member[] tmp = member.getArray(memberArrayList.size());
-		members = memberArrayList.toArray(tmp);
-	}
-
-	public void removeMember(String id)
-	{
-		ArrayList<Member> memberArrayList = new ArrayList<>();
-		for(Member m : members)
-		{
-			if(!m.user.id.equals(id))
-			{
-				memberArrayList.add(m);
-			}
-		}
-		Member[] tmp = new Member[memberArrayList.size()];
-		members = memberArrayList.toArray(tmp);
-	}
-
-	/**
-	 * @param id User ID
-	 * @return {@link Presence} object with given ID
-	 */
-	public Presence getPresence(String id)
-	{
-		for(Presence p : presences)
-		{
-			if(p.user.id.equals(id))
-			{
-				return p;
-			}
-		}
-		return null;
-	}
-
-	public void addPresence(Presence presence)
-	{
-		ArrayList<Presence> presencesArrayList = new ArrayList<>();
-		for(Presence p : presences)
-		{
-			if(!p.equals(presence))
-			{
-				presencesArrayList.add(p);
-			}
-		}
-		presencesArrayList.add(presence);
-		Presence[] tmp = presence.getArray(presencesArrayList.size());
-		presences = presencesArrayList.toArray(tmp);
-	}
-
-	public void removePresence(String id)
-	{
-		ArrayList<Presence> presencesArrayList = new ArrayList<>();
-		for(Presence p : presences)
-		{
-			if(!p.user.id.equals(id))
-			{
-				presencesArrayList.add(p);
-			}
-		}
-		Presence[] tmp = new Presence[presencesArrayList.size()];
-		presences = presencesArrayList.toArray(tmp);
-	}
-
-	public void addChannel(Channel channel)
-	{
-		ArrayList<Channel> channelsArrayList = new ArrayList<>();
-		for(Channel c : channels)
-		{
-			if(!c.equals(channel))
-			{
-				channelsArrayList.add(c);
-			}
-		}
-		channelsArrayList.add(channel);
-		Channel[] tmp = new Channel[channelsArrayList.size()];
-		channels = channelsArrayList.toArray(tmp);
-	}
-
-	/**
-	 * @param u {@link User} object
-	 * @return {@link Presence} object correlating to the given {@link User} object
-	 * @deprecated Use {@link Guild#getPresence(String)} using {@link User#id} instead
-	 */
-	public Presence getPresence(User u)
-	{
-		return getPresence(u.id);
-	}
-
-	/**
-	 * @param m {@link Member} object
-	 * @return {@link Presence} object correlating to the given {@link Member} object
-	 */
-	public Presence getPresence(Member m)
-	{
-		return getPresence(m.user.id);
-	}
-
-	/**
-	 * @return List of guild channels
-	 */
-	public Channel[] getChannels()
-	{
-		if(channels == null)
-		{
-			channels = (Channel[]) DiscordAPI.request("/guilds/" + this.id + "/channels", new Channel());
-		}
-		return channels;
-	}
-
-	/**
-	 * @return List of text channels which are part of this guild
-	 * @since 1.2
-	 */
-	public Channel[] getTextChannels()
-	{
-		ArrayList<Channel> channelArrayList = new ArrayList<>();
-		for(Channel c : getChannels())
-		{
-			if(c.type.equals("text"))
-			{
-				channelArrayList.add(c);
-			}
-		}
-		Channel[] tmp = new Channel[channelArrayList.size()];
-		return channelArrayList.toArray(tmp);
-	}
-
-	/**
-	 * @return List of voice channels which are part of this guild
-	 * @since 1.2
-	 */
-	public Channel[] getVoiceChannels()
-	{
-		ArrayList<Channel> channelArrayList = new ArrayList<>();
-		for(Channel c : getChannels())
-		{
-			if(c.type.equals("voice"))
-			{
-				channelArrayList.add(c);
-			}
-		}
-		Channel[] tmp = new Channel[channelArrayList.size()];
-		return channelArrayList.toArray(tmp);
-	}
-
-	/**
-	 * @param id {@link Channel} ID
-	 * @return {@link Channel} object with the given ID
-	 */
-	public Channel getChannel(String id)
-	{
-		for(Channel c : getChannels())
-		{
-			if(c.id.equals(id))
-			{
-				return c;
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * @return AFK {@link Channel}
-	 */
-	public Channel getAFKChannel()
-	{
-		if(afk_channel_id == null)
-		{
-			return null;
-		}
-		return getChannel(afk_channel_id);
-	}
-
-	/**
-	 * @return AFK {@link Embed}
-	 */
-	public Channel getEmbedChannel()
-	{
-		if(embed_channel_id == null)
-		{
-			return null;
-		}
-		return getChannel(embed_channel_id);
-	}
-
-	public Guild[] getArray(int size)
-	{
-		return new Guild[size];
-	}
-
-	public String toString()
-	{
-		return "{Guild \"" + this.name + "\" #" + this.id + "}";
-	}
+var game_roles = {
+    "Minecraft": "Block Crusher",
+    "Osu": "Circle Clicker",
 }
+
+script.on("USER_JOIN", function(m) // Called when a user joins a guild
+{
+	console.log(m.user.getTag() + " joined " + m.getGuild().name);
+}).on("USER_REMOVE", function(p) // Called when a user leaves or gets kicked out of a guild
+{
+	console.log(p.user.getTag() + " left " + p.getGuild().name);
+}).on("PRESENCE_GO_ONLINE", function(p) // Called when a presence goes online
+{
+	console.log(p.user.getTag() + " is now online as " + p.status);
+}).on("PRESENCE_GO_OFFLINE", function(p) // Called when a presence goes offline
+{
+	console.log(p.user.getTag() + " is now offline (was " + p.status + ")");
+}).on("PRESENCE_UPDATE_STATUS", function(arr) // Called upon update of of a presence's status
+{
+	var p = arr[0];
+	console.log(p.user.getTag() + " is now " + p.status + " (was " + arr[1] + ")"); // Log new and old status to console
+}).on("MEMBER_UPDATE_NICK", function(arr) // Called upon update of a member's nick
+{
+	var m = arr[0];
+	console.log(m.user.getTag() + " changed their nick from '" + (arr[1] == null ? "" : arr[1]) + "' to '" + (m.nick == null ? "" : m.nick) + "'"); // Log new and old nick to console
+}).on("PRESENCE_UPDATE_GAME", function(arr) // Called upon update of a member's nick
+{
+	var p = arr[0];
+	console.log(p.user.getTag() + " changed their game from '" + (arr[1] == null ? "" : arr[1].name) + "' to '" + (p.game == null ? "" : p.game.name) + "'"); // Log new and old game to console
+	if(p.game != null)
+	{
+        for(game_name in game_roles)
+        {
+            if(p.game.name.toLowerCase().substr(0, game_name.length) == game_name.toLowerCase()) // If the new game the user is playing hsa a role assigned...
+            {
+                var r = p.getGuild().getRoleByName(game_roles[game_name]); // We get the role for game
+                if(r == null) // If it is not found...
+                {
+                    console.error("Error giving out Role " + game_roles[game_name] + ": Role doesn't exist."); // print an error,
+                } else // but if it is found...
+                {
+                    if(!p.getMember().hasRole(r)) // ...and the user doesn't have it...
+                    {
+                        p.getMember().addRole(r); // we assign the Role to the Member.
+                    }
+                }
+            }
+        }
+	}
+}).on("MEMBER_UPDATE_ROLES", function(arr) // Called upon update of a members's guilds
+{
+	var m = arr[0], g = m.getGuild();
+	script.each(m.getRoles(), function(role)
+	{
+		if(script.inArray(arr[1], role))
+		{
+			console.log(m.getName() + " is now part of " + g.getRole(role).name + " in " + g.name); // Log added roles to console
+		}
+	});
+	script.each(arr[1], function(role)
+	{
+		if(script.inArray(m.getRoles(), role))
+		{
+			console.log(m.getName() + " is no longer part of " + g.getRole(role).name + " in " + g.name); // Log removed roles to console
+		}
+	});
+}).on("CHANNEL_UPDATE_NAME", function(arr) // Called upon update of a channel's name
+{
+    var c = arr[0], old_name = arr[1];
+    console.log(c.getName() + " in " + c.getGuild().name + " was called '" + old_name + "' just a second ago.");
+}).on("CHANNEL_UPDATE_TOPIC", function(arr) // Called upon update of a channel's name
+{
+    var c = arr[0], old_topic = arr[1];
+    console.log(c.getName() + " in " + c.getGuild().name + " now has a new topic.");
+}).on("TYPING_START", function(arr) // Called upon typing start. Note: There is NO typing stop event.
+{
+	var channel = arr[0], user = arr[1];
+	if(channel.is_private)
+	{
+		console.log(user.getTag() + " is now typing in private");
+	} else
+	{
+		console.log(user.getTag() + " is now typing in " + channel.getName() + " in " + channel.getGuild().name);
+	}
+});

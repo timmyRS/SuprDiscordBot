@@ -36,8 +36,7 @@ public class Member extends Structure
 	 */
 	public String guild_id;
 	/**
-	 * Role IDs this member is part of.
-	 * Use {@link #getRoles()} to get a list of {@link Role} objects.
+	 * Use {@link #getRoles()} to get a list of Roles this Member is a part of.
 	 */
 	public String[] roles;
 	/**
