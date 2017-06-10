@@ -351,12 +351,15 @@ script.on("MESSAGE_CREATE", function(msg)
 					var deleted = 0;
 					script.each(channel.getMessagesBefore(reading, mymsg.id), function(msg)
 					{
-						if(msg.id != mymsg.id)
-						{
-							msg.delete();
-							i--;
-							deleted++;
-							totaldel++;
+					    if(!msg.pinned)
+                    	{
+                            if(msg.id != mymsg.id)
+                            {
+                                msg.delete();
+                                i--;
+                                deleted++;
+                                totaldel++;
+                            }
 						}
 					});
 					if(deleted == 0)
@@ -380,10 +383,10 @@ script.on("MESSAGE_CREATE", function(msg)
 			var mymsg;
 			if(channel.getValues().has("slowmode"))
 			{
-				mymsg = channel.sendMessage(":thumbsup: An interval of **" + channel.getValues().getString("slowmode") + "** second(s) is being inforced in " + channel.getHandle() + ".");
+				mymsg = channel.sendMessage(":information_source: An interval of **" + channel.getValues().getString("slowmode") + "** second(s) is being inforced in " + channel.getHandle() + ".");
 			} else
 			{
-				mymsg = channel.sendMessage(":thumbsdown: There is no interval being enforced in " + channel.getHandle() + ".");
+				mymsg = channel.sendMessage(":information_source: There is no interval being enforced in " + channel.getHandle() + ".");
 			}
 			script.timeout(function()
 			{

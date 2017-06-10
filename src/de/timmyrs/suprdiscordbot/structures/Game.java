@@ -6,6 +6,7 @@ package de.timmyrs.suprdiscordbot.structures;
  *
  * @author timmyRS
  */
+@SuppressWarnings("WeakerAccess")
 public class Game extends Structure
 {
 	/**

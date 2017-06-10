@@ -42,6 +42,7 @@ public class ScriptWatcher extends Thread
 		{
 			try
 			{
+				//noinspection ConstantConditions
 				for(File f : scriptsDir.listFiles())
 				{
 					if(f.isDirectory())
@@ -116,7 +117,7 @@ public class ScriptWatcher extends Thread
 					}
 					if(s != null)
 					{
-						s.fireEvent("LOAD");
+						s.fireEvent("LOAD", null);
 					}
 				}
 				Thread.sleep(1000);

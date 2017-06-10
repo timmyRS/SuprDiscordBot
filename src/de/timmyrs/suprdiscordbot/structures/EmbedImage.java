@@ -1,5 +1,6 @@
 package de.timmyrs.suprdiscordbot.structures;
 
+@SuppressWarnings("unused")
 public class EmbedImage
 {
 	public String url;

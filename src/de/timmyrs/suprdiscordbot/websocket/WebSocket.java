@@ -232,6 +232,11 @@ public class WebSocket
 								g.addChannel(cc);
 								break;
 							case "MESSAGE_CREATE":
+								Message msg = Main.gson.fromJson(data, Message.class);
+								c = msg.getChannel();
+								g = c.getGuild();
+								c.last_message_id = msg.id;
+								g.addChannel(c);
 							case "MESSAGE_UPDATE":
 							case "MESSAGE_DELETE":
 								Main.scriptManager.fireEvent(payload.t, Main.gson.fromJson(data, Message.class));

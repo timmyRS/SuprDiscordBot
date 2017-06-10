@@ -7,7 +7,7 @@ import de.timmyrs.suprdiscordbot.Main;
  *
  * @author timmyRS
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "WeakerAccess", "SameParameterValue"})
 public class ConsoleAPI
 {
 	/**
@@ -92,10 +92,10 @@ public class ConsoleAPI
 		{
 			return this.warn("[]");
 		}
-		String msg = "[";
+		StringBuilder msg = new StringBuilder("[");
 		for(Object o : objects)
 		{
-			msg += o.toString() + ", ";
+			msg.append(o.toString()).append(", ");
 		}
 		return this.log(msg.substring(0, msg.length() - 2) + "]");
 	}
@@ -122,10 +122,10 @@ public class ConsoleAPI
 		{
 			return this.error("[]");
 		}
-		String msg = "[";
+		StringBuilder msg = new StringBuilder("[");
 		for(Object o : objects)
 		{
-			msg += o.toString() + ", ";
+			msg.append(o.toString()).append(", ");
 		}
 		return this.log(msg.substring(0, msg.length() - 2) + "]");
 	}

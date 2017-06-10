@@ -3,6 +3,7 @@ package de.timmyrs.suprdiscordbot.structures;
 import de.timmyrs.suprdiscordbot.apis.DiscordAPI;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Embed Structure.
@@ -18,6 +19,7 @@ import java.util.ArrayList;
  *
  * @author timmyRS
  */
+@SuppressWarnings({"WeakerAccess", "unused", "SameParameterValue"})
 public class Embed extends Structure
 {
 	/**
@@ -140,10 +142,7 @@ public class Embed extends Structure
 		ArrayList<EmbedField> fieldsList = new ArrayList<>();
 		if(fields != null)
 		{
-			for(EmbedField f : fields)
-			{
-				fieldsList.add(f);
-			}
+			fieldsList.addAll(Arrays.asList(fields));
 		}
 		fieldsList.add(field);
 		this.fields = fieldsList.toArray(new EmbedField[fieldsList.size()]);

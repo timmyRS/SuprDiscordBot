@@ -122,7 +122,7 @@ public class Configuration
 		try
 		{
 			return this.json.get(key).getAsString();
-		} catch(Exception e)
+		} catch(Exception ignored)
 		{
 		}
 		return "";

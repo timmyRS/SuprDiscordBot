@@ -1,5 +1,6 @@
 package de.timmyrs.suprdiscordbot.structures;
 
+@SuppressWarnings("WeakerAccess")
 public class EmbedField
 {
 	/**

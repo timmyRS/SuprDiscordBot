@@ -5,6 +5,7 @@ package de.timmyrs.suprdiscordbot.structures;
  *
  * @author timmyRS
  */
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class Attachment extends Structure
 {
 	/**

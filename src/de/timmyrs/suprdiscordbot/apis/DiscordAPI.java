@@ -15,6 +15,7 @@ import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -22,7 +23,7 @@ import java.util.HashMap;
  *
  * @author timmyRS
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "SameParameterValue", "UnusedReturnValue", "WeakerAccess"})
 public class DiscordAPI
 {
 	public static final HashMap<String, Long> rate_limits = new HashMap<>();
@@ -206,10 +207,8 @@ public class DiscordAPI
 
 	/**
 	 * Not accessible within script.
-	 *
-	 * @return WebSocket
 	 */
-	public static WebSocket getWebSocket()
+	public static void getWebSocket()
 	{
 		if(ws == null)
 		{
@@ -220,7 +219,6 @@ public class DiscordAPI
 			}
 			ws = new WebSocket(Main.configuration.getString("gateway") + "/?v=5&encoding=json");
 		}
-		return ws;
 	}
 
 	/**
@@ -437,10 +435,7 @@ public class DiscordAPI
 		if(dms == null)
 		{
 			dms = new ArrayList<>();
-			for(Channel c : (Channel[]) request("/users/@me/channels", new Channel()))
-			{
-				dms.add(c);
-			}
+			dms.addAll(Arrays.asList((Channel[]) request("/users/@me/channels", new Channel())));
 		}
 		Channel[] ret = new Channel[dms.size()];
 		return dms.toArray(ret);

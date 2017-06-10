@@ -11,6 +11,7 @@ import de.timmyrs.suprdiscordbot.apis.DiscordAPI;
  *
  * @author timmyRS
  */
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class User extends Structure
 {
 	/**

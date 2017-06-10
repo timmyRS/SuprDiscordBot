@@ -62,15 +62,17 @@ public class Main
 		Main.log("Main", "https://github.com/timmyrs/SuprDiscordBot");
 		for(String arg : args)
 		{
-			if(arg.equals("--debug"))
+			switch(arg)
 			{
-				Main.debug = true;
-			} else if(arg.equals("--dont-update-scripts"))
-			{
-				Main.dontUpdateScripts = true;
-			} else
-			{
-				Main.log("Main", "Unknown Argument: " + arg);
+				case "--debug":
+					Main.debug = true;
+					break;
+				case "--dont-update-scripts":
+					Main.dontUpdateScripts = true;
+					break;
+				default:
+					Main.log("Main", "Unknown Argument: " + arg);
+					break;
 			}
 		}
 		Main.jsonParser = new JsonParser();
@@ -111,10 +113,12 @@ public class Main
 	{
 		from = "[" + from + "] ";
 		final int length = (12 - from.length());
+		StringBuilder fromBuilder = new StringBuilder(from);
 		for(int i = 0; i < length; i++)
 		{
-			from += " ";
+			fromBuilder.append(" ");
 		}
+		from = fromBuilder.toString();
 		System.out.println(from + msg);
 	}
 

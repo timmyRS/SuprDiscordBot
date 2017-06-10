@@ -85,7 +85,7 @@ public class ScriptManager
 	}
 
 	@NotNull
-	FailedScript registerFailedScript(@NotNull final File f)
+	void registerFailedScript(@NotNull final File f)
 	{
 		String cont = "";
 		try
@@ -97,22 +97,20 @@ public class ScriptManager
 		}
 		FailedScript s = new FailedScript(f.getName(), DigestUtils.sha384Hex(cont));
 		this.failedscripts.add(s);
-		return s;
 	}
 
 	@NotNull
-	public ScriptManager fireEvent(@NotNull final String event)
+	public void fireEvent(@NotNull final String event)
 	{
-		return fireEvent(event, null);
+		fireEvent(event, null);
 	}
 
 	@NotNull
-	public ScriptManager fireEvent(@NotNull final String event, @Nullable final Object data)
+	public void fireEvent(@NotNull final String event, @Nullable final Object data)
 	{
 		for(Script script : scripts)
 		{
 			script.fireEvent(event, data);
 		}
-		return this;
 	}
 }

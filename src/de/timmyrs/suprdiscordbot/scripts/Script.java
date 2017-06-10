@@ -5,7 +5,6 @@ import com.sun.istack.internal.Nullable;
 import de.timmyrs.suprdiscordbot.Main;
 import de.timmyrs.suprdiscordbot.apis.ScriptAPI;
 
-import javax.script.Bindings;
 import javax.script.ScriptEngine;
 import javax.script.ScriptException;
 import java.util.HashMap;
@@ -42,20 +41,13 @@ public class Script
 		engine.put("internet", Main.internetAPI);
 		engine.put("permission", Main.permisisonAPI);
 		engine.put("script", new ScriptAPI(this));
-		Bindings bindings = engine.getBindings(100);
 		engine.eval(script);
 		this.started = true;
 		return this;
 	}
 
 	@NotNull
-	public Script fireEvent(@NotNull final String event)
-	{
-		return fireEvent(event, null);
-	}
-
-	@NotNull
-	public Script fireEvent(@NotNull String event, @Nullable final Object data)
+	public void fireEvent(@NotNull String event, @Nullable final Object data)
 	{
 		event = event.toUpperCase();
 		if(this.events.containsKey(event))
@@ -66,6 +58,5 @@ public class Script
 				function.accept(data);
 			}, name + " " + event).start();
 		}
-		return this;
 	}
 }

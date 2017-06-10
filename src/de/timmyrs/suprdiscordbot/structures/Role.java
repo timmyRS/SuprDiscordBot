@@ -12,6 +12,7 @@ import java.util.ArrayList;
  *
  * @author timmyRS
  */
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class Role extends Structure
 {
 	/**

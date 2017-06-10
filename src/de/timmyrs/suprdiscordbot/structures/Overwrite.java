@@ -11,7 +11,7 @@ import de.timmyrs.suprdiscordbot.apis.DiscordAPI;
  * @author timmyRS
  * @see Channel#overwritePermissions(Overwrite)
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class Overwrite extends Structure
 {
 	/**

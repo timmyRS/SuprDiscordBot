@@ -115,7 +115,6 @@ public class Channel extends Structure
 	/**
 	 * @param id Message ID
 	 * @return {@link Message} object with the given ID.
-	 * @deprecated I don't see any pratical use in this function, but feel free to open an issue if you need it.
 	 */
 	public Message getMessage(String id)
 	{

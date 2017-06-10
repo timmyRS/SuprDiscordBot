@@ -5,6 +5,8 @@ import de.timmyrs.suprdiscordbot.Configuration;
 import de.timmyrs.suprdiscordbot.Main;
 import de.timmyrs.suprdiscordbot.apis.DiscordAPI;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -13,31 +15,36 @@ import java.util.ArrayList;
  *
  * @author timmyRS
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class Guild extends Structure
 {
 	/**
-	 * Guild ID
+	 * Guild ID.
 	 */
 	public String id;
 	/**
-	 * Guild Name (2-100 chars)
+	 * Guild Name.
+	 * 2-100 chars.
 	 */
 	public String name;
 	/**
-	 * Icon Hash
+	 * Icon Hash.
+	 *
+	 * @see Guild#getIconURL()
 	 */
 	public String icon;
 	/**
-	 * Splash Hash
+	 * Splash Hash.
+	 *
+	 * @see Guild#getSplashURL()
 	 */
 	public String splash;
 	/**
-	 * Voice Region
+	 * Voice Region.
 	 */
 	public String region;
 	/**
-	 * AFK timeout in seconds
+	 * AFK timeout in seconds.
 	 */
 	public int afk_timeout;
 	/**
@@ -45,51 +52,56 @@ public class Guild extends Structure
 	 */
 	public boolean embed_enabled;
 	/**
-	 * Level of verification
+	 * Level of verification.
 	 */
 	public int verification_level;
 	/**
-	 * Default message notifications level
+	 * Default message notifications level.
 	 */
 	public int default_message_notifications;
 	/**
-	 * Use {@link Guild#getRoles()} to get Roles this Guild has.
+	 * An array of {@link Role} objects this guild has.
+	 *
+	 * @see Guild#getRoles()
 	 */
 	public Role[] roles;
 	/**
-	 * Array of {@link Emoji} objects
+	 * Array of {@link Emoji} objects.
 	 */
 	public Emoji[] emojis;
 	/**
-	 * Array of guild features
+	 * Array of guild features.
 	 */
 	public String[] features;
 	/**
-	 * Required Multi Factor Authentication (MFA) level for the guild
+	 * Required Multi Factor Authentication (MFA) level for the guild.
 	 */
 	public int mfa_level;
 	/**
-	 * Date this guild was joined at (Create-only)
+	 * Date the guild was joined at.
+	 * Use {@link Guild#getJoinedAt()}
 	 */
 	public String joined_at;
 	/**
-	 * Is this guild unavailable? (Create-only)
+	 * Is the Guild unavailable?
+	 *
+	 * @see Guild#isAvailable()
 	 */
 	public boolean unavailable;
 	/**
-	 * Total number of members in this guild (Create-only)
+	 * Total number of members in this guild .
 	 */
 	public int member_count;
 	/**
-	 * Array of {@link VoiceState} objects
+	 * Array of {@link VoiceState} objects.
 	 */
 	public VoiceState[] voice_states;
 	/**
-	 * Array of {@link Member} objects
+	 * Array of {@link Member} objects.
 	 */
 	public Member[] members;
 	/**
-	 * Array of {@link Presence} objects
+	 * Array of {@link Presence} objects.
 	 */
 	public Presence[] presences;
 	private String owner_id;
@@ -98,7 +110,7 @@ public class Guild extends Structure
 	private Channel[] channels;
 
 	/**
-	 * @return {@link Configuration}
+	 * @return {@link Configuration}.
 	 */
 	public Configuration getValues()
 	{
@@ -106,27 +118,56 @@ public class Guild extends Structure
 	}
 
 	/**
-	 * @return Guild Icon URL. Empty when it has none.
+	 * @return Guild Icon URL or null if has none.
 	 */
-	public String getIcon()
+	public String getIconURL()
 	{
 		if(this.icon == null)
 		{
-			return "";
+			return null;
 		}
 		return "https://cdn.discordapp.com/icons/" + this.id + "/" + this.icon;
 	}
 
 	/**
-	 * @return Guild Splash URL. Empty when it has none.
+	 * @return Guild Splash URL or null if has none.
 	 */
-	public String getSplash()
+	public String getSplashURL()
 	{
 		if(this.splash == null)
 		{
-			return "";
+			return null;
 		}
 		return "https://cdn.discordapp.com/icons/" + this.id + "/" + this.splash;
+	}
+
+	/**
+	 * @return Is the Guild available?
+	 * @since 1.2
+	 */
+	public boolean isAvailable()
+	{
+		return !this.unavailable;
+	}
+
+	/**
+	 * @return The UNIX timestamp of when the Guild was joined at.
+	 * @see Guild#getJoinedMillis()
+	 * @since 1.2
+	 */
+	public long getJoinedAt() throws ParseException
+	{
+		return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(this.joined_at.substring(0, this.joined_at.length() - 9)).getTime() / 1000L;
+	}
+
+	/**
+	 * @return The time millis of when the Guild was joined at.
+	 * @see Guild#getJoinedAt()
+	 * @since 1.2
+	 */
+	public long getJoinedMillis() throws ParseException
+	{
+		return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(this.joined_at.substring(0, this.joined_at.length() - 9)).getTime() / 1000L;
 	}
 
 	/**
@@ -144,7 +185,7 @@ public class Guild extends Structure
 	}
 
 	/**
-	 * @return An array of {@link Role} objects this guild has
+	 * @return An array of {@link Role} objects this guild has.
 	 * @since 1.2
 	 */
 	public Role[] getRoles()
@@ -158,7 +199,7 @@ public class Guild extends Structure
 
 	/**
 	 * @param id Role ID
-	 * @return {@link Role} object with given ID or null if not found
+	 * @return {@link Role} object with given ID or null if not found.
 	 */
 	public Role getRole(String id)
 	{
@@ -174,7 +215,7 @@ public class Guild extends Structure
 
 	/**
 	 * @param name Role Name
-	 * @return {@link Role} object with given name or null if not found
+	 * @return {@link Role} object with given name or null if not found.
 	 * @since 1.2
 	 */
 	public Role getRoleByName(String name)
@@ -191,7 +232,7 @@ public class Guild extends Structure
 
 	/**
 	 * @param id Member ID
-	 * @return {@link Member} object with given ID or null if not found
+	 * @return {@link Member} object with given ID or null if not found.
 	 */
 	public Member getMember(String id)
 	{
@@ -207,7 +248,7 @@ public class Guild extends Structure
 
 	/**
 	 * @param u {@link User} object
-	 * @return {@link Member} Member correlating with the {@link User} object
+	 * @return {@link Member} Member correlating with the {@link User} object.
 	 */
 	public Member getMember(User u)
 	{
@@ -216,7 +257,7 @@ public class Guild extends Structure
 
 	/**
 	 * @param p {@link Presence} object
-	 * @return {@link Member} Member correlating with the {@link Presence} object
+	 * @return {@link Member} Member correlating with the {@link Presence} object.
 	 */
 	public Member getMember(Presence p)
 	{
@@ -254,7 +295,7 @@ public class Guild extends Structure
 
 	/**
 	 * @param id User ID
-	 * @return {@link Presence} object with given ID
+	 * @return {@link Presence} object with given ID.
 	 */
 	public Presence getPresence(String id)
 	{
@@ -282,6 +323,7 @@ public class Guild extends Structure
 		Presence[] tmp = presence.getArray(presencesArrayList.size());
 		presences = presencesArrayList.toArray(tmp);
 	}
+
 	public void removePresence(String id)
 	{
 		ArrayList<Presence> presencesArrayList = new ArrayList<>();
@@ -313,7 +355,7 @@ public class Guild extends Structure
 
 	/**
 	 * @param u {@link User} object
-	 * @return {@link Presence} object correlating to the given {@link User} object
+	 * @return {@link Presence} object correlating to the given {@link User} object.
 	 */
 	public Presence getPresence(User u)
 	{
@@ -322,7 +364,7 @@ public class Guild extends Structure
 
 	/**
 	 * @param m {@link Member} object
-	 * @return {@link Presence} object correlating to the given {@link Member} object
+	 * @return {@link Presence} object correlating to the given {@link Member} object.
 	 */
 	public Presence getPresence(Member m)
 	{
@@ -342,7 +384,7 @@ public class Guild extends Structure
 	}
 
 	/**
-	 * @return List of text channels which are part of this guild
+	 * @return List of text channels which are part of this guild.
 	 * @since 1.2
 	 */
 	public Channel[] getTextChannels()
@@ -360,7 +402,7 @@ public class Guild extends Structure
 	}
 
 	/**
-	 * @return List of voice channels which are part of this guild
+	 * @return List of voice channels which are part of this guild.
 	 * @since 1.2
 	 */
 	public Channel[] getVoiceChannels()
@@ -379,7 +421,7 @@ public class Guild extends Structure
 
 	/**
 	 * @param id {@link Channel} ID
-	 * @return {@link Channel} object with the given ID
+	 * @return {@link Channel} object with the given ID.
 	 */
 	public Channel getChannel(String id)
 	{
@@ -394,7 +436,7 @@ public class Guild extends Structure
 	}
 
 	/**
-	 * @return AFK {@link Channel}
+	 * @return AFK {@link Channel}.
 	 */
 	public Channel getAFKChannel()
 	{
@@ -406,7 +448,7 @@ public class Guild extends Structure
 	}
 
 	/**
-	 * @return AFK {@link Embed}
+	 * @return AFK {@link Embed}.
 	 */
 	public Channel getEmbedChannel()
 	{

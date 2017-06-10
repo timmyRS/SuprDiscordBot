@@ -22,7 +22,7 @@
 ## Other Resources
 
 - [Examples](https://github.com/timmyrs/SuprDiscordBot/tree/master/scripts/examples)
-- [Documentation](https://timmyrs.github.io/SuprDiscordBot)
+- [Documentation](https://timmyrs.github.io/SuprDiscordBot/index.html?de/timmyrs/suprdiscordbot/structures/package-summary.html)
 
 ## Upgrading
 

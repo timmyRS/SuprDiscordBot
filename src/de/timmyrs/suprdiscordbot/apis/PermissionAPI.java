@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @author timmyRS
  * @since 1.1
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class PermissionAPI
 {
 	/**

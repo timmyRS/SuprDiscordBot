@@ -12,7 +12,7 @@ import java.util.function.Consumer;
  *
  * @author timmyRS
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "WeakerAccess", "SameParameterValue"})
 public class ScriptAPI
 {
 	private Script script;
@@ -109,8 +109,6 @@ public class ScriptAPI
 			{
 				Thread.sleep(millis);
 				function.run();
-			} catch(InterruptedException e)
-			{
 			} catch(Exception e)
 			{
 				e.printStackTrace();
@@ -127,11 +125,12 @@ public class ScriptAPI
 	 */
 	public boolean isVersionOrAbove(String version)
 	{
-		version = version.replaceAll("\\.", "");
-		while(version.length() < 4)
+		StringBuilder versionBuilder = new StringBuilder(version.replaceAll("\\.", ""));
+		while(versionBuilder.length() < 4)
 		{
-			version += "0";
+			versionBuilder.append("0");
 		}
+		version = versionBuilder.toString();
 		return Main.versionInt >= Integer.valueOf(version);
 	}
 

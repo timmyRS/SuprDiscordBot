@@ -1,5 +1,6 @@
 package de.timmyrs.suprdiscordbot.structures;
 
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class EmbedFooter
 {
 	/**

@@ -8,6 +8,7 @@ import de.timmyrs.suprdiscordbot.Main;
  *
  * @author timmyRS
  */
+@SuppressWarnings("unused")
 public class Presence extends Structure
 {
 	/**

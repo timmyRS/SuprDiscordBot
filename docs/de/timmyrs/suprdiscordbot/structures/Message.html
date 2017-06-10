@@ -665,13 +665,18 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <ul class="blockList">
 <li class="blockList">
 <h4>getTime</h4>
-<pre>public&nbsp;long&nbsp;getTime()</pre>
+<pre>public&nbsp;long&nbsp;getTime()
+             throws java.text.ParseException</pre>
 <div class="block">Get Time</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>The UNIX timestamp of the message's creation.</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.text.ParseException</code></dd>
 <dt><span class="simpleTagLabel">Since:</span></dt>
 <dd>1.2</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../de/timmyrs/suprdiscordbot/structures/Message.html#getMillis--"><code>getMillis()</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -681,13 +686,18 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <ul class="blockList">
 <li class="blockList">
 <h4>getMillis</h4>
-<pre>public&nbsp;long&nbsp;getMillis()</pre>
+<pre>public&nbsp;long&nbsp;getMillis()
+               throws java.text.ParseException</pre>
 <div class="block">Get Time Millis</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>The time millis of the message's creation.</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.text.ParseException</code></dd>
 <dt><span class="simpleTagLabel">Since:</span></dt>
 <dd>1.2</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../de/timmyrs/suprdiscordbot/structures/Message.html#getTime--"><code>getTime()</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -697,13 +707,18 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <ul class="blockList">
 <li class="blockList">
 <h4>getEditTime</h4>
-<pre>public&nbsp;long&nbsp;getEditTime()</pre>
+<pre>public&nbsp;long&nbsp;getEditTime()
+                 throws java.text.ParseException</pre>
 <div class="block">Get Edit Time</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The UNIX timestamp of the message's last edit.</dd>
+<dd>The UNIX timestamp of the message's last edit or 0 if not edited.</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.text.ParseException</code></dd>
 <dt><span class="simpleTagLabel">Since:</span></dt>
 <dd>1.2</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../de/timmyrs/suprdiscordbot/structures/Message.html#getEditMillis--"><code>getEditMillis()</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -713,13 +728,18 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <ul class="blockList">
 <li class="blockList">
 <h4>getEditMillis</h4>
-<pre>public&nbsp;long&nbsp;getEditMillis()</pre>
+<pre>public&nbsp;long&nbsp;getEditMillis()
+                   throws java.text.ParseException</pre>
 <div class="block">Get Edit Time Millis</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>The time millis of the message's last edit.</dd>
+<dd>The time millis of the message's last edit or 0 if not edited.</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.text.ParseException</code></dd>
 <dt><span class="simpleTagLabel">Since:</span></dt>
 <dd>1.2</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../de/timmyrs/suprdiscordbot/structures/Message.html#getEditTime--"><code>getEditTime()</code></a></dd>
 </dl>
 </li>
 </ul>

@@ -16,7 +16,8 @@ public class WebSocketHeart extends Thread
 
 	public void run()
 	{
-		while(true)
+		//noinspection InfiniteLoopStatement
+		do
 		{
 			if(interval != 0)
 			{
@@ -41,6 +42,6 @@ public class WebSocketHeart extends Thread
 			{
 				e.printStackTrace();
 			}
-		}
+		} while(true);
 	}
 }

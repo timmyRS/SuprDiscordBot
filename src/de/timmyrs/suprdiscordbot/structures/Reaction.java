@@ -5,6 +5,7 @@ package de.timmyrs.suprdiscordbot.structures;
  *
  * @author timmyRS
  */
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class Reaction extends Structure
 {
 	/**

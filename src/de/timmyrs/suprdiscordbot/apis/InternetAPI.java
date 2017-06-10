@@ -12,6 +12,7 @@ import java.net.URL;
  *
  * @since 1.2
  */
+@SuppressWarnings("SameParameterValue")
 public class InternetAPI
 {
 	/**

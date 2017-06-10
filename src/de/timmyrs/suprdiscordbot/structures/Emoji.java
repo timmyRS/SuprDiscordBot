@@ -4,6 +4,7 @@ package de.timmyrs.suprdiscordbot.structures;
  * Emoji Structure.
  * https://discordapp.com/developers/docs/resources/guild#emoji-object
  */
+@SuppressWarnings("unused")
 public class Emoji extends Structure
 {
 	/**

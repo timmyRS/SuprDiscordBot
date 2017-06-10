@@ -8,7 +8,7 @@ import de.timmyrs.suprdiscordbot.Main;
  *
  * @author timmyRS
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class Member extends Structure
 {
 	/**

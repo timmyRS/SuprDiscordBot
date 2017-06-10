@@ -14,7 +14,8 @@ public class RAMCleaner extends Thread
 	@Override
 	public void run()
 	{
-		while(true)
+		//noinspection InfiniteLoopStatement
+		do
 		{
 			try
 			{
@@ -47,6 +48,6 @@ public class RAMCleaner extends Thread
 					ex.printStackTrace();
 				}
 			}
-		}
+		} while(true);
 	}
 }
