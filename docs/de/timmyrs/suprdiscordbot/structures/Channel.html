@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -157,54 +157,55 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html#is_private">is_private</a></span></code>
-<div class="block">Is this a DM channel?</div>
-</td>
-</tr>
-<tr class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html#last_message_id">last_message_id</a></span></code>
 <div class="block">The ID of the last message sent in this channel.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html#name">name</a></span></code>
 <div class="block">Name of the channel.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Overwrite.html" title="class in de.timmyrs.suprdiscordbot.structures">Overwrite</a>[]</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html#permission_overwrites">permission_overwrites</a></span></code>
 <div class="block">An array of <code>Override</code> objects</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>int</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html#position">position</a></span></code>
 <div class="block">The sorting position of this channel.</div>
 </td>
 </tr>
-<tr class="altColor">
-<td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/User.html" title="class in de.timmyrs.suprdiscordbot.structures">User</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html#recipient">recipient</a></span></code>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/User.html" title="class in de.timmyrs.suprdiscordbot.structures">User</a>[]</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html#recipients">recipients</a></span></code>
 <div class="block">The <a href="../../../../de/timmyrs/suprdiscordbot/structures/User.html" title="class in de.timmyrs.suprdiscordbot.structures"><code>User</code></a> object of the recipient.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html#topic">topic</a></span></code>
 <div class="block">The channel topic.</div>
 </td>
 </tr>
-<tr class="altColor">
-<td class="colFirst"><code>java.lang.String</code></td>
+<tr class="rowColor">
+<td class="colFirst"><code>int</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html#type">type</a></span></code>
-<div class="block">The type of this channel - "text" or "voice".</div>
+<div class="block">What type of Channel this is:
+ 
+ 0 = Guild Text Channel
+ 1 = DM Channel
+ 2 = Guild Voice Channel
+ 3 = Group DM Channel
+ 4 = Guild Category
+ </div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><code>int</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html#user_limit">user_limit</a></span></code>
 <div class="block">The user limit of this channel.</div>
@@ -256,7 +257,9 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html#getHandle--">getHandle</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html#getHandle--">getHandle</a></span>()</code>
+<div class="block">Returns the Handle of this channel to be used in a message</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Message.html" title="class in de.timmyrs.suprdiscordbot.structures">Message</a></code></td>
@@ -302,42 +305,50 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html#getOverwrite-de.timmyrs.suprdiscordbot.structures.User-">getOverwrite</a></span>(<a href="../../../../de/timmyrs/suprdiscordbot/structures/User.html" title="class in de.timmyrs.suprdiscordbot.structures">User</a>&nbsp;u)</code>&nbsp;</td>
 </tr>
 <tr id="i12" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html#getTypeName--">getTypeName</a></span>()</code>
+<div class="block">Returns the Type as String of this Channel.</div>
+</td>
+</tr>
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/Configuration.html" title="class in de.timmyrs.suprdiscordbot">Configuration</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html#getValues--">getValues</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i13" class="rowColor">
-<td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html#isPrivate--">isPrivate</a></span>()</code>&nbsp;</td>
-</tr>
 <tr id="i14" class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html#isPartOfGuild--">isPartOfGuild</a></span>()</code>
+<div class="block">Returns true if this channel is part of a Guild.</div>
+</td>
+</tr>
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html" title="class in de.timmyrs.suprdiscordbot.structures">Channel</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html#overwritePermissions-de.timmyrs.suprdiscordbot.structures.Overwrite-">overwritePermissions</a></span>(<a href="../../../../de/timmyrs/suprdiscordbot/structures/Overwrite.html" title="class in de.timmyrs.suprdiscordbot.structures">Overwrite</a>&nbsp;overwrite)</code>&nbsp;</td>
 </tr>
-<tr id="i15" class="rowColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Message.html" title="class in de.timmyrs.suprdiscordbot.structures">Message</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html#sendMessage-de.timmyrs.suprdiscordbot.structures.Embed-">sendMessage</a></span>(<a href="../../../../de/timmyrs/suprdiscordbot/structures/Embed.html" title="class in de.timmyrs.suprdiscordbot.structures">Embed</a>&nbsp;embed)</code>&nbsp;</td>
 </tr>
-<tr id="i16" class="altColor">
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Message.html" title="class in de.timmyrs.suprdiscordbot.structures">Message</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html#sendMessage-java.lang.String-">sendMessage</a></span>(java.lang.String&nbsp;content)</code>&nbsp;</td>
 </tr>
-<tr id="i17" class="rowColor">
+<tr id="i18" class="altColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Message.html" title="class in de.timmyrs.suprdiscordbot.structures">Message</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html#sendMessage-java.lang.String-boolean-">sendMessage</a></span>(java.lang.String&nbsp;content,
            boolean&nbsp;tts)</code>&nbsp;</td>
 </tr>
-<tr id="i18" class="altColor">
+<tr id="i19" class="rowColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Message.html" title="class in de.timmyrs.suprdiscordbot.structures">Message</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html#sendMessage-java.lang.String-de.timmyrs.suprdiscordbot.structures.Embed-">sendMessage</a></span>(java.lang.String&nbsp;content,
            <a href="../../../../de/timmyrs/suprdiscordbot/structures/Embed.html" title="class in de.timmyrs.suprdiscordbot.structures">Embed</a>&nbsp;embed)</code>&nbsp;</td>
 </tr>
-<tr id="i19" class="rowColor">
+<tr id="i20" class="altColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html" title="class in de.timmyrs.suprdiscordbot.structures">Channel</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html#sendTyping--">sendTyping</a></span>()</code>
 <div class="block">Show everyone in this channel that we are typing/working.</div>
 </td>
 </tr>
-<tr id="i20" class="altColor">
+<tr id="i21" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html#toString--">toString</a></span>()</code>&nbsp;</td>
 </tr>
@@ -400,8 +411,21 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <ul class="blockList">
 <li class="blockList">
 <h4>type</h4>
-<pre>public&nbsp;java.lang.String type</pre>
-<div class="block">The type of this channel - "text" or "voice".</div>
+<pre>public&nbsp;int type</pre>
+<div class="block">What type of Channel this is:
+ <ul>
+ <li>0 = Guild Text Channel</li>
+ <li>1 = DM Channel</li>
+ <li>2 = Guild Voice Channel</li>
+ <li>3 = Group DM Channel</li>
+ <li>4 = Guild Category</li>
+ </ul></div>
+<dl>
+<dt><span class="simpleTagLabel">Since:</span></dt>
+<dd>1.2</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html#isPartOfGuild--"><code>isPartOfGuild()</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="position">
@@ -414,22 +438,6 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <div class="block">The sorting position of this channel.</div>
 </li>
 </ul>
-<a name="is_private">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>is_private</h4>
-<pre>public&nbsp;boolean is_private</pre>
-<div class="block">Is this a DM channel?</div>
-<dl>
-<dt><span class="simpleTagLabel">Since:</span></dt>
-<dd>1.2</dd>
-<dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html#isPrivate--"><code>isPrivate()</code></a></dd>
-</dl>
-</li>
-</ul>
 <a name="permission_overwrites">
 <!--   -->
 </a>
@@ -440,13 +448,13 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <div class="block">An array of <code>Override</code> objects</div>
 </li>
 </ul>
-<a name="recipient">
+<a name="recipients">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>recipient</h4>
-<pre>public&nbsp;<a href="../../../../de/timmyrs/suprdiscordbot/structures/User.html" title="class in de.timmyrs.suprdiscordbot.structures">User</a> recipient</pre>
+<h4>recipients</h4>
+<pre>public&nbsp;<a href="../../../../de/timmyrs/suprdiscordbot/structures/User.html" title="class in de.timmyrs.suprdiscordbot.structures">User</a>[] recipients</pre>
 <div class="block">The <a href="../../../../de/timmyrs/suprdiscordbot/structures/User.html" title="class in de.timmyrs.suprdiscordbot.structures"><code>User</code></a> object of the recipient. DM-only.</div>
 </li>
 </ul>
@@ -552,16 +560,17 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 </dl>
 </li>
 </ul>
-<a name="isPrivate--">
+<a name="isPartOfGuild--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>isPrivate</h4>
-<pre>public&nbsp;boolean&nbsp;isPrivate()</pre>
+<h4>isPartOfGuild</h4>
+<pre>public&nbsp;boolean&nbsp;isPartOfGuild()</pre>
+<div class="block">Returns true if this channel is part of a Guild.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>Whether this is a DM Channel or not.</dd>
+<dd>True if this channel is part of a Guild.</dd>
 <dt><span class="simpleTagLabel">Since:</span></dt>
 <dd>1.2</dd>
 </dl>
@@ -846,9 +855,26 @@ extends <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html
 <li class="blockList">
 <h4>getHandle</h4>
 <pre>public&nbsp;java.lang.String&nbsp;getHandle()</pre>
+<div class="block">Returns the Handle of this channel to be used in a message</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>Handle of this channel to be used in a message</dd>
+<dd>The Handle of this channel to be used in a message</dd>
+</dl>
+</li>
+</ul>
+<a name="getTypeName--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getTypeName</h4>
+<pre>public&nbsp;java.lang.String&nbsp;getTypeName()</pre>
+<div class="block">Returns the Type as String of this Channel.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>The Type of this Channel.</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html#type"><code>type</code></a></dd>
 </dl>
 </li>
 </ul>

@@ -13,7 +13,7 @@ import de.timmyrs.suprdiscordbot.apis.DiscordAPI;
  *
  * @author timmyRS
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class Channel extends Structure
 {
 	/**
@@ -27,20 +27,24 @@ public class Channel extends Structure
 	 */
 	public String name;
 	/**
-	 * The type of this channel - "text" or "voice".
+	 * What type of Channel this is:
+	 * <ul>
+	 * <li>0 = Guild Text Channel</li>
+	 * <li>1 = DM Channel</li>
+	 * <li>2 = Guild Voice Channel</li>
+	 * <li>3 = Group DM Channel</li>
+	 * <li>4 = Guild Category</li>
+	 * </ul>
+	 *
+	 * @see Channel#isPartOfGuild()
+	 * @since 1.2
 	 */
-	public String type;
+	public int type;
 	/**
 	 * The sorting position of this channel.
 	 */
 	public int position;
-	/**
-	 * Is this a DM channel?
-	 *
-	 * @see Channel#isPrivate()
-	 * @since 1.2
-	 */
-	public boolean is_private;
+
 	/**
 	 * An array of {@link Override} objects
 	 */
@@ -48,7 +52,7 @@ public class Channel extends Structure
 	/**
 	 * The {@link User} object of the recipient. DM-only.
 	 */
-	public User recipient;
+	public User[] recipients;
 	/**
 	 * The channel topic. 0-1024 chars. Guild- &amp; Text-only.
 	 */
@@ -84,7 +88,7 @@ public class Channel extends Structure
 	 */
 	public String getName()
 	{
-		if(is_private)
+		if(this.type == 1)
 		{
 			return "private";
 		}
@@ -92,12 +96,14 @@ public class Channel extends Structure
 	}
 
 	/**
-	 * @return Whether this is a DM Channel or not.
+	 * Returns true if this channel is part of a Guild.
+	 *
+	 * @return True if this channel is part of a Guild.
 	 * @since 1.2
 	 */
-	public boolean isPrivate()
+	public boolean isPartOfGuild()
 	{
-		return this.is_private;
+		return this.type == 0 || this.type == 2 || this.type == 3;
 	}
 
 	/**
@@ -105,11 +111,11 @@ public class Channel extends Structure
 	 */
 	public Guild getGuild()
 	{
-		if(is_private)
+		if(this.isPartOfGuild())
 		{
-			return null;
+			return Main.discordAPI.getGuild(guild_id);
 		}
-		return Main.discordAPI.getGuild(guild_id);
+		return null;
 	}
 
 	/**
@@ -126,7 +132,8 @@ public class Channel extends Structure
 		if(count < 1)
 		{
 			count = 1;
-		} else if(count > 100)
+		}
+		else if(count > 100)
 		{
 			count = 100;
 		}
@@ -204,7 +211,8 @@ public class Channel extends Structure
 		if(ids.length == 1)
 		{
 			DiscordAPI.request("DELETE", "/channels/" + id + "/messages/" + ids[0]);
-		} else if(ids.length > 0)
+		}
+		else if(ids.length > 0)
 		{
 			JsonArray snowflakes = new JsonArray();
 			for(String id : ids)
@@ -332,11 +340,49 @@ public class Channel extends Structure
 	}
 
 	/**
-	 * @return Handle of this channel to be used in a message
+	 * Returns the Handle of this channel to be used in a message
+	 *
+	 * @return The Handle of this channel to be used in a message
 	 */
 	public String getHandle()
 	{
 		return "<#" + id + ">";
+	}
+
+	/**
+	 * Returns the Type as String of this Channel.
+	 *
+	 * @return The Type of this Channel.
+	 * @see Channel#type
+	 */
+	public String getTypeName()
+	{
+		String type_;
+		if(type == 0)
+		{
+			type_ = "Guild Text";
+		}
+		else if(type == 1)
+		{
+			type_ = "DM";
+		}
+		else if(type == 2)
+		{
+			type_ = "Guild Voice";
+		}
+		else if(type == 3)
+		{
+			type_ = "Group DM";
+		}
+		else if(type == 4)
+		{
+			type_ = "Guild Category";
+		}
+		else
+		{
+			type_ = "[[Unknown Type " + type + "]]";
+		}
+		return type_;
 	}
 
 	public Channel[] getArray(int size)
@@ -346,6 +392,6 @@ public class Channel extends Structure
 
 	public String toString()
 	{
-		return "{" + (type.equals("text") ? "Text" : "Voice") + " Channel \"" + getName() + "\" #" + id + "}";
+		return "{" + this.getTypeName() + " Channel \"" + getName() + "\" #" + id + "}";
 	}
 }

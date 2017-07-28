@@ -154,6 +154,7 @@ public class Guild extends Structure
 	 * @return The UNIX timestamp of when the Guild was joined at.
 	 * @see Guild#getJoinedMillis()
 	 * @since 1.2
+	 * @throws ParseException In case the parsing of the date went wrong.
 	 */
 	public long getJoinedAt() throws ParseException
 	{
@@ -164,6 +165,7 @@ public class Guild extends Structure
 	 * @return The time millis of when the Guild was joined at.
 	 * @see Guild#getJoinedAt()
 	 * @since 1.2
+	 * @throws ParseException In case the parsing of the date went wrong.
 	 */
 	public long getJoinedMillis() throws ParseException
 	{
@@ -392,7 +394,7 @@ public class Guild extends Structure
 		ArrayList<Channel> channelArrayList = new ArrayList<>();
 		for(Channel c : getChannels())
 		{
-			if(c.type.equals("text"))
+			if(c.type == 0)
 			{
 				channelArrayList.add(c);
 			}
@@ -410,7 +412,7 @@ public class Guild extends Structure
 		ArrayList<Channel> channelArrayList = new ArrayList<>();
 		for(Channel c : getChannels())
 		{
-			if(c.type.equals("voice"))
+			if(c.type == 2)
 			{
 				channelArrayList.add(c);
 			}

@@ -130,7 +130,8 @@ public class WebSocket
 								if(p.user.username == null || p.user.discriminator == null || p.user.avatar == null)
 								{
 									p.user = cp.user;
-								} else
+								}
+								else
 								{
 									cp.user = p.user;
 								}
@@ -146,13 +147,15 @@ public class WebSocket
 										Main.scriptManager.fireEvent("PRESENCE_UPDATE_GAME", new Object[]{p, null});
 										cp.game = p.game;
 									}
-								} else
+								}
+								else
 								{
 									if(p.game == null)
 									{
 										Main.scriptManager.fireEvent("PRESENCE_UPDATE_GAME", new Object[]{p, cp.game});
 										p.game = null;
-									} else if(!cp.game.name.equals(p.game.name))
+									}
+									else if(!cp.game.name.equals(p.game.name))
 									{
 										Main.scriptManager.fireEvent("PRESENCE_UPDATE_GAME", new Object[]{p, cp.game});
 										cp.game = p.game;
@@ -176,13 +179,15 @@ public class WebSocket
 										Main.scriptManager.fireEvent("MEMBER_UPDATE_NICK", new Object[]{m, null});
 										cm.nick = m.nick;
 									}
-								} else
+								}
+								else
 								{
 									if(m.nick == null)
 									{
 										Main.scriptManager.fireEvent("MEMBER_UPDATE_NICK", new Object[]{m, cm.nick});
 										cm.nick = null;
-									} else if(!cm.nick.equals(m.nick))
+									}
+									else if(!cm.nick.equals(m.nick))
 									{
 										Main.scriptManager.fireEvent("MEMBER_UPDATE_NICK", new Object[]{m, cm.nick});
 										cm.nick = m.nick;
@@ -196,10 +201,15 @@ public class WebSocket
 								break;
 							case "TYPING_START":
 								Channel c = Main.discordAPI.getChannel(data.get("channel_id").getAsString());
-								if(c.is_private)
+								if(c.type == 1)
 								{
-									u = c.recipient;
-								} else
+									u = c.recipients[0];
+								}
+								else if(c.type == 3)
+								{
+									u = Main.discordAPI.getUser(data.get("user_id").getAsString());
+								}
+								else
 								{
 									u = c.getGuild().getMember(data.get("user_id").getAsString()).user;
 								}
@@ -234,9 +244,12 @@ public class WebSocket
 							case "MESSAGE_CREATE":
 								Message msg = Main.gson.fromJson(data, Message.class);
 								c = msg.getChannel();
-								g = c.getGuild();
-								c.last_message_id = msg.id;
-								g.addChannel(c);
+								if(c.isPartOfGuild())
+								{
+									g = c.getGuild();
+									c.last_message_id = msg.id;
+									g.addChannel(c);
+								}
 							case "MESSAGE_UPDATE":
 							case "MESSAGE_DELETE":
 								Main.scriptManager.fireEvent(payload.t, Main.gson.fromJson(data, Message.class));
@@ -267,7 +280,8 @@ public class WebSocket
 							d.addProperty("large_threshold", 50);
 							d.add("shard", Main.jsonParser.parse("[0,1]").getAsJsonArray());
 							Main.discordAPI.send(2, d);
-						} else
+						}
+						else
 						{
 							d.addProperty("token", Main.configuration.getString("botToken"));
 							d.addProperty("session_id", session_id);
@@ -281,7 +295,8 @@ public class WebSocket
 						break;
 				}
 			});
-		} catch(Exception e)
+		}
+		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -308,7 +323,8 @@ public class WebSocket
 			{
 				Main.webSocketEndpoint = null;
 			}
-		} catch(Exception e)
+		}
+		catch(Exception e)
 		{
 			e.printStackTrace();
 		}

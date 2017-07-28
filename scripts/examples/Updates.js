@@ -76,11 +76,16 @@ script.on("USER_JOIN", function(m) // Called when a user joins a guild
 }).on("TYPING_START", function(arr) // Called upon typing start. Note: There is NO typing stop event.
 {
 	var channel = arr[0], user = arr[1];
-	if(channel.is_private)
+	if(channel.isPartOfGuild())
 	{
-		console.log(user.getTag() + " is now typing in private");
-	} else
+	    console.log(user.getTag() + " is now typing in " + channel.getName() + " in " + channel.getGuild().name);
+	}
+	else if(channel.type == 3)
 	{
-		console.log(user.getTag() + " is now typing in " + channel.getName() + " in " + channel.getGuild().name);
+		console.log(user.getTag() + " is now typing in Group DM " + channel.getName());
+	}
+	else
+	{
+	    console.log(user.getTag() + " is now typing in " + channel.getTypeName() + " Channel");
 	}
 });

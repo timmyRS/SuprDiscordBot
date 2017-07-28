@@ -86,7 +86,8 @@ public class DiscordAPI
 				try
 				{
 					Thread.sleep(50);
-				} catch(InterruptedException e)
+				}
+				catch(InterruptedException e)
 				{
 					e.printStackTrace();
 				}
@@ -103,14 +104,15 @@ public class DiscordAPI
 		}
 		try
 		{
-			con = (HttpURLConnection) new URL("https://discordapp.com/api" + endpoint).openConnection();
+			con = (HttpURLConnection) new URL("https://discordapp.com/api/v6/" + endpoint).openConnection();
 			Field delegate = HttpsURLConnectionImpl.class.getDeclaredField("delegate");
 			delegate.setAccessible(true);
 			Object target = delegate.get(con);
 			Field field = HttpURLConnection.class.getDeclaredField("method");
 			field.setAccessible(true);
 			field.set(target, method);
-		} catch(Exception e)
+		}
+		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -127,16 +129,19 @@ public class DiscordAPI
 			try
 			{
 				con.getOutputStream().write(args.getBytes());
-			} catch(IOException e)
+			}
+			catch(IOException e)
 			{
 				e.printStackTrace();
 			}
-		} else
+		}
+		else
 		{
 			try
 			{
 				con.connect();
-			} catch(IOException e)
+			}
+			catch(IOException e)
 			{
 				e.printStackTrace();
 			}
@@ -149,7 +154,8 @@ public class DiscordAPI
 		try
 		{
 			is = con.getInputStream();
-		} catch(Exception e)
+		}
+		catch(Exception e)
 		{
 			try
 			{
@@ -158,7 +164,7 @@ public class DiscordAPI
 				if(res.startsWith("{"))
 				{
 					JsonObject json = Main.jsonParser.parse(res).getAsJsonObject();
-					Main.log("Discord", con.getResponseCode() + " - " + json.toString());
+					Main.log("Discord", con.getResponseCode() + " - " + json.toString() + " in response to " + endpoint);
 					if(json.has("message"))
 					{
 						if(json.get("message").getAsString().equals("You are being rate limited."))
@@ -173,7 +179,8 @@ public class DiscordAPI
 					return null;
 				}
 				Main.log("Discord", con.getResponseCode() + " - " + res);
-			} catch(Exception ex)
+			}
+			catch(Exception ex)
 			{
 				ex.printStackTrace();
 			}
@@ -185,10 +192,12 @@ public class DiscordAPI
 			if(structure == null)
 			{
 				return res;
-			} else if(res.startsWith("{"))
+			}
+			else if(res.startsWith("{"))
 			{
 				return Main.gson.fromJson(res, structure.getClass());
-			} else if(res.startsWith("["))
+			}
+			else if(res.startsWith("["))
 			{
 				ArrayList<Structure> arrayList = new ArrayList<>();
 				for(JsonElement e : Main.jsonParser.parse(res).getAsJsonArray())
@@ -198,7 +207,8 @@ public class DiscordAPI
 				Structure[] arr = structure.getArray(arrayList.size());
 				return arrayList.toArray(arr);
 			}
-		} catch(Exception e)
+		}
+		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -217,7 +227,7 @@ public class DiscordAPI
 				JsonObject json = Main.jsonParser.parse(Main.discordAPI.request("/gateway").toString()).getAsJsonObject();
 				Main.configuration.set("gateway", json.get("url").getAsString());
 			}
-			ws = new WebSocket(Main.configuration.getString("gateway") + "/?v=5&encoding=json");
+			ws = new WebSocket(Main.configuration.getString("gateway") + "/?v=6&encoding=json");
 		}
 	}
 
@@ -285,10 +295,12 @@ public class DiscordAPI
 		if(d instanceof JsonElement)
 		{
 			json.add("d", (JsonElement) d);
-		} else if(d instanceof String && d.toString().startsWith("{"))
+		}
+		else if(d instanceof String && d.toString().startsWith("{"))
 		{
 			json.add("d", Main.jsonParser.parse(d.toString()).getAsJsonObject());
-		} else
+		}
+		else
 		{
 			json.addProperty("d", d.toString());
 		}
@@ -296,7 +308,8 @@ public class DiscordAPI
 		{
 			WebSocket.afterConnectSend = json;
 			DiscordAPI.getWebSocket();
-		} else
+		}
+		else
 		{
 			ws.send(json);
 		}
@@ -355,9 +368,12 @@ public class DiscordAPI
 	{
 		for(Channel c : getDMs())
 		{
-			if(c.recipient.id.equals(id))
+			if(c.type == 1)
 			{
-				return c.recipient;
+				if(c.recipients[0].id.equals(id))
+				{
+					return c.recipients[0];
+				}
 			}
 		}
 		return (User) request("/users/" + id, new User());
@@ -411,7 +427,7 @@ public class DiscordAPI
 			}
 		}
 		Channel c = (Channel) request("/channels/" + id, new Channel());
-		if(c.is_private)
+		if(c.type == 1 || c.type == 3)
 		{
 			dms.add(c);
 		}
@@ -428,6 +444,9 @@ public class DiscordAPI
 	}
 
 	/**
+	 * Returns an array of DM {@link Channel}s this bot is part of.
+	 * This includes DM Channels (type 1) as well as Group DM Channels (type 3), so make sure to check the {@link Channel#type}.
+	 *
 	 * @return An array of DM {@link Channel}s this bot is part of.
 	 */
 	public Channel[] getDMs()

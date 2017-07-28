@@ -18,7 +18,7 @@ script.on("MESSAGE_CREATE", function(msg)
 	console.log(msg.author.username + " wrote " + cont + " in " + channel.getName());
 
 	// Slowmode
-	if(!channel.is_private)
+	if(channel.isPartOfGuild())
 	{
 		var slowmode = channel.getValues().getInt("slowmode");
 		if(slowmode > 0)
@@ -41,7 +41,7 @@ script.on("MESSAGE_CREATE", function(msg)
 	// Handle commands
 	if(cont.substr(0, 7) == "+react ")
 	{
-		if(!channel.is_private)
+		if(channel.isPartOfGuild())
 		{
 			msg.delete();
 		}
@@ -56,7 +56,7 @@ script.on("MESSAGE_CREATE", function(msg)
 	} else if(cont == "+info")
 	{
 		var presence = discord.getPresence(msg.author.id);
-		if(!channel.is_private)
+		if(channel.isPartOfGuild())
 		{
 			msg.delete();
 			channel = msg.author.getDMChannel();
@@ -74,7 +74,7 @@ script.on("MESSAGE_CREATE", function(msg)
 		channel.sendMessage(embed);
 	} else if(cont == "+help")
 	{
-		if(!channel.is_private)
+		if(channel.isPartOfGuild())
 		{
 			msg.delete();
 			channel = msg.author.getDMChannel();
@@ -84,11 +84,11 @@ script.on("MESSAGE_CREATE", function(msg)
 			.setTitle("SuprDiscordBot Help")
 			.setURL("https://github.com/timmyrs/SuprDiscordBot")
 			.addField("Everywhere-Commands", "`+react`, `+react <id>`, `+info` and `+help` work everywhere.", false)
-			.addField("Guild-only", "`+explode` and `xd`-fixture are Guild-only.", false)
+			.addField("Guild-only", "`+explode`, `+slowmode` and `xd`-fixture are Guild-only.", false)
 			.addField("Guild-Mod-only", "`+explode <id>`, `+clear <count> [<mentions ...>]`, `+erase <count>`, `+mute <secs> <mentions ...>`, `+mute <mentions ...>`, `+unmute <mentions ...>`, `+gute <mentions ...>`, `+ungute <mentions ...>` and `+slowmode <secs>` are only available on Guilds for Mods.", false)
 			.setFooter("SuprDiscordBot, Commands.js, by timmyRS")
 			);
-	} else if(!channel.is_private)
+	} else if(channel.isPartOfGuild())
 	{
 		// Handle severe cases of incompetence
 		if(msg.content.indexOf("xd") != -1)

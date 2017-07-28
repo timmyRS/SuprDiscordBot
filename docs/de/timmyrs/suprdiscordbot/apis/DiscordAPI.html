@@ -200,7 +200,9 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html" title="class in de.timmyrs.suprdiscordbot.structures">Channel</a>[]</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/DiscordAPI.html#getDMs--">getDMs</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/DiscordAPI.html#getDMs--">getDMs</a></span>()</code>
+<div class="block">Returns an array of DM <a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html" title="class in de.timmyrs.suprdiscordbot.structures"><code>Channel</code></a>s this bot is part of.</div>
+</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html" title="class in de.timmyrs.suprdiscordbot.structures">Guild</a></code></td>
@@ -629,6 +631,8 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getDMs</h4>
 <pre>public&nbsp;<a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html" title="class in de.timmyrs.suprdiscordbot.structures">Channel</a>[]&nbsp;getDMs()</pre>
+<div class="block">Returns an array of DM <a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html" title="class in de.timmyrs.suprdiscordbot.structures"><code>Channel</code></a>s this bot is part of.
+ This includes DM Channels (type 1) as well as Group DM Channels (type 3), so make sure to check the <a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html#type"><code>Channel.type</code></a>.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>An array of DM <a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html" title="class in de.timmyrs.suprdiscordbot.structures"><code>Channel</code></a>s this bot is part of.</dd>

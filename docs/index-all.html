@@ -506,7 +506,9 @@
 <div class="block">Gets DM Channel with this User.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/apis/DiscordAPI.html#getDMs--">getDMs()</a></span> - Method in class de.timmyrs.suprdiscordbot.apis.<a href="de/timmyrs/suprdiscordbot/apis/DiscordAPI.html" title="class in de.timmyrs.suprdiscordbot.apis">DiscordAPI</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns an array of DM <a href="de/timmyrs/suprdiscordbot/structures/Channel.html" title="class in de.timmyrs.suprdiscordbot.structures"><code>Channel</code></a>s this bot is part of.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/structures/Message.html#getEditMillis--">getEditMillis()</a></span> - Method in class de.timmyrs.suprdiscordbot.structures.<a href="de/timmyrs/suprdiscordbot/structures/Message.html" title="class in de.timmyrs.suprdiscordbot.structures">Message</a></dt>
 <dd>
 <div class="block">Get Edit Time Millis</div>
@@ -542,7 +544,9 @@
 <dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/apis/DiscordAPI.html#getGuilds--">getGuilds()</a></span> - Method in class de.timmyrs.suprdiscordbot.apis.<a href="de/timmyrs/suprdiscordbot/apis/DiscordAPI.html" title="class in de.timmyrs.suprdiscordbot.apis">DiscordAPI</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/structures/Channel.html#getHandle--">getHandle()</a></span> - Method in class de.timmyrs.suprdiscordbot.structures.<a href="de/timmyrs/suprdiscordbot/structures/Channel.html" title="class in de.timmyrs.suprdiscordbot.structures">Channel</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns the Handle of this channel to be used in a message</div>
+</dd>
 <dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/structures/Role.html#getHandle--">getHandle()</a></span> - Method in class de.timmyrs.suprdiscordbot.structures.<a href="de/timmyrs/suprdiscordbot/structures/Role.html" title="class in de.timmyrs.suprdiscordbot.structures">Role</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/structures/User.html#getHandle--">getHandle()</a></span> - Method in class de.timmyrs.suprdiscordbot.structures.<a href="de/timmyrs/suprdiscordbot/structures/User.html" title="class in de.timmyrs.suprdiscordbot.structures">User</a></dt>
@@ -640,6 +644,10 @@
 <dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/structures/Message.html#getTime--">getTime()</a></span> - Method in class de.timmyrs.suprdiscordbot.structures.<a href="de/timmyrs/suprdiscordbot/structures/Message.html" title="class in de.timmyrs.suprdiscordbot.structures">Message</a></dt>
 <dd>
 <div class="block">Get Time</div>
+</dd>
+<dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/structures/Channel.html#getTypeName--">getTypeName()</a></span> - Method in class de.timmyrs.suprdiscordbot.structures.<a href="de/timmyrs/suprdiscordbot/structures/Channel.html" title="class in de.timmyrs.suprdiscordbot.structures">Channel</a></dt>
+<dd>
+<div class="block">Returns the Type as String of this Channel.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/apis/DiscordAPI.html#getUser-java.lang.String-">getUser(String)</a></span> - Method in class de.timmyrs.suprdiscordbot.apis.<a href="de/timmyrs/suprdiscordbot/apis/DiscordAPI.html" title="class in de.timmyrs.suprdiscordbot.apis">DiscordAPI</a></dt>
 <dd>
@@ -795,19 +803,17 @@
 <div class="block"><span class="deprecationComment">Use <a href="de/timmyrs/suprdiscordbot/apis/PermissionAPI.html#bitsToStrings-int-"><code>PermissionAPI.bitsToStrings(int)</code></a> instead</span></div>
 </div>
 </dd>
-<dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/structures/Channel.html#is_private">is_private</a></span> - Variable in class de.timmyrs.suprdiscordbot.structures.<a href="de/timmyrs/suprdiscordbot/structures/Channel.html" title="class in de.timmyrs.suprdiscordbot.structures">Channel</a></dt>
-<dd>
-<div class="block">Is this a DM channel?</div>
-</dd>
 <dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/structures/Guild.html#isAvailable--">isAvailable()</a></span> - Method in class de.timmyrs.suprdiscordbot.structures.<a href="de/timmyrs/suprdiscordbot/structures/Guild.html" title="class in de.timmyrs.suprdiscordbot.structures">Guild</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/apis/DiscordAPI.html#isInDebugMode--">isInDebugMode()</a></span> - Method in class de.timmyrs.suprdiscordbot.apis.<a href="de/timmyrs/suprdiscordbot/apis/DiscordAPI.html" title="class in de.timmyrs.suprdiscordbot.apis">DiscordAPI</a></dt>
 <dd>
 <div class="block">Tells you weather this instance is running in debug mode.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/structures/Channel.html#isPartOfGuild--">isPartOfGuild()</a></span> - Method in class de.timmyrs.suprdiscordbot.structures.<a href="de/timmyrs/suprdiscordbot/structures/Channel.html" title="class in de.timmyrs.suprdiscordbot.structures">Channel</a></dt>
+<dd>
+<div class="block">Returns true if this channel is part of a Guild.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/structures/Message.html#isPinned--">isPinned()</a></span> - Method in class de.timmyrs.suprdiscordbot.structures.<a href="de/timmyrs/suprdiscordbot/structures/Message.html" title="class in de.timmyrs.suprdiscordbot.structures">Message</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/structures/Channel.html#isPrivate--">isPrivate()</a></span> - Method in class de.timmyrs.suprdiscordbot.structures.<a href="de/timmyrs/suprdiscordbot/structures/Channel.html" title="class in de.timmyrs.suprdiscordbot.structures">Channel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/apis/ScriptAPI.html#isVersionOrAbove-java.lang.String-">isVersionOrAbove(String)</a></span> - Method in class de.timmyrs.suprdiscordbot.apis.<a href="de/timmyrs/suprdiscordbot/apis/ScriptAPI.html" title="class in de.timmyrs.suprdiscordbot.apis">ScriptAPI</a></dt>
 <dd>&nbsp;</dd>
@@ -1138,7 +1144,7 @@
 </dd>
 <dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/Main.html#ready">ready</a></span> - Static variable in class de.timmyrs.suprdiscordbot.<a href="de/timmyrs/suprdiscordbot/Main.html" title="class in de.timmyrs.suprdiscordbot">Main</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/structures/Channel.html#recipient">recipient</a></span> - Variable in class de.timmyrs.suprdiscordbot.structures.<a href="de/timmyrs/suprdiscordbot/structures/Channel.html" title="class in de.timmyrs.suprdiscordbot.structures">Channel</a></dt>
+<dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/structures/Channel.html#recipients">recipients</a></span> - Variable in class de.timmyrs.suprdiscordbot.structures.<a href="de/timmyrs/suprdiscordbot/structures/Channel.html" title="class in de.timmyrs.suprdiscordbot.structures">Channel</a></dt>
 <dd>
 <div class="block">The <a href="de/timmyrs/suprdiscordbot/structures/User.html" title="class in de.timmyrs.suprdiscordbot.structures"><code>User</code></a> object of the recipient.</div>
 </dd>
@@ -1420,7 +1426,14 @@
 </dd>
 <dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/structures/Channel.html#type">type</a></span> - Variable in class de.timmyrs.suprdiscordbot.structures.<a href="de/timmyrs/suprdiscordbot/structures/Channel.html" title="class in de.timmyrs.suprdiscordbot.structures">Channel</a></dt>
 <dd>
-<div class="block">The type of this channel - "text" or "voice".</div>
+<div class="block">What type of Channel this is:
+ 
+ 0 = Guild Text Channel
+ 1 = DM Channel
+ 2 = Guild Voice Channel
+ 3 = Group DM Channel
+ 4 = Guild Category
+ </div>
 </dd>
 <dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/structures/Embed.html#type">type</a></span> - Variable in class de.timmyrs.suprdiscordbot.structures.<a href="de/timmyrs/suprdiscordbot/structures/Embed.html" title="class in de.timmyrs.suprdiscordbot.structures">Embed</a></dt>
 <dd>
@@ -1431,6 +1444,20 @@
 <div class="block">The game type
  0: Game
  1: Streaming</div>
+</dd>
+<dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/structures/Message.html#type">type</a></span> - Variable in class de.timmyrs.suprdiscordbot.structures.<a href="de/timmyrs/suprdiscordbot/structures/Message.html" title="class in de.timmyrs.suprdiscordbot.structures">Message</a></dt>
+<dd>
+<div class="block">What type of Message this is:
+ 
+     0 = Default
+     1 = User added (for Group DMs)
+     2 = User removed (for Group DMs)
+     3 = Call (for DMs and Group DMs)
+     4 = Channel Name Change (for Group DMs)
+     5 = Channel Icon Change (for Group DMs)
+     6 = A message was pinned (for Guild Text Channels)
+     7 = A Member joined (for Guild Text Channels)
+ </div>
 </dd>
 <dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/structures/Overwrite.html#type">type</a></span> - Variable in class de.timmyrs.suprdiscordbot.structures.<a href="de/timmyrs/suprdiscordbot/structures/Overwrite.html" title="class in de.timmyrs.suprdiscordbot.structures">Overwrite</a></dt>
 <dd>

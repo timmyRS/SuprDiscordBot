@@ -93,7 +93,7 @@ public class User extends Structure
 	{
 		for(Channel c : Main.discordAPI.getDMs())
 		{
-			if(c.recipient.id.equals(id))
+			if(c.type == 1 && c.recipients[0].id.equals(id))
 			{
 				return c;
 			}

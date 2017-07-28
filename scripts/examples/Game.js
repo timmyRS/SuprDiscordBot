@@ -4,7 +4,8 @@ var game = "https://github.com/timmyrs/SuprDiscordBot";
 script.on("connected", function() // Called everytime the WebSocket to Discord has been (re)opened.
 {
 	// Sends Status Update (OP 3) with custom game name.
-	discord.send(3, '{"idle_since":0,"game":{"type":0,"name":"' + game + '"}}');
+	discord.send(3, '{"status":"online","game":{"type":0,"name":"'+game+'"},"afk":false,"since":0}');
+	// Note for "status": It can be "online", "away", "dnd" or "invisible".
 }).on("load", function()
 {
 	script.fireEvent("connected"); // Firing connected event on load.
