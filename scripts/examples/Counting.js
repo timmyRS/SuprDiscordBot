@@ -23,8 +23,8 @@ script.on("MESSAGE_CREATE", function(msg)
 		});
 		if(last != null)
 		{
-			num = getNum(msg.content),
-			lastNum = getNum(last.content);
+			num = parseInt(msg.content),
+			lastNum = parseInt(last.content);
 			if(num != (lastNum + 1))
 			{
 				msg.delete();
@@ -38,22 +38,3 @@ script.on("MESSAGE_CREATE", function(msg)
 		script.fireEvent("MESSAGE_CREATE", msg);
 	}
 })
-
-function getNum(cont)
-{
-	var num = "", counting = true;
-	script.each(cont.split(""), function(char)
-	{
-		if(counting)
-		{
-			if(script.inArray(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"], char))
-			{
-				num += char;
-			} else
-			{
-				counting = false;
-			}
-		}
-	});
-	return parseInt(num);
-}

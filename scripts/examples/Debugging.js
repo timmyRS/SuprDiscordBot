@@ -59,6 +59,7 @@ script.on("LOAD", function()
 		});
 	} else
 	{
-		console.log("You are not in debugging mode, so Debugging.js will not do anything.");
+		console.error("You are not in debugging mode, so Debugging.js is now doing *nothing*!");
+		console.info("You can start in debugging mode by adding the --debug argument.");
 	}
 });

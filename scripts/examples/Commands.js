@@ -18,7 +18,7 @@ script.on("MESSAGE_CREATE", function(msg)
 	console.log(msg.author.username + " wrote " + cont + " in " + channel.getName());
 
 	// Slowmode
-	if(channel.isPartOfGuild())
+	if(channel.isPartOfGuild() && msg.author)
 	{
 		var slowmode = channel.getValues().getInt("slowmode");
 		if(slowmode > 0)

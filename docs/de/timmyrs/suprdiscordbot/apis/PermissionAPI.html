@@ -17,8 +17,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":42};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"],32:["t6","Deprecated Methods"]};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -110,6 +110,7 @@ var activeTableTab = "activeTableTab";
 <pre>public class <span class="typeNameLabel">PermissionAPI</span>
 extends java.lang.Object</pre>
 <div class="block">Permission API ('permission')
+ <p>
  Permission values taken directly from https://discordapp.com/developers/docs/topics/permissions</div>
 <dl>
 <dt><span class="simpleTagLabel">Since:</span></dt>
@@ -324,7 +325,7 @@ extends java.lang.Object</pre>
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t6" class="tableTab"><span><a href="javascript:show(32);">Deprecated Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
@@ -358,15 +359,7 @@ extends java.lang.Object</pre>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>java.lang.String[][]</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/PermissionAPI.html#getPermArray--">getPermArray</a></span>()</code>
-<div class="block">Returns a multidimensional array of all permissions</div>
-</td>
-</tr>
-<tr id="i6" class="altColor">
-<td class="colFirst"><code>java.lang.String[]</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/PermissionAPI.html#intToStringArray-int-">intToStringArray</a></span>(int&nbsp;i)</code>
-<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
-<div class="block"><span class="deprecationComment">Use <a href="../../../../de/timmyrs/suprdiscordbot/apis/PermissionAPI.html#bitsToStrings-int-"><code>bitsToStrings(int)</code></a> instead</span></div>
-</div>
+<div class="block">Returns an array of string arrays of permission name and hex values ordered by highest hex value first</div>
 </td>
 </tr>
 </table>
@@ -801,27 +794,10 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getPermArray</h4>
 <pre>public&nbsp;java.lang.String[][]&nbsp;getPermArray()</pre>
-<div class="block">Returns a multidimensional array of all permissions</div>
+<div class="block">Returns an array of string arrays of permission name and hex values ordered by highest hex value first</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>Array of string arrays of permission name and hex values ordered by highest hex value first</dd>
-</dl>
-</li>
-</ul>
-<a name="intToStringArray-int-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>intToStringArray</h4>
-<pre>public&nbsp;java.lang.String[]&nbsp;intToStringArray(int&nbsp;i)</pre>
-<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">Use <a href="../../../../de/timmyrs/suprdiscordbot/apis/PermissionAPI.html#bitsToStrings-int-"><code>bitsToStrings(int)</code></a> instead</span></div>
-<div class="block">Converts permission bit set to string array.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>i</code> - Permission Bit Set</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>String array of permissions</dd>
+<dd>An array of string arrays of permission name and hex values ordered by highest hex value first</dd>
 </dl>
 </li>
 </ul>
