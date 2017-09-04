@@ -152,9 +152,9 @@ public class Guild extends Structure
 
 	/**
 	 * @return The UNIX timestamp of when the Guild was joined at.
+	 * @throws ParseException In case the parsing of the date went wrong.
 	 * @see Guild#getJoinedMillis()
 	 * @since 1.2
-	 * @throws ParseException In case the parsing of the date went wrong.
 	 */
 	public long getJoinedAt() throws ParseException
 	{
@@ -163,9 +163,9 @@ public class Guild extends Structure
 
 	/**
 	 * @return The time millis of when the Guild was joined at.
+	 * @throws ParseException In case the parsing of the date went wrong.
 	 * @see Guild#getJoinedAt()
 	 * @since 1.2
-	 * @throws ParseException In case the parsing of the date went wrong.
 	 */
 	public long getJoinedMillis() throws ParseException
 	{

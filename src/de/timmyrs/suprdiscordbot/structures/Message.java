@@ -150,7 +150,8 @@ public class Message extends Structure
 		try
 		{
 			DiscordAPI.request("PUT", "/channels/" + channel_id + "/messages/" + id + "/reactions/" + URLEncoder.encode(emoji, "UTF-8") + "/@me");
-		} catch(Exception e)
+		}
+		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -171,7 +172,8 @@ public class Message extends Structure
 				try
 				{
 					Thread.sleep(500);
-				} catch(InterruptedException e)
+				}
+				catch(InterruptedException e)
 				{
 					e.printStackTrace();
 				}
@@ -213,9 +215,9 @@ public class Message extends Structure
 	 * Get Time
 	 *
 	 * @return The UNIX timestamp of the message's creation.
+	 * @throws ParseException In case the parsing of the date went wrong.
 	 * @see Message#getMillis()
 	 * @since 1.2
-	 * @throws ParseException In case the parsing of the date went wrong.
 	 */
 	public long getTime() throws ParseException
 	{
@@ -226,9 +228,9 @@ public class Message extends Structure
 	 * Get Time Millis
 	 *
 	 * @return The time millis of the message's creation.
+	 * @throws ParseException In case the parsing of the date went wrong.
 	 * @see Message#getTime()
 	 * @since 1.2
-	 * @throws ParseException In case the parsing of the date went wrong.
 	 */
 	public long getMillis() throws ParseException
 	{
@@ -239,9 +241,9 @@ public class Message extends Structure
 	 * Get Edit Time
 	 *
 	 * @return The UNIX timestamp of the message's last edit or 0 if not edited.
+	 * @throws ParseException In case the parsing of the date went wrong.
 	 * @see Message#getEditMillis()
 	 * @since 1.2
-	 * @throws ParseException In case the parsing of the date went wrong.
 	 */
 	public long getEditTime() throws ParseException
 	{
@@ -256,9 +258,9 @@ public class Message extends Structure
 	 * Get Edit Time Millis
 	 *
 	 * @return The time millis of the message's last edit or 0 if not edited.
+	 * @throws ParseException In case the parsing of the date went wrong.
 	 * @see Message#getEditTime()
 	 * @since 1.2
-	 * @throws ParseException In case the parsing of the date went wrong.
 	 */
 	public long getEditMillis() throws ParseException
 	{
@@ -279,7 +281,8 @@ public class Message extends Structure
 		if(author == null)
 		{
 			return "{Message \"" + content + "\"}";
-		} else
+		}
+		else
 		{
 			return "{Message #" + id +
 					" by " + author.toString() +

@@ -93,12 +93,6 @@
 </dd>
 <dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/structures/Message.html#addReactions-java.lang.String:A-">addReactions(String[])</a></span> - Method in class de.timmyrs.suprdiscordbot.structures.<a href="de/timmyrs/suprdiscordbot/structures/Message.html" title="class in de.timmyrs.suprdiscordbot.structures">Message</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/structures/Member.html#addRole-de.timmyrs.suprdiscordbot.structures.Role-">addRole(Role)</a></span> - Method in class de.timmyrs.suprdiscordbot.structures.<a href="de/timmyrs/suprdiscordbot/structures/Member.html" title="class in de.timmyrs.suprdiscordbot.structures">Member</a></dt>
-<dd>
-<div class="block"><span class="deprecatedLabel">Deprecated.</span>
-<div class="block"><span class="deprecationComment">Use <a href="de/timmyrs/suprdiscordbot/structures/Role.html#assign-de.timmyrs.suprdiscordbot.structures.Member-"><code>Role.assign(Member)</code></a> instead.</span></div>
-</div>
-</dd>
 <dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/apis/PermissionAPI.html#ADMINISTRATOR">ADMINISTRATOR</a></span> - Variable in class de.timmyrs.suprdiscordbot.apis.<a href="de/timmyrs/suprdiscordbot/apis/PermissionAPI.html" title="class in de.timmyrs.suprdiscordbot.apis">PermissionAPI</a></dt>
 <dd>
 <div class="block">Allows all permissions and bypasses channel permission overwrites (0x00000008)</div>
@@ -307,8 +301,6 @@
 <dd>
 <div class="block">The user's 4-digit Discord-tag.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/Main.html#dontUpdateScripts">dontUpdateScripts</a></span> - Static variable in class de.timmyrs.suprdiscordbot.<a href="de/timmyrs/suprdiscordbot/Main.html" title="class in de.timmyrs.suprdiscordbot">Main</a></dt>
-<dd>&nbsp;</dd>
 </dl>
 <a name="I:E">
 <!--   -->
@@ -607,7 +599,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/apis/PermissionAPI.html#getPermArray--">getPermArray()</a></span> - Method in class de.timmyrs.suprdiscordbot.apis.<a href="de/timmyrs/suprdiscordbot/apis/PermissionAPI.html" title="class in de.timmyrs.suprdiscordbot.apis">PermissionAPI</a></dt>
 <dd>
-<div class="block">Returns a multidimensional array of all permissions</div>
+<div class="block">Returns an array of string arrays of permission name and hex values ordered by highest hex value first</div>
 </dd>
 <dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/structures/User.html#getPic--">getPic()</a></span> - Method in class de.timmyrs.suprdiscordbot.structures.<a href="de/timmyrs/suprdiscordbot/structures/User.html" title="class in de.timmyrs.suprdiscordbot.structures">User</a></dt>
 <dd>&nbsp;</dd>
@@ -797,12 +789,6 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/Main.html#internetAPI">internetAPI</a></span> - Static variable in class de.timmyrs.suprdiscordbot.<a href="de/timmyrs/suprdiscordbot/Main.html" title="class in de.timmyrs.suprdiscordbot">Main</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/apis/PermissionAPI.html#intToStringArray-int-">intToStringArray(int)</a></span> - Method in class de.timmyrs.suprdiscordbot.apis.<a href="de/timmyrs/suprdiscordbot/apis/PermissionAPI.html" title="class in de.timmyrs.suprdiscordbot.apis">PermissionAPI</a></dt>
-<dd>
-<div class="block"><span class="deprecatedLabel">Deprecated.</span>
-<div class="block"><span class="deprecationComment">Use <a href="de/timmyrs/suprdiscordbot/apis/PermissionAPI.html#bitsToStrings-int-"><code>PermissionAPI.bitsToStrings(int)</code></a> instead</span></div>
-</div>
-</dd>
 <dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/structures/Guild.html#isAvailable--">isAvailable()</a></span> - Method in class de.timmyrs.suprdiscordbot.structures.<a href="de/timmyrs/suprdiscordbot/structures/Guild.html" title="class in de.timmyrs.suprdiscordbot.structures">Guild</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/apis/DiscordAPI.html#isInDebugMode--">isInDebugMode()</a></span> - Method in class de.timmyrs.suprdiscordbot.apis.<a href="de/timmyrs/suprdiscordbot/apis/DiscordAPI.html" title="class in de.timmyrs.suprdiscordbot.apis">DiscordAPI</a></dt>
@@ -853,6 +839,8 @@
 <dd>
 <div class="block">The ID of the last message sent in this channel.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/Main.html#liveUpdateScripts">liveUpdateScripts</a></span> - Static variable in class de.timmyrs.suprdiscordbot.<a href="de/timmyrs/suprdiscordbot/Main.html" title="class in de.timmyrs.suprdiscordbot">Main</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/apis/ConsoleAPI.html#log-java.lang.Object-">log(Object)</a></span> - Method in class de.timmyrs.suprdiscordbot.apis.<a href="de/timmyrs/suprdiscordbot/apis/ConsoleAPI.html" title="class in de.timmyrs.suprdiscordbot.apis">ConsoleAPI</a></dt>
 <dd>
 <div class="block">Replacement for console.log</div>
@@ -1063,8 +1051,7 @@
 </dd>
 <dt><a href="de/timmyrs/suprdiscordbot/apis/PermissionAPI.html" title="class in de.timmyrs.suprdiscordbot.apis"><span class="typeNameLink">PermissionAPI</span></a> - Class in <a href="de/timmyrs/suprdiscordbot/apis/package-summary.html">de.timmyrs.suprdiscordbot.apis</a></dt>
 <dd>
-<div class="block">Permission API ('permission')
- Permission values taken directly from https://discordapp.com/developers/docs/topics/permissions</div>
+<div class="block">Permission API ('permission')</div>
 </dd>
 <dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/apis/PermissionAPI.html#PermissionAPI--">PermissionAPI()</a></span> - Constructor for class de.timmyrs.suprdiscordbot.apis.<a href="de/timmyrs/suprdiscordbot/apis/PermissionAPI.html" title="class in de.timmyrs.suprdiscordbot.apis">PermissionAPI</a></dt>
 <dd>&nbsp;</dd>
@@ -1164,12 +1151,6 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/structures/Guild.html#removePresence-java.lang.String-">removePresence(String)</a></span> - Method in class de.timmyrs.suprdiscordbot.structures.<a href="de/timmyrs/suprdiscordbot/structures/Guild.html" title="class in de.timmyrs.suprdiscordbot.structures">Guild</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/structures/Member.html#removeRole-de.timmyrs.suprdiscordbot.structures.Role-">removeRole(Role)</a></span> - Method in class de.timmyrs.suprdiscordbot.structures.<a href="de/timmyrs/suprdiscordbot/structures/Member.html" title="class in de.timmyrs.suprdiscordbot.structures">Member</a></dt>
-<dd>
-<div class="block"><span class="deprecatedLabel">Deprecated.</span>
-<div class="block"><span class="deprecationComment">Use <a href="de/timmyrs/suprdiscordbot/structures/Role.html#remove-de.timmyrs.suprdiscordbot.structures.Member-"><code>Role.remove(Member)</code></a> instead.</span></div>
-</div>
-</dd>
 <dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/apis/DiscordAPI.html#request-java.lang.String-de.timmyrs.suprdiscordbot.structures.Structure-">request(String, Structure)</a></span> - Static method in class de.timmyrs.suprdiscordbot.apis.<a href="de/timmyrs/suprdiscordbot/apis/DiscordAPI.html" title="class in de.timmyrs.suprdiscordbot.apis">DiscordAPI</a></dt>
 <dd>
 <div class="block">Not accessible within script.</div>
@@ -1449,14 +1430,14 @@
 <dd>
 <div class="block">What type of Message this is:
  
-     0 = Default
-     1 = User added (for Group DMs)
-     2 = User removed (for Group DMs)
-     3 = Call (for DMs and Group DMs)
-     4 = Channel Name Change (for Group DMs)
-     5 = Channel Icon Change (for Group DMs)
-     6 = A message was pinned (for Guild Text Channels)
-     7 = A Member joined (for Guild Text Channels)
+ 0 = Default
+ 1 = User added (for Group DMs)
+ 2 = User removed (for Group DMs)
+ 3 = Call (for DMs and Group DMs)
+ 4 = Channel Name Change (for Group DMs)
+ 5 = Channel Icon Change (for Group DMs)
+ 6 = A message was pinned (for Guild Text Channels)
+ 7 = A Member joined (for Guild Text Channels)
  </div>
 </dd>
 <dt><span class="memberNameLink"><a href="de/timmyrs/suprdiscordbot/structures/Overwrite.html#type">type</a></span> - Variable in class de.timmyrs.suprdiscordbot.structures.<a href="de/timmyrs/suprdiscordbot/structures/Overwrite.html" title="class in de.timmyrs.suprdiscordbot.structures">Overwrite</a></dt>

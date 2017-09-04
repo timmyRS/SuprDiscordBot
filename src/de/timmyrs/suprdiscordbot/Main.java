@@ -31,7 +31,7 @@ import java.io.IOException;
  * </ul>
  *
  * @author timmyRS
- * @version 1.2
+ * @version 1.2.1
  * @see DiscordAPI
  * @see de.timmyrs.suprdiscordbot.apis.ScriptAPI
  * @see de.timmyrs.suprdiscordbot.apis.ConsoleAPI
@@ -39,12 +39,12 @@ import java.io.IOException;
  */
 public class Main
 {
-	public static final int versionInt = 1200;
-	private static final String version = "1.2";
+	public static final int versionInt = 1210;
+	private static final String version = "1.2.1";
 	private static final File valuesDir = new File("values");
 	private final static File confFile = new File("config.json");
 	public static boolean debug = false;
-	public static boolean dontUpdateScripts = false;
+	public static boolean liveUpdateScripts = false;
 	public static Configuration configuration;
 	public static ScriptManager scriptManager;
 	public static ConsoleAPI consoleAPI;
@@ -67,8 +67,8 @@ public class Main
 				case "--debug":
 					Main.debug = true;
 					break;
-				case "--dont-update-scripts":
-					Main.dontUpdateScripts = true;
+				case "--live-update-scripts":
+					Main.liveUpdateScripts = true;
 					break;
 				default:
 					Main.log("Main", "Unknown Argument: " + arg);
@@ -92,15 +92,18 @@ public class Main
 				if(Integer.valueOf(internetAPI.httpString("https://raw.githubusercontent.com/timmyrs/SuprDiscordBot/master/version.txt").trim()) > Main.versionInt)
 				{
 					Main.log("Main", "There is a new verion/release available at https://github.com/timmyrs/SuprDiscordBot/releases");
-				} else if(Main.debug)
+				}
+				else if(Main.debug)
 				{
 					Main.log("Main", "This seems to be the newest version.");
 				}
-			} catch(IOException e)
+			}
+			catch(IOException e)
 			{
 				e.printStackTrace();
 			}
-		} else
+		}
+		else
 		{
 			Main.configuration.set("botToken", "BOT_TOKEN");
 			Main.log("Setup", "Welcome to SuprDiscordBot. :) Please setup a");

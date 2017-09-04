@@ -164,7 +164,14 @@ public class DiscordAPI
 				if(res.startsWith("{"))
 				{
 					JsonObject json = Main.jsonParser.parse(res).getAsJsonObject();
-					Main.log("Discord", con.getResponseCode() + " - " + json.toString() + " in response to " + endpoint);
+					if(Main.debug)
+					{
+						throw new RuntimeException(con.getResponseCode() + " - " + json.toString());
+					}
+					else
+					{
+						Main.log("Discord", con.getResponseCode() + " " + json.toString() + " in response to " + method + " " + endpoint);
+					}
 					if(json.has("message"))
 					{
 						if(json.get("message").getAsString().equals("You are being rate limited."))
@@ -178,7 +185,14 @@ public class DiscordAPI
 					}
 					return null;
 				}
-				Main.log("Discord", con.getResponseCode() + " - " + res);
+				if(Main.debug)
+				{
+					throw new RuntimeException(con.getResponseCode() + " - " + res);
+				}
+				else
+				{
+					Main.log("Discord", con.getResponseCode() + " " + res + " in response to " + method + " " + endpoint);
+				}
 			}
 			catch(Exception ex)
 			{

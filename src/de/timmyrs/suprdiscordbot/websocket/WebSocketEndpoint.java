@@ -23,7 +23,8 @@ public class WebSocketEndpoint
 		{
 			WebSocketContainer container = ContainerProvider.getWebSocketContainer();
 			container.connectToServer(this, endpointURI);
-		} catch(Exception e)
+		}
+		catch(Exception e)
 		{
 			DiscordAPI.closeWebSocket("Connection failed.");
 			DiscordAPI.getWebSocket();
@@ -67,7 +68,8 @@ public class WebSocketEndpoint
 				Main.log("Socket", "> " + msg);
 			}
 			this.messageHandler.handleMessage(msg);
-		} else if(msg != null)
+		}
+		else if(msg != null)
 		{
 			Main.log("Socket", "Unhandled > " + msg);
 		}

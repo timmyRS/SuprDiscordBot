@@ -9,6 +9,14 @@
 
 **Note:** A "Discord Server" is called a "Guild".
 
+## Debugging & Automatic Reloading
+
+You can start the SuprDiscordBot with different arguments:
+
+- `--debug` Debug Mode, will make SuprDiscordBot output more.
+
+- `--live-update-scripts` Updates Scripts after you edit them. This causes the RAM to get filled up very quickly tho, so only use this whilst editing scripts.
+
 ## What Makes SuprDiscordBot's Javascript Different
 
 - The `console` object's [functions in SuprDiscordBot](https://timmyrs.github.io/SuprDiscordBot/?de/timmyrs/suprdiscordbot/apis/ConsoleAPI.html) only accept one argument, which can be an object or an array of objects.

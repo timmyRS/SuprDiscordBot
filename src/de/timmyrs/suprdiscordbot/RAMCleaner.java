@@ -32,22 +32,24 @@ public class RAMCleaner extends Thread
 						}
 					}
 				}
-				System.gc();
 				if(removed > 0 && Main.debug)
 				{
 					Main.log("Cleaner", "Removed " + removed + " useless value(s) from RAM.");
 				}
 				Thread.sleep(60000);
-			} catch(Exception e)
+			}
+			catch(Exception e)
 			{
 				try
 				{
 					Thread.sleep(100);
-				} catch(InterruptedException ex)
+				}
+				catch(InterruptedException ex)
 				{
 					ex.printStackTrace();
 				}
 			}
-		} while(true);
+		}
+		while(true);
 	}
 }

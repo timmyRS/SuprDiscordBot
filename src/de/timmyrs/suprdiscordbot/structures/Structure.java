@@ -3,7 +3,6 @@ package de.timmyrs.suprdiscordbot.structures;
 import com.sun.istack.internal.NotNull;
 
 /**
- *
  * @author timmyRS
  */
 public abstract class Structure

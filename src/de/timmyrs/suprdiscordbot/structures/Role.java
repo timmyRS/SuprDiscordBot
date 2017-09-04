@@ -109,7 +109,8 @@ public class Role extends Structure
 	 */
 	public Role assign(Presence p)
 	{
-		return this.assign(p.getMember());
+		DiscordAPI.request("PUT", "/guilds/" + p.guild_id + "/members/" + p.user.id + "/roles/" + this.id);
+		return this;
 	}
 
 	/**
@@ -134,7 +135,8 @@ public class Role extends Structure
 	 */
 	public Role remove(Presence p)
 	{
-		return this.remove(p.getMember());
+		DiscordAPI.request("DELETE", "/guilds/" + p.guild_id + "/members/" + p.user.id + "/roles/" + this.id);
+		return this;
 	}
 
 	/**

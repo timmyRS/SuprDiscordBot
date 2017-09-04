@@ -27,7 +27,8 @@ public class WebSocketHeart extends Thread
 					{
 						gotACK = false;
 						Main.discordAPI.send(1, WebSocket.lastSeq);
-					} else
+					}
+					else
 					{
 						interval = 0;
 						DiscordAPI.closeWebSocket("Discord did not answer heartbeat.");
@@ -38,10 +39,12 @@ public class WebSocketHeart extends Thread
 			try
 			{
 				Thread.sleep(200);
-			} catch(InterruptedException e)
+			}
+			catch(InterruptedException e)
 			{
 				e.printStackTrace();
 			}
-		} while(true);
+		}
+		while(true);
 	}
 }

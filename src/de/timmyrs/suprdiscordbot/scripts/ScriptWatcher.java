@@ -23,7 +23,8 @@ public class ScriptWatcher extends Thread
 		{
 			// Delay initial script loading, to collect data from Discord without any problems.
 			Thread.sleep(1000);
-		} catch(InterruptedException e)
+		}
+		catch(InterruptedException e)
 		{
 			e.printStackTrace();
 		}
@@ -34,7 +35,8 @@ public class ScriptWatcher extends Thread
 				scriptsDir.mkdir();
 			}
 			Main.log("Watcher", "Scripts are being loaded from " + scriptsDir.getAbsolutePath());
-		} catch(Exception e)
+		}
+		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -65,13 +67,15 @@ public class ScriptWatcher extends Thread
 						{
 							Main.log("Watcher", "Loading " + f.getName());
 							s = Main.scriptManager.registerScript(f);
-						} else
+						}
+						else
 						{
 							String cont = "";
 							try
 							{
 								cont = IOUtils.toString(new BufferedInputStream(new FileInputStream(f)), "UTF-8");
-							} catch(Exception e)
+							}
+							catch(Exception e)
 							{
 								e.printStackTrace();
 							}
@@ -85,7 +89,8 @@ public class ScriptWatcher extends Thread
 								Main.log("Watcher", "Reloading " + s.name);
 								s.hash = hash;
 								s.setScript(cont);
-							} else
+							}
+							else
 							{
 								if(fs.hash.equals(hash))
 								{
@@ -96,7 +101,8 @@ public class ScriptWatcher extends Thread
 								s = Main.scriptManager.registerScript(f);
 							}
 						}
-					} catch(Exception e)
+					}
+					catch(Exception e)
 					{
 						if(s != null)
 						{
@@ -105,7 +111,8 @@ public class ScriptWatcher extends Thread
 						if(e.getMessage() == null)
 						{
 							e.printStackTrace();
-						} else
+						}
+						else
 						{
 							Main.log("Watcher", e.getMessage() + " in " + f.getName());
 						}
@@ -121,11 +128,12 @@ public class ScriptWatcher extends Thread
 					}
 				}
 				Thread.sleep(1000);
-			} catch(Exception e)
+			}
+			catch(Exception e)
 			{
 				e.printStackTrace();
 			}
 		}
-		while(!Main.dontUpdateScripts);
+		while(Main.liveUpdateScripts);
 	}
 }

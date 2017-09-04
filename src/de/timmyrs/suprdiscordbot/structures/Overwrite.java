@@ -68,7 +68,8 @@ public class Overwrite extends Structure
 			{
 				this.allow += allow;
 			}
-		} else if(!Main.permisisonAPI.allowsFor(this.allow, allow))
+		}
+		else if(!Main.permisisonAPI.allowsFor(this.allow, allow))
 		{
 			this.allow += allow;
 		}
@@ -88,7 +89,8 @@ public class Overwrite extends Structure
 			{
 				this.deny += deny;
 			}
-		} else if(!Main.permisisonAPI.allowsFor(this.deny, deny))
+		}
+		else if(!Main.permisisonAPI.allowsFor(this.deny, deny))
 		{
 			this.deny += deny;
 		}

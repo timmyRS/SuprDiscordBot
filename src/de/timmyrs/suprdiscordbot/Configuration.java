@@ -31,7 +31,8 @@ public class Configuration
 			{
 				cont = IOUtils.toString(new BufferedInputStream(new FileInputStream(this.file)), "UTF-8");
 			}
-		} catch(Exception e)
+		}
+		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -98,7 +99,8 @@ public class Configuration
 				{
 					this.file.delete();
 				}
-			} else
+			}
+			else
 			{
 				if(!this.file.exists())
 				{
@@ -106,7 +108,8 @@ public class Configuration
 				}
 				IOUtils.write(json.toString(), new FileOutputStream(this.file), "UTF-8");
 			}
-		} catch(Exception e)
+		}
+		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -122,7 +125,8 @@ public class Configuration
 		try
 		{
 			return this.json.get(key).getAsString();
-		} catch(Exception ignored)
+		}
+		catch(Exception ignored)
 		{
 		}
 		return "";

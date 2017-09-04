@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Permission API ('permission')
+ * <p>
  * Permission values taken directly from https://discordapp.com/developers/docs/topics/permissions
  *
  * @author timmyRS
@@ -122,9 +123,9 @@ public class PermissionAPI
 	public final int MANAGE_EMOJIS = 0x40000000;
 
 	/**
-	 * Returns a multidimensional array of all permissions
+	 * Returns an array of string arrays of permission name and hex values ordered by highest hex value first
 	 *
-	 * @return Array of string arrays of permission name and hex values ordered by highest hex value first
+	 * @return An array of string arrays of permission name and hex values ordered by highest hex value first
 	 */
 	public String[][] getPermArray()
 	{
@@ -164,18 +165,6 @@ public class PermissionAPI
 	 *
 	 * @param i Permission Bit Set
 	 * @return String array of permissions
-	 * @deprecated Use {@link PermissionAPI#bitsToStrings(int)} instead
-	 */
-	public String[] intToStringArray(int i)
-	{
-		return bitsToStrings(i);
-	}
-
-	/**
-	 * Converts permission bit set to string array.
-	 *
-	 * @param i Permission Bit Set
-	 * @return String array of permissions
 	 * @since 1.2
 	 */
 	public String[] bitsToStrings(int i)
@@ -193,7 +182,8 @@ public class PermissionAPI
 				}
 			}
 			return perms.toArray(new String[perms.size()]);
-		} catch(Exception e)
+		}
+		catch(Exception e)
 		{
 			e.printStackTrace();
 		}

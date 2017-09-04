@@ -75,7 +75,8 @@ public class ScriptManager
 		try
 		{
 			cont = IOUtils.toString(new BufferedInputStream(new FileInputStream(f)), "UTF-8");
-		} catch(IOException e)
+		}
+		catch(IOException e)
 		{
 			e.printStackTrace();
 		}
@@ -91,7 +92,8 @@ public class ScriptManager
 		try
 		{
 			cont = IOUtils.toString(new BufferedInputStream(new FileInputStream(f)), "UTF-8");
-		} catch(IOException e)
+		}
+		catch(IOException e)
 		{
 			e.printStackTrace();
 		}

@@ -33,7 +33,8 @@ public class ScriptAPI
 		if(new ScriptAPI(null).inArray(new String[]{"PRESENCE_UPDATE", "USER_LEAVE"}, event))
 		{
 			Main.log("Script", "Event '" + event + "' is no longer being supported and thereby will not be registered.");
-		} else
+		}
+		else
 		{
 			this.script.events.put(event, function);
 		}
@@ -109,7 +110,8 @@ public class ScriptAPI
 			{
 				Thread.sleep(millis);
 				function.run();
-			} catch(Exception e)
+			}
+			catch(Exception e)
 			{
 				e.printStackTrace();
 			}

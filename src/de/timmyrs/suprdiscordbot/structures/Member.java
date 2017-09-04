@@ -59,30 +59,6 @@ public class Member extends Structure
 	}
 
 	/**
-	 * @param r {@link Role} object
-	 * @return this
-	 * @since 1.2
-	 * @deprecated Use {@link Role#assign(Member)} instead.
-	 */
-	public Member addRole(Role r)
-	{
-		r.assign(this);
-		return this;
-	}
-
-	/**
-	 * @param r {@link Role} object
-	 * @return this
-	 * @since 1.2
-	 * @deprecated Use {@link Role#remove(Member)} instead.
-	 */
-	public Member removeRole(Role r)
-	{
-		r.remove(this);
-		return this;
-	}
-
-	/**
 	 * @return List of IDs of Roles the Member is part of.
 	 * @see Member#getRoles()
 	 */
