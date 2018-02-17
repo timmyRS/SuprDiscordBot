@@ -1,6 +1,8 @@
 var game_roles = {
     "Minecraft": "Block Crusher",
     "Osu": "Circle Clicker",
+    "Watch Dogs": "Dog Watcher",
+    "Watch_Dogs": "Dog Watcher"
 }
 
 script.on("USER_JOIN", function(m) // Called when a user joins a guild
@@ -23,7 +25,7 @@ script.on("USER_JOIN", function(m) // Called when a user joins a guild
 {
 	var m = arr[0];
 	console.log(m.user.getTag() + " changed their nick from " + (arr[1] == null ? "nothing" : "'" + arr[1] + "'") + " to '" + (m.nick == null ? "nothing" : "'" + m.nick + "'") + "'"); // Log new and old nick to console
-}).on("PRESENCE_UPDATE_GAME", function(arr) // Called upon update of a member's nick
+}).on("PRESENCE_UPDATE_GAME", function(arr) // Called upon update of a member's game
 {
 	var p = arr[0];
 	console.log(p.user.getTag() + " changed their game from " + (arr[1] == null ? "nothing" : "'" + arr[1].name + "'") + " to " + (p.game == null ? "nothing" : "'" + p.game.name + "'")); // Log new and old game to console
@@ -31,7 +33,7 @@ script.on("USER_JOIN", function(m) // Called when a user joins a guild
 	{
         for(game_name in game_roles)
         {
-            if(p.game.name.toLowerCase().substr(0, game_name.length) == game_name.toLowerCase()) // If the new game the user is playing hsa a role assigned...
+            if(p.game.name.toLowerCase().substr(0, game_name.length).indexOf(game_name.toLowerCase()) > -1) // If the new game the user is playing has a role assigned...
             {
                 var r = p.getGuild().getRoleByName(game_roles[game_name]); // We get the role for game
                 if(r == null) // If it is not found...
