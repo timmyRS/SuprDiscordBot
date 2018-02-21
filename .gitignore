@@ -4,9 +4,6 @@ out/
 *.iml
 hs_err_pid*
 
-start.bat
-start.sh
-
 values/
 scripts/*.js
 config.json
