@@ -292,33 +292,29 @@ script.on("MESSAGE_CREATE", function(msg)
 				{
 					mentions.push(user.id);
 				});
-				while(count > 0)
+				while(deleted < count)
 				{
-					var reading = 100;
-					if(count < 100)
-					{
-						reading = count;
-					}
 					var deletemsgs = [];
-					script.each(channel.getMessages(reading), function(msg)
+					script.each(channel.getMessages(100), function(msg)
 					{
-					    if(!msg.pinned)
-					    {
-                            if(mentions.length > 0)
-                            {
-                                if(script.inArray(mentions, msg.author.id))
-                                {
-                                    deletemsgs.push(msg.id);
-                                }
-                            } else
-                            {
-                                deletemsgs.push(msg.id);
-                            }
+						if(!msg.pinned && deleted < count)
+						{
+							if(mentions.length > 0)
+							{
+								if(script.inArray(mentions, msg.author.id))
+								{
+									deletemsgs.push(msg.id);
+									deleted++;
+								}
+							}
+							else
+							{
+								deletemsgs.push(msg.id);
+								deleted++;
+							}
 						}
 					});
 					channel.deleteMessages(deletemsgs);
-					count -= reading;
-					deleted += deletemsgs.length;
 				}
 				mymsg = channel.sendMessage(":thumbsup: Deleted a whopping **" + deleted + "** messages.");
 			}
@@ -351,15 +347,15 @@ script.on("MESSAGE_CREATE", function(msg)
 					var deleted = 0;
 					script.each(channel.getMessagesBefore(reading, mymsg.id), function(msg)
 					{
-					    if(!msg.pinned)
-                    	{
-                            if(msg.id != mymsg.id)
-                            {
-                                msg.delete();
-                                i--;
-                                deleted++;
-                                totaldel++;
-                            }
+						if(!msg.pinned)
+						{
+							if(msg.id != mymsg.id)
+							{
+								msg.delete();
+								i--;
+								deleted++;
+								totaldel++;
+							}
 						}
 					});
 					if(deleted == 0)
