@@ -216,7 +216,16 @@ extends java.lang.Object</pre>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>WebSocket</h4>
-<pre>public&nbsp;WebSocket(java.lang.String&nbsp;url)</pre>
+<pre>public&nbsp;WebSocket(java.lang.String&nbsp;url)
+          throws java.net.URISyntaxException,
+                 java.io.IOException,
+                 javax.websocket.DeploymentException</pre>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.net.URISyntaxException</code></dd>
+<dd><code>java.io.IOException</code></dd>
+<dd><code>javax.websocket.DeploymentException</code></dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -242,8 +251,7 @@ extends java.lang.Object</pre>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>close</h4>
-<pre>public&nbsp;void&nbsp;close(@Nullable
-                  java.lang.String&nbsp;reason)</pre>
+<pre>public&nbsp;void&nbsp;close(java.lang.String&nbsp;reason)</pre>
 </li>
 </ul>
 </li>

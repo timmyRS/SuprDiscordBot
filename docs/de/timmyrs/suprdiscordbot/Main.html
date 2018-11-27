@@ -404,7 +404,16 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>main</h4>
-<pre>public static&nbsp;void&nbsp;main(java.lang.String[]&nbsp;args)</pre>
+<pre>public static&nbsp;void&nbsp;main(java.lang.String[]&nbsp;args)
+                 throws javax.websocket.DeploymentException,
+                        java.io.IOException,
+                        java.net.URISyntaxException</pre>
+<dl>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>javax.websocket.DeploymentException</code></dd>
+<dd><code>java.io.IOException</code></dd>
+<dd><code>java.net.URISyntaxException</code></dd>
+</dl>
 </li>
 </ul>
 <a name="log-java.lang.String-java.lang.String-">
@@ -413,8 +422,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>log</h4>
-<pre>public static&nbsp;void&nbsp;log(@NotNull
-                       java.lang.String&nbsp;from,
+<pre>public static&nbsp;void&nbsp;log(java.lang.String&nbsp;from,
                        java.lang.String&nbsp;msg)</pre>
 </li>
 </ul>
