@@ -2,6 +2,7 @@
 out/
 target/
 values/
+dependency-reduced-pom.xml
 SuprDiscordbot.iml
 SuprDiscordBot.jar
 SuprDiscordBot.zip
