@@ -1,5 +1,6 @@
 .idea/
 out/
+target/
 values/
 SuprDiscordbot.iml
 SuprDiscordBot.jar
