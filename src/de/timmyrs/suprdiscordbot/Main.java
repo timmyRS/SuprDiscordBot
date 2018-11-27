@@ -7,6 +7,7 @@ import de.timmyrs.suprdiscordbot.apis.ConsoleAPI;
 import de.timmyrs.suprdiscordbot.apis.DiscordAPI;
 import de.timmyrs.suprdiscordbot.apis.InternetAPI;
 import de.timmyrs.suprdiscordbot.apis.PermissionAPI;
+import de.timmyrs.suprdiscordbot.apis.ScriptAPI;
 import de.timmyrs.suprdiscordbot.scripts.ScriptManager;
 import de.timmyrs.suprdiscordbot.websocket.WebSocketEndpoint;
 import de.timmyrs.suprdiscordbot.websocket.WebSocketHeart;
@@ -32,8 +33,8 @@ import java.io.IOException;
  *
  * @author timmyRS
  * @see DiscordAPI
- * @see de.timmyrs.suprdiscordbot.apis.ScriptAPI
- * @see de.timmyrs.suprdiscordbot.apis.ConsoleAPI
+ * @see ScriptAPI
+ * @see ConsoleAPI
  * @see de.timmyrs.suprdiscordbot.structures.Guild
  */
 public class Main
