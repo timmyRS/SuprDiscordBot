@@ -1,3 +1,4 @@
 {
-    "ignore": ["docs/"]
+    "ignore": ["docs/"],
+    "php_has_html": false
 }
