@@ -6,8 +6,7 @@ script.on("LOAD", function() // On loading of this script...
 	{
 		script.fireEvent("GUILD_CREATE", guild); // ...fire the GUILD_CREATE event.
 	})
-})
-.on("GUILD_CREATE", function(guild) // Called when we are added to a guild.
+}).on("GUILD_CREATE", function(guild) // Called when we are added to a guild.
 {
 	guild.setNickname(nickname == "" ? null : nickname); // Set name; null if name is empty.
 })

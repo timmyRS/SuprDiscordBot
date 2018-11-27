@@ -1,8 +1,8 @@
 var game_roles = {
-    "Minecraft": "Block Crusher",
-    "Osu": "Circle Clicker",
-    "Watch Dogs": "Dog Watcher",
-    "Watch_Dogs": "Dog Watcher"
+	"Minecraft": "Block Crusher",
+	"Osu": "Circle Clicker",
+	"Watch Dogs": "Dog Watcher",
+	"Watch_Dogs": "Dog Watcher"
 }
 
 script.on("USER_JOIN", function(m) // Called when a user joins a guild
@@ -31,23 +31,24 @@ script.on("USER_JOIN", function(m) // Called when a user joins a guild
 	console.log(p.user.getTag() + " changed their game from " + (arr[1] == null ? "nothing" : "'" + arr[1].name + "'") + " to " + (p.game == null ? "nothing" : "'" + p.game.name + "'")); // Log new and old game to console
 	if(p.game != null)
 	{
-        for(game_name in game_roles)
-        {
-            if(p.game.name.toLowerCase().substr(0, game_name.length).indexOf(game_name.toLowerCase()) > -1) // If the new game the user is playing has a role assigned...
-            {
-                var r = p.getGuild().getRoleByName(game_roles[game_name]); // We get the role for game
-                if(r == null) // If it is not found...
-                {
-                    console.error("Error giving out Role " + game_roles[game_name] + ": Role doesn't exist."); // print an error,
-                } else // but if it is found...
-                {
-                    if(!p.getMember().hasRole(r)) // ...and the user doesn't have it...
-                    {
-                        r.assign(p); // we assign the Role to the Member.
-                    }
-                }
-            }
-        }
+		for(game_name in game_roles)
+		{
+			if(p.game.name.toLowerCase().substr(0, game_name.length).indexOf(game_name.toLowerCase()) > -1) // If the new game the user is playing has a role assigned...
+			{
+				var r = p.getGuild().getRoleByName(game_roles[game_name]); // We get the role for game
+				if(r == null) // If it is not found...
+				{
+					console.error("Error giving out Role " + game_roles[game_name] + ": Role doesn't exist."); // print an error,
+				}
+				else // but if it is found...
+				{
+					if(!p.getMember().hasRole(r)) // ...and the user doesn't have it...
+					{
+						r.assign(p); // we assign the Role to the Member.
+					}
+				}
+			}
+		}
 	}
 }).on("MEMBER_UPDATE_ROLES", function(arr) // Called upon update of a members's guilds
 {
@@ -69,18 +70,18 @@ script.on("USER_JOIN", function(m) // Called when a user joins a guild
 	});
 }).on("CHANNEL_UPDATE_NAME", function(arr) // Called upon update of a channel's name
 {
-    var c = arr[0], old_name = arr[1];
-    console.log(c.getName() + " in " + c.getGuild().name + " was called '" + old_name + "' just a second ago.");
+	var c = arr[0], old_name = arr[1];
+	console.log(c.getName() + " in " + c.getGuild().name + " was called '" + old_name + "' just a second ago.");
 }).on("CHANNEL_UPDATE_TOPIC", function(arr) // Called upon update of a channel's name
 {
-    var c = arr[0], old_topic = arr[1];
-    console.log(c.getName() + " in " + c.getGuild().name + " now has a new topic.");
+	var c = arr[0], old_topic = arr[1];
+	console.log(c.getName() + " in " + c.getGuild().name + " now has a new topic.");
 }).on("TYPING_START", function(arr) // Called upon typing start. Note: There is NO typing stop event.
 {
 	var channel = arr[0], user = arr[1];
 	if(channel.isPartOfGuild())
 	{
-	    console.log(user.getTag() + " is now typing in " + channel.getName() + " in " + channel.getGuild().name);
+		console.log(user.getTag() + " is now typing in " + channel.getName() + " in " + channel.getGuild().name);
 	}
 	else if(channel.type == 3)
 	{
@@ -88,6 +89,6 @@ script.on("USER_JOIN", function(m) // Called when a user joins a guild
 	}
 	else
 	{
-	    console.log(user.getTag() + " is now typing in " + channel.getTypeName() + " Channel");
+		console.log(user.getTag() + " is now typing in " + channel.getTypeName() + " Channel");
 	}
 });

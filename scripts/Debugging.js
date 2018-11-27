@@ -4,60 +4,58 @@ script.on("LOAD", function()
 	{
 		script.on("MESSAGE_CREATE", function(msg)
 		{
-		var cont = msg.content.toLowerCase().trim();
-        if(cont.substr(0, 5) == "+dump")
-        {
-			if(msg.getChannel().is_private)
+			var cont = msg.content.toLowerCase().trim();
+			if(cont.substr(0, 5) == "+dump")
 			{
-
-					console.log("┌ DMs");
-					script.each(discord.getDMs(), function(c)
+				if(msg.getChannel().isPartOfGuild())
+				{
+					msg.delete();
+				}
+				console.log("┌ DMs");
+				script.each(discord.getDMs(), function(c)
+				{
+					console.log("│   ├ " + c.recipient);
+				});
+				script.each(discord.getGuilds(), function(g)
+				{
+					console.log("├ " + g.name);
+					console.log("│   ├ Channels");
+					script.each(g.getChannels(), function(c)
 					{
-						console.log("│   ├ " + c.recipient);
+						console.log("│   │   ├ " + c.getName());
+						script.each(c.permission_overwrites, function(o)
+						{
+							console.log("│   │   │    ├ " + o);
+						});
 					});
-					script.each(discord.getGuilds(), function(g)
+					console.log("│   ├ Roles");
+					script.each(g.roles, function(r)
 					{
-						console.log("├ " + g.name);
-						console.log("│   ├ Channels");
-						script.each(g.getChannels(), function(c)
+						console.log("│   │   ├ " + r.name);
+						script.each(permission.bitsToStrings(r.permissions), function(p)
 						{
-							console.log("│   │   ├ " + c.getName());
-							script.each(c.permission_overwrites, function(o)
-							{
-								console.log("│   │   │    ├ " + o);
-							});
+							console.log("│   │   │    ├ " + p);
 						});
-						console.log("│   ├ Roles");
-						script.each(g.roles, function(r)
+					});
+					console.log("│   └ Members");
+					script.each(g.members, function(m)
+					{
+						console.log("│       ├ " + m.user);
+						var p = m.getPresence();
+						if(p != null)
 						{
-							console.log("│   │   ├ " + r.name);
-							script.each(permission.bitsToStrings(r.permissions), function(p)
+							console.log("│       │   └ " + p);
+							if(p.game != null)
 							{
-								console.log("│   │   │    ├ " + p);
-							});
-						});
-						console.log("│   └ Members");
-						script.each(g.members, function(m)
-						{
-							console.log("│       ├ " + m.user);
-							var p = m.getPresence();
-							if(p != null)
-							{
-								console.log("│       │   └ " + p);
-								if(p.game != null)
-								{
-									console.log("│       │        └ " + p.game);
-								}
+								console.log("│       │        └ " + p.game);
 							}
-						});
+						}
 					});
-                } else
-                {
-                    msg.delete();
-                }
-            }
+				});
+			}
 		});
-	} else
+	}
+	else
 	{
 		console.error("You are not in debugging mode, so Debugging.js is now doing *nothing*!");
 		console.info("You can start in debugging mode by adding the --debug argument.");

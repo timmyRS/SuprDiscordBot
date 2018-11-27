@@ -2,8 +2,7 @@
 
 script.on("MESSAGE_CREATE", function(msg)
 {
-	var cont = msg.content.toLowerCase().trim(),
-	channel = msg.getChannel();
+	var cont = msg.content.toLowerCase().trim(), channel = msg.getChannel();
 
 	if(channel.getName() == "#counting")
 	{
@@ -13,7 +12,8 @@ script.on("MESSAGE_CREATE", function(msg)
 			if(bool)
 			{
 				last = m, bool = false;
-			} else if(last == null)
+			}
+			else if(last == null)
 			{
 				if(m.id == msg.id)
 				{
@@ -24,7 +24,7 @@ script.on("MESSAGE_CREATE", function(msg)
 		if(last != null)
 		{
 			num = parseInt(msg.content),
-			lastNum = parseInt(last.content);
+				lastNum = parseInt(last.content);
 			if(num != (lastNum + 1))
 			{
 				msg.delete();

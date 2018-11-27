@@ -11,8 +11,7 @@ script.on("MESSAGE_CREATE", function(msg)
 	}
 
 	// Set variables
-	var cont = msg.content.toLowerCase().trim(),
-		channel = msg.getChannel();
+	var cont = msg.content.toLowerCase().trim(), channel = msg.getChannel();
 
 	// Write message to log
 	console.log(msg.author.username + " wrote " + cont + " in " + channel.getName());
@@ -83,7 +82,8 @@ script.on("MESSAGE_CREATE", function(msg)
 			msg.delete();
 			channel = msg.author.getDMChannel();
 		}
-		channel.sendTyping().sendMessage(discord.createEmbed()
+		channel.sendTyping().sendMessage(
+			discord.createEmbed()
 			.setColor(0xF57C00)
 			.setTitle("SuprDiscordBot Help")
 			.setDescription("`+react`, `+react <id>`, `+info` and `+help` work everywhere.")
