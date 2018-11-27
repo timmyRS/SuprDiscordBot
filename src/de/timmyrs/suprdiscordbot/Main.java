@@ -76,7 +76,7 @@ public class Main
 		}
 		Main.jsonParser = new JsonParser();
 		Main.configuration = new Configuration(confFile);
-		if(Main.configuration.has("botToken"))
+		if(Main.configuration.has("botToken") && !Main.configuration.getString("botToken").equals("BOT_TOKEN"))
 		{
 			Main.gson = new Gson();
 			Main.scriptManager = new ScriptManager();
@@ -101,9 +101,7 @@ public class Main
 		else
 		{
 			Main.configuration.set("botToken", "BOT_TOKEN");
-			Main.log("Setup", "Welcome to SuprDiscordBot. :) Please setup a");
-			Main.log("Setup", "Discord Application using the following guide.");
-			Main.log("Setup", "https://github.com/timmyrs/SuprDiscordBot/blob/master/SETUP.md");
+			Main.log("Setup", "Welcome to SuprDiscordBot. Please set up a Discord Application. Check the readme for details.");
 		}
 	}
 
