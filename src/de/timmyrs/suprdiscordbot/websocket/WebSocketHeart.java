@@ -3,6 +3,10 @@ package de.timmyrs.suprdiscordbot.websocket;
 import de.timmyrs.suprdiscordbot.Main;
 import de.timmyrs.suprdiscordbot.apis.DiscordAPI;
 
+import javax.websocket.DeploymentException;
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 public class WebSocketHeart extends Thread
 {
 	static boolean gotACK = true;
@@ -26,7 +30,14 @@ public class WebSocketHeart extends Thread
 					if(gotACK)
 					{
 						gotACK = false;
-						Main.discordAPI.send(1, WebSocket.lastSeq);
+						try
+						{
+							Main.discordAPI.send(1, WebSocket.lastSeq);
+						}
+						catch(DeploymentException | IOException | URISyntaxException e)
+						{
+							e.printStackTrace();
+						}
 					}
 					else
 					{

@@ -2,7 +2,6 @@ package de.timmyrs.suprdiscordbot;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonParser;
-import com.sun.istack.internal.NotNull;
 import de.timmyrs.suprdiscordbot.apis.ConsoleAPI;
 import de.timmyrs.suprdiscordbot.apis.DiscordAPI;
 import de.timmyrs.suprdiscordbot.apis.InternetAPI;
@@ -12,8 +11,10 @@ import de.timmyrs.suprdiscordbot.scripts.ScriptManager;
 import de.timmyrs.suprdiscordbot.websocket.WebSocketEndpoint;
 import de.timmyrs.suprdiscordbot.websocket.WebSocketHeart;
 
+import javax.websocket.DeploymentException;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 /**
  * SuprDiscordBot Main Class.
@@ -55,7 +56,7 @@ public class Main
 	public static JsonParser jsonParser;
 	public static volatile WebSocketEndpoint webSocketEndpoint;
 
-	public static void main(String[] args)
+	public static void main(String[] args) throws DeploymentException, IOException, URISyntaxException
 	{
 		Main.log("Main", "SuprDiscordBot v" + version);
 		Main.log("Main", "https://github.com/timmyrs/SuprDiscordBot");
@@ -84,8 +85,8 @@ public class Main
 			Main.discordAPI = new DiscordAPI();
 			Main.internetAPI = new InternetAPI();
 			Main.permissionAPI = new PermissionAPI();
+			DiscordAPI.openWebSocket();
 			new WebSocketHeart();
-			DiscordAPI.getWebSocket();
 			try
 			{
 				if(!internetAPI.httpString("https://raw.githubusercontent.com/timmyrs/SuprDiscordBot/master/version.txt").trim().equals(Main.version))
@@ -105,7 +106,7 @@ public class Main
 		}
 	}
 
-	public static void log(@NotNull String from, String msg)
+	public static void log(String from, String msg)
 	{
 		from = "[" + from + "] ";
 		final int length = (12 - from.length());

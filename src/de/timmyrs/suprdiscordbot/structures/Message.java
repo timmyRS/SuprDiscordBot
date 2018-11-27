@@ -284,9 +284,7 @@ public class Message extends Structure
 		}
 		else
 		{
-			return "{Message #" + id +
-					" by " + author.toString() +
-					" in " + getChannel().toString() + "}";
+			return "{Message #" + id + " by " + author.toString() + " in " + getChannel().toString() + "}";
 		}
 	}
 }

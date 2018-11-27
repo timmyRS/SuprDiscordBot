@@ -1,38 +1,36 @@
 package de.timmyrs.suprdiscordbot.websocket;
 
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
 import de.timmyrs.suprdiscordbot.Main;
 import de.timmyrs.suprdiscordbot.apis.DiscordAPI;
 
-import javax.websocket.*;
+import javax.websocket.ClientEndpoint;
+import javax.websocket.CloseReason;
+import javax.websocket.ContainerProvider;
+import javax.websocket.DeploymentException;
+import javax.websocket.OnClose;
+import javax.websocket.OnError;
+import javax.websocket.OnMessage;
+import javax.websocket.OnOpen;
+import javax.websocket.Session;
+import javax.websocket.WebSocketContainer;
+import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 
 @SuppressWarnings("unused")
 @ClientEndpoint
 public class WebSocketEndpoint
 {
-	@Nullable
 	Session userSession;
-	@NotNull
 	private MessageHandler messageHandler;
 
-	WebSocketEndpoint(@NotNull URI endpointURI)
+	WebSocketEndpoint(URI endpointURI) throws IOException, DeploymentException
 	{
-		try
-		{
-			WebSocketContainer container = ContainerProvider.getWebSocketContainer();
-			container.connectToServer(this, endpointURI);
-		}
-		catch(Exception e)
-		{
-			DiscordAPI.closeWebSocket("Connection failed.");
-			DiscordAPI.getWebSocket();
-		}
+		WebSocketContainer container = ContainerProvider.getWebSocketContainer();
+		container.connectToServer(this, endpointURI);
 	}
 
 	@OnOpen
-	@Nullable
 	public void onOpen(Session userSession)
 	{
 		Main.log("Socket", "WebSocket opened.");
@@ -40,26 +38,23 @@ public class WebSocketEndpoint
 	}
 
 	@OnError
-	@Nullable
 	public void onError(Session userSession, Throwable e)
 	{
 		e.printStackTrace();
 	}
 
 	@OnClose
-	@Nullable
-	public void onClose(Session userSession, CloseReason reason)
+	public void onClose(Session userSession, CloseReason reason) throws DeploymentException, IOException, URISyntaxException
 	{
 		Main.log("Socket", "WebSocket closed: " + reason.getReasonPhrase() + " (" + reason.getCloseCode().getCode() + ")");
 		this.userSession = null;
 		Main.scriptManager.fireEvent("DISCONNECTED");
 		DiscordAPI.closeWebSocket(null);
-		DiscordAPI.getWebSocket();
+		DiscordAPI.openWebSocket();
 	}
 
 	@OnMessage
-	@Nullable
-	public void onMessage(@Nullable String msg)
+	public void onMessage(String msg) throws DeploymentException, IOException, URISyntaxException
 	{
 		if(this.messageHandler != null)
 		{
@@ -71,7 +66,7 @@ public class WebSocketEndpoint
 		}
 		else if(msg != null)
 		{
-			Main.log("Socket", "Unhandled > " + msg);
+			Main.log("Socket", "Unhandled: " + msg);
 		}
 	}
 
@@ -80,7 +75,6 @@ public class WebSocketEndpoint
 		this.messageHandler = msgHandler;
 	}
 
-	@Nullable
 	void send(String msg)
 	{
 		if(Main.debug)
@@ -95,6 +89,6 @@ public class WebSocketEndpoint
 
 	public interface MessageHandler
 	{
-		void handleMessage(@Nullable String message);
+		void handleMessage(String message) throws DeploymentException, IOException, URISyntaxException;
 	}
 }

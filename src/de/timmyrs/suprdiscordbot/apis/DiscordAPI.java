@@ -2,17 +2,24 @@ package de.timmyrs.suprdiscordbot.apis;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.sun.istack.internal.Nullable;
 import de.timmyrs.suprdiscordbot.Main;
-import de.timmyrs.suprdiscordbot.structures.*;
+import de.timmyrs.suprdiscordbot.structures.Channel;
+import de.timmyrs.suprdiscordbot.structures.Embed;
+import de.timmyrs.suprdiscordbot.structures.Guild;
+import de.timmyrs.suprdiscordbot.structures.Overwrite;
+import de.timmyrs.suprdiscordbot.structures.Presence;
+import de.timmyrs.suprdiscordbot.structures.Structure;
+import de.timmyrs.suprdiscordbot.structures.User;
 import de.timmyrs.suprdiscordbot.websocket.WebSocket;
 import org.apache.commons.io.IOUtils;
 import sun.net.www.protocol.https.HttpsURLConnectionImpl;
 
+import javax.websocket.DeploymentException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -232,14 +239,13 @@ public class DiscordAPI
 	/**
 	 * Not accessible within script.
 	 */
-	public static void getWebSocket()
+	public static void openWebSocket() throws DeploymentException, IOException, URISyntaxException
 	{
 		if(ws == null)
 		{
 			if(!Main.configuration.has("gateway"))
 			{
-				JsonObject json = Main.jsonParser.parse(Main.discordAPI.request("/gateway").toString()).getAsJsonObject();
-				Main.configuration.set("gateway", json.get("url").getAsString());
+				Main.configuration.set("gateway", Main.jsonParser.parse(Main.discordAPI.request("/gateway").toString()).getAsJsonObject().get("url").getAsString());
 			}
 			ws = new WebSocket(Main.configuration.getString("gateway") + "/?v=6&encoding=json");
 		}
@@ -250,7 +256,7 @@ public class DiscordAPI
 	 *
 	 * @param reason Close reason
 	 */
-	public static void closeWebSocket(@Nullable String reason)
+	public static void closeWebSocket(String reason)
 	{
 		if(ws != null)
 		{
@@ -302,7 +308,7 @@ public class DiscordAPI
 	 * @param op OP Code
 	 * @param d  Raw JSON Data
 	 */
-	public void send(int op, Object d)
+	public void send(int op, Object d) throws DeploymentException, IOException, URISyntaxException
 	{
 		JsonObject json = new JsonObject();
 		json.addProperty("op", op);
@@ -321,7 +327,7 @@ public class DiscordAPI
 		if(ws == null)
 		{
 			WebSocket.afterConnectSend = json;
-			DiscordAPI.getWebSocket();
+			DiscordAPI.openWebSocket();
 		}
 		else
 		{

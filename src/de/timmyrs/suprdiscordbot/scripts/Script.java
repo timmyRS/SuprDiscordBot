@@ -1,7 +1,5 @@
 package de.timmyrs.suprdiscordbot.scripts;
 
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
 import de.timmyrs.suprdiscordbot.Main;
 import de.timmyrs.suprdiscordbot.apis.ScriptAPI;
 
@@ -17,15 +15,15 @@ public class Script
 	String hash;
 	private boolean started = false;
 
-	Script(@NotNull String name, @NotNull String hash, @NotNull String script) throws ScriptException
+	Script(String name, String hash, String script) throws ScriptException
 	{
 		this.name = name;
 		this.hash = hash;
 		setScript(script);
 	}
 
-	@NotNull
-	Script setScript(@NotNull final String script) throws ScriptException
+
+	Script setScript(final String script) throws ScriptException
 	{
 		if(this.started)
 		{
@@ -46,8 +44,8 @@ public class Script
 		return this;
 	}
 
-	@NotNull
-	public void fireEvent(@NotNull String event, @Nullable final Object data)
+
+	public void fireEvent(String event, final Object data)
 	{
 		event = event.toUpperCase();
 		if(this.events.containsKey(event))
