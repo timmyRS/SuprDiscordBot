@@ -1,8 +1,8 @@
 .idea/
-dist/SuprDiscordBot.jar
-dist/SuprDiscordBot.zip
 out/
 target/
 values/
 SuprDiscordbot.iml
+SuprDiscordBot.jar
+SuprDiscordBot.zip
 config.json
