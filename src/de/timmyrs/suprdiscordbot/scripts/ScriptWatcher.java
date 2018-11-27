@@ -14,7 +14,7 @@ public class ScriptWatcher extends Thread
 
 	public ScriptWatcher()
 	{
-		new Thread(this, "ScriptWatcher").start();
+		this.start();
 	}
 
 	public void run()

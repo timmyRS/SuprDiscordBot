@@ -39,7 +39,7 @@ public class Script
 		engine.put("console", Main.consoleAPI);
 		engine.put("discord", Main.discordAPI);
 		engine.put("internet", Main.internetAPI);
-		engine.put("permission", Main.permisisonAPI);
+		engine.put("permission", Main.permissionAPI);
 		engine.put("script", new ScriptAPI(this));
 		engine.eval(script);
 		this.started = true;

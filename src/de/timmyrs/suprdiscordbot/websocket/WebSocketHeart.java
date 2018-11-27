@@ -11,7 +11,7 @@ public class WebSocketHeart extends Thread
 
 	public WebSocketHeart()
 	{
-		new Thread(this, "WebSocketHeart").start();
+		this.start();
 	}
 
 	public void run()

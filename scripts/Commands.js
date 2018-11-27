@@ -12,7 +12,7 @@ script.on("MESSAGE_CREATE", function(msg)
 
 	// Set variables
 	var cont = msg.content.toLowerCase().trim(),
-	channel = msg.getChannel();
+		channel = msg.getChannel();
 
 	// Write message to log
 	console.log(msg.author.username + " wrote " + cont + " in " + channel.getName());
@@ -50,10 +50,12 @@ script.on("MESSAGE_CREATE", function(msg)
 		{
 			msg.addReactions(["🇴", "🇰"]);
 		}
-	} else if(cont == "+react")
+	}
+	else if(cont == "+react")
 	{
 		msg.addReactions(["🇴", "🇰"]);
-	} else if(cont == "+info")
+	}
+	else if(cont == "+info")
 	{
 		var presence = discord.getPresence(msg.author.id);
 		if(channel.isPartOfGuild())
@@ -67,12 +69,14 @@ script.on("MESSAGE_CREATE", function(msg)
 		if(presence.game != null)
 		{
 			embed.addField("Game", presence.game, false);
-		} else
+		}
+		else
 		{
 			embed.addField("Game", "None", false);
 		}
 		channel.sendMessage(embed);
-	} else if(cont == "+help")
+	}
+	else if(cont == "+help")
 	{
 		if(channel.isPartOfGuild())
 		{
@@ -82,22 +86,15 @@ script.on("MESSAGE_CREATE", function(msg)
 		channel.sendTyping().sendMessage(discord.createEmbed()
 			.setColor(0xF57C00)
 			.setTitle("SuprDiscordBot Help")
+			.setDescription("`+react`, `+react <id>`, `+info` and `+help` work everywhere.")
 			.setURL("https://github.com/timmyrs/SuprDiscordBot")
-			.addField("Everywhere-Commands", "`+react`, `+react <id>`, `+info` and `+help` work everywhere.", false)
-			.addField("Guild-only", "`+explode`, `+slowmode` and `xd`-fixture are Guild-only.", false)
-			.addField("Guild-Mod-only", "`+explode <id>`, `+clear <count> [<mentions ...>]`, `+erase <count>`, `+mute <secs> <mentions ...>`, `+mute <mentions ...>`, `+unmute <mentions ...>`, `+gute <mentions ...>`, `+ungute <mentions ...>` and `+slowmode <secs>` are only available on Guilds for Mods.", false)
-			.setFooter("SuprDiscordBot, Commands.js, by timmyRS")
-			);
-	} else if(channel.isPartOfGuild())
+			.addField("Guild-only", "`+explode` and `+slowmode` are Guild-only.", false)
+			.addField("Guild Mod-only", "`+explode <id>`, `+clear <count> [<mentions ...>]`, `+erase <count>`, `+mute <secs> <mentions ...>`, `+mute <mentions ...>`, `+unmute <mentions ...>`, `+gute <mentions ...>`, `+ungute <mentions ...>` and `+slowmode <secs>` are only available on Guilds for Mods.", false)
+			.setFooter("https://github.com/timmyrs/SuprDiscordBot")
+		);
+	}
+	else if(channel.isPartOfGuild())
 	{
-		// Handle severe cases of incompetence
-		if(msg.content.indexOf("xd") != -1)
-		{
-			msg.delete();
-			msg.author.getDMChannel().sendMessage("Here is your message, but with fixed `xD`:\n```\n" + msg.content.split("xd").join("xD") + "\n```");
-			return;
-		}
-
 		// Find out if member is privileged
 		var hasperm = false;
 		script.each(channel.getGuild().getMember(msg.author).getRoles(), function(role)
@@ -110,7 +107,6 @@ script.on("MESSAGE_CREATE", function(msg)
 				}
 			});
 		});
-
 		// Guild-only commands
 		if(cont.substr(0, 6) == "+mute " || cont.substr(0, 6) == "+gute ")
 		{
@@ -130,7 +126,8 @@ script.on("MESSAGE_CREATE", function(msg)
 					{
 						msg.delete();
 					}, 5000);
-				} else
+				}
+				else
 				{
 					script.each(msg.mentions, function(mention)
 					{
@@ -165,18 +162,21 @@ script.on("MESSAGE_CREATE", function(msg)
 							if(gmute)
 							{
 								channel.sendMessage(":thumbsup: " + mention.getHandle() + " is now muted in " + channel.getGuild().name + ".");
-							} else
+							}
+							else
 							{
 								channel.sendMessage(":thumbsup: " + mention.getHandle() + " is now muted in " + channel.getHandle() + ".");
 							}
-						} else
+						}
+						else
 						{
 							if(gmute)
 							{
-								msg = channel.sendMessage(":thumbsup: " + mention.getHandle() + " is now muted for **" + secs + "** second" + (secs == 1 ? "" : "s") +" in " + channel.getGuild().name + ".");
-							} else
+								msg = channel.sendMessage(":thumbsup: " + mention.getHandle() + " is now muted for **" + secs + "** second" + (secs == 1 ? "" : "s") + " in " + channel.getGuild().name + ".");
+							}
+							else
 							{
-								msg = channel.sendMessage(":thumbsup: " + mention.getHandle() + " is now muted for **" + secs + "** second" + (secs == 1 ? "" : "s") +" in " + channel.getHandle() + ".");
+								msg = channel.sendMessage(":thumbsup: " + mention.getHandle() + " is now muted for **" + secs + "** second" + (secs == 1 ? "" : "s") + " in " + channel.getHandle() + ".");
 							}
 						}
 					});
@@ -205,7 +205,8 @@ script.on("MESSAGE_CREATE", function(msg)
 					if(gmute)
 					{
 						channel.sendMessage(":thumbsup: " + mention.getHandle() + " is no longer muted in " + channel.getGuild().name + ".");
-					} else
+					}
+					else
 					{
 						channel.sendMessage(":thumbsup: " + mention.getHandle() + " is no longer muted in " + channel.getHandle() + ".");
 					}
@@ -233,7 +234,8 @@ script.on("MESSAGE_CREATE", function(msg)
 				{
 					delmsg = delmsg.id;
 				}
-			} else
+			}
+			else
 			{
 				delmsg = msg.id;
 			}
@@ -244,7 +246,8 @@ script.on("MESSAGE_CREATE", function(msg)
 				{
 					mymsg.delete();
 				}, 5000);
-			} else
+			}
+			else
 			{
 				mymsg = channel.sendMessage("Message **" + delmsg + "** explodes in `5`...");
 				script.timeout(function()
@@ -268,7 +271,8 @@ script.on("MESSAGE_CREATE", function(msg)
 					}, 1000);
 				}, 1000);
 			}
-		} else if(cont.substr(0, 7) == "+clear ")
+		}
+		else if(cont.substr(0, 7) == "+clear ")
 		{
 			channel.sendTyping();
 			msg.delete();
@@ -277,15 +281,18 @@ script.on("MESSAGE_CREATE", function(msg)
 			{
 				msg.delete();
 				mymsg = channel.sendMessage(":warning: " + msg.author.getHandle() + " Only privileged members may use `+clear <count> [<mentions ...>]`.");
-			} else if(count < 1)
+			}
+			else if(count < 1)
 			{
 				msg.delete();
 				mymsg = channel.sendMessage(":warning: " + msg.author.getHandle() + " Can't delete 0 (or less) messages.");
-			} else if(count == 1)
+			}
+			else if(count == 1)
 			{
 				msg.delete();
 				mymsg = channel.sendMessage(":thumbsdown: Now you are just being lazy, " + msg.author.getHandle() + ".");
-			} else
+			}
+			else
 			{
 				var deleted = 0, mentions = [];
 				script.each(msg.mentions, function(user)
@@ -322,7 +329,8 @@ script.on("MESSAGE_CREATE", function(msg)
 			{
 				mymsg.delete();
 			}, 5000);
-		} else if(cont.substr(0, 7) == "+erase ")
+		}
+		else if(cont.substr(0, 7) == "+erase ")
 		{
 			channel.sendTyping();
 			var count = parseInt(cont.substr(7)), mymsg;
@@ -330,10 +338,12 @@ script.on("MESSAGE_CREATE", function(msg)
 			if(!hasperm)
 			{
 				mymsg = channel.sendMessage(":warning: " + msg.author.getHandle() + " Only privileged members may use `+erase <count>`.");
-			} else if(count < 1)
+			}
+			else if(count < 1)
 			{
 				mymsg = channel.sendMessage(":warning: " + msg.author.getHandle() + " Can't delete 0 or less messages.");
-			} else
+			}
+			else
 			{
 				var i = count, totaldel = 0;
 				mymsg = channel.sendMessage(":warning: Deleting **" + count + "** messages...");
@@ -361,7 +371,8 @@ script.on("MESSAGE_CREATE", function(msg)
 					if(deleted == 0)
 					{
 						i = 0;
-					} else
+					}
+					else
 					{
 						mymsg.edit(":warning: Deleting **" + i + "** messages...");
 					}
@@ -372,7 +383,8 @@ script.on("MESSAGE_CREATE", function(msg)
 			{
 				mymsg.delete();
 			}, 5000);
-		} else if(cont == "+slowmode")
+		}
+		else if(cont == "+slowmode")
 		{
 			channel.sendTyping();
 			msg.delete();
@@ -380,7 +392,8 @@ script.on("MESSAGE_CREATE", function(msg)
 			if(channel.getValues().has("slowmode"))
 			{
 				mymsg = channel.sendMessage(":information_source: An interval of **" + channel.getValues().getString("slowmode") + "** second(s) is being inforced in " + channel.getHandle() + ".");
-			} else
+			}
+			else
 			{
 				mymsg = channel.sendMessage(":information_source: There is no interval being enforced in " + channel.getHandle() + ".");
 			}
@@ -388,7 +401,8 @@ script.on("MESSAGE_CREATE", function(msg)
 			{
 				mymsg.delete();
 			}, 5000);
-		} else if(cont.substr(0, 10) == "+slowmode ")
+		}
+		else if(cont.substr(0, 10) == "+slowmode ")
 		{
 			channel.sendTyping();
 			msg.delete();
@@ -396,17 +410,21 @@ script.on("MESSAGE_CREATE", function(msg)
 			if(!hasperm)
 			{
 				mymsg = channel.sendMessage(":warning: " + msg.author.getHandle() + " Only privileged members may use `+clear <count>`.");
-			} else if(secs == 0)
+			}
+			else if(secs == 0)
 			{
 				channel.getValues().unset("slowmode");
 				mymsg = channel.sendMessage(":thumbsup: Disabled slowmode in " + channel.getHandle() + ".");
-			} else if(secs < 0)
+			}
+			else if(secs < 0)
 			{
 				mymsg = channel.sendMessage(":warning: " + msg.author.getHandle() + " Interval has to be a positive integer.");
-			} else if(secs > 60)
+			}
+			else if(secs > 60)
 			{
 				mymsg = channel.sendMessage(":warning: " + msg.author.getHandle() + " Won't set interval above 60 seconds.");
-			} else
+			}
+			else
 			{
 				channel.getValues().set("slowmode", secs);
 				mymsg = channel.sendMessage(":thumbsup: An interval of **" + secs + "** second(s) between messages is now being enforced.");
@@ -415,7 +433,8 @@ script.on("MESSAGE_CREATE", function(msg)
 			{
 				mymsg.delete();
 			}, 5000);
-		} else if(cont.substr(0, 11) == "+timeclear ")
+		}
+		else if(cont.substr(0, 11) == "+timeclear ")
 		{
 			channel.sendTyping();
 			msg.delete();
@@ -423,10 +442,12 @@ script.on("MESSAGE_CREATE", function(msg)
 			if(!hasperm)
 			{
 				mymsg = channel.sendMessage(":warning: " + msg.author.getHandle() + " Only privileged members may use `+timeclear <hours>`.");
-			} else if(hours < 0)
+			}
+			else if(hours < 0)
 			{
 				mymsg = channel.sendMessage(":warning: " + msg.author.getHandle() + " Hours have to be a positive integer.");
-			} else
+			}
+			else
 			{
 				var msgs, before = channel.last_message_id, done = false, count = 0;
 				while(!done && (msgs = channel.getMessagesBefore(100, before)).length != 0)
@@ -445,7 +466,8 @@ script.on("MESSAGE_CREATE", function(msg)
 							{
 								console.info("Can't delete messages older than 2 weeks. Use +erase <count> instead.");
 								done = true;
-							} else
+							}
+							else
 							{
 								deleteids.push(msg.id);
 								count++;

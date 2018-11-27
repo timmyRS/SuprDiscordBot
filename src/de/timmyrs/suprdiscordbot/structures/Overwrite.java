@@ -64,12 +64,12 @@ public class Overwrite extends Structure
 	{
 		if(allow < 0)
 		{
-			if(Main.permisisonAPI.allowsFor(this.allow, allow * -1))
+			if(Main.permissionAPI.allowsFor(this.allow, allow * -1))
 			{
 				this.allow += allow;
 			}
 		}
-		else if(!Main.permisisonAPI.allowsFor(this.allow, allow))
+		else if(!Main.permissionAPI.allowsFor(this.allow, allow))
 		{
 			this.allow += allow;
 		}
@@ -85,12 +85,12 @@ public class Overwrite extends Structure
 	{
 		if(deny < 0)
 		{
-			if(Main.permisisonAPI.allowsFor(this.deny, deny * -1))
+			if(Main.permissionAPI.allowsFor(this.deny, deny * -1))
 			{
 				this.deny += deny;
 			}
 		}
-		else if(!Main.permisisonAPI.allowsFor(this.deny, deny))
+		else if(!Main.permissionAPI.allowsFor(this.deny, deny))
 		{
 			this.deny += deny;
 		}

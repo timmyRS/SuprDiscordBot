@@ -129,7 +129,7 @@ public class Embed extends Structure
 	 *
 	 * @param name   Name of the field. Up to 256 chars.
 	 * @param value  Value of the field. Up to 2048 chars.
-	 * @param inline Whether or not this field should display inline (true = right of the last field, false = below the last field).
+	 * @param inline Whether or not this field should display inline (true = to the right of the last field, false = below the last field).
 	 * @return this
 	 * @see EmbedField
 	 */

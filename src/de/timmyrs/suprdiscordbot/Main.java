@@ -31,7 +31,6 @@ import java.io.IOException;
  * </ul>
  *
  * @author timmyRS
- * @version 1.2.1
  * @see DiscordAPI
  * @see de.timmyrs.suprdiscordbot.apis.ScriptAPI
  * @see de.timmyrs.suprdiscordbot.apis.ConsoleAPI
@@ -39,8 +38,7 @@ import java.io.IOException;
  */
 public class Main
 {
-	public static final int versionInt = 1210;
-	private static final String version = "1.2.1";
+	private static final String version = "1.2.2";
 	private static final File valuesDir = new File("values");
 	private final static File confFile = new File("config.json");
 	public static boolean debug = false;
@@ -50,7 +48,7 @@ public class Main
 	public static ConsoleAPI consoleAPI;
 	public static DiscordAPI discordAPI;
 	public static InternetAPI internetAPI;
-	public static PermissionAPI permisisonAPI;
+	public static PermissionAPI permissionAPI;
 	public static boolean ready = false;
 	public static Gson gson;
 	public static JsonParser jsonParser;
@@ -58,7 +56,7 @@ public class Main
 
 	public static void main(String[] args)
 	{
-		Main.log("Main", "SuprDiscordBot Version " + version);
+		Main.log("Main", "SuprDiscordBot v" + version);
 		Main.log("Main", "https://github.com/timmyrs/SuprDiscordBot");
 		for(String arg : args)
 		{
@@ -84,18 +82,14 @@ public class Main
 			Main.consoleAPI = new ConsoleAPI();
 			Main.discordAPI = new DiscordAPI();
 			Main.internetAPI = new InternetAPI();
-			Main.permisisonAPI = new PermissionAPI();
+			Main.permissionAPI = new PermissionAPI();
 			new WebSocketHeart();
 			DiscordAPI.getWebSocket();
 			try
 			{
-				if(Integer.valueOf(internetAPI.httpString("https://raw.githubusercontent.com/timmyrs/SuprDiscordBot/master/version.txt").trim()) > Main.versionInt)
+				if(!internetAPI.httpString("https://raw.githubusercontent.com/timmyrs/SuprDiscordBot/master/version.txt").trim().equals(Main.version))
 				{
 					Main.log("Main", "There is a new verion/release available at https://github.com/timmyrs/SuprDiscordBot/releases");
-				}
-				else if(Main.debug)
-				{
-					Main.log("Main", "This seems to be the newest version.");
 				}
 			}
 			catch(IOException e)

@@ -121,22 +121,6 @@ public class ScriptAPI
 	}
 
 	/**
-	 * @param version Minimum version
-	 * @return Whether the version of this instance is equal to or above the given minimum version
-	 * @since 1.1
-	 */
-	public boolean isVersionOrAbove(String version)
-	{
-		StringBuilder versionBuilder = new StringBuilder(version.replaceAll("\\.", ""));
-		while(versionBuilder.length() < 4)
-		{
-			versionBuilder.append("0");
-		}
-		version = versionBuilder.toString();
-		return Main.versionInt >= Integer.valueOf(version);
-	}
-
-	/**
 	 * @param event Name of the event to be fired
 	 * @return this
 	 */

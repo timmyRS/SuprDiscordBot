@@ -1,9 +1,8 @@
-out/
 .idea/
-.floo*
-*.iml
-hs_err_pid*
-
+dist/SuprDiscordBot.jar
+dist/SuprDiscordBot.zip
+out/
+target/
 values/
-scripts/*.js
+SuprDiscordbot.iml
 config.json

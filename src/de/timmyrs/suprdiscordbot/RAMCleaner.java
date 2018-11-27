@@ -8,7 +8,7 @@ public class RAMCleaner extends Thread
 {
 	public RAMCleaner()
 	{
-		new Thread(this, "RAMCleaner").start();
+		this.start();
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class RAMCleaner extends Thread
 				}
 				if(removed > 0 && Main.debug)
 				{
-					Main.log("Cleaner", "Removed " + removed + " useless value(s) from RAM.");
+					Main.log("Cleaner", "Removed " + removed + " useless value" + (removed == 1 ? "" : "s") + " from RAM.");
 				}
 				Thread.sleep(60000);
 			}
