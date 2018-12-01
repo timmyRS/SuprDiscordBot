@@ -8,6 +8,7 @@ import de.timmyrs.suprdiscordbot.apis.InternetAPI;
 import de.timmyrs.suprdiscordbot.apis.PermissionAPI;
 import de.timmyrs.suprdiscordbot.apis.ScriptAPI;
 import de.timmyrs.suprdiscordbot.scripts.ScriptManager;
+import de.timmyrs.suprdiscordbot.websocket.WebSocket;
 import de.timmyrs.suprdiscordbot.websocket.WebSocketEndpoint;
 import de.timmyrs.suprdiscordbot.websocket.WebSocketHeart;
 
@@ -40,7 +41,7 @@ import java.net.URISyntaxException;
  */
 public class Main
 {
-	private static final String version = "1.2.2";
+	private static final String version = "1.2.3";
 	private static final File valuesDir = new File("values");
 	private final static File confFile = new File("config.json");
 	public static boolean debug = false;
@@ -80,12 +81,15 @@ public class Main
 		if(Main.configuration.has("botToken") && !Main.configuration.getString("botToken").equals("BOT_TOKEN"))
 		{
 			Main.gson = new Gson();
+			if(!Main.configuration.has("gateway"))
+			{
+				Main.configuration.set("gateway", Main.jsonParser.parse(Main.discordAPI.request("/gateway").toString()).getAsJsonObject().get("url").getAsString());
+			}
 			Main.scriptManager = new ScriptManager();
+			Main.discordAPI = new DiscordAPI(new WebSocket(Main.configuration.getString("gateway") + "/?v=6&encoding=json"));
 			Main.consoleAPI = new ConsoleAPI();
-			Main.discordAPI = new DiscordAPI();
 			Main.internetAPI = new InternetAPI();
 			Main.permissionAPI = new PermissionAPI();
-			DiscordAPI.openWebSocket();
 			new WebSocketHeart();
 			try
 			{

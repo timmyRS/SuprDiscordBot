@@ -1,7 +1,6 @@
 package de.timmyrs.suprdiscordbot.websocket;
 
 import de.timmyrs.suprdiscordbot.Main;
-import de.timmyrs.suprdiscordbot.apis.DiscordAPI;
 
 import javax.websocket.ClientEndpoint;
 import javax.websocket.CloseReason;
@@ -21,20 +20,21 @@ import java.net.URISyntaxException;
 @ClientEndpoint
 public class WebSocketEndpoint
 {
-	Session userSession;
-	private MessageHandler messageHandler;
+	final private MessageHandler messageHandler;
+	public Session session;
 
-	WebSocketEndpoint(URI endpointURI) throws IOException, DeploymentException
+	WebSocketEndpoint(URI endpointURI, MessageHandler messageHandler) throws IOException, DeploymentException
 	{
 		WebSocketContainer container = ContainerProvider.getWebSocketContainer();
 		container.connectToServer(this, endpointURI);
+		this.messageHandler = messageHandler;
 	}
 
 	@OnOpen
-	public void onOpen(Session userSession)
+	public void onOpen(Session session)
 	{
 		Main.log("Socket", "WebSocket opened.");
-		this.userSession = userSession;
+		this.session = session;
 	}
 
 	@OnError
@@ -44,13 +44,10 @@ public class WebSocketEndpoint
 	}
 
 	@OnClose
-	public void onClose(Session userSession, CloseReason reason) throws DeploymentException, IOException, URISyntaxException
+	public void onClose(Session userSession, CloseReason reason)
 	{
 		Main.log("Socket", "WebSocket closed: " + reason.getReasonPhrase() + " (" + reason.getCloseCode().getCode() + ")");
-		this.userSession = null;
-		Main.scriptManager.fireEvent("DISCONNECTED");
-		DiscordAPI.closeWebSocket(null);
-		DiscordAPI.openWebSocket();
+		System.exit(0);
 	}
 
 	@OnMessage
@@ -67,23 +64,6 @@ public class WebSocketEndpoint
 		else if(msg != null)
 		{
 			Main.log("Socket", "Unhandled: " + msg);
-		}
-	}
-
-	void addMessageHandler(MessageHandler msgHandler)
-	{
-		this.messageHandler = msgHandler;
-	}
-
-	void send(String msg)
-	{
-		if(Main.debug)
-		{
-			Main.log("Socket", "< " + msg);
-		}
-		if(this.userSession != null && this.userSession.isOpen())
-		{
-			this.userSession.getAsyncRemote().sendText(msg);
 		}
 	}
 

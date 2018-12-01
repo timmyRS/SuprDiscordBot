@@ -1,11 +1,6 @@
 package de.timmyrs.suprdiscordbot.websocket;
 
 import de.timmyrs.suprdiscordbot.Main;
-import de.timmyrs.suprdiscordbot.apis.DiscordAPI;
-
-import javax.websocket.DeploymentException;
-import java.io.IOException;
-import java.net.URISyntaxException;
 
 public class WebSocketHeart extends Thread
 {
@@ -30,19 +25,13 @@ public class WebSocketHeart extends Thread
 					if(gotACK)
 					{
 						gotACK = false;
-						try
-						{
-							Main.discordAPI.send(1, WebSocket.lastSeq);
-						}
-						catch(DeploymentException | IOException | URISyntaxException e)
-						{
-							e.printStackTrace();
-						}
+						Main.discordAPI.send(1, WebSocket.lastSeq);
 					}
 					else
 					{
 						interval = 0;
-						DiscordAPI.closeWebSocket("Discord did not answer heartbeat.");
+						Main.log("Socket", "Discord did not answer heartbeat.");
+						System.exit(0);
 					}
 					lastHeartbeat = System.currentTimeMillis();
 				}

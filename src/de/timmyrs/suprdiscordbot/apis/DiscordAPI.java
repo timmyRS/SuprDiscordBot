@@ -14,12 +14,10 @@ import de.timmyrs.suprdiscordbot.websocket.WebSocket;
 import org.apache.commons.io.IOUtils;
 import sun.net.www.protocol.https.HttpsURLConnectionImpl;
 
-import javax.websocket.DeploymentException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,12 +40,13 @@ public class DiscordAPI
 	 */
 	public User user;
 
+	public DiscordAPI(WebSocket ws)
+	{
+		DiscordAPI.ws = ws;
+	}
+
 	/**
 	 * Not accessible within script.
-	 *
-	 * @param endpoint  Endpoint
-	 * @param structure Structure
-	 * @return Object
 	 */
 	public static Object request(String endpoint, Structure structure)
 	{
@@ -56,11 +55,6 @@ public class DiscordAPI
 
 	/**
 	 * Not accessible within script.
-	 *
-	 * @param method    Method
-	 * @param endpoint  Endpoint
-	 * @param structure Structure
-	 * @return Object
 	 */
 	public static Object request(String method, String endpoint, Structure structure)
 	{
@@ -69,12 +63,6 @@ public class DiscordAPI
 
 	/**
 	 * Not accessible within script.
-	 *
-	 * @param method    Method
-	 * @param endpoint  Endpoint
-	 * @param args      Args
-	 * @param structure Structure
-	 * @return Object
 	 */
 	public static Object request(String method, String endpoint, String args, Structure structure)
 	{
@@ -237,36 +225,7 @@ public class DiscordAPI
 	}
 
 	/**
-	 * Not accessible within script.
-	 */
-	public static void openWebSocket() throws DeploymentException, IOException, URISyntaxException
-	{
-		if(ws == null)
-		{
-			if(!Main.configuration.has("gateway"))
-			{
-				Main.configuration.set("gateway", Main.jsonParser.parse(Main.discordAPI.request("/gateway").toString()).getAsJsonObject().get("url").getAsString());
-			}
-			ws = new WebSocket(Main.configuration.getString("gateway") + "/?v=6&encoding=json");
-		}
-	}
-
-	/**
-	 * Not accessible within script.
-	 *
-	 * @param reason Close reason
-	 */
-	public static void closeWebSocket(String reason)
-	{
-		if(ws != null)
-		{
-			ws.close(reason);
-			ws = null;
-		}
-	}
-
-	/**
-	 * Send a manual request to the Discord API.
+	 * Sends a request to the Discord API.
 	 *
 	 * @param method   HTTP Method (GET, POST, PATCH, etc.)
 	 * @param endpoint The API endpoint (e.g. /users/_ID_)
@@ -278,7 +237,7 @@ public class DiscordAPI
 	}
 
 	/**
-	 * Send a manual request to the Discord API.
+	 * Sends a request to the Discord API.
 	 *
 	 * @param method   HTTP Method (GET, POST, PATCH, etc.)
 	 * @param endpoint The API endpoint (e.g. /users/_ID_)
@@ -291,7 +250,7 @@ public class DiscordAPI
 	}
 
 	/**
-	 * Send a manual request to the Discord API.
+	 * Sends a request to the Discord API.
 	 *
 	 * @param endpoint HTTP Method (GET, POST, PATCH, etc.)
 	 * @return Object
@@ -308,7 +267,7 @@ public class DiscordAPI
 	 * @param op OP Code
 	 * @param d  Raw JSON Data
 	 */
-	public void send(int op, Object d) throws DeploymentException, IOException, URISyntaxException
+	public void send(int op, Object d)
 	{
 		JsonObject json = new JsonObject();
 		json.addProperty("op", op);
@@ -324,15 +283,9 @@ public class DiscordAPI
 		{
 			json.addProperty("d", d.toString());
 		}
-		if(ws == null)
-		{
-			WebSocket.afterConnectSend = json;
-			DiscordAPI.openWebSocket();
-		}
-		else
-		{
-			ws.send(json);
-		}
+		final String msg = json.toString();
+		Main.log("Socket", "< " + msg);
+		Main.webSocketEndpoint.session.getAsyncRemote().sendText(msg);
 	}
 
 	/**

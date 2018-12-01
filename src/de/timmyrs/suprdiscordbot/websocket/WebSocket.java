@@ -2,7 +2,6 @@ package de.timmyrs.suprdiscordbot.websocket;
 
 import com.google.gson.JsonObject;
 import de.timmyrs.suprdiscordbot.Main;
-import de.timmyrs.suprdiscordbot.RAMCleaner;
 import de.timmyrs.suprdiscordbot.apis.DiscordAPI;
 import de.timmyrs.suprdiscordbot.scripts.ScriptWatcher;
 import de.timmyrs.suprdiscordbot.structures.Channel;
@@ -22,14 +21,12 @@ import java.util.Arrays;
 
 public class WebSocket
 {
-	public static JsonObject afterConnectSend;
 	static int lastSeq;
 	private static String session_id = "";
 
 	public WebSocket(String url) throws URISyntaxException, IOException, DeploymentException
 	{
-		Main.webSocketEndpoint = new WebSocketEndpoint(new URI(url));
-		Main.webSocketEndpoint.addMessageHandler(message->
+		Main.webSocketEndpoint = new WebSocketEndpoint(new URI(url), message->
 		{
 			JsonObject json = Main.jsonParser.parse(message).getAsJsonObject();
 			GatewayPayload payload = Main.gson.fromJson(json, GatewayPayload.class);
@@ -64,14 +61,7 @@ public class WebSocket
 							if(!Main.ready)
 							{
 								new ScriptWatcher();
-								new RAMCleaner();
 								Main.ready = true;
-							}
-						case "RESUMED":
-							if(afterConnectSend != null)
-							{
-								send(afterConnectSend);
-								afterConnectSend = null;
 							}
 							Main.scriptManager.fireEvent("CONNECTED");
 							break;
@@ -264,12 +254,8 @@ public class WebSocket
 					}
 					break;
 				case 7:
-					DiscordAPI.closeWebSocket("Gateway requested reconnect.");
-					DiscordAPI.openWebSocket();
-					break;
-				case 9:
-					DiscordAPI.closeWebSocket("Resume failed.");
-					DiscordAPI.openWebSocket();
+					Main.log("Socket", "Gateway requested reconnect.");
+					System.exit(0);
 					break;
 				case 10:
 					JsonObject d = new JsonObject();
@@ -302,33 +288,5 @@ public class WebSocket
 					break;
 			}
 		});
-	}
-
-	public void send(JsonObject json)
-	{
-		Main.webSocketEndpoint.send(json.toString());
-	}
-
-	public void close(String reason)
-	{
-		try
-		{
-			if(reason != null)
-			{
-				Main.log("Socket", "Manually closing: " + reason);
-			}
-			if(Main.webSocketEndpoint.userSession != null && Main.webSocketEndpoint.userSession.isOpen())
-			{
-				Main.webSocketEndpoint.userSession.close();
-			}
-			if(reason == null)
-			{
-				Main.webSocketEndpoint = null;
-			}
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
 	}
 }

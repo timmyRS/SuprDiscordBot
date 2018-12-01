@@ -22,7 +22,6 @@ public class ScriptManager
 		this.factory = new ScriptEngineManager();
 	}
 
-
 	Script getScript(final String name)
 	{
 		for(Script script : scripts)
@@ -34,7 +33,6 @@ public class ScriptManager
 		}
 		return null;
 	}
-
 
 	FailedScript getFailedScript(final String name)
 	{
@@ -48,18 +46,15 @@ public class ScriptManager
 		return null;
 	}
 
-
 	void removeScript(final Script script)
 	{
 		scripts.remove(script);
 	}
 
-
 	void removeFailedScript(final FailedScript script)
 	{
 		failedscripts.remove(script);
 	}
-
 
 	Script registerScript(final File f) throws ScriptException
 	{
@@ -77,7 +72,6 @@ public class ScriptManager
 		return s;
 	}
 
-
 	void registerFailedScript(final File f)
 	{
 		String cont = "";
@@ -93,12 +87,10 @@ public class ScriptManager
 		this.failedscripts.add(s);
 	}
 
-
 	public void fireEvent(final String event)
 	{
 		fireEvent(event, null);
 	}
-
 
 	public void fireEvent(final String event, final Object data)
 	{
