@@ -14,22 +14,18 @@ import de.timmyrs.suprdiscordbot.websocket.WebSocketHeart;
 
 import javax.websocket.DeploymentException;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
 /**
- * SuprDiscordBot Main Class.
+ * SuprDiscordBot's Main Class
  * <p>
  * Arguments:
  * <ul>
  * <li>
  * <strong>--debug</strong>
  * makes output more verbose and makes {@link DiscordAPI#isInDebugMode()} return true
- * </li>
- * <li>
- * <strong>--dont-update-scripts</strong>
- * stops the Script Watcher from checking for new or updated scripts.
- * This is recommended for a <i>production environment</i>, as the watcher reads on your hard drive quite often.
  * </li>
  * </ul>
  *
@@ -41,11 +37,10 @@ import java.net.URISyntaxException;
  */
 public class Main
 {
-	private static final String version = "1.2.3";
 	private static final File valuesDir = new File("values");
-	private final static File confFile = new File("config.json");
+	private static final File confFile = new File("config.json");
+	private static FileWriter logFileWriter;
 	public static boolean debug = false;
-	public static boolean liveUpdateScripts = false;
 	public static Configuration configuration;
 	public static ScriptManager scriptManager;
 	public static ConsoleAPI consoleAPI;
@@ -59,7 +54,8 @@ public class Main
 
 	public static void main(String[] args) throws DeploymentException, IOException, URISyntaxException
 	{
-		Main.log("Main", "SuprDiscordBot v" + version);
+		logFileWriter = new FileWriter(new File("latest.log"), false);
+		Main.log("Main", "SuprDiscordBot");
 		Main.log("Main", "https://github.com/timmyrs/SuprDiscordBot");
 		for(String arg : args)
 		{
@@ -68,9 +64,6 @@ public class Main
 				case "--debug":
 					Main.debug = true;
 					break;
-				case "--live-update-scripts":
-					Main.liveUpdateScripts = true;
-					break;
 				default:
 					Main.log("Main", "Unknown Argument: " + arg);
 					break;
@@ -78,7 +71,15 @@ public class Main
 		}
 		Main.jsonParser = new JsonParser();
 		Main.configuration = new Configuration(confFile);
-		if(Main.configuration.has("botToken") && !Main.configuration.getString("botToken").equals("BOT_TOKEN"))
+		if(!Main.configuration.has("botToken"))
+		{
+			Main.configuration.set("botToken", "BOT_TOKEN");
+		}
+		if(Main.configuration.getString("botToken").equals("BOT_TOKEN"))
+		{
+			Main.log("Setup", "Welcome to SuprDiscordBot. Please set up a Discord Application. Check the readme for details.");
+		}
+		else
 		{
 			Main.gson = new Gson();
 			if(!Main.configuration.has("gateway"))
@@ -91,22 +92,6 @@ public class Main
 			Main.internetAPI = new InternetAPI();
 			Main.permissionAPI = new PermissionAPI();
 			new WebSocketHeart();
-			try
-			{
-				if(!internetAPI.httpString("https://raw.githubusercontent.com/timmyrs/SuprDiscordBot/master/version.txt").trim().equals(Main.version))
-				{
-					Main.log("Main", "There is a new verion/release available at https://github.com/timmyrs/SuprDiscordBot/releases");
-				}
-			}
-			catch(IOException e)
-			{
-				e.printStackTrace();
-			}
-		}
-		else
-		{
-			Main.configuration.set("botToken", "BOT_TOKEN");
-			Main.log("Setup", "Welcome to SuprDiscordBot. Please set up a Discord Application. Check the readme for details.");
 		}
 	}
 
@@ -121,6 +106,15 @@ public class Main
 		}
 		from = fromBuilder.toString();
 		System.out.println(from + msg);
+		try
+		{
+			logFileWriter.write(from + msg + "\n");
+			logFileWriter.flush();
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	public static Configuration getValuesConfig(String name)

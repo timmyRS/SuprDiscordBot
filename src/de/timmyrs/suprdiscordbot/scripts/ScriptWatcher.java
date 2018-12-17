@@ -7,6 +7,7 @@ import org.apache.commons.io.IOUtils;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.Objects;
 
 public class ScriptWatcher extends Thread
 {
@@ -44,8 +45,7 @@ public class ScriptWatcher extends Thread
 		{
 			try
 			{
-				//noinspection ConstantConditions
-				for(File f : scriptsDir.listFiles())
+				for(File f : Objects.requireNonNull(scriptsDir.listFiles()))
 				{
 					if(f.isDirectory())
 					{
@@ -82,13 +82,15 @@ public class ScriptWatcher extends Thread
 							String hash = DigestUtils.sha384Hex(cont);
 							if(s != null)
 							{
-								if(s.hash.equals(hash))
+								synchronized(s.events)
 								{
-									continue;
+									if(s.hash.equals(hash))
+									{
+										continue;
+									}
 								}
 								Main.log("Watcher", "Reloading " + s.name);
-								s.hash = hash;
-								s.setScript(cont);
+								s.setScript(hash, cont);
 							}
 							else
 							{
@@ -127,13 +129,13 @@ public class ScriptWatcher extends Thread
 						s.fireEvent("LOAD", null);
 					}
 				}
-				Thread.sleep(1000);
+				Thread.sleep(3000);
 			}
 			catch(Exception e)
 			{
 				e.printStackTrace();
 			}
 		}
-		while(Main.liveUpdateScripts);
+		while(!this.isInterrupted());
 	}
 }

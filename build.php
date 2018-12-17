@@ -5,7 +5,7 @@ $zip=new ZipArchive();
 $zip->open("SuprDiscordBot.zip",ZipArchive::CREATE+ZipArchive::EXCL+ZipArchive::CHECKCONS)||die("Failed to create zipfile\n");
 foreach(scandir("target")as$f)
 	if(substr($f,0,15)=="SuprDiscordBot-")
-		$zip->addFile("target/$f","SuprDiscordBot.jar");
+        rename("target/$f", "SuprDiscordBot.jar");
 foreach(["LICENSE","readme.url","start.bat","start.sh"]as$f)
 	$zip->addFile($f,$f);
 foreach(["scripts","scripts/disabled"]as$d)

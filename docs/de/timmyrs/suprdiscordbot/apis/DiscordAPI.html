@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":9,"i12":10,"i13":9,"i14":9,"i15":9,"i16":9,"i17":9,"i18":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":9,"i12":9,"i13":9,"i14":9,"i15":9,"i16":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -161,7 +161,7 @@ extends java.lang.Object</pre>
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/DiscordAPI.html#DiscordAPI--">DiscordAPI</a></span>()</code>&nbsp;</td>
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/DiscordAPI.html#DiscordAPI-de.timmyrs.suprdiscordbot.websocket.WebSocket-">DiscordAPI</a></span>(<a href="../../../../de/timmyrs/suprdiscordbot/websocket/WebSocket.html" title="class in de.timmyrs.suprdiscordbot.websocket">WebSocket</a>&nbsp;ws)</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -179,93 +179,81 @@ extends java.lang.Object</pre>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>static void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/DiscordAPI.html#closeWebSocket-java.lang.String-">closeWebSocket</a></span>(java.lang.String&nbsp;reason)</code>
-<div class="block">Not accessible within script.</div>
-</td>
-</tr>
-<tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Embed.html" title="class in de.timmyrs.suprdiscordbot.structures">Embed</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/DiscordAPI.html#createEmbed--">createEmbed</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Overwrite.html" title="class in de.timmyrs.suprdiscordbot.structures">Overwrite</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/DiscordAPI.html#createOverwrite--">createOverwrite</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html" title="class in de.timmyrs.suprdiscordbot.structures">Channel</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/DiscordAPI.html#getChannel-java.lang.String-">getChannel</a></span>(java.lang.String&nbsp;id)</code>
 <div class="block">Gets <a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html" title="class in de.timmyrs.suprdiscordbot.structures"><code>Channel</code></a> object by ID</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html" title="class in de.timmyrs.suprdiscordbot.structures">Channel</a>[]</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/DiscordAPI.html#getDMs--">getDMs</a></span>()</code>
 <div class="block">Returns an array of DM <a href="../../../../de/timmyrs/suprdiscordbot/structures/Channel.html" title="class in de.timmyrs.suprdiscordbot.structures"><code>Channel</code></a>s this bot is part of.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html" title="class in de.timmyrs.suprdiscordbot.structures">Guild</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/DiscordAPI.html#getGuild-java.lang.String-">getGuild</a></span>(java.lang.String&nbsp;id)</code>
 <div class="block">Gets <a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html" title="class in de.timmyrs.suprdiscordbot.structures"><code>Guild</code></a> object by ID</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html" title="class in de.timmyrs.suprdiscordbot.structures">Guild</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/DiscordAPI.html#getGuildByName-java.lang.String-">getGuildByName</a></span>(java.lang.String&nbsp;name)</code>
 <div class="block">Gets <a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html" title="class in de.timmyrs.suprdiscordbot.structures"><code>Guild</code></a> object by Name</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Guild.html" title="class in de.timmyrs.suprdiscordbot.structures">Guild</a>[]</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/DiscordAPI.html#getGuilds--">getGuilds</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/Presence.html" title="class in de.timmyrs.suprdiscordbot.structures">Presence</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/DiscordAPI.html#getPresence-java.lang.String-">getPresence</a></span>(java.lang.String&nbsp;id)</code>
 <div class="block">Gets <a href="../../../../de/timmyrs/suprdiscordbot/structures/Presence.html" title="class in de.timmyrs.suprdiscordbot.structures"><code>Presence</code></a> object by ID</div>
 </td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="../../../../de/timmyrs/suprdiscordbot/structures/User.html" title="class in de.timmyrs.suprdiscordbot.structures">User</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/DiscordAPI.html#getUser-java.lang.String-">getUser</a></span>(java.lang.String&nbsp;id)</code>
 <div class="block">Gets User by ID</div>
 </td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/DiscordAPI.html#isInDebugMode--">isInDebugMode</a></span>()</code>
 <div class="block">Tells you weather this instance is running in debug mode.</div>
 </td>
 </tr>
-<tr id="i11" class="rowColor">
-<td class="colFirst"><code>static void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/DiscordAPI.html#openWebSocket--">openWebSocket</a></span>()</code>
-<div class="block">Not accessible within script.</div>
-</td>
-</tr>
-<tr id="i12" class="altColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>java.lang.Object</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/DiscordAPI.html#request-java.lang.String-">request</a></span>(java.lang.String&nbsp;endpoint)</code>
-<div class="block">Send a manual request to the Discord API.</div>
+<div class="block">Sends a request to the Discord API.</div>
 </td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>static java.lang.Object</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/DiscordAPI.html#request-java.lang.String-java.lang.String-">request</a></span>(java.lang.String&nbsp;method,
        java.lang.String&nbsp;endpoint)</code>
-<div class="block">Send a manual request to the Discord API.</div>
+<div class="block">Sends a request to the Discord API.</div>
 </td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>static java.lang.Object</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/DiscordAPI.html#request-java.lang.String-java.lang.String-java.lang.String-">request</a></span>(java.lang.String&nbsp;method,
        java.lang.String&nbsp;endpoint,
        java.lang.String&nbsp;args)</code>
-<div class="block">Send a manual request to the Discord API.</div>
+<div class="block">Sends a request to the Discord API.</div>
 </td>
 </tr>
-<tr id="i15" class="rowColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code>static java.lang.Object</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/DiscordAPI.html#request-java.lang.String-java.lang.String-java.lang.String-de.timmyrs.suprdiscordbot.structures.Structure-">request</a></span>(java.lang.String&nbsp;method,
        java.lang.String&nbsp;endpoint,
@@ -274,7 +262,7 @@ extends java.lang.Object</pre>
 <div class="block">Not accessible within script.</div>
 </td>
 </tr>
-<tr id="i16" class="altColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>static java.lang.Object</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/DiscordAPI.html#request-java.lang.String-java.lang.String-de.timmyrs.suprdiscordbot.structures.Structure-">request</a></span>(java.lang.String&nbsp;method,
        java.lang.String&nbsp;endpoint,
@@ -282,14 +270,14 @@ extends java.lang.Object</pre>
 <div class="block">Not accessible within script.</div>
 </td>
 </tr>
-<tr id="i17" class="rowColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code>static java.lang.Object</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/DiscordAPI.html#request-java.lang.String-de.timmyrs.suprdiscordbot.structures.Structure-">request</a></span>(java.lang.String&nbsp;endpoint,
        <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html" title="class in de.timmyrs.suprdiscordbot.structures">Structure</a>&nbsp;structure)</code>
 <div class="block">Not accessible within script.</div>
 </td>
 </tr>
-<tr id="i18" class="altColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../de/timmyrs/suprdiscordbot/apis/DiscordAPI.html#send-int-java.lang.Object-">send</a></span>(int&nbsp;op,
     java.lang.Object&nbsp;d)</code>
@@ -354,13 +342,13 @@ extends java.lang.Object</pre>
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a name="DiscordAPI--">
+<a name="DiscordAPI-de.timmyrs.suprdiscordbot.websocket.WebSocket-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>DiscordAPI</h4>
-<pre>public&nbsp;DiscordAPI()</pre>
+<pre>public&nbsp;DiscordAPI(<a href="../../../../de/timmyrs/suprdiscordbot/websocket/WebSocket.html" title="class in de.timmyrs.suprdiscordbot.websocket">WebSocket</a>&nbsp;ws)</pre>
 </li>
 </ul>
 </li>
@@ -380,13 +368,6 @@ extends java.lang.Object</pre>
 <pre>public static&nbsp;java.lang.Object&nbsp;request(java.lang.String&nbsp;endpoint,
                                        <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html" title="class in de.timmyrs.suprdiscordbot.structures">Structure</a>&nbsp;structure)</pre>
 <div class="block">Not accessible within script.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>endpoint</code> - Endpoint</dd>
-<dd><code>structure</code> - Structure</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>Object</dd>
-</dl>
 </li>
 </ul>
 <a name="request-java.lang.String-java.lang.String-de.timmyrs.suprdiscordbot.structures.Structure-">
@@ -399,14 +380,6 @@ extends java.lang.Object</pre>
                                        java.lang.String&nbsp;endpoint,
                                        <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html" title="class in de.timmyrs.suprdiscordbot.structures">Structure</a>&nbsp;structure)</pre>
 <div class="block">Not accessible within script.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>method</code> - Method</dd>
-<dd><code>endpoint</code> - Endpoint</dd>
-<dd><code>structure</code> - Structure</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>Object</dd>
-</dl>
 </li>
 </ul>
 <a name="request-java.lang.String-java.lang.String-java.lang.String-de.timmyrs.suprdiscordbot.structures.Structure-">
@@ -420,48 +393,6 @@ extends java.lang.Object</pre>
                                        java.lang.String&nbsp;args,
                                        <a href="../../../../de/timmyrs/suprdiscordbot/structures/Structure.html" title="class in de.timmyrs.suprdiscordbot.structures">Structure</a>&nbsp;structure)</pre>
 <div class="block">Not accessible within script.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>method</code> - Method</dd>
-<dd><code>endpoint</code> - Endpoint</dd>
-<dd><code>args</code> - Args</dd>
-<dd><code>structure</code> - Structure</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>Object</dd>
-</dl>
-</li>
-</ul>
-<a name="openWebSocket--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>openWebSocket</h4>
-<pre>public static&nbsp;void&nbsp;openWebSocket()
-                          throws javax.websocket.DeploymentException,
-                                 java.io.IOException,
-                                 java.net.URISyntaxException</pre>
-<div class="block">Not accessible within script.</div>
-<dl>
-<dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>javax.websocket.DeploymentException</code></dd>
-<dd><code>java.io.IOException</code></dd>
-<dd><code>java.net.URISyntaxException</code></dd>
-</dl>
-</li>
-</ul>
-<a name="closeWebSocket-java.lang.String-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>closeWebSocket</h4>
-<pre>public static&nbsp;void&nbsp;closeWebSocket(java.lang.String&nbsp;reason)</pre>
-<div class="block">Not accessible within script.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>reason</code> - Close reason</dd>
-</dl>
 </li>
 </ul>
 <a name="request-java.lang.String-java.lang.String-">
@@ -472,7 +403,7 @@ extends java.lang.Object</pre>
 <h4>request</h4>
 <pre>public static&nbsp;java.lang.Object&nbsp;request(java.lang.String&nbsp;method,
                                        java.lang.String&nbsp;endpoint)</pre>
-<div class="block">Send a manual request to the Discord API.</div>
+<div class="block">Sends a request to the Discord API.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>method</code> - HTTP Method (GET, POST, PATCH, etc.)</dd>
@@ -491,7 +422,7 @@ extends java.lang.Object</pre>
 <pre>public static&nbsp;java.lang.Object&nbsp;request(java.lang.String&nbsp;method,
                                        java.lang.String&nbsp;endpoint,
                                        java.lang.String&nbsp;args)</pre>
-<div class="block">Send a manual request to the Discord API.</div>
+<div class="block">Sends a request to the Discord API.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>method</code> - HTTP Method (GET, POST, PATCH, etc.)</dd>
@@ -509,7 +440,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>request</h4>
 <pre>public&nbsp;java.lang.Object&nbsp;request(java.lang.String&nbsp;endpoint)</pre>
-<div class="block">Send a manual request to the Discord API.</div>
+<div class="block">Sends a request to the Discord API.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>endpoint</code> - HTTP Method (GET, POST, PATCH, etc.)</dd>
@@ -525,20 +456,13 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>send</h4>
 <pre>public&nbsp;void&nbsp;send(int&nbsp;op,
-                 java.lang.Object&nbsp;d)
-          throws javax.websocket.DeploymentException,
-                 java.io.IOException,
-                 java.net.URISyntaxException</pre>
+                 java.lang.Object&nbsp;d)</pre>
 <div class="block">Sends a request through the Gateway/Websocket.
  See https://discordapp.com/developers/docs/topics/gateway for the documentation.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>op</code> - OP Code</dd>
 <dd><code>d</code> - Raw JSON Data</dd>
-<dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>javax.websocket.DeploymentException</code></dd>
-<dd><code>java.io.IOException</code></dd>
-<dd><code>java.net.URISyntaxException</code></dd>
 </dl>
 </li>
 </ul>

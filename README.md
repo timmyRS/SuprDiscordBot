@@ -21,8 +21,6 @@ You can change the profile picture of your bot by changing your **App Icon**.
 
 - `--debug` Enables verbose logging, optimal for debugging scripts.
 
-- `--live-update-scripts` Your script files will be reloaded when changes have been detected.
-
 ## Scripting
 
 When making a JavaScript script for SuprDiscordBot, instead of `window` and `console`, you have [ScriptAPI](https://timmyrs.github.io/SuprDiscordBot/?de/timmyrs/suprdiscordbot/apis/ScriptAPI.html) and [ConsoleAPI](https://timmyrs.github.io/SuprDiscordBot/?de/timmyrs/suprdiscordbot/apis/ConsoleAPI.html), which you can access as `console` and  `script`, respectively.
