@@ -40,11 +40,7 @@ public class WebSocket
 					break;
 				case 0:
 					lastSeq = payload.s;
-					User u;
-					Guild g;
-					Member m;
-					Presence p;
-					JsonObject data = json.get("d").getAsJsonObject();
+					final JsonObject data = json.get("d").getAsJsonObject();
 					switch(payload.t)
 					{
 						default:
@@ -54,7 +50,8 @@ public class WebSocket
 							}
 							break;
 						case "READY":
-							JsonObject d = json.get("d").getAsJsonObject();
+						{
+							final JsonObject d = json.get("d").getAsJsonObject();
 							session_id = d.get("session_id").getAsString();
 							DiscordAPI.guilds.clear();
 							Main.discordAPI.user = Main.gson.fromJson(d.get("user"), User.class);
@@ -65,8 +62,10 @@ public class WebSocket
 							}
 							Main.scriptManager.fireEvent("CONNECTED");
 							break;
+						}
 						case "GUILD_CREATE":
-							g = Main.gson.fromJson(data, Guild.class);
+						{
+							final Guild g = Main.gson.fromJson(data, Guild.class);
 							for(Channel c : g.getChannels())
 							{
 								c.guild_id = g.id;
@@ -87,27 +86,35 @@ public class WebSocket
 							DiscordAPI.guilds.add(g);
 							Main.scriptManager.fireEvent("GUILD_CREATE", g);
 							break;
+						}
 						case "GUILD_DELETE":
-							g = Main.discordAPI.getGuild(data.get("id").getAsString());
+						{
+							final Guild g = Main.discordAPI.getGuild(data.get("id").getAsString());
 							DiscordAPI.guilds.remove(g);
 							Main.scriptManager.fireEvent("GUILD_DELETE", g);
 							break;
+						}
 						case "GUILD_MEMBER_ADD":
-							m = Main.gson.fromJson(data, Member.class);
+						{
+							final Member m = Main.gson.fromJson(data, Member.class);
 							m.getGuild().addMember(m);
 							Main.scriptManager.fireEvent("USER_JOIN", m);
 							break;
+						}
 						case "GUILD_MEMBER_REMOVE":
-							p = Main.gson.fromJson(data, Presence.class);
+						{
+							final Presence p = Main.gson.fromJson(data, Presence.class);
 							p.getGuild().removeMember(p.user.id);
 							p.getGuild().removePresence(p.user.id);
 							Main.scriptManager.fireEvent("USER_REMOVE", p);
 							break;
+						}
 						case "PRESENCE_UPDATE":
-							g = Main.discordAPI.getGuild(data.get("guild_id").getAsString());
-							p = Main.gson.fromJson(data, Presence.class);
-							Presence cp = g.getPresence(p.user.id);
-							m = g.getMember(p.user.id);
+						{
+							final Guild g = Main.discordAPI.getGuild(data.get("guild_id").getAsString());
+							final Presence p = Main.gson.fromJson(data, Presence.class);
+							final Presence cp = g.getPresence(p.user.id);
+							final Member m = g.getMember(p.user.id);
 							if(cp == null)
 							{
 								if(!p.status.equals("offline"))
@@ -165,10 +172,12 @@ public class WebSocket
 							}
 							g.addPresence(cp);
 							break;
+						}
 						case "GUILD_MEMBER_UPDATE":
-							m = Main.gson.fromJson(data, Member.class);
-							g = m.getGuild();
-							Member cm = m.getGuild().getMember(m.user.id);
+						{
+							final Member m = Main.gson.fromJson(data, Member.class);
+							final Guild g = m.getGuild();
+							final Member cm = m.getGuild().getMember(m.user.id);
 							if(cm.nick == null)
 							{
 								if(m.nick != null)
@@ -196,8 +205,11 @@ public class WebSocket
 							}
 							g.addMember(m);
 							break;
+						}
 						case "TYPING_START":
-							Channel c = Main.discordAPI.getChannel(data.get("channel_id").getAsString());
+						{
+							final User u;
+							final Channel c = Main.discordAPI.getChannel(data.get("channel_id").getAsString());
 							if(c.type == 1)
 							{
 								u = c.recipients[0];
@@ -212,38 +224,38 @@ public class WebSocket
 							}
 							Main.scriptManager.fireEvent("TYPING_START", new Object[]{c, u});
 							break;
+						}
 						case "CHANNEL_UPDATE":
-							g = Main.discordAPI.getGuild(data.get("guild_id").getAsString());
-							c = Main.gson.fromJson(data, Channel.class);
-							Channel cc = g.getChannel(c.id);
-							if(!cc.getName().equals(c.getName()))
+						{
+							final Guild g = Main.discordAPI.getGuild(data.get("guild_id").getAsString());
+							final Channel c = Main.gson.fromJson(data, Channel.class);
+							Channel _c = g.getChannel(c.id);
+							Main.scriptManager.fireEvent("CHANNEL_UPDATE", new Object[]{c, _c});
+							if(!_c.getName().equals(c.getName()))
 							{
-								cc.name = c.name;
-								Main.scriptManager.fireEvent("CHANNEL_UPDATE_NAME", new Object[]{c, cc.getName()});
+								Main.scriptManager.fireEvent("CHANNEL_UPDATE_NAME", new Object[]{c, _c.getName()});
 							}
-							if(c.topic != null && !cc.topic.equals(c.topic))
+							if(c.topic != null && !_c.topic.equals(c.topic))
 							{
-								cc.topic = c.topic;
-								Main.scriptManager.fireEvent("CHANNEL_UPDATE_TOPIC", new Object[]{c, cc.topic});
+								Main.scriptManager.fireEvent("CHANNEL_UPDATE_TOPIC", new Object[]{c, _c.topic});
 							}
-							if(cc.position != c.position)
+							if(_c.position != c.position)
 							{
-								cc.position = c.position;
-								Main.scriptManager.fireEvent("CHANNEL_UPDATE_POSITION", new Object[]{c, cc.position});
+								Main.scriptManager.fireEvent("CHANNEL_UPDATE_POSITION", new Object[]{c, _c.position});
 							}
-							if(c.permission_overwrites != null && !Arrays.equals(cc.permission_overwrites, c.permission_overwrites))
+							if(c.permission_overwrites != null && !Arrays.equals(_c.permission_overwrites, c.permission_overwrites))
 							{
-								cc.permission_overwrites = c.permission_overwrites;
-								Main.scriptManager.fireEvent("CHANNEL_UPDATE_OVERWRITES", new Object[]{c, cc.permission_overwrites});
+								Main.scriptManager.fireEvent("CHANNEL_UPDATE_OVERWRITES", new Object[]{c, _c.permission_overwrites});
 							}
-							g.addChannel(cc);
+							g.addChannel(c);
 							break;
+						}
 						case "MESSAGE_CREATE":
-							Message msg = Main.gson.fromJson(data, Message.class);
-							c = msg.getChannel();
-							if(c.isPartOfGuild())
+							final Message msg = Main.gson.fromJson(data, Message.class);
+							final Channel c = msg.getChannel();
+							if(c.isPartOfAGuild())
 							{
-								g = c.getGuild();
+								Guild g = c.getGuild();
 								c.last_message_id = msg.id;
 								g.addChannel(c);
 							}

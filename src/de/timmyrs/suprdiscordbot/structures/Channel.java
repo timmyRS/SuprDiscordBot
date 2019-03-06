@@ -36,7 +36,7 @@ public class Channel extends Structure
 	 * <li>4 = Guild Category</li>
 	 * </ul>
 	 *
-	 * @see Channel#isPartOfGuild()
+	 * @see Channel#isPartOfAGuild()
 	 * @since 1.2
 	 */
 	public int type;
@@ -54,26 +54,39 @@ public class Channel extends Structure
 	 */
 	public User[] recipients;
 	/**
-	 * The channel topic. 0-1024 chars. Guild- &amp; Text-only.
+	 * The channel topic. 0-1024 chars. Guild-Text-only.
 	 */
 	public String topic;
 	/**
-	 * The ID of the last message sent in this channel. Guild- &amp; Text-only.
+	 * Whether the messages in the channel are allowed to be NSFW. Guild-Text-only.
+	 */
+	public boolean nsfw;
+	/**
+	 * The ID of the last message sent in this channel. Guild-Text-only.
 	 */
 	public String last_message_id;
 	/**
-	 * The bitrate (in bits) of the voice channel. Guild- &amp; Voice-only.
+	 * The bitrate (in bits) of the voice channel. Guild-Voice-only.
 	 */
 	public int bitrate;
 	/**
-	 * The user limit of this channel. Guild- &amp; Voice-only.
+	 * The user limit of this channel. Guild-Voice-only.
 	 */
 	public int user_limit;
 	/**
-	 * The ID of the guild this channel is part of.
-	 * Use {@link Member#getGuild()} to get a {@link Guild} object.
+	 * The amount of seconds a user has to wait before sending another message (0 - 120). Guild-Text-only.
+	 */
+	public int rate_limit_per_user;
+	/**
+	 * The ID of the guild this channel is a part of.
+	 * Use {@link Channel#getGuild()} to get a {@link Guild} object.
 	 */
 	public String guild_id;
+	/**
+	 * The ID of the channel category this channel is a part of.
+	 * Use {@link Channel#getParent()} to get a {@link Channel} object.
+	 */
+	public String parent_id;
 
 	/**
 	 * @return {@link Configuration} object.
@@ -96,24 +109,60 @@ public class Channel extends Structure
 	}
 
 	/**
-	 * Returns true if this channel is part of a Guild.
+	 * Returns true if this channel is part of a guild.
 	 *
-	 * @return True if this channel is part of a Guild.
+	 * @return true if this channel is part of a guild.
 	 * @since 1.2
+	 * @deprecated Use {@link Channel#isPartOfAGuild} instead.
 	 */
 	public boolean isPartOfGuild()
 	{
-		return this.type == 0 || this.type == 2 || this.type == 3;
+		return this.isPartOfAGuild();
 	}
 
 	/**
-	 * @return {@link Guild} Guild this channel is part of.
+	 * Returns true if this channel is part of a guild.
+	 *
+	 * @return true if this channel is part of a guild.
+	 * @since 1.4.0
+	 */
+	public boolean isPartOfAGuild()
+	{
+		return this.type == 0 || this.type == 2 || this.type == 4;
+	}
+
+	/**
+	 * @return {@link Guild} The guild this channel is part of.
 	 */
 	public Guild getGuild()
 	{
-		if(this.isPartOfGuild())
+		if(this.isPartOfAGuild())
 		{
-			return Main.discordAPI.getGuild(guild_id);
+			return Main.discordAPI.getGuild(this.guild_id);
+		}
+		return null;
+	}
+
+	/**
+	 * Returns true if this channel is part of a category.
+	 *
+	 * @return true if this channel is part of a category.
+	 * @since 1.4.0
+	 */
+	public boolean hasParent()
+	{
+		return this.parent_id != null;
+	}
+
+	/**
+	 * @return {@link Channel} Category this channel is a part of.
+	 * @since 1.4.0
+	 */
+	public Channel getParent()
+	{
+		if(this.hasParent())
+		{
+			return Main.discordAPI.getChannel(this.parent_id);
 		}
 		return null;
 	}
@@ -309,7 +358,7 @@ public class Channel extends Structure
 	 */
 	public Message sendMessage(String content, boolean tts)
 	{
-		JsonObject json = new JsonObject();
+		final JsonObject json = new JsonObject();
 		json.addProperty("content", content);
 		json.addProperty("tts", tts);
 		return (Message) DiscordAPI.request("POST", "/channels/" + id + "/messages", json.toString(), new Message());
@@ -337,6 +386,36 @@ public class Channel extends Structure
 		json.addProperty("content", content);
 		json.add("embed", Main.gson.toJsonTree(embed));
 		return (Message) DiscordAPI.request("POST", "/channels/" + id + "/messages", json.toString(), new Message());
+	}
+
+	/**
+	 * Uploads local changes to this object's variables to the Discord API.
+	 *
+	 * @return this
+	 * @since 1.4.0
+	 */
+	public Channel uploadChanges()
+	{
+		final JsonObject json = new JsonObject();
+		json.addProperty("name", this.name);
+		json.addProperty("position", this.position);
+		if(this.type == 0 || this.type == 2)
+		{
+			if(this.type == 0)
+			{
+				json.addProperty("topic", this.topic);
+				json.addProperty("nsfw", this.nsfw);
+				json.addProperty("rate_limit_per_user", this.rate_limit_per_user);
+			}
+			else
+			{
+				json.addProperty("bitrate", this.bitrate);
+				json.addProperty("user_limit", this.user_limit);
+			}
+			json.addProperty("parent_id", this.parent_id);
+		}
+		DiscordAPI.request("PATCH", "/channels/" + id, json.toString());
+		return this;
 	}
 
 	/**
@@ -385,11 +464,13 @@ public class Channel extends Structure
 		return type_;
 	}
 
+	@Override
 	public Channel[] getArray(int size)
 	{
 		return new Channel[size];
 	}
 
+	@Override
 	public String toString()
 	{
 		return "{" + this.getTypeName() + " Channel \"" + getName() + "\" #" + id + "}";

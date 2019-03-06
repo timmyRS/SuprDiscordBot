@@ -1,5 +1,5 @@
 // Privileged Roles:
-var roles = ["Mod"];
+var roles = ["Bot Commander"];
 
 // Handle message creation
 script.on("MESSAGE_CREATE", function(msg)
@@ -15,27 +15,6 @@ script.on("MESSAGE_CREATE", function(msg)
 
 	// Write message to log
 	console.log(msg.author.username + " wrote " + cont + " in " + channel.getName());
-
-	// Slowmode
-	if(channel.isPartOfGuild() && msg.author)
-	{
-		var slowmode = channel.getValues().getInt("slowmode");
-		if(slowmode > 0)
-		{
-			var overwrite = channel.getOverwrite(msg.author);
-			if(overwrite == null)
-			{
-				overwrite = discord.createOverwrite().setUser(msg.author);
-			}
-			overwrite.deny(permission.SEND_MESSAGES);
-			channel.overwritePermissions(overwrite);
-			script.timeout(function()
-			{
-				overwrite.deny(-permission.SEND_MESSAGES);
-				channel.overwritePermissions(overwrite);
-			}, (slowmode * 1000));
-		}
-	}
 
 	// Handle commands
 	if(cont.substr(0, 7) == "+react ")
@@ -388,15 +367,7 @@ script.on("MESSAGE_CREATE", function(msg)
 		{
 			channel.sendTyping();
 			msg.delete();
-			var mymsg;
-			if(channel.getValues().has("slowmode"))
-			{
-				mymsg = channel.sendMessage(":information_source: An interval of **" + channel.getValues().getString("slowmode") + "** second(s) is being inforced in " + channel.getHandle() + ".");
-			}
-			else
-			{
-				mymsg = channel.sendMessage(":information_source: There is no interval being enforced in " + channel.getHandle() + ".");
-			}
+			var mymsg = channel.sendMessage(":information_source: An interval of **" + channel.rate_limit_per_user + "** second(s) is being inforced in " + channel.getHandle() + ".");
 			script.timeout(function()
 			{
 				mymsg.delete();
@@ -409,7 +380,7 @@ script.on("MESSAGE_CREATE", function(msg)
 			var secs = parseInt(cont.substr(10)), mymsg;
 			if(!hasperm)
 			{
-				mymsg = channel.sendMessage(":warning: " + msg.author.getHandle() + " Only privileged members may use `+clear <count>`.");
+				mymsg = channel.sendMessage(":warning: " + msg.author.getHandle() + ", only privileged members may use `+slowmode <seconds>`.");
 			}
 			else if(secs == 0)
 			{
@@ -418,15 +389,16 @@ script.on("MESSAGE_CREATE", function(msg)
 			}
 			else if(secs < 0)
 			{
-				mymsg = channel.sendMessage(":warning: " + msg.author.getHandle() + " Interval has to be a positive integer.");
+				mymsg = channel.sendMessage(":warning: " + msg.author.getHandle() + ", the interval has to be a positive integer.");
 			}
-			else if(secs > 60)
+			else if(secs > 120)
 			{
-				mymsg = channel.sendMessage(":warning: " + msg.author.getHandle() + " Won't set interval above 60 seconds.");
+				mymsg = channel.sendMessage(":warning: " + msg.author.getHandle() + ", I can't set an interval above 120 seconds.");
 			}
 			else
 			{
-				channel.getValues().set("slowmode", secs);
+				channel.rate_limit_per_user = secs;
+				channel.uploadChanges();
 				mymsg = channel.sendMessage(":thumbsup: An interval of **" + secs + "** second(s) between messages is now being enforced.");
 			}
 			script.timeout(function()
