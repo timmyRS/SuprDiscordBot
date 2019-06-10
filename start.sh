@@ -1,11 +1,7 @@
 #!/bin/bash
 
-if [ -f SuprDiscordBot.jar ]; then
-	rm SuprDiscordBot.jar
-fi
-while true
-do
-	wget https://raw.githubusercontent.com/timmyrs/SuprDiscordBot/master/SuprDiscordBot.jar
+
+while true; do
 	if [ -f latest.log ]; then
 		if [ -f previous.log ]; then
 			rm previous.log
@@ -13,5 +9,4 @@ do
 		mv latest.log previous.log
 	fi
 	java -jar SuprDiscordBot.jar "$@"
-	rm SuprDiscordBot.jar
 done

@@ -84,6 +84,7 @@ public class Main
 			Main.gson = new Gson();
 			if(!Main.configuration.has("gateway"))
 			{
+				Main.discordAPI = new DiscordAPI(null);
 				Main.configuration.set("gateway", Main.jsonParser.parse(Main.discordAPI.request("/gateway").toString()).getAsJsonObject().get("url").getAsString());
 			}
 			Main.scriptManager = new ScriptManager();

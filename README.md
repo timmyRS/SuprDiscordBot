@@ -4,18 +4,17 @@ SuprDiscordBot is a Java 8+ application allowing you to easily script a Discord 
 
 If you encounter any bugs, have suggestions or questions, [create an issue](https://github.com/timmyrs/SuprDiscordBot/issues/new).
 
-## Registering a Discord Application
+## Setup
 
-1. [Register an application at Discord](https://discordapp.com/developers/applications/). The only field you have to fill out is the app name.
-2. Add a bot user - do not check any of the boxes - reveal and copy the **Bot Token** and **[Save changes]**.
-3. Open the `config.json` in the SuprDiscordBot directory and replace `BOT_TOKEN` with your **Bot Token**.
-4. Start the SuprDiscordBot again *(see step 5)*.
-5. Copy the **Client ID** from your Discord Application.
-6. Replace `CLIENT_ID` in the following URL with your **Client ID** and then open it in your browser: `https://discordapp.com/oauth2/authorize?client_id=CLIENT_ID&scope=bot&permissions=2146958463`
+1. Download SuprDiscordBot.zip [from the latest release](https://github.com/timmyrs/SuprDiscordBot/releases), unzip it and put it in a good location.
+2. Start SuprDiscordBot using start.bat or start.sh.
+3. Register an application on [Discord's Developer Portal](https://discordapp.com/developers/applications/).
+4. Select "Bot" and click "Add Bot."
+5. Reveal the token, and copy it.
+6. Open the `config.json` in SuprDiscordBot's directory and replace `BOT_TOKEN` with the token you've just copied.
+7. Start SuprDiscordBot again.
 
-That's it! Now your bot should have joined your guild.
-
-You can change the profile picture of your bot by changing your **App Icon**.
+To get your bot to join your guild, use `https://discordapp.com/oauth2/authorize?client_id=__CLIENT_ID_HERE__&scope=bot&permissions=2146958463` where `__CLIENT_ID_HERE__` should be replaced by your app's client ID, which you can find in the "General Information" section.
 
 ## Arguments
 

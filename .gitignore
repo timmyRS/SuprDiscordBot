@@ -3,7 +3,8 @@ out/
 target/
 values/
 dependency-reduced-pom.xml
-SuprDiscordbot.iml
+SuprDiscordBot.iml
+SuprDiscordBot.jar
 SuprDiscordBot.zip
 config.json
 latest.log
