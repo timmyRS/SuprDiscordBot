@@ -2,7 +2,8 @@ var game_roles = {
 	"Minecraft": "Block Crusher",
 	"Osu": "Circle Clicker",
 	"Watch Dogs": "Dog Watcher",
-	"Watch_Dogs": "Dog Watcher"
+	"Watch_Dogs": "Dog Watcher",
+	"Grand Theft Auto V": "Car Stealer"
 }
 
 script.on("USER_JOIN", function(m) // Called when a user joins a guild
