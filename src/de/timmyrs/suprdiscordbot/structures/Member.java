@@ -1,6 +1,8 @@
 package de.timmyrs.suprdiscordbot.structures;
 
+import com.google.gson.JsonObject;
 import de.timmyrs.suprdiscordbot.Main;
+import de.timmyrs.suprdiscordbot.apis.DiscordAPI;
 
 /**
  * Member Structure.
@@ -38,7 +40,8 @@ public class Member extends Structure
 	public String[] roles;
 	/**
 	 * Nickname of this Member.
-	 * Use {@link Member#getName()} to get the user's name.
+	 *
+	 * @see Member#getName()
 	 */
 	public String nick;
 
@@ -48,6 +51,24 @@ public class Member extends Structure
 	public String getName()
 	{
 		return (nick == null ? user.username : nick);
+	}
+
+	/**
+	 * Changes the nickname of this Member.
+	 *
+	 * @param nick The new nickname.
+	 * @since 1.4.2
+	 */
+	public void setNick(String nick)
+	{
+		if(nick == null)
+		{
+			nick = "";
+		}
+		final JsonObject json = new JsonObject();
+		json.addProperty("nick", nick);
+		DiscordAPI.request("PATCH", "/guilds/" + this.guild_id + "/members/" + this.user.id, json.toString());
+		this.nick = nick;
 	}
 
 	/**
