@@ -131,12 +131,17 @@ public class WebSocket
 								g.removePresence(cp.user.id);
 								break;
 							}
-							if(p.user.username == null || p.user.discriminator == null || p.user.avatar == null)
+							if(cp.user == null || cp.user.username == null || cp.user.discriminator == null || cp.user.avatar == null)
+							{
+								cp.user = m.user;
+							}
+							if(p.user == null || p.user.username == null || p.user.discriminator == null || p.user.avatar == null)
 							{
 								p.user = cp.user;
 							}
-							else
+							else if(!cp.user.username.equals(p.user.username) || !cp.user.discriminator.equals(p.user.discriminator))
 							{
+								Main.scriptManager.fireEvent("PRESENCE_UPDATE_USER", new Object[]{p, cp.user});
 								cp.user = p.user;
 							}
 							if(!p.status.equals(cp.status))
@@ -157,18 +162,13 @@ public class WebSocket
 								if(p.game == null)
 								{
 									Main.scriptManager.fireEvent("PRESENCE_UPDATE_GAME", new Object[]{p, cp.game});
-									p.game = null;
+									cp.game = null;
 								}
 								else if(!cp.game.name.equals(p.game.name))
 								{
 									Main.scriptManager.fireEvent("PRESENCE_UPDATE_GAME", new Object[]{p, cp.game});
 									cp.game = p.game;
 								}
-							}
-							if(!cp.user.username.equals(p.user.username) || !cp.user.username.equals(p.user.discriminator))
-							{
-								Main.scriptManager.fireEvent("PRESENCE_UPDATE_USER", new Object[]{p, cp.user});
-								p.user = cp.user;
 							}
 							g.addPresence(cp);
 							break;
